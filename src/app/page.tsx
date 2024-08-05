@@ -3,12 +3,12 @@ import MainPage from './(main)/main-page'
 
 export default function Home() {
   return (
-    <div className="w-screen">
+    <div className="w-screen z-50">
       <header>
         <NavBar />
       </header>
 
-      <main className="mt-10 bg-soft">
+      <main className="">
         <MainPage />
       </main>
 
