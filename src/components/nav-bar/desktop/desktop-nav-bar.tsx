@@ -1,9 +1,8 @@
 'use client'
+import { MENU, NAVIGATION_PATH } from '@/const/navigation'
 import classNames from 'classnames'
 import Link from 'next/link'
 import { useSelectedLayoutSegment } from 'next/navigation'
-import { MENU } from '../nav-list'
-import { NAVIGATION_PATH } from '@/config/navigation'
 
 export default function DesktopNavBar() {
   const selectedSegment = useSelectedLayoutSegment()

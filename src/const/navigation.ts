@@ -1,4 +1,10 @@
-import { NAVIGATION_PATH } from '@/config/navigation'
+export const NAVIGATION_PATH = {
+  home: '/',
+  profile: '/profile',
+  developer: '/developer',
+  marketer: '/marketer',
+  designer: '/designer',
+}
 
 export const MENU = [
   {
