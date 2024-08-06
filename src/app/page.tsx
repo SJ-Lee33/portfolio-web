@@ -11,8 +11,6 @@ export default function Home() {
       <main className="">
         <MainPage />
       </main>
-
-      <footer>footer line</footer>
     </div>
   )
 }
