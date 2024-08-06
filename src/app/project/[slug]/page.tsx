@@ -1,3 +1,4 @@
+import NavBar from '@/components/nav-bar/nav-bar'
 import ProjectDetailPage from './ProjectDetailPage'
 
 type Props = {
@@ -8,5 +9,15 @@ type Props = {
 
 export default async function Page({ params }: Props) {
   const temp = [{ title: 'hello' }]
-  return <ProjectDetailPage id={params.slug} project={temp} />
+  return (
+    <div className="w-screen z-50">
+      <header>
+        <NavBar />
+      </header>
+
+      <main className="mt-12">
+        <ProjectDetailPage id={params.slug} project={temp} />
+      </main>
+    </div>
+  )
 }
