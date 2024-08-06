@@ -12,7 +12,7 @@ export default function ProjectTitle({
       className={classNames(
         'sticky top-10 z-10',
         'flex items-center justify-center text-center',
-        'w-full px-5 py-7 bg-secondary rounded-b-md',
+        'w-full px-10 py-7 bg-secondary rounded-b-md',
         'shadow-lg shadow-neutralLight/50',
         'text-white font-extrabold text-headline-l',
       )}

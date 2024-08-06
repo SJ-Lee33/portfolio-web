@@ -3,8 +3,8 @@ import downArrow from '/public/images/down-arrow.gif'
 
 export default function FirstScreen() {
   return (
-    <div className="h-screen w-screen relative ">
-      <div className="w-full px-5 absolute bottom-0">
+    <div className="h-screen w-screen relative">
+      <div className="w-full px-10 absolute bottom-0">
         <div className="text-[3.8rem]">
           <span className="font-black">개발의 다음</span>을 생각하는 개발자
         </div>

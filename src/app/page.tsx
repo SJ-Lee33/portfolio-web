@@ -8,7 +8,7 @@ export default function Home() {
         <NavBar />
       </header>
 
-      <main className="">
+      <main className="mt-12">
         <MainPage />
       </main>
     </div>
