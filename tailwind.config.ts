@@ -19,6 +19,9 @@ const config: Config = {
 
       neutral: '#333333',
       neutralLight: '#666666',
+
+      black: '#000000',
+      white: '#ffffff',
     },
     fontSize: {
       'display-l': `clamp(3.0rem, 2.5vw, 5.0rem)`,
@@ -33,6 +36,7 @@ const config: Config = {
       'body-l': `clamp(1.0rem, 0.75vw, 1.25rem)`,
       'body-m': `clamp(0.875rem, 0.65vw, 1.125rem)`,
       'body-s': `clamp(0.75rem, 0.6vw, 1.0rem)`,
+      caption: `clamp(0.5rem, 0.6vw, 0.75rem)`,
     },
     fontFamily: {
       sans: ['Pretendard', 'sans-serif'],
