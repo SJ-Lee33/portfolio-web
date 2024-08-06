@@ -10,16 +10,14 @@ export default function ProjectTitle({
   return (
     <div
       className={classNames(
-        'sticky top-0 z-10',
-        'w-full bg-secondary rounded-b-md',
+        'sticky top-10 z-10',
+        'flex items-center justify-center text-center',
+        'w-full px-5 py-7 bg-secondary rounded-b-md',
         'shadow-lg shadow-neutralLight/50',
+        'text-white font-extrabold text-headline-l',
       )}
     >
-      <div className="flex items-center text-center text-white px-5 py-7">
-        <div className="font-extrabold text-headline-l text-center">
-          독학 Unity 3D 게임 개발, 사용자 환경에 맞춘 Web GL 배포
-        </div>
-      </div>
+      독학 Unity 3D 게임 개발, 사용자 환경에 맞춘 Web GL 배포
     </div>
   )
 }

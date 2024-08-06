@@ -25,9 +25,10 @@ export default function DesktopNavBar() {
   }
 
   return (
-    <nav className="flex items-center h-10 px-12">
+    <nav className="flex items-center h-10 px-12 bg-white">
       <ul className="flex justify-center gap-10">
         <Chip value={NAVIGATION_PATH.profile} />
+        <Chip value={NAVIGATION_PATH.project} />
         <Chip value={NAVIGATION_PATH.developer} />
         <Chip value={NAVIGATION_PATH.marketer} />
         <Chip value={NAVIGATION_PATH.designer} />

@@ -1,6 +1,7 @@
 export const NAVIGATION_PATH = {
   home: '/',
   profile: '/profile',
+  project: '/project',
   developer: '/developer',
   marketer: '/marketer',
   designer: '/designer',
@@ -10,6 +11,10 @@ export const MENU = [
   {
     title: 'Profile',
     value: NAVIGATION_PATH.profile,
+  },
+  {
+    title: 'Project',
+    value: NAVIGATION_PATH.project,
   },
   {
     title: 'Developer',
