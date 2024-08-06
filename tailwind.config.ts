@@ -12,10 +12,12 @@ const config: Config = {
       soft: '#E6F0FA',
 
       primary: '#1E90FF',
-      primarDark: '##0056b3',
-      primaryDarker: '##003d80',
+      primaryDark: '#0056b3',
+      primaryDarker: '#003d80',
       primaryLight: '#63B8FF',
       primaryLighter: '#B0E0E6',
+
+      secondary: '#5E78FF',
 
       neutral: '#333333',
       neutralLight: '#666666',
