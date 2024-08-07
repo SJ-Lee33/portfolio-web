@@ -2,7 +2,6 @@ import Contact from './contact'
 import Skills from './skills'
 import History from './history'
 import { useProfile } from '@/app/profile/hooks/use-profile'
-import { PortableText } from 'next-sanity'
 
 export default function SecondScreen() {
   const { profile, error } = useProfile()
