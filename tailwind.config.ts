@@ -38,7 +38,7 @@ const config: Config = {
       'body-l': `clamp(1.0rem, 0.75vw, 1.25rem)`,
       'body-m': `clamp(0.875rem, 0.65vw, 1.125rem)`,
       'body-s': `clamp(0.75rem, 0.6vw, 1.0rem)`,
-      caption: `clamp(0.5rem, 0.6vw, 0.75rem)`,
+      caption: `clamp(0.6rem, 0.6vw, 0.8rem)`,
     },
     fontFamily: {
       sans: ['Pretendard', 'sans-serif'],
