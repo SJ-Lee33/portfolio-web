@@ -1,7 +1,15 @@
 import NavBar from '@/components/nav-bar/nav-bar'
 import ProjectDetailPage from './ProjectDetailPage'
+import { getProjectById } from '@/hooks/get-project-by-id'
 
-export default async function Page() {
+type Props = {
+  params: {
+    slug: string
+  }
+}
+
+export default async function Page({ params: { slug } }: Props) {
+  const project = await getProjectById(slug)
   return (
     <div className="w-screen z-50">
       <header>
@@ -9,7 +17,7 @@ export default async function Page() {
       </header>
 
       <main className="mt-12">
-        <ProjectDetailPage />
+        <ProjectDetailPage project={project} />
       </main>
     </div>
   )

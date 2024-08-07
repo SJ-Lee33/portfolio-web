@@ -1,12 +1,6 @@
 import classNames from 'classnames'
 
-export default function ProjectTitle({
-  id,
-  project,
-}: {
-  id?: string
-  project?: any
-}) {
+export default function ProjectTitle({ title }: { title: string }) {
   return (
     <div
       className={classNames(
@@ -17,7 +11,7 @@ export default function ProjectTitle({
         'text-white font-extrabold text-headline-l',
       )}
     >
-      독학 Unity 3D 게임 개발, 사용자 환경에 맞춘 Web GL 배포
+      {title}{' '}
     </div>
   )
 }
