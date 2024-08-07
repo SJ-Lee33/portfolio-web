@@ -1,6 +1,6 @@
 'use client'
 
-import { useTypeSearchParam } from '@/app/project/hooks/use-type-search-param'
+import { useTypeSearchParam } from '@/app/(main)/project/hooks/use-type-search-param'
 import classNames from 'classnames'
 import Link from 'next/link'
 

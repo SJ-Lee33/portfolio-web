@@ -1,5 +1,5 @@
 import NavBar from '@/components/nav-bar/nav-bar'
-import MainPage from './(main)/main-page'
+import MainPage from './(main)/(home)/main-page'
 
 export default function Home() {
   return (

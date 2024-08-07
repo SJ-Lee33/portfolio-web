@@ -3,13 +3,7 @@ import ProjectSubtitle from './components/project-subtitle'
 import ProjectSummary from './components/project-summary'
 import ProjectTitle from './components/project-title'
 
-export default function ProjectDetailPage({
-  id,
-  project,
-}: {
-  id: string
-  project: any
-}) {
+export default async function ProjectDetailPage() {
   return (
     <div className="flex flex-col items-center w-full">
       <ProjectLabel />

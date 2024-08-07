@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import ProjectItem from './project-item'
 import { ProjectListDto } from '@/types/project/project-list-dto'
-import { useProjects } from '@/app/project/hooks/use-project'
+import { useProjects } from '@/app/(main)/project/hooks/use-project'
 
 export default function ProjectList() {
   const { projects, error } = useProjects()
