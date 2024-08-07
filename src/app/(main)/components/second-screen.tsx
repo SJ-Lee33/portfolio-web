@@ -7,7 +7,7 @@ export default function SecondScreen() {
   const { profile, error } = useProfile()
 
   return (
-    <div className="w-screen flex gap-2 p-10">
+    <div className="w-screen flex gap-2 p-10 mt-10">
       <div className="flex flex-col w-2/7 gap-4">
         <Contact />
         <History profile={profile} />

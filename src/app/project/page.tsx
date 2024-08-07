@@ -1,7 +1,5 @@
-// src/app/project/page.tsx
-
-import MainPage from '../page'
+import Home from '../page'
 
 export default function ProjectPage() {
-  return <MainPage />
+  return <Home />
 }

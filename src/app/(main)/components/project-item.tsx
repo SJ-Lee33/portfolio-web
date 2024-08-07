@@ -7,7 +7,6 @@ import SkillDisplay from '@/components/SkillDisplay'
 import { formatDate } from '@/utils/formatDate'
 
 export default function ProjectItem(project: ProjectListDto) {
-  console.log(project.skill)
   return (
     <div className="flex gap-4 min-h-[150px] hover:bg-soft p-4">
       <div className="relative w-1/3">
