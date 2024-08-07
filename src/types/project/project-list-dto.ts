@@ -1,7 +1,5 @@
 export type ProjectListDto = {
-  placeName: string
-  displayAddress: string
-  type: 'development' | 'design' | 'marketing'
+  type?: 'development' | 'design' | 'marketing'
 } & Pick<
   ProjectSchema,
   | 'id'

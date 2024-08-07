@@ -1,21 +1,20 @@
 'use client'
 
+import { useTypeSearchParam } from '@/app/project/hooks/use-type-search-param'
 import classNames from 'classnames'
 import Link from 'next/link'
 
-//TODO: 메뉴에 따른 링크이동
-
 export default function ProjectNavBar() {
-  // const type = useStatusSearchParam()
-  const type = 'temp'
+  const type = useTypeSearchParam()
+
   const NavLink = ({
     href,
     children,
-  }: // isActive,
-  {
+    isActive,
+  }: {
     href: string
     children: React.ReactNode
-    // isActive: boolean
+    isActive: boolean
   }) => {
     return (
       <Link
@@ -25,10 +24,7 @@ export default function ProjectNavBar() {
           'w-full py-4 rounded-full',
           'text-body-m text-neutral font-normal',
           'hover:bg-primary hover:text-white hover:font-bold',
-
-          // isActive
-          //   ? 'font-bold border-primary'
-          //   : 'font-normal border-transparent',
+          isActive && 'bg-primary text-white font-bold',
         )}
       >
         {children}
@@ -45,29 +41,20 @@ export default function ProjectNavBar() {
         'min-h-[40px]',
       )}
     >
-      <NavLink
-        href="/"
-        // isActive={!type}
-      >
+      <NavLink href="/project" isActive={!type}>
         <li>전체</li>
       </NavLink>
       <NavLink
-        href=""
-        // isActive={type === 'development'}
+        href="/project?type=development"
+        isActive={type === 'development'}
       >
         <li>개발</li>
       </NavLink>
-      <NavLink
-        href=""
-        // isActive={type === 'marketing'}
-      >
-        <li>마케팅</li>
-      </NavLink>
-      <NavLink
-        href=""
-        // isActive={type === 'design'}
-      >
+      <NavLink href="/project?type=design" isActive={type === 'design'}>
         <li>디자인</li>
+      </NavLink>
+      <NavLink href="/project?type=marketing" isActive={type === 'marketing'}>
+        <li>마케팅</li>
       </NavLink>
     </ul>
   )

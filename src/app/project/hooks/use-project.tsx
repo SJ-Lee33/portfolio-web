@@ -10,9 +10,7 @@ export const useProjects = () => {
 
   const { data, error, mutate, isLoading, isValidating, size, setSize } =
     useSWRInfinite<ProjectListDto[]>((index) => {
-      return `/api/project?page=${
-        index + 1
-      }&limit=${PAGE_SIZE}&projectType=${type}`
+      return `/api/project?page=${index + 1}&limit=${PAGE_SIZE}&type=${type}`
     }, fetcher)
 
   async function fetcher(url: string) {

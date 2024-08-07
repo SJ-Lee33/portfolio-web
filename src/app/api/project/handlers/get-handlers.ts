@@ -9,22 +9,7 @@ export async function getHandler(request: Request) {
     const page = url.searchParams.get('page') ?? '1'
     const limit = url.searchParams.get('limit') ?? '10'
     const type = url.searchParams.get('type') ?? undefined
-    const artistId = url.searchParams.get('artistId')
-    const isTopFixed = url.searchParams.get('isTopFixed')
 
-    // if (artistId) {
-    //   const data = await getShowcasesByArtist(
-    //     artistId,
-    //     page ? parseInt(page) : 1,
-    //     limit ? parseInt(limit) : 20,
-    //   )
-    //   return new Response(JSON.stringify(data), {
-    //     status: 200,
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //   })
-    // }
     const data = await getData({
       page: parseInt(page),
       limit: parseInt(limit),
@@ -61,13 +46,13 @@ const getData = async ({
 
   if (type === 'development') {
     // 개발 프로젝트
-    typeFilter = `&& type=='development'`
+    typeFilter = `&& projectTypes.development == true`
   } else if (type === 'design') {
     // 디자인 프로젝트
-    typeFilter = `&& type=='design'`
+    typeFilter = `&& projectTypes.design == true`
   } else if (type === 'marketing') {
     // 마케팅 프로젝트
-    typeFilter = `&& type=='marketing'`
+    typeFilter = `&& projectTypes.marketing == true`
   }
 
   const query = `*[_type == "project" && !(_id in path('drafts.**')) ${typeFilter}] | order(releaseDate desc) [
@@ -75,19 +60,30 @@ const getData = async ({
     ]  {
      'id':_id,
      title,
-  type,
-  releaseDate,
-  skill,
-  summary,
-  "thumbnail":thumbnail.asset->url
+        projectTypes,
+        releaseDate,
+        skill,
+        summary,
+        "thumbnail":thumbnail.asset->url
  }`
 
   const data = await client.fetch(query)
+
   const projects = data.map((project: any) => {
+    let current = ''
+
+    if (project.projectTypes.development) {
+      current = 'development'
+    } else if (project.projectTypes.design) {
+      current = 'design'
+    } else if (project.projectTypes.marketing) {
+      current = 'marketing'
+    }
     return {
       ...project,
-      type: project.projectTypes,
+      type: current,
     }
   })
+
   return projects
 }
