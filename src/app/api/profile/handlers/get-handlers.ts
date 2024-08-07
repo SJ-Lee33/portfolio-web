@@ -1,5 +1,6 @@
 import { client } from '@/lib/sanity'
 
+// 프로필 정보 불러오기
 export async function getHandler(request: Request) {
   try {
     const data = await getData()
@@ -24,7 +25,7 @@ export async function getHandler(request: Request) {
 const getData = async () => {
   const query = `*[_type == "history"  && !(_id in path('drafts.**'))] | order(year desc)
     {
-      year
+      year,
       content,
     }
     `
