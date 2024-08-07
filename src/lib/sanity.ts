@@ -1,11 +1,12 @@
 import { createClient } from '@sanity/client'
+import imageUrlBuilder from '@sanity/image-url'
 
 const SANITY_DATASET = 'production'
 
 export const client = createClient({
   projectId: process.env.SANITY_PROJECT_ID,
   dataset: SANITY_DATASET,
-  useCdn: false, // set to `true` to fetch from edge cache
+  useCdn: false,
   apiVersion: '2024-08-07', // use current date (YYYY-MM-DD) to target the latest API version
   token: process.env.SANITY_SECRET_TOKEN,
 })
@@ -23,4 +24,10 @@ export const uploadAsset = async (file: Blob) => {
   })
   const { document } = await res.json()
   return document
+}
+
+const builder = imageUrlBuilder(client)
+
+export function urlFor(source: any) {
+  return builder.image(source)
 }

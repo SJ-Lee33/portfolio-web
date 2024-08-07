@@ -3,7 +3,7 @@ import { PortableText } from 'next-sanity'
 import { FaRegCircleDot } from 'react-icons/fa6'
 
 export default function History({ profile }: { profile: ProfileDTO[] }) {
-  const components = {
+  const components: any = {
     listItem: {
       bullet: ({ children }: { children: any }) => (
         <li className="text-body-m" style={{ listStyleType: 'disc' }}>

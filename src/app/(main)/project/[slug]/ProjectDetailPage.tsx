@@ -1,14 +1,49 @@
+'use client'
+
 import { ProjectDTO } from '@/types/project/project-dto'
 import ProjectSubtitle from './components/project-subtitle'
 import ProjectSummary from './components/project-summary'
 import ProjectTitle from './components/project-title'
 import ProjectTypeLabel from '../../(home)/components/project-type-label'
+import { PortableText } from 'next-sanity'
+import ProjectPlanetext from './components/project-plaintext'
+import ProjectImage from './components/project-image'
+import ProjectCodebox from './components/project-codebox'
 
 export default async function ProjectDetailPage({
   project,
 }: {
   project?: ProjectDTO
 }) {
+  const components: any = {
+    block: {
+      h3: ({ children }: { children: any }) => (
+        <ProjectSubtitle>{children}</ProjectSubtitle>
+      ),
+      normal: ({ children }: { children: any }) => (
+        <ProjectPlanetext>{children}</ProjectPlanetext>
+      ),
+    },
+    listItem: {
+      bullet: ({ children }: { children: any }) => (
+        <li
+          className="mx-8 md:mx-16 text-body-m"
+          style={{ listStyleType: 'disc' }}
+        >
+          {children}
+        </li>
+      ),
+    },
+    types: {
+      image: ({ value }: { value: { asset: { _ref: string } } }) => (
+        <ProjectImage asset={value.asset} />
+      ),
+      code: ({ value }: { value: { code: string; language: string } }) => (
+        <ProjectCodebox value={value} />
+      ),
+    },
+  }
+
   if (!project) return <></>
   return (
     <div className="flex flex-col items-center w-full">
@@ -30,15 +65,8 @@ export default async function ProjectDetailPage({
         thumbnail={project.thumbnail}
       />
 
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col gap-2">
-          <ProjectSubtitle subtitle="프로젝트 개요" />
-          <div className="px-5 md:px-10">
-            이벤트성 퀴즈 게임을 Unity 툴로 제작하였습니다. 사용자 경험을 개선해
-            개인 SNS를 통해 배포하였으며, SNS 실시간 트렌드에 오르는 성과를
-            내었고 이 경험을 바탕으로 관련 수업을 수강해 좋은 성적을 받았습니다.
-          </div>
-        </div>
+      <div className="flex flex-col px-4 w-full">
+        <PortableText value={project.contents} components={components} />
       </div>
     </div>
   )
