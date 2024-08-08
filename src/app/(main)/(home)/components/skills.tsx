@@ -1,6 +1,5 @@
-import Image, { StaticImageData } from 'next/image'
+import SkillIcon, { SkillItem } from '@/components/skill-icon'
 import { SkillList } from '@/const/skills'
-import SkillIcon, { SkillItem } from '@/components/SkillIcon'
 
 export default function Skills() {
   const Label = ({ title }: { title: string }) => {

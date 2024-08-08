@@ -1,10 +1,8 @@
-import SkillIcon from '@/components/SkillIcon'
-import { SkillList } from '@/const/skills'
 import { ProjectListDto } from '@/types/project/project-list-dto'
 import ProjectTypeLabel from './project-type-label'
 import Image from 'next/image'
-import SkillDisplay from '@/components/SkillDisplay'
 import { formatDate } from '@/utils/formatDate'
+import SkillDisplay from '@/components/skill-display'
 
 export default function ProjectItem(project: ProjectListDto) {
   return (

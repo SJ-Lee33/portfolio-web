@@ -1,6 +1,6 @@
 // SkillDisplay.tsx
 import React from 'react'
-import SkillIcon from './SkillIcon'
+import SkillIcon from './skill-icon'
 import { SkillList } from '@/const/skills'
 
 export default function SkillDisplay({
