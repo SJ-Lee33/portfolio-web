@@ -30,8 +30,8 @@ export default function DesktopNavBar() {
         <Chip value={NAVIGATION_PATH.profile} />
         <Chip value={NAVIGATION_PATH.project} />
         <Chip value={NAVIGATION_PATH.developer} />
-        <Chip value={NAVIGATION_PATH.marketer} />
         <Chip value={NAVIGATION_PATH.designer} />
+        <Chip value={NAVIGATION_PATH.marketer} />
       </ul>
     </nav>
   )
