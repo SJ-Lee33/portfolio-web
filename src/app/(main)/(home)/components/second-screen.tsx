@@ -1,7 +1,9 @@
+'use client'
+
 import Contact from './contact'
 import Skills from './skills'
 import History from './history'
-import { useProfile } from '@/app/profile/hooks/use-profile'
+import { useProfile } from '../../profile/hooks/use-profile'
 
 export default function SecondScreen() {
   const { profile, error } = useProfile()

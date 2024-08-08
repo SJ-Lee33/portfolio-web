@@ -3,16 +3,19 @@ import { client } from '@/lib/sanity'
 import { ProjectListDto } from '@/types/project/project-list-dto'
 
 // 프로젝트 리스트 불러오기
-export async function getHandler(request: Request) {
+export async function getHandler({
+  page,
+  limit,
+  type,
+}: {
+  page: number
+  limit: number
+  type?: string
+}) {
   try {
-    const url = new URL(request.url)
-    const page = url.searchParams.get('page') ?? '1'
-    const limit = url.searchParams.get('limit') ?? '10'
-    const type = url.searchParams.get('type') ?? undefined
-
     const data = await getData({
-      page: parseInt(page),
-      limit: parseInt(limit),
+      page,
+      limit,
       type: type as ProjectListDto['type'] | undefined,
     })
 

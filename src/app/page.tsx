@@ -1,15 +1,18 @@
 import NavBar from '@/components/nav-bar/nav-bar'
-import MainPage from './(main)/(home)/main-page'
+import HomePage from './(main)/(home)/home-page'
+import { Suspense } from 'react'
+import { LoadingSpinner } from '@/components/loading-spinner'
 
-export default function Home() {
+export default function MainPage() {
   return (
-    <div className="w-screen z-50">
+    <div className="w-screen">
       <header>
         <NavBar />
       </header>
-
       <main className="mt-12">
-        <MainPage />
+        <Suspense fallback={<LoadingSpinner />}>
+          <HomePage />
+        </Suspense>
       </main>
     </div>
   )
