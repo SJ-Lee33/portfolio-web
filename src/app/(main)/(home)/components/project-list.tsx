@@ -3,9 +3,11 @@ import Link from 'next/link'
 import ProjectItem from './project-item'
 import { ProjectListDto } from '@/types/project/project-list-dto'
 import { useProjects } from '@/app/(main)/project/hooks/use-project'
+import { LoadingSpinner } from '@/components/loading-spinner'
 
 export default function ProjectList() {
-  const { projects, error } = useProjects()
+  const { projects, isLoading } = useProjects()
+  if (isLoading) return <LoadingSpinner />
   return (
     <div className="flex flex-col gap-1 text-title-s rounded-md">
       {projects?.map((project: ProjectListDto) => {
