@@ -9,6 +9,26 @@ export default function Skills() {
       </div>
     )
   }
+  const Container = ({
+    title,
+    start,
+    end,
+  }: {
+    title: string
+    start: number
+    end: number
+  }) => {
+    return (
+      <div className="flex gap-4 lg:gap-8">
+        <Label title={title} />
+        <div className="flex flex-wrap justify-start items-center gap-2 lg:gap-7">
+          {SkillList.slice(start, end).map((item: SkillItem, index: number) => (
+            <SkillIcon key={index} item={item} />
+          ))}
+        </div>
+      </div>
+    )
+  }
 
   /**
    * programming - 0~5
@@ -24,49 +44,11 @@ export default function Skills() {
       </div>
 
       <div className="flex flex-col gap-4 p-4">
-        <div className="flex gap-4 lg:gap-8">
-          <Label title="Programming" />
-          <div className="flex flex-wrap justify-start items-center gap-2 lg:gap-5">
-            {SkillList.slice(0, 5).map((item: SkillItem, index: number) => (
-              <SkillIcon key={index} item={item} />
-            ))}
-          </div>
-        </div>
-
-        <div className="flex gap-4 lg:gap-8">
-          <Label title="FrontEnd" />
-
-          <div className="flex flex-wrap justify-start items-center gap-2 lg:gap-5">
-            {SkillList.slice(5, 12).map((item: SkillItem, index: number) => (
-              <SkillIcon key={index} item={item} />
-            ))}
-          </div>
-        </div>
-        <div className="flex gap-4 lg:gap-8">
-          <Label title="BackEnd" />
-
-          <div className="flex flex-wrap justify-start items-center gap-2 lg:gap-5">
-            {SkillList.slice(12, 16).map((item: SkillItem, index: number) => (
-              <SkillIcon key={index} item={item} />
-            ))}
-          </div>
-        </div>
-        <div className="flex gap-4 lg:gap-8">
-          <Label title="Design" />
-          <div className="flex flex-wrap justify-start items-center gap-2 lg:gap-5">
-            {SkillList.slice(16, 21).map((item: SkillItem, index: number) => (
-              <SkillIcon key={index} item={item} />
-            ))}
-          </div>
-        </div>
-        <div className="flex gap-4 lg:gap-8">
-          <Label title="Coorporation" />
-          <div className="flex flex-wrap justify-start items-center gap-2 lg:gap-5">
-            {SkillList.slice(21, 26).map((item: SkillItem, index: number) => (
-              <SkillIcon key={index} item={item} />
-            ))}
-          </div>
-        </div>
+        <Container title="Programming" start={0} end={5} />
+        <Container title="FrontEnd" start={5} end={12} />
+        <Container title="BackEnd" start={12} end={16} />
+        <Container title="Design" start={16} end={21} />
+        <Container title="Coorporation" start={21} end={26} />
       </div>
     </div>
   )

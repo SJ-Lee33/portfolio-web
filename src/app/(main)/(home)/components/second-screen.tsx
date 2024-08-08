@@ -11,12 +11,12 @@ export default function SecondScreen() {
   if (isLoading) return <LoadingSpinner />
 
   return (
-    <div className="w-screen flex gap-2 p-10 mt-10">
-      <div className="flex flex-col w-2/7 gap-4">
+    <div className="w-screen grid grid-cols-4 gap-5 p-10">
+      <div className="flex flex-col gap-4 mt-5">
         <Contact />
         <History profile={profile} />
       </div>
-      <div className="flex w-full">
+      <div className="flex w-full col-span-3 mt-5">
         <Skills />
       </div>
     </div>
