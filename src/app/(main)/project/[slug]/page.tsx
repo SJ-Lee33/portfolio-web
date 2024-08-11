@@ -67,7 +67,7 @@ export default async function Page({ params: { slug } }: Props) {
         thumbnail={project.thumbnail}
       />
 
-      <div className="flex flex-col px-4 md:px-[50px] lg:px-[80px] w-full">
+      <div className="flex flex-col px-4 py-12 md:px-[50px] lg:px-[80px] w-full">
         <PortableText value={project.contents} components={components} />
       </div>
     </div>
