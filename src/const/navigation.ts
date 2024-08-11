@@ -9,23 +9,23 @@ export const NAVIGATION_PATH = {
 
 export const MENU = [
   {
-    title: 'Profile',
+    title: 'PROFILE',
     value: NAVIGATION_PATH.profile,
   },
   {
-    title: 'Project',
+    title: 'PROJECT',
     value: NAVIGATION_PATH.project,
   },
   {
-    title: 'Developer',
+    title: 'DEVELOPER',
     value: NAVIGATION_PATH.developer,
   },
   {
-    title: 'Designer',
+    title: 'DESIGNER',
     value: NAVIGATION_PATH.designer,
   },
   {
-    title: 'Marketer',
+    title: 'MARKETER',
     value: NAVIGATION_PATH.marketer,
   },
 ]

@@ -6,10 +6,10 @@ import { LoadingSpinner } from '@/components/loading-spinner'
 export default function MainPage() {
   return (
     <div className="w-screen">
-      <header>
+      <header className="w-full fixed top-0 z-50">
         <NavBar />
       </header>
-      <main className="mt-12">
+      <main>
         <Suspense fallback={<LoadingSpinner />}>
           <HomePage />
         </Suspense>
