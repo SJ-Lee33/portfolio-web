@@ -22,9 +22,10 @@ export default function ProjectNavBar() {
         className={classNames(
           'flex-1 justify-center text-center',
           'w-full py-4 rounded-full',
-          'text-body-m text-neutral font-normal',
-          'hover:bg-primary hover:text-white hover:font-bold',
-          isActive && 'bg-primary text-white font-bold',
+          'text-neutral',
+          'text-body-m md:text-title-s',
+          'hover:bg-primaryDark hover:text-white hover:font-extrabold',
+          isActive && 'bg-primary text-white font-extrabold',
         )}
       >
         {children}

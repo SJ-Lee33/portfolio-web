@@ -4,7 +4,7 @@ import { SkillList } from '@/const/skills'
 export default function Skills() {
   const Label = ({ title }: { title: string }) => {
     return (
-      <div className="flex w-40 min-w-40 justify-center items-center bg-white font-extralight rounded-md text-title-s">
+      <div className="flex md:w-40px md:min-w-40 py-4 justify-center items-center bg-white font-extralight rounded-md text-title-s">
         {title}
       </div>
     )
@@ -19,9 +19,9 @@ export default function Skills() {
     end: number
   }) => {
     return (
-      <div className="flex gap-4 lg:gap-8">
+      <div className="flex flex-col md:flex-row gap-4 lg:gap-8">
         <Label title={title} />
-        <div className="flex flex-wrap justify-start items-center gap-2 lg:gap-7">
+        <div className="flex flex-wrap md:justify-start justify-center items-center gap-2 lg:gap-7">
           {SkillList.slice(start, end).map((item: SkillItem, index: number) => (
             <SkillIcon key={index} item={item} />
           ))}
@@ -43,7 +43,7 @@ export default function Skills() {
         Skills & Tools
       </div>
 
-      <div className="flex flex-col gap-4 p-4">
+      <div className="flex flex-col gap-12 p-4 mt-3">
         <Container title="Programming" start={0} end={5} />
         <Container title="FrontEnd" start={5} end={12} />
         <Container title="BackEnd" start={12} end={16} />

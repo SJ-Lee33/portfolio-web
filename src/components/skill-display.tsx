@@ -14,7 +14,7 @@ export default function SkillDisplay({
     return SkillList.find((skill) => skill.title === title)
   }
   return (
-    <div className="flex flex-wrap gap-2 items-center">
+    <div className="flex flex-wrap gap-2 p-2 items-center">
       {skills?.map((skillTitle) => {
         const skillItem = getSkillItem(skillTitle)
         if (skillItem) {

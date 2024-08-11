@@ -7,7 +7,11 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        xs: '480px', // 사용자 정의 브레이크포인트
+      },
+    },
     colors: {
       soft: '#E6F0FA',
 
