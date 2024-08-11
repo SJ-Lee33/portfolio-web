@@ -20,7 +20,7 @@ export default async function ProjectSummary({
   if (skill) skillsList = Object.values(skill).join(' / ')
 
   return (
-    <div className="flex flex-col w-full rounded-b-md items-center gap-5 px-5 py-7">
+    <div className="flex flex-col md:flex-row w-full rounded-b-md items-center md:items-start justify-center gap-5 px-5 pt-[80px]">
       {/* 썸네일 */}
       <Image
         src={thumbnail}
@@ -30,7 +30,7 @@ export default async function ProjectSummary({
         className="w-[400px] h-auto object-contain"
       />
 
-      <div className="flex flex-col gap-1 text-body-s font-light">
+      <div className="flex flex-col gap-1 text-body-m font-light py-3">
         <div>
           <span className="font-semibold">역할 |</span> {role}
         </div>
@@ -41,7 +41,7 @@ export default async function ProjectSummary({
           <span className="font-semibold">기술 |</span> {skillsList}
         </div>
         <div>
-          <span className="font-semibold">기간 |</span>{' '}
+          <span className="font-semibold">기간 |</span>
           {formatDate(releaseDate) + ` (${duration})`}
         </div>
       </div>

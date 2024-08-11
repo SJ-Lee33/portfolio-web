@@ -18,7 +18,7 @@ export default function History({ profile }: { profile: ProfileDTO[] }) {
     return (
       <div
         className={classNames(
-          'flex flex-col p-2',
+          'flex flex-col p-3 gap-1',
           'rounded-md',
           index % 2 == 0 && 'bg-neutralLighter',
         )}
@@ -27,20 +27,19 @@ export default function History({ profile }: { profile: ProfileDTO[] }) {
           <FaRegCircleDot className="w-[20px]" />
           <div className="text-title-s font-bold">{item.year}</div>
         </div>
+
         <ul className="list-disc ml-10">
           <PortableText value={item.content} components={components} />
         </ul>
       </div>
     )
   }
+
   return (
-    <div className="flex gap-3">
-      <div className="bg-neutralLight w-[0.5px]" />
-      <div className="flex flex-col gap-3 py-2">
-        {profile.map((item, index) => (
-          <Container key={index} item={item} index={index} />
-        ))}
-      </div>
+    <div className="flex flex-col gap-3 pl-4 py-4 border-l border-neutralLight">
+      {profile.map((item, index) => (
+        <Container key={index} item={item} index={index} />
+      ))}
     </div>
   )
 }
