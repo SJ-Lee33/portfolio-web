@@ -8,7 +8,6 @@ export const getProjectById = async (
     const data = await client.fetch(
       `*[_type == "project" && _id == $id]{
                 ...,
-                "id": _id,
                 contents,
                 contribution,
                 duration,

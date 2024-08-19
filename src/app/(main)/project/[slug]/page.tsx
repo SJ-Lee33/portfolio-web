@@ -1,4 +1,4 @@
-import ProjectSubtitle from './components/project-subtitle'
+import ProjectHeader from './components/project-header'
 import ProjectSummary from './components/project-summary'
 import ProjectTitle from './components/project-title'
 import ProjectTypeLabel from '../../(home)/components/project-type-label'
@@ -7,6 +7,10 @@ import ProjectPlanetext from './components/project-plaintext'
 import ProjectImage from './components/project-image'
 import ProjectCodebox from './components/project-codebox'
 import { getProjectById } from '@/hooks/get-project-by-id'
+import { LoadingSpinner } from '@/components/loading-spinner'
+import ProjectListitems from './components/project-listitems'
+import ProjectSubheader from './components/project-subheader'
+export const dynamic = 'force-dynamic'
 
 type Props = {
   params: {
@@ -15,24 +19,21 @@ type Props = {
 }
 export default async function Page({ params: { slug } }: Props) {
   const project = await getProjectById(slug)
-
   const components: any = {
     block: {
       h3: ({ children }: { children: any }) => (
-        <ProjectSubtitle>{children}</ProjectSubtitle>
+        <ProjectHeader>{children}</ProjectHeader>
+      ),
+      h4: ({ children }: { children: any }) => (
+        <ProjectSubheader>{children}</ProjectSubheader>
       ),
       normal: ({ children }: { children: any }) => (
         <ProjectPlanetext>{children}</ProjectPlanetext>
       ),
     },
-    listItem: {
+    list: {
       bullet: ({ children }: { children: any }) => (
-        <li
-          className="mx-8 md:mx-16 text-body-m"
-          style={{ listStyleType: 'disc' }}
-        >
-          {children}
-        </li>
+        <ProjectListitems>{children}</ProjectListitems>
       ),
     },
     types: {
@@ -45,7 +46,7 @@ export default async function Page({ params: { slug } }: Props) {
     },
   }
 
-  if (!project) return <></>
+  if (!project) return <LoadingSpinner />
   return (
     <div className="flex flex-col items-center w-full">
       {/* 분류 */}
