@@ -61,13 +61,13 @@ const getData = async ({
   const query = `*[_type == "project" && !(_id in path('drafts.**')) ${typeFilter}] | order(releaseDate desc) [
     ${limit * (page - 1)}...${limit * page}
     ]  {
-     'id':_id,
+     "id":_id,
      title,
-        projectTypes,
-        releaseDate,
-        skill,
-        summary,
-        "thumbnail":thumbnail.asset->url
+     projectTypes,
+     releaseDate,
+     skill,
+     summary,
+     "thumbnail":thumbnail.asset->url
  }`
 
   const data = await client.fetch(query)

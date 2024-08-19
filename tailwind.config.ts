@@ -23,6 +23,8 @@ const config: Config = {
 
       secondary: '#5E78FF',
 
+      red: '#FF4500',
+
       neutral: '#333333',
       neutralLight: '#666666',
       neutralLighter: '#f3f3f3',

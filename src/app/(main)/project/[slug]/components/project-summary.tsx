@@ -42,7 +42,7 @@ export default async function ProjectSummary({
         </div>
         <div>
           <span className="font-semibold">기간 |</span>
-          {formatDate(releaseDate) + ` (${duration})`}
+          {` ${formatDate(releaseDate)} (${duration})`}
         </div>
       </div>
     </div>

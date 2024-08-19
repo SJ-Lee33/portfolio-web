@@ -10,6 +10,7 @@ export const getProjectById = async (
                 ...,
                 "id": _id,
                 contents,
+                troubleShootings,
                 contribution,
                 duration,
                 projectTypes,
@@ -19,9 +20,25 @@ export const getProjectById = async (
                 "thumbnail":thumbnail.asset->url,
                 title,
                 "imageUrls": images[].asset->url,
+
+                "relatedProjects": relatedProjects[]{
+                    "reference": reference->{
+                        "id": _id,
+                        "title": title,
+                        "projectTypes": projectTypes,
+                        "releaseDate": releaseDate,
+                        "skill": skill,
+                        "summary": summary,
+                        "thumbnail": thumbnail.asset->url
+                    }
+                }
+
             }[0]`,
       {
         id,
+      },
+      {
+        cache: 'no-store', // 캐시 사용 안 함
       },
     )
     const { ...rest } = data

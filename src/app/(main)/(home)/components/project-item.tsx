@@ -44,7 +44,7 @@ export default function ProjectItem(project: ProjectListDto) {
         {/* 제목&부제목 */}
         <div className="flex flex-col">
           <div className="text-title-l font-extrabold">{project.title}</div>
-          <div className="text-body-m font-light">{project.summary}</div>
+          <div className="text-body-m font-light">{project?.summary}</div>
         </div>
 
         {/* 출시일&기술스택 */}
