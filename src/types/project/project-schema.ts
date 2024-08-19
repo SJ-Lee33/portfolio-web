@@ -17,7 +17,12 @@ interface ProjectSchema {
 
   summary?: string
   thumbnail: string
-  contents: [] // portable text (type:block)
+  contents: [] // portable text
+  troubleShootings?: {
+    troubleShootingType: number
+    troubleShootingTitle: string
+    troubleShootingContent: [] // portable text
+  }[]
 
   imageUrls?: string[]
   relatedProjects?: {

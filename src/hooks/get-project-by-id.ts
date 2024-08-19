@@ -10,6 +10,7 @@ export const getProjectById = async (
                 ...,
                 "id": _id,
                 contents,
+                troubleShootings,
                 contribution,
                 duration,
                 projectTypes,

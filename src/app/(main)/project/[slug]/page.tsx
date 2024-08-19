@@ -11,7 +11,6 @@ import { LoadingSpinner } from '@/components/loading-spinner'
 import ProjectListitems from './components/project-listitems'
 import ProjectSubheader from './components/project-subheader'
 import ProjectImages from './components/project-images'
-import { ProjectListDto } from '@/types/project/project-list-dto'
 import Link from 'next/link'
 import ProjectItem from '../../(home)/components/project-item'
 
@@ -50,12 +49,11 @@ export default async function Page({ params: { slug } }: Props) {
       ),
     },
   }
-
   if (!project) return <LoadingSpinner />
   return (
     <div className="flex flex-col items-center w-full">
       {/* 분류 */}
-      <div className="flex flex-col w-full items-center text-center font-bold text-title-s bg-secondary text-white pt-2 gap-2">
+      <div className="flex flex-col w-full items-center text-center font-bold text-title-s bg-secondary text-white pt-4 gap-4">
         <ProjectTypeLabel projectTypes={project.projectTypes} />
         <div className="flex h-[1px] w-[40px] bg-white" />
       </div>
@@ -74,7 +72,38 @@ export default async function Page({ params: { slug } }: Props) {
       />
 
       <div className="flex flex-col px-4 py-12 md:px-[50px] lg:px-[80px] w-full">
+        {/* 내용 */}
         <PortableText value={project.contents} components={components} />
+
+        {/* 트러블슈팅  */}
+        {project?.troubleShootings && (
+          <>
+            <ProjectHeader>{'트러블 슈팅'}</ProjectHeader>
+            <div className="-mb-10" />
+            {project.troubleShootings.map((item: any, index: any) => {
+              return (
+                <div key={index}>
+                  {/* 타이틀 */}
+                  {item.troubleShootingType == 0 ? (
+                    <ProjectSubheader color="red">
+                      {'💥 문제 발생! ' + item.troubleShootingTitle}
+                    </ProjectSubheader>
+                  ) : (
+                    <ProjectSubheader color="blue">
+                      {'🍀 문제 해결! ' + item.troubleShootingTitle}
+                    </ProjectSubheader>
+                  )}
+
+                  {/* 내용 */}
+                  <PortableText
+                    value={item.troubleShootingContent}
+                    components={components}
+                  />
+                </div>
+              )
+            })}
+          </>
+        )}
 
         {/* 사진 갤러리 */}
         {project?.imageUrls && (

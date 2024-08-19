@@ -2,6 +2,7 @@ export type ProjectDTO = Pick<
   ProjectSchema,
   | 'id'
   | 'contents'
+  | 'troubleShootings'
   | 'contribution'
   | 'duration'
   | 'projectTypes'

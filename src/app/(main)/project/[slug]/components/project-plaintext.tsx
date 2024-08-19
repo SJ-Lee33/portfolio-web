@@ -26,7 +26,7 @@ export default function ProjectPlanetext({
   }
 
   return (
-    <p className="w-full px-4 my-3 md:px-10 text-body-l">
+    <p className="w-full px-4 py-1 md:px-10 text-body-m">
       {Array.isArray(children)
         ? children.map(renderChild)
         : renderChild(children)}
