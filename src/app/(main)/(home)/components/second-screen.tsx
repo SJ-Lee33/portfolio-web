@@ -6,7 +6,6 @@ import History from './history'
 import { useProfile } from '../../profile/hooks/use-profile'
 import { LoadingSpinner } from '@/components/loading-spinner'
 import classNames from 'classnames'
-export const dynamic = 'force-dynamic'
 
 export default function SecondScreen() {
   const { profile, isLoading } = useProfile()

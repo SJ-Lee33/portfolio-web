@@ -7,7 +7,7 @@ export default function ProjectImage({ asset }: { asset: { _ref: string } }) {
     <img
       src={imageUrl}
       alt="본문 이미지"
-      className="w-[400px] h-auto object-contain px-4 md:px-10 py-3"
+      className="w-[400px] h-auto object-contain mx-4 md:mx-10 my-3 shadow-md shadow-neutralLight/30"
     />
   )
 }

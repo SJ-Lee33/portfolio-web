@@ -17,8 +17,10 @@ type Props = {
     slug: string
   }
 }
+
 export default async function Page({ params: { slug } }: Props) {
   const project = await getProjectById(slug)
+
   const components: any = {
     block: {
       h3: ({ children }: { children: any }) => (
