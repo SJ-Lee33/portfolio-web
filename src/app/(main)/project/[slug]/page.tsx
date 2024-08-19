@@ -10,7 +10,6 @@ import { getProjectById } from '@/hooks/get-project-by-id'
 import { LoadingSpinner } from '@/components/loading-spinner'
 import ProjectListitems from './components/project-listitems'
 import ProjectSubheader from './components/project-subheader'
-export const dynamic = 'force-dynamic'
 
 type Props = {
   params: {

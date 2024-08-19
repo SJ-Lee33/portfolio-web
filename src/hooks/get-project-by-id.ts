@@ -8,7 +8,7 @@ export const getProjectById = async (
     const data = await client.fetch(
       `*[_type == "project" && _id == $id]{
                 ...,
-                "id": id,
+                "id": _id,
                 contents,
                 contribution,
                 duration,
@@ -23,9 +23,9 @@ export const getProjectById = async (
       {
         id,
       },
-      // {
-      //   cache: 'no-store', // 캐시 사용 안 함
-      // },
+      {
+        cache: 'no-store', // 캐시 사용 안 함
+      },
     )
     const { ...rest } = data
 
