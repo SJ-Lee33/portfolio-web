@@ -8,6 +8,7 @@ import ThirdScreen from './components/third-screen'
 import LastScreen from './components/last-screen'
 import { LoadingSpinner } from '@/components/loading-spinner'
 import { Scroll } from './components/scroll'
+export const dynamic = 'force-dynamic'
 
 const HomePage: React.FC = () => {
   const profileRef = useRef<HTMLDivElement>(null)
