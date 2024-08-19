@@ -11,7 +11,7 @@ export default async function ClientLayout({ children }: Props) {
         <NavBar />
       </header>
 
-      <main className="mt-[90px]">{children}</main>
+      <main className="md:mt-[65px] mt-[91px]">{children}</main>
     </div>
   )
 }
