@@ -10,4 +10,5 @@ export type ProjectDTO = Pick<
   | 'skill'
   | 'thumbnail'
   | 'title'
+  | 'imageUrls'
 >

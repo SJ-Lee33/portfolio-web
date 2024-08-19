@@ -18,4 +18,6 @@ interface ProjectSchema {
   summary: string
   thumbnail: string
   contents: [] // portable text (type:block)
+
+  imageUrls?: string[]
 }

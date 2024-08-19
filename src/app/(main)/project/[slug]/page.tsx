@@ -10,6 +10,7 @@ import { getProjectById } from '@/hooks/get-project-by-id'
 import { LoadingSpinner } from '@/components/loading-spinner'
 import ProjectListitems from './components/project-listitems'
 import ProjectSubheader from './components/project-subheader'
+import ProjectImages from './components/project-images'
 
 type Props = {
   params: {
@@ -19,7 +20,6 @@ type Props = {
 
 export default async function Page({ params: { slug } }: Props) {
   const project = await getProjectById(slug)
-
   const components: any = {
     block: {
       h3: ({ children }: { children: any }) => (
@@ -71,7 +71,16 @@ export default async function Page({ params: { slug } }: Props) {
 
       <div className="flex flex-col px-4 py-12 md:px-[50px] lg:px-[80px] w-full">
         <PortableText value={project.contents} components={components} />
+        {/* TODO: 사진 갤러리 */}
+        {project?.imageUrls && (
+          <>
+            <ProjectHeader>{'스크린샷'}</ProjectHeader>
+            <ProjectImages images={project.imageUrls} />
+          </>
+        )}
       </div>
+
+      {/* TODO: 관련 프로젝트  */}
     </div>
   )
 }
