@@ -19,6 +19,19 @@ export const getProjectById = async (
                 "thumbnail":thumbnail.asset->url,
                 title,
                 "imageUrls": images[].asset->url,
+
+                "relatedProjects": relatedProjects[]{
+                    "reference": reference->{
+                        "id": _id,
+                        "title": title,
+                        "projectTypes": projectTypes,
+                        "releaseDate": releaseDate,
+                        "skill": skill,
+                        "summary": summary,
+                        "thumbnail": thumbnail.asset->url
+                    }
+                }
+
             }[0]`,
       {
         id,

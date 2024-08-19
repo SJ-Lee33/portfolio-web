@@ -11,4 +11,5 @@ export type ProjectDTO = Pick<
   | 'thumbnail'
   | 'title'
   | 'imageUrls'
+  | 'relatedProjects'
 >

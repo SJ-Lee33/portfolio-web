@@ -11,6 +11,9 @@ import { LoadingSpinner } from '@/components/loading-spinner'
 import ProjectListitems from './components/project-listitems'
 import ProjectSubheader from './components/project-subheader'
 import ProjectImages from './components/project-images'
+import { ProjectListDto } from '@/types/project/project-list-dto'
+import Link from 'next/link'
+import ProjectItem from '../../(home)/components/project-item'
 
 type Props = {
   params: {
@@ -20,6 +23,7 @@ type Props = {
 
 export default async function Page({ params: { slug } }: Props) {
   const project = await getProjectById(slug)
+
   const components: any = {
     block: {
       h3: ({ children }: { children: any }) => (
@@ -71,16 +75,43 @@ export default async function Page({ params: { slug } }: Props) {
 
       <div className="flex flex-col px-4 py-12 md:px-[50px] lg:px-[80px] w-full">
         <PortableText value={project.contents} components={components} />
-        {/* TODO: 사진 갤러리 */}
+
+        {/* 사진 갤러리 */}
         {project?.imageUrls && (
           <>
             <ProjectHeader>{'스크린샷'}</ProjectHeader>
             <ProjectImages images={project.imageUrls} />
           </>
         )}
-      </div>
 
-      {/* TODO: 관련 프로젝트  */}
+        {/* 관련 프로젝트  */}
+        {project?.relatedProjects && (
+          <>
+            <ProjectHeader>{'관련 프로젝트'}</ProjectHeader>
+            {project.relatedProjects.map((reference: any) => {
+              let relatedProject = reference.reference
+              return (
+                <Link
+                  href={`/project/${relatedProject.id}`}
+                  key={relatedProject.id}
+                  target="_blank"
+                  className="w-full"
+                >
+                  <ProjectItem
+                    id={relatedProject.id}
+                    title={relatedProject.title}
+                    projectTypes={relatedProject.projectTypes}
+                    type={relatedProject.type}
+                    releaseDate={relatedProject.releaseDate}
+                    thumbnail={relatedProject.thumbnail}
+                    skill={relatedProject?.skill}
+                  />
+                </Link>
+              )
+            })}
+          </>
+        )}
+      </div>
     </div>
   )
 }

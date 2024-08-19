@@ -15,9 +15,20 @@ interface ProjectSchema {
   contribution: string
   skill?: string[]
 
-  summary: string
+  summary?: string
   thumbnail: string
   contents: [] // portable text (type:block)
 
   imageUrls?: string[]
+  relatedProjects?: {
+    reference?: {
+      id: ProjectSchema['id']
+      title: ProjectSchema['title']
+      projectTypes: ProjectSchema['projectTypes']
+      releaseDate: ProjectSchema['releaseDate']
+      skill?: ProjectSchema['skill']
+      summary: ProjectSchema['summary']
+      thumbnail: ProjectSchema['thumbnail']
+    }
+  }[]
 }
