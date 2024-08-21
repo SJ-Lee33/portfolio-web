@@ -9,6 +9,7 @@ import { LoadingSpinner } from '@/components/loading-spinner'
 import { Scroll } from './components/scroll'
 import NavBar from '@/components/nav-bar/nav-bar'
 import { useEffect, useState } from 'react'
+import SkillsScreen from './components/skills-screen'
 
 const HomePage: React.FC = () => {
   const profileRef = useRef<HTMLDivElement>(null)
@@ -47,6 +48,7 @@ const HomePage: React.FC = () => {
       <div ref={profileRef}>
         <HistoryScreen />
       </div>
+      <SkillsScreen />
       <div ref={projectRef}>
         <ThirdScreen />
       </div>

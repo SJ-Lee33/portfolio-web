@@ -9,7 +9,7 @@ export default function HistoryScreen() {
   if (isLoading) return <LoadingSpinner />
 
   return (
-    <div className="w-screen p-12 text-neutral">
+    <div className="p-12 text-neutral">
       {/* 제목 */}
       <div className="text-headline-l font-extrabold">History</div>
 
