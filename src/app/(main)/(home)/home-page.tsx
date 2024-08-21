@@ -2,7 +2,7 @@
 
 import React, { useRef, Suspense } from 'react'
 import FirstScreen from './components/first-screen'
-import SecondScreen from './components/second-screen'
+import HistoryScreen from './components/history-screen'
 import ThirdScreen from './components/third-screen'
 import LastScreen from './components/last-screen'
 import { LoadingSpinner } from '@/components/loading-spinner'
@@ -45,7 +45,7 @@ const HomePage: React.FC = () => {
       </header>
       <FirstScreen />
       <div ref={profileRef}>
-        <SecondScreen />
+        <HistoryScreen />
       </div>
       <div ref={projectRef}>
         <ThirdScreen />
