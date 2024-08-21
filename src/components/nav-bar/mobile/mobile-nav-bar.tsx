@@ -3,13 +3,13 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import Logo from '../logo'
 
-export default function MobileNavBar() {
+export default function MobileNavBar({ shownLogo }: { shownLogo?: boolean }) {
   const Chip = ({ value }: { value: string }) => {
     return (
       <Link
         href={value}
         className={classNames(
-          'text-body-m font-extralight text-neutral',
+          'text-body-m font-extralight',
           'hover:text-primaryPressed hover:text-primary hover:font-bold',
         )}
       >
@@ -20,8 +20,8 @@ export default function MobileNavBar() {
 
   return (
     <div className="flex flex-col justify-center">
-      <Logo />
-      <nav className="flex items-center justify-center h-10 bg-white shadow-md shadow-neutralLight/5">
+      {shownLogo && <Logo />}
+      <nav className="flex items-center justify-center h-10">
         <ul className="flex gap-10">
           <Chip value={NAVIGATION_PATH.profile} />
           <Chip value={NAVIGATION_PATH.project} />

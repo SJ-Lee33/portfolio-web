@@ -9,8 +9,8 @@ export default function Logo({ horizontal }: { horizontal?: boolean }) {
     <Link
       href={'/'}
       className={classNames(
-        'flex justify-center bg-white',
-        !horizontal && 'border-b border-neutralLighter',
+        'flex justify-center',
+        !horizontal && 'border-b border-neutralLighter bg-white/50',
       )}
     >
       <Image

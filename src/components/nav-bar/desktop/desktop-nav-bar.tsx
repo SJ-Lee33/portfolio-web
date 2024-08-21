@@ -3,13 +3,13 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import Logo from '../logo'
 
-export default function DesktopNavBar() {
+export default function DesktopNavBar({ shownLogo }: { shownLogo?: boolean }) {
   const Chip = ({ value }: { value: string }) => {
     return (
       <Link
         href={value}
         className={classNames(
-          'text-title-s font-extralight text-neutral',
+          'text-title-s font-extralight',
           'hover:text-primaryPressed hover:text-primary hover:font-extrabold',
         )}
       >
@@ -19,8 +19,7 @@ export default function DesktopNavBar() {
   }
 
   return (
-    <div className="flex justify-between items-center h-[65px] px-10 bg-white shadow-md shadow-neutral/5">
-      <Logo horizontal />
+    <div className="flex justify-between items-center h-[65px] px-10 ">
       <nav className="flex items-center">
         <ul className="flex justify-center gap-8">
           <Chip value={NAVIGATION_PATH.profile} />
@@ -30,6 +29,7 @@ export default function DesktopNavBar() {
           <Chip value={NAVIGATION_PATH.marketer} />
         </ul>
       </nav>
+      {shownLogo && <Logo horizontal />}
     </div>
   )
 }
