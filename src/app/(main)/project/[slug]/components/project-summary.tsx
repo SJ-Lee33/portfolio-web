@@ -20,18 +20,18 @@ export default async function ProjectSummary({
   if (skill) skillsList = Object.values(skill).join(' / ')
 
   return (
-    <div className="flex flex-col md:flex-row w-full rounded-b-md items-center md:items-end justify-center gap-5 px-5 pt-[80px]">
+    <div className="flex flex-col md:flex-row w-full rounded-b-md items-center md:items-start justify-center gap-8 px-5 pt-[80px]">
       {/* 썸네일 */}
       <Image
         src={thumbnail}
         alt="project thumbnail"
         width={400}
         height={400}
-        className="w-[400px] h-auto object-contain md:pr-5 pb-5 md:pb-0 border-b-[1px] md:border-r-[1px] md:border-b-0 border-neutralLight/70"
+        className="w-[400px] h-auto object-contain md:pr-8 pb-8 md:pb-0 border-b-[1px] md:border-r-[1px] md:border-b-0 border-neutralLight/70"
       />
 
       {/* 요약 */}
-      <div className="flex flex-col gap-1 text-body-m font-light py-3">
+      <div className="flex flex-col gap-1 text-body-m font-light md:py-3">
         <div>
           <span className="font-semibold">역할 |</span> {role}
         </div>

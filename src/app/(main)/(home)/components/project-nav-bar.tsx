@@ -25,6 +25,7 @@ export default function ProjectNavBar() {
           'text-neutral',
           'text-body-m md:text-title-s',
           'hover:bg-primaryDark hover:text-white hover:font-extrabold',
+          'focus:bg-primaryDarker',
           isActive && 'bg-primary text-white font-extrabold',
         )}
       >
@@ -35,7 +36,7 @@ export default function ProjectNavBar() {
   return (
     <ul
       className={classNames(
-        'flex items-center',
+        'flex items-center mb-8',
         'text-title-s bg-white rounded-full',
         'border border-neutralLight',
         'gap-3',

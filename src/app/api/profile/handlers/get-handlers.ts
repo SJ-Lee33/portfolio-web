@@ -27,7 +27,7 @@ export async function getHandler(request: Request) {
 }
 
 const getData = async ({ page, limit }: { page: number; limit: number }) => {
-  const query = `*[_type == "history" && !(_id in path('drafts.**')) ] | order(year desc) [
+  const query = `*[_type == "history" && !(_id in path('drafts.**')) ] | order(year) [
     ${limit * (page - 1)}...${limit * page}
     ]  {
     'id': _id,

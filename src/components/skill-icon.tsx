@@ -13,11 +13,11 @@ export default function SkillIcon({
   small?: boolean
 }) {
   return (
-    <div className="relative flex flex-col items-center group">
+    <div className="relative flex flex-col items-center group bg-white shadow-md shadow-neutral/10 rounded-lg p-2">
       <Image
         className={classNames(
           'object-contain',
-          small ? 'h-[35px]' : 'h-[65px]',
+          small ? 'h-[30px]' : 'h-[60px]',
         )}
         src={item.icon}
         alt={item.title}
