@@ -24,7 +24,7 @@ export default function HistoryScreen() {
 
           {/* 내용 */}
           <div className="flex flex-col gap-3">
-            <div>이화여자대학교 엘텍공과대학 소프트웨어학부 컴퓨터공학전공</div>
+            <div>이화여자대학교 소프트웨어학부 컴퓨터공학전공</div>
             <div>
               <p>2022-24 IT스타트업 IRUTI</p>
               <p>2024 제조업 INNOS</p>
@@ -36,8 +36,8 @@ export default function HistoryScreen() {
         <div className="flex gap-5 text-body-m">
           {/* 항목명 */}
           <div className="flex flex-col gap-3 font-bold w-[70px]">
-            <div>phone</div>
-            <div>email</div>
+            <div>휴대폰</div>
+            <div>이메일</div>
           </div>
 
           {/* 내용 */}
