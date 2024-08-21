@@ -3,7 +3,7 @@
 import React, { useRef, Suspense } from 'react'
 import FirstScreen from './components/first-screen'
 import HistoryScreen from './components/history-screen'
-import ThirdScreen from './components/third-screen'
+import ProjectsScreen from './components/projects-screen'
 import LastScreen from './components/last-screen'
 import { LoadingSpinner } from '@/components/loading-spinner'
 import { Scroll } from './components/scroll'
@@ -50,7 +50,7 @@ const HomePage: React.FC = () => {
       </div>
       <SkillsScreen />
       <div ref={projectRef}>
-        <ThirdScreen />
+        <ProjectsScreen />
       </div>
       <LastScreen />
       <Suspense fallback={<LoadingSpinner />}>
