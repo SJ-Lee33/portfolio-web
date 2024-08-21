@@ -13,11 +13,11 @@ export default function HistoryScreen() {
       {/* 제목 */}
       <div className="text-headline-l font-extrabold">History</div>
 
-      <div className="flex gap-20">
+      <div className="flex flex-col gap-3 my-10 md:flex-row md:gap-20">
         {/* 요약 */}
-        <div className="flex gap-5 text-body-m my-10">
+        <div className="flex gap-5 text-body-m">
           {/* 항목명 */}
-          <div className="flex flex-col gap-3 font-bold">
+          <div className="flex flex-col gap-3 font-bold w-[70px]">
             <div>학력</div>
             <div>주요 경력</div>
           </div>
@@ -33,9 +33,9 @@ export default function HistoryScreen() {
         </div>
 
         {/* 연락처 */}
-        <div className="flex gap-5 text-body-m my-10">
+        <div className="flex gap-5 text-body-m">
           {/* 항목명 */}
-          <div className="flex flex-col gap-3 font-bold">
+          <div className="flex flex-col gap-3 font-bold w-[70px]">
             <div>phone</div>
             <div>email</div>
           </div>

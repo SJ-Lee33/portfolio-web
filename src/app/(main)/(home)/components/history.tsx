@@ -1,4 +1,5 @@
 import { ProfileDTO } from '@/types/profile/profile-dto'
+import classNames from 'classnames'
 import { PortableText } from 'next-sanity'
 import { FaCircle } from 'react-icons/fa6'
 
@@ -15,13 +16,19 @@ export default function History({ profile }: { profile: ProfileDTO[] }) {
 
   const Container = ({ item }: { item: ProfileDTO }) => {
     return (
-      <div className="flex flex-col gap-4 text-neutral">
-        <div className="flex flex-col gap-3">
+      <div className="flex flex-col text-neutral">
+        <div
+          className={classNames(
+            'block w-full h-[0.5px] bg-neutralLight -mb-2',
+            'md:hidden',
+          )}
+        />
+        <div className="flex flex-col gap-2 md:gap-3">
           <FaCircle className="w-[15px]" />
-          <div className="text-title-s font-bold">{item.year}</div>
+          <div className="text-title-s font-bold mb-2 md:mb-4">{item.year}</div>
         </div>
 
-        <ul>
+        <ul className="mb-10">
           <PortableText value={item.content} components={components} />
         </ul>
       </div>
@@ -30,8 +37,18 @@ export default function History({ profile }: { profile: ProfileDTO[] }) {
 
   return (
     <div className="flex flex-col">
-      <div className="w-full h-[0.5px] bg-neutralLight -mb-2 " />
-      <div className="grid grid-cols-5 gap-8">
+      <div
+        className={classNames(
+          'hidden',
+          'md:block md:w-full md:h-[0.5px] md:bg-neutralLight md:-mb-2', // md ~
+        )}
+      />
+      <div
+        className={classNames(
+          'flex flex-col gap-5',
+          'md:grid md:grid-cols-5 md:gap-8', // md ~
+        )}
+      >
         {profile.map((item, index) => (
           <Container key={index} item={item} />
         ))}

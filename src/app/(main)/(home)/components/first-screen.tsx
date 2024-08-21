@@ -23,11 +23,11 @@ export default function FirstScreen() {
   }
   return (
     <div
-      className="h-screen w-screen grid px-10 grid-cols-3 bg-cover bg-center"
+      className="h-screen w-screen flex flex-col items-start justify-center md:flex-row md:justify-between md:items-center px-10 bg-cover bg-center"
       style={{ backgroundImage: `url(${backgroundImage.src})` }}
     >
       {/* 메인 문구 */}
-      <div className="flex flex-col col-span-2 justify-center text-[3.5rem] text-white font-extralight">
+      <div className="flex flex-col justify-center text-[3rem] text-white font-extralight">
         <div>
           <span className="font-medium">회사의 비전</span>을 이해하고
         </div>
@@ -48,8 +48,7 @@ export default function FirstScreen() {
       </div>
 
       {/* 연락처 */}
-
-      <div className="flex justify-end items-center">
+      <div className="mt-10 md:m-0">
         <Contact />
       </div>
     </div>

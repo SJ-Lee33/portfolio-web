@@ -23,8 +23,8 @@ export default function Contact() {
         target="_blank"
         className="flex gap-3 justify-end items-center group"
       >
-        {/* hover 시 보이는 내용 */}
-        <div className="hidden group-hover:block text-white font-extralight text-body-s">
+        {/* md 이상에서, hover 시 보이는 내용 */}
+        <div className="hidden md:group-hover:block text-white font-extralight text-body-s">
           {content}
         </div>
 
@@ -45,7 +45,7 @@ export default function Contact() {
   }
 
   return (
-    <div className="flex flex-col p-4 gap-10">
+    <div className="flex md:flex-col justify-start p-4 gap-10">
       <Container
         icon={<IoMail />}
         title="Email"

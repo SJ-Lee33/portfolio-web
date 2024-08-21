@@ -20,7 +20,7 @@ const HomePage: React.FC = () => {
     const handleScroll = () => {
       const position = window.scrollY
 
-      if (position >= 660) {
+      if (position >= 600) {
         // 스크롤 진행후
         setHeaderDesign('bg-white text-neutral shadow-md shadow-neutral/5')
         setShownLogo(true)
