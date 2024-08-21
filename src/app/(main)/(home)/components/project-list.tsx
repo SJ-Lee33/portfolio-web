@@ -9,7 +9,7 @@ export default function ProjectList() {
   const { projects, isLoading } = useProjects()
   if (isLoading) return <LoadingSpinner />
   return (
-    <div className="flex flex-col gap-1 text-title-s rounded-md">
+    <div className="flex flex-col gap-2 text-title-s rounded-md">
       {projects?.map((project: ProjectListDto) => {
         return (
           <Link
