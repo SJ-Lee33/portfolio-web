@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import Image from 'next/image'
-import { CopyBlock, atomOneDark } from 'react-code-blocks'
 
 export default function ProjectImages({ images }: { images: string[] }) {
   return (
@@ -8,7 +7,7 @@ export default function ProjectImages({ images }: { images: string[] }) {
       className={classNames(
         'px-4 gap-4 columns-2 my-3',
         'md:px-10 md:columns-3',
-        'xl:columns-4',
+        // 'xl:columns-4',
       )}
     >
       {images.map((item, index) => (
@@ -18,7 +17,7 @@ export default function ProjectImages({ images }: { images: string[] }) {
             src={item}
             width={250}
             height={250}
-            className="w-full h-auto"
+            className="w-full h-auto shadow-lg shadow-neutralLight/20"
             style={{ objectFit: 'cover' }}
           />
         </div>

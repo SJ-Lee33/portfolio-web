@@ -9,7 +9,7 @@ export default function ProjectTitle({ title }: { title: string }) {
         'flex items-center justify-center text-center',
         'w-full px-10 py-4 bg-secondary rounded-b-md',
         'shadow-lg shadow-neutralLight/50',
-        'text-white font-extrabold text-headline-s',
+        'text-white font-bold text-headline-s',
         'md:text-headline-l md:py-7',
       )}
     >

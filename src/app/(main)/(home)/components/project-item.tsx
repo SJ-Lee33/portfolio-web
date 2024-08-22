@@ -26,8 +26,8 @@ export default function ProjectItem(project: ProjectListDto) {
         <Image
           src={project.thumbnail}
           alt="project thumbnail"
-          width={100}
-          height={100}
+          width={250}
+          height={250}
           className="w-full h-full object-cover bg-primary rounded-md shadow-lg shadow-neutralLight/30"
         />
       </div>
@@ -60,7 +60,7 @@ export default function ProjectItem(project: ProjectListDto) {
           <div className="text-body-s text-neutralLight">
             {formatDate(project.releaseDate)}
           </div>
-          <SkillDisplay skills={project.skill} />
+          <SkillDisplay skills={project.skill} small />
         </div>
       </div>
     </div>

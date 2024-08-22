@@ -2,7 +2,7 @@ import Skills from './skills'
 
 export default function SkillsScreen() {
   return (
-    <div className="flex flex-col md:flex-row p-12 gap-10 text-neutral">
+    <div className="flex flex-col md:flex-row p-12 gap-10 lg:gap-16 text-neutral">
       <div className="flex flex-col gap-5">
         {/* 제목 */}
         <div className="text-headline-l font-extrabold">Skills & Tools</div>
