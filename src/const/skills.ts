@@ -9,6 +9,9 @@ import Next from '/public/images/logo-nextjs.png'
 import JavaScript from '/public/images/logo-javascript.png'
 import TypeScript from '/public/images/logo-typescript.png'
 import Kotlin from '/public/images/logo-kotlin.png'
+import StyledComponents from '/public/images/logo-styled-components.png'
+import TailwindCss from '/public/images/logo-tailwindcss.png'
+import Recoil from '/public/images/logo-recoil.png'
 import Sanity from '/public/images/logo-sanity.png'
 import Clouinary from '/public/images/logo-cloudinary.png'
 import Firebase from '/public/images/logo-firebase.png'
@@ -27,13 +30,13 @@ import Github from '/public/images/logo-github.png'
 export const SkillList = [
   /**
    * programming - 0~5
-   * frontend - 5~12
-   * backend - 12~16
-   * design - 16~21
-   * coorporation - 21~25
+   * frontend - 5~15
+   * backend - 16~19
+   * design - 19~24
+   * coorporation - 24~28
    */
 
-  // programming - 5
+  // programming
   {
     title: 'C/C++',
     icon: C,
@@ -52,7 +55,7 @@ export const SkillList = [
   },
   { title: 'Unity', icon: Unity },
 
-  // frontend - 7
+  // frontend
   {
     title: 'HTML',
     icon: Html,
@@ -61,26 +64,29 @@ export const SkillList = [
     title: 'CSS',
     icon: Css,
   },
-  { title: 'React', icon: React },
-  { title: 'Next', icon: Next },
   { title: 'JavaScript', icon: JavaScript },
   { title: 'TypeScript', icon: TypeScript },
+  { title: 'React', icon: React },
+  { title: 'Next', icon: Next },
   { title: 'Kotlin', icon: Kotlin },
+  { title: 'Styled Components', icon: StyledComponents },
+  { title: 'Tailwind CSS', icon: TailwindCss },
+  { title: 'Recoil', icon: Recoil },
 
-  // backend - 4
+  // backend
   { title: 'Sanity', icon: Sanity },
   { title: 'Cloudinary', icon: Clouinary },
   { title: 'Firebase', icon: Firebase },
   { title: 'AWS', icon: Aws },
 
-  // design - 5
+  // design
   { title: 'Adobe Photoshop', icon: Photoshop },
   { title: 'Adobe Illustrator', icon: Illustrator },
   { title: 'Adobe Premiere Pro', icon: Premiere },
   { title: 'Adobe After Effect', icon: AfterEffects },
   { title: 'Figma', icon: Figma },
 
-  // coorporation - 4
+  // coorporation
   { title: 'Notion', icon: Notion },
   { title: 'Github', icon: Github },
   { title: 'Hiworks', icon: Hiworks },

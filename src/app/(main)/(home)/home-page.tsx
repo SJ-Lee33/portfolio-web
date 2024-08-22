@@ -14,7 +14,7 @@ import SkillsScreen from './components/skills-screen'
 const HomePage: React.FC = () => {
   const profileRef = useRef<HTMLDivElement>(null)
   const projectRef = useRef<HTMLDivElement>(null)
-  const [headerDesign, setHeaderDesign] = useState('')
+  const [headerDesign, setHeaderDesign] = useState('text-white')
   const [shownLogo, setShownLogo] = useState(false)
 
   useEffect(() => {

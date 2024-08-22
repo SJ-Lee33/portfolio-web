@@ -2,7 +2,13 @@ import React from 'react'
 import SkillIcon from './skill-icon'
 import { SkillList } from '@/const/skills'
 
-export default function SkillDisplay({ skills }: { skills?: string[] }) {
+export default function SkillDisplay({
+  skills,
+  small,
+}: {
+  skills?: string[]
+  small?: boolean
+}) {
   const getSkillItem = (title: string) => {
     return SkillList.find((skill) => skill.title === title)
   }
@@ -11,7 +17,7 @@ export default function SkillDisplay({ skills }: { skills?: string[] }) {
       {skills?.map((skillTitle) => {
         const skillItem = getSkillItem(skillTitle)
         if (skillItem) {
-          return <SkillIcon key={skillTitle} item={skillItem} small />
+          return <SkillIcon key={skillTitle} item={skillItem} small={small} />
         }
         return null
       })}

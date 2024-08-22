@@ -1,26 +1,7 @@
 import Contact from './contact'
 import backgroundImage from '/public/images/background.jpg'
-import Link from 'next/link'
 
 export default function FirstScreen() {
-  const Chip = ({
-    title,
-    href,
-    color,
-  }: {
-    title: string
-    href: string
-    color: string
-  }) => {
-    return (
-      <Link
-        className={`w-[80px] h-[80px] rounded-full font-bold text-body-m text-center flex justify-center items-center bg-white/70 hover:bg-white text-${color}`}
-        href={href}
-      >
-        {title}
-      </Link>
-    )
-  }
   return (
     <div
       className="h-screen w-screen flex flex-col items-start justify-center md:flex-row md:justify-between md:items-center px-10 bg-cover bg-center"

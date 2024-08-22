@@ -36,7 +36,7 @@ export default async function Page({ params: { slug } }: Props) {
         <ProjectPlanetext>{children}</ProjectPlanetext>
       ),
     },
-    list: {
+    listItem: {
       bullet: ({ children }: { children: any }) => (
         <ProjectListitems>{children}</ProjectListitems>
       ),
@@ -51,6 +51,7 @@ export default async function Page({ params: { slug } }: Props) {
     },
   }
   if (!project) return <LoadingSpinner />
+
   return (
     <>
       <header className="w-full fixed top-0 z-50">
@@ -59,11 +60,12 @@ export default async function Page({ params: { slug } }: Props) {
           shownLogo
         />
       </header>
-      <div className="flex flex-col items-center w-full">
+
+      <div className="flex flex-col items-center w-full mt-[90px] md:mt-[65px]">
         {/* 분류 */}
-        <div className="flex flex-col w-full items-center text-center font-bold text-title-s bg-secondary text-white pt-4 gap-4">
+        <div className="flex flex-col w-full items-center text-center font-light text-body-l bg-secondary text-white pt-4 gap-4">
           <ProjectTypeLabel projectTypes={project.projectTypes} />
-          <div className="flex h-[1px] w-[40px] bg-white" />
+          <div className="h-[1px] w-[40px] bg-white" />
         </div>
 
         {/* 제목 (상단고정) */}
