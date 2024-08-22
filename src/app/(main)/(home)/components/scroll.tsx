@@ -16,7 +16,7 @@ export function Scroll({ profileRef, projectRef }: ScrollProps) {
     const path = window.location.pathname
 
     if (path === '/profile') {
-      profileRef.current?.scrollIntoView({ behavior: 'auto' })
+      profileRef.current?.scrollIntoView({ behavior: 'smooth' })
     } else if (path === '/project' || (path === '/project' && type)) {
       projectRef.current?.scrollIntoView({ behavior: 'auto' })
     }
