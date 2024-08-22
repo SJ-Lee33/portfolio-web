@@ -89,7 +89,6 @@ export default async function Page({ params: { slug } }: Props) {
           {project?.troubleShootings && (
             <>
               <ProjectHeader>{'트러블 슈팅'}</ProjectHeader>
-              <div className="-mb-10" />
               {project.troubleShootings.map((item: any, index: any) => {
                 return (
                   <div key={index}>

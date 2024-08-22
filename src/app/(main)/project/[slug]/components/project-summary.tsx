@@ -22,7 +22,7 @@ export default async function ProjectSummary({
 
   const Title = ({ title }: { title: string }) => {
     return (
-      <div className="font-semibold border-r border-neutralLight/50 min-w-[40px]">
+      <div className="font-semibold border-r-[1.5px] border-neutralLight/50 min-w-[40px]">
         {title}
       </div>
     )
@@ -37,7 +37,7 @@ export default async function ProjectSummary({
           alt="project thumbnail"
           width={400}
           height={400}
-          className="w-[400px] h-auto object-contain mr-0 md:mr-10 mb-10 md:mb-0 shadow-xl shadow-neutralLight/30"
+          className="w-[400px] h-auto object-contain mr-0 md:mr-10 mb-10 md:mb-0 shadow-xl shadow-neutralLight/30 rounded-md"
         />
       </div>
 
