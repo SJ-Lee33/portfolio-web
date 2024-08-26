@@ -9,9 +9,9 @@ export default function ProjectImage({ asset }: { asset: { _ref: string } }) {
       <Image
         src={imageUrl}
         alt="본문 이미지"
-        width={800}
-        height={800}
-        className="w-full md:w-[600px] h-auto object-contain rounded-md shadow-md shadow-neutralLight/30"
+        width={600}
+        height={600}
+        className="w-full md:w-[600px] h-auto object-contain rounded-md shadow-lg shadow-neutralLight/20"
       />
     </div>
   )

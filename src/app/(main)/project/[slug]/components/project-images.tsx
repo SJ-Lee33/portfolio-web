@@ -1,7 +1,14 @@
 import classNames from 'classnames'
 import Image from 'next/image'
 
-export default function ProjectImages({ images }: { images: string[] }) {
+export default function ProjectImages({
+  images,
+  thumbnail,
+}: {
+  images: string[]
+  thumbnail: string
+}) {
+  const imageCss = 'w-full h-auto shadow-lg shadow-neutralLight/20 rounded-sm'
   return (
     <div
       className={classNames(
@@ -9,6 +16,19 @@ export default function ProjectImages({ images }: { images: string[] }) {
         'md:px-10 md:columns-3',
       )}
     >
+      {/* 썸네일 */}
+      <div className="mb-4 break-inside-avoid">
+        <Image
+          alt={`screenshot-thumbnail`}
+          src={thumbnail}
+          width={250}
+          height={250}
+          className={imageCss}
+          style={{ objectFit: 'cover' }}
+        />
+      </div>
+
+      {/* 추가 스크린샷 */}
       {images.map((item, index) => (
         <div key={index} className="mb-4 break-inside-avoid">
           <Image
@@ -16,7 +36,7 @@ export default function ProjectImages({ images }: { images: string[] }) {
             src={item}
             width={250}
             height={250}
-            className="w-full h-auto shadow-lg shadow-neutralLight/20 rounded-sm"
+            className={imageCss}
             style={{ objectFit: 'cover' }}
           />
         </div>

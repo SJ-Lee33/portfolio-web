@@ -118,7 +118,10 @@ export default async function Page({ params: { slug } }: Props) {
           {project?.imageUrls && (
             <>
               <ProjectHeader>{'스크린샷'}</ProjectHeader>
-              <ProjectImages images={project.imageUrls} />
+              <ProjectImages
+                images={project.imageUrls}
+                thumbnail={project.thumbnail}
+              />
             </>
           )}
 
