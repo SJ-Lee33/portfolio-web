@@ -35,7 +35,8 @@ export default function Skills() {
    * frontend - 5~15
    * backend - 16~19
    * design - 19~24
-   * coorporation - 24~28
+   * document - 24~28
+   * cooperation - 28~32
    */
   return (
     <div className="flex w-full flex-col gap-10 p-4 mt-3 bg-neutralLighter/80 rounded-md">
@@ -43,7 +44,8 @@ export default function Skills() {
       <Container title="WEB & APP" start={5} end={15} />
       <Container title="DATA" start={16} end={19} />
       <Container title="DESIGN" start={19} end={24} />
-      <Container title="COORPORATION" start={24} end={29} />
+      <Container title="DOCUMENT" start={24} end={28} />
+      <Container title="COOPERATION" start={28} end={32} />
     </div>
   )
 }

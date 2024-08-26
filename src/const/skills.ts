@@ -26,6 +26,10 @@ import Slack from '/public/images/logo-slack.png'
 import Notion from '/public/images/logo-notion.png'
 import Hiworks from '/public/images/logo-hiworks.png'
 import Github from '/public/images/logo-github.png'
+import Excel from '/public/images/logo-excel.png'
+import Powerpoint from '/public/images/logo-ppt.png'
+import Word from '/public/images/logo-word.png'
+import Hancom from '/public/images/logo-hancom.png'
 
 export const SkillList = [
   /**
@@ -33,7 +37,8 @@ export const SkillList = [
    * frontend - 5~15
    * backend - 16~19
    * design - 19~24
-   * coorporation - 24~28
+   * document - 24~28
+   * cooperation - 28~32
    */
 
   // programming
@@ -86,7 +91,13 @@ export const SkillList = [
   { title: 'Adobe After Effect', icon: AfterEffects },
   { title: 'Figma', icon: Figma },
 
-  // coorporation
+  // document
+  { title: 'Excel', icon: Excel },
+  { title: 'Word', icon: Word },
+  { title: 'Power Point', icon: Powerpoint },
+  { title: '한컴오피스', icon: Hancom },
+
+  // cooperation
   { title: 'Notion', icon: Notion },
   { title: 'Github', icon: Github },
   { title: 'Hiworks', icon: Hiworks },
