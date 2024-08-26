@@ -35,7 +35,7 @@ export const SkillList = [
   /**
    * programming - 0~5
    * frontend - 5~15
-   * backend - 16~19
+   * backend - 15~19
    * design - 19~24
    * document - 24~28
    * cooperation - 28~32

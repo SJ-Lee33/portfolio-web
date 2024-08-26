@@ -33,7 +33,7 @@ export default function Skills() {
   /**
    * programming - 0~5
    * frontend - 5~15
-   * backend - 16~19
+   * backend - 15~19
    * design - 19~24
    * document - 24~28
    * cooperation - 28~32
@@ -42,7 +42,7 @@ export default function Skills() {
     <div className="flex w-full flex-col gap-10 p-4 mt-3 bg-neutralLighter/80 rounded-md">
       <Container title="PROGRAMMING" start={0} end={5} />
       <Container title="WEB & APP" start={5} end={15} />
-      <Container title="DATA" start={16} end={19} />
+      <Container title="DATA" start={15} end={19} />
       <Container title="DESIGN" start={19} end={24} />
       <Container title="DOCUMENT" start={24} end={28} />
       <Container title="COOPERATION" start={28} end={32} />
