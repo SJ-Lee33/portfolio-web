@@ -5,6 +5,8 @@ import Python from '/public/images/logo-python.png'
 import Html from '/public/images/logo-html.png'
 import Css from '/public/images/logo-css.png'
 import React from '/public/images/logo-react.png'
+import ReactNative from '/public/images/logo-reactnative.png'
+import Expo from '/public/images/logo-expo.png'
 import Next from '/public/images/logo-nextjs.png'
 import JavaScript from '/public/images/logo-javascript.png'
 import TypeScript from '/public/images/logo-typescript.png'
@@ -34,11 +36,11 @@ import Hancom from '/public/images/logo-hancom.png'
 export const SkillList = [
   /**
    * programming - 0~5
-   * frontend - 5~15
-   * backend - 15~19
-   * design - 19~24
-   * document - 24~28
-   * cooperation - 28~32
+   * frontend - 5~17
+   * backend - 17~21
+   * design - 21~26
+   * document - 26~30
+   * cooperation - 30~34
    */
 
   // programming
@@ -72,6 +74,8 @@ export const SkillList = [
   { title: 'JavaScript', icon: JavaScript },
   { title: 'TypeScript', icon: TypeScript },
   { title: 'React', icon: React },
+  { title: 'React Native', icon: ReactNative },
+  { title: 'Expo', icon: Expo },
   { title: 'Next', icon: Next },
   { title: 'Kotlin', icon: Kotlin },
   { title: 'Styled Components', icon: StyledComponents },
