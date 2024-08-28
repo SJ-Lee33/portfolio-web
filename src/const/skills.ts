@@ -92,7 +92,7 @@ export const SkillList = [
   { title: 'Adobe Photoshop', icon: Photoshop },
   { title: 'Adobe Illustrator', icon: Illustrator },
   { title: 'Adobe Premiere Pro', icon: Premiere },
-  { title: 'Adobe After Effect', icon: AfterEffects },
+  { title: 'Adobe After Effects', icon: AfterEffects },
   { title: 'Figma', icon: Figma },
 
   // document
