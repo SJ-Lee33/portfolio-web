@@ -19,7 +19,7 @@ export default function HistoryScreen() {
           {/* 항목명 */}
           <div className="flex flex-col gap-3 font-bold w-[70px]">
             <div>학력</div>
-            <div>주요 경력</div>
+            <div>업무 경험</div>
           </div>
 
           {/* 내용 */}
@@ -42,7 +42,7 @@ export default function HistoryScreen() {
 
           {/* 내용 */}
           <div className="flex flex-col gap-3">
-            <div>010.7159.9812</div>
+            <div>(+82) 10-7159-9812</div>
             <div>sojinlee0z0@gmail.com</div>
           </div>
         </div>
