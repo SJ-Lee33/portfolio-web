@@ -67,10 +67,6 @@ export const SkillList = [
     title: 'HTML',
     icon: Html,
   },
-  {
-    title: 'CSS',
-    icon: Css,
-  },
   { title: 'JavaScript', icon: JavaScript },
   { title: 'TypeScript', icon: TypeScript },
   { title: 'React', icon: React },
@@ -78,6 +74,10 @@ export const SkillList = [
   { title: 'Expo', icon: Expo },
   { title: 'Next', icon: Next },
   { title: 'Kotlin', icon: Kotlin },
+  {
+    title: 'CSS',
+    icon: Css,
+  },
   { title: 'Styled Components', icon: StyledComponents },
   { title: 'Tailwind CSS', icon: TailwindCss },
   { title: 'Recoil', icon: Recoil },
