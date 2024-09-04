@@ -1,9 +1,9 @@
-import { ProfileDTO } from '@/types/profile/profile-dto'
+import { HistoryDTO } from '@/types/history/history-dto'
 import classNames from 'classnames'
 import { PortableText } from 'next-sanity'
 import { FaCircle } from 'react-icons/fa6'
 
-export default function History({ profile }: { profile: ProfileDTO[] }) {
+export default function History({ history }: { history: HistoryDTO[] }) {
   const components: any = {
     listItem: {
       bullet: ({ children }: { children: any }) => (
@@ -14,7 +14,7 @@ export default function History({ profile }: { profile: ProfileDTO[] }) {
     },
   }
 
-  const Container = ({ item }: { item: ProfileDTO }) => {
+  const Container = ({ item }: { item: HistoryDTO }) => {
     return (
       <div className="flex flex-col text-neutral">
         <div
@@ -49,7 +49,7 @@ export default function History({ profile }: { profile: ProfileDTO[] }) {
           'md:grid md:grid-cols-5 md:gap-8', // md ~
         )}
       >
-        {profile.map((item, index) => (
+        {history.map((item, index) => (
           <Container key={index} item={item} />
         ))}
       </div>
