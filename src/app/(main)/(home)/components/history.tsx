@@ -16,7 +16,7 @@ export default function History({ history }: { history: HistoryDTO[] }) {
 
   const Container = ({ item }: { item: HistoryDTO }) => {
     return (
-      <div className="flex flex-col text-neutral">
+      <div className="flex flex-col text-neutral mb-10">
         <div
           className={classNames(
             'block w-full h-[0.5px] bg-neutralLight -mb-2',
@@ -25,10 +25,10 @@ export default function History({ history }: { history: HistoryDTO[] }) {
         />
         <div className="flex flex-col gap-2 md:gap-3">
           <FaCircle className="w-[15px]" />
-          <div className="text-title-s font-bold mb-2 md:mb-4">{item.year}</div>
+          <div className="text-title-s font-bold mb-2">{item.year}</div>
         </div>
 
-        <ul className="mb-10">
+        <ul className="ml-4">
           <PortableText value={item.content} components={components} />
         </ul>
       </div>

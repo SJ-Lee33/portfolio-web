@@ -21,7 +21,7 @@ export default function Skills() {
   }) => {
     const skills = SkillList.slice(start, end).map((item) => item.title)
     return (
-      <div className="flex flex-col gap-5 p-4 hover:text-primary hover:bg-soft/80">
+      <div className="flex flex-col gap-5 p-4 hover:text-primary hover:bg-soft/80 duration-300">
         <Label title={title} />
         <div className="flex flex-wrap justify-start items-center gap-2 md:gap-4">
           <SkillDisplay skills={skills} />
