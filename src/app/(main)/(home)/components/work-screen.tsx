@@ -28,6 +28,7 @@ export default function WorkScreen() {
       company: 'INNOS inc.',
       period: '2024.08 - 2024.09 (1개월)',
       summary: [
+        '제품의 기능 및 개발 버그 테스트 및 오류/개선 사항 도출',
         '디지털 낚시 아케이드 팝업 부스 준비 및 홍보물 제작',
         '광고판촉 채널 조사, 디자인 및 제작',
         '홈페이지 UI/UX 디자인',
