@@ -129,6 +129,7 @@ export default async function Page({ params: { slug } }: Props) {
           {project?.relatedProjects && (
             <>
               <ProjectHeader>{'관련 프로젝트'}</ProjectHeader>
+              <div className="h-[50px]" />
               {project.relatedProjects.map((reference: any) => {
                 let relatedProject = reference.reference
                 return (

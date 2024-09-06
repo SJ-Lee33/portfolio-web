@@ -11,6 +11,7 @@ import Next from '/public/images/logo-nextjs.png'
 import JavaScript from '/public/images/logo-javascript.png'
 import TypeScript from '/public/images/logo-typescript.png'
 import Kotlin from '/public/images/logo-kotlin.png'
+import Flutter from '/public/images/logo-flutter.png'
 import StyledComponents from '/public/images/logo-styled-components.png'
 import TailwindCss from '/public/images/logo-tailwindcss.png'
 import Recoil from '/public/images/logo-recoil.png'
@@ -36,8 +37,8 @@ import Hancom from '/public/images/logo-hancom.png'
 export const SkillList = [
   /**
    * programming - 0~5
-   * frontend - 5~17
-   * backend - 17~21
+   * frontend - 5~18
+   * backend - 18~21
    * design - 21~26
    * document - 26~30
    * cooperation - 30~34
@@ -72,8 +73,9 @@ export const SkillList = [
   { title: 'React', icon: React },
   { title: 'React Native', icon: ReactNative },
   { title: 'Expo', icon: Expo },
-  { title: 'Next', icon: Next },
+  { title: 'Next.js', icon: Next },
   { title: 'Kotlin', icon: Kotlin },
+  { title: 'Flutter', icon: Flutter },
   {
     title: 'CSS',
     icon: Css,
@@ -86,7 +88,7 @@ export const SkillList = [
   { title: 'Sanity', icon: Sanity },
   { title: 'Cloudinary', icon: Clouinary },
   { title: 'Firebase', icon: Firebase },
-  { title: 'AWS', icon: Aws },
+  // { title: 'AWS', icon: Aws },
 
   // design
   { title: 'Adobe Photoshop', icon: Photoshop },

@@ -42,6 +42,9 @@ const HomePage: React.FC = () => {
 
   return (
     <div>
+      <Suspense fallback={<LoadingSpinner />}>
+        <Scroll profileRef={profileRef} projectRef={projectRef} />
+      </Suspense>
       <header className="w-full fixed top-0 z-50">
         <NavBar shownLogo={shownLogo} headerDesign={headerDesign} />
       </header>
@@ -54,10 +57,7 @@ const HomePage: React.FC = () => {
       <div ref={projectRef}>
         <ProjectsScreen />
       </div>
-      <LastScreen />
-      <Suspense fallback={<LoadingSpinner />}>
-        <Scroll profileRef={profileRef} projectRef={projectRef} />
-      </Suspense>
+      {/* <LastScreen /> */}
     </div>
   )
 }
