@@ -89,7 +89,6 @@ export default async function Page({ params: { slug } }: Props) {
           {project?.troubleShootings && (
             <>
               <ProjectHeader>{'트러블 슈팅'}</ProjectHeader>
-              <div className="-mb-10" />
               {project.troubleShootings.map((item: any, index: any) => {
                 return (
                   <div key={index}>
@@ -119,7 +118,10 @@ export default async function Page({ params: { slug } }: Props) {
           {project?.imageUrls && (
             <>
               <ProjectHeader>{'스크린샷'}</ProjectHeader>
-              <ProjectImages images={project.imageUrls} />
+              <ProjectImages
+                images={project.imageUrls}
+                thumbnail={project.thumbnail}
+              />
             </>
           )}
 
@@ -127,6 +129,7 @@ export default async function Page({ params: { slug } }: Props) {
           {project?.relatedProjects && (
             <>
               <ProjectHeader>{'관련 프로젝트'}</ProjectHeader>
+              <div className="h-[50px]" />
               {project.relatedProjects.map((reference: any) => {
                 let relatedProject = reference.reference
                 return (

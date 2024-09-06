@@ -9,16 +9,16 @@ export default function ProjectItem(project: ProjectListDto) {
   return (
     <div
       className={classNames(
-        'grid gap-5 p-4 text-neutral',
-        'group hover:bg-neutralLighter/80',
+        'grid gap-2 md:gap-5 p-4 text-neutral',
+        'group hover:bg-secondary hover:text-white duration-300',
         'grid-cols-3', // sm ~ md
         'lg:grid-cols-4', // lg ~ xl
       )}
     >
-      <div className="relative h-[250px] col-span-1">
+      <div className="relative h-[200px] col-span-1">
         {/* 라벨 */}
         <div
-          className={`z-10 absolute top-2 left-2 py-1 px-2 text-caption flex items-center bg-white opacity-90 text-neutral rounded-md font-light`}
+          className={`z-10 absolute top-2 left-2 py-1 px-2 text-caption flex items-center bg-white opacity-90 text-neutral rounded-md font-medium`}
         >
           <ProjectTypeLabel projectTypes={project.projectTypes} />
         </div>
@@ -28,7 +28,7 @@ export default function ProjectItem(project: ProjectListDto) {
           alt="project thumbnail"
           width={250}
           height={250}
-          className="w-full h-full object-cover bg-primary rounded-md shadow-lg shadow-neutralLight/30"
+          className="w-full h-full object-cover bg-secondary rounded-md shadow-lg shadow-neutralLight/30"
         />
       </div>
 
@@ -39,25 +39,25 @@ export default function ProjectItem(project: ProjectListDto) {
           'lg:col-span-3', // lg ~ xl
         )}
       >
-        {/* 제목&부제목 */}
+        {/* 제목&요약 */}
         <div className="flex flex-col gap-2">
           <div
             className={classNames(
-              'text-title-l py-1 px-4 bg-neutralLighter/80 rounded-md',
-              'font-extrabold',
-              'group-hover:text-white group-hover:bg-primary duration-300',
+              'py-1 px-2 md:px-4 bg-neutralLighter/80 rounded-md',
+              'group-hover:bg-secondary duration-300',
+              'font-extrabold text-body-l md:text-title-m',
             )}
           >
             {project.title}
           </div>
-          <div className="text-body-m font-light px-4 group-focus:text-white">
+          <div className="text-body-m md:text-body-l px-2 md:px-4">
             {project?.summary}
           </div>
         </div>
 
         {/* 출시일&기술스택 */}
-        <div className="flex flex-col gap-2 px-4">
-          <div className="text-body-s text-neutralLight">
+        <div className="flex flex-col gap-2 px-2 md:px-4">
+          <div className="text-body-s text-neutralLight group-hover:text-white duration-300 font-light mt-3">
             {formatDate(project.releaseDate)}
           </div>
           <SkillDisplay skills={project.skill} small />

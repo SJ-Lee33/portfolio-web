@@ -7,6 +7,7 @@ export default function DesktopNavBar({ shownLogo }: { shownLogo?: boolean }) {
   const Chip = ({ value }: { value: string }) => {
     return (
       <Link
+        lang="en"
         href={value}
         className={classNames(
           'text-title-s font-extralight',

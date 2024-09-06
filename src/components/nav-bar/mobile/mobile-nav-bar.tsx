@@ -7,6 +7,7 @@ export default function MobileNavBar({ shownLogo }: { shownLogo?: boolean }) {
   const Chip = ({ value }: { value: string }) => {
     return (
       <Link
+        lang="en"
         href={value}
         className={classNames(
           'text-body-m font-extralight',

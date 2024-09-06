@@ -10,6 +10,7 @@ import { Scroll } from './components/scroll'
 import NavBar from '@/components/nav-bar/nav-bar'
 import { useEffect, useState } from 'react'
 import SkillsScreen from './components/skills-screen'
+import WorkScreen from './components/work-screen'
 
 const HomePage: React.FC = () => {
   const profileRef = useRef<HTMLDivElement>(null)
@@ -41,21 +42,22 @@ const HomePage: React.FC = () => {
 
   return (
     <div>
+      <Suspense fallback={<LoadingSpinner />}>
+        <Scroll profileRef={profileRef} projectRef={projectRef} />
+      </Suspense>
       <header className="w-full fixed top-0 z-50">
         <NavBar shownLogo={shownLogo} headerDesign={headerDesign} />
       </header>
       <FirstScreen />
       <div ref={profileRef}>
         <HistoryScreen />
+        <WorkScreen />
       </div>
       <SkillsScreen />
       <div ref={projectRef}>
         <ProjectsScreen />
       </div>
-      <LastScreen />
-      <Suspense fallback={<LoadingSpinner />}>
-        <Scroll profileRef={profileRef} projectRef={projectRef} />
-      </Suspense>
+      {/* <LastScreen /> */}
     </div>
   )
 }

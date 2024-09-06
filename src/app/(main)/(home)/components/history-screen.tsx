@@ -1,11 +1,11 @@
 'use client'
 
 import History from './history'
-import { useProfile } from '../../profile/hooks/use-profile'
+import { useHistory } from '../../profile/hooks/use-history'
 import { LoadingSpinner } from '@/components/loading-spinner'
 
 export default function HistoryScreen() {
-  const { profile, isLoading } = useProfile()
+  const { history, isLoading } = useHistory()
   if (isLoading) return <LoadingSpinner />
 
   return (
@@ -19,15 +19,15 @@ export default function HistoryScreen() {
           {/* 항목명 */}
           <div className="flex flex-col gap-3 font-bold w-[70px]">
             <div>학력</div>
-            <div>주요 경력</div>
+            <div>업무 경험</div>
           </div>
 
           {/* 내용 */}
           <div className="flex flex-col gap-3">
             <div>이화여자대학교 소프트웨어학부 컴퓨터공학전공</div>
             <div>
-              <p>2022-24 IT스타트업 IRUTI</p>
-              <p>2024 제조업 INNOS</p>
+              <div>2024 INNOS inc.</div>
+              <p>2022-24 IRUTI inc.</p>
             </div>
           </div>
         </div>
@@ -42,7 +42,7 @@ export default function HistoryScreen() {
 
           {/* 내용 */}
           <div className="flex flex-col gap-3">
-            <div>010.7159.9812</div>
+            <div>(+82) 10-7159-9812</div>
             <div>sojinlee0z0@gmail.com</div>
           </div>
         </div>
@@ -50,7 +50,7 @@ export default function HistoryScreen() {
 
       {/* 경력 */}
       <div className="mt-[140px]">
-        <History profile={profile} />
+        <History history={history} />
       </div>
     </div>
   )
