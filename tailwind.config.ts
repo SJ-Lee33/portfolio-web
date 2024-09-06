@@ -9,7 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
-        xs: '480px', // 사용자 정의 브레이크포인트
+        // 사용자 정의 브레이크포인트
+        xs: '480px',
+        xxl: '1550px',
       },
     },
     colors: {
