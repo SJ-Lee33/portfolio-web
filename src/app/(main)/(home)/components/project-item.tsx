@@ -9,13 +9,15 @@ export default function ProjectItem(project: ProjectListDto) {
   return (
     <div
       className={classNames(
-        'grid gap-2 md:gap-5 p-4 text-neutral',
+        'xs:grid xs:gap-5 p-4 text-neutral',
         'group hover:bg-secondary hover:text-white duration-300',
-        'grid-cols-3', // sm ~ md
+        'xs:grid-cols-3', // xs ~ md
         'lg:grid-cols-4', // lg ~ xl
+        'xxl:grid-cols-5', // xxl ~
       )}
     >
-      <div className="relative h-[200px] col-span-1">
+      {/* 썸네일 */}
+      <div className="relative h-[180px] pb-4 sm:h-[230px] xs:col-span-1 xs:pb-0">
         {/* 라벨 */}
         <div
           className={`z-10 absolute top-2 left-2 py-1 px-2 text-caption flex items-center bg-white opacity-90 text-neutral rounded-md font-medium`}
@@ -26,17 +28,19 @@ export default function ProjectItem(project: ProjectListDto) {
         <Image
           src={project.thumbnail}
           alt="project thumbnail"
-          width={250}
-          height={250}
+          width={300}
+          height={300}
           className="w-full h-full object-cover bg-secondary rounded-md shadow-lg shadow-neutralLight/30"
         />
       </div>
 
+      {/* 헤드라인 */}
       <div
         className={classNames(
           'flex flex-col justify-between',
-          'col-span-2', // md ~ lg
+          'xs:col-span-2', // xs ~ lg
           'lg:col-span-3', // lg ~ xl
+          'xxl:col-span-4', // xxl ~
         )}
       >
         {/* 제목&요약 */}

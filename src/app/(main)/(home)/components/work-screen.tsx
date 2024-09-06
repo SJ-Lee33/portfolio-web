@@ -24,7 +24,7 @@ export default function WorkScreen() {
       ],
     },
     {
-      job: 'Designer & Marketer',
+      job: 'Technical QA & Designer & Marketer',
       company: 'INNOS inc.',
       period: '2024.08 - 2024.09 (1개월)',
       summary: [
