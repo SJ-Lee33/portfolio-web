@@ -1,8 +1,3 @@
-'use client'
-
-import History from './history'
-import { useHistory } from '../../profile/hooks/use-history'
-import { LoadingSpinner } from '@/components/loading-spinner'
 interface WorkProps {
   job: string
   company: string
