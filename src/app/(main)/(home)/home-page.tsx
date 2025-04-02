@@ -4,7 +4,6 @@ import React, { useRef, Suspense } from 'react'
 import FirstScreen from './components/first-screen'
 import HistoryScreen from './components/history-screen'
 import ProjectsScreen from './components/projects-screen'
-import LastScreen from './components/last-screen'
 import { LoadingSpinner } from '@/components/loading-spinner'
 import { Scroll } from './components/scroll'
 import NavBar from '@/components/nav-bar/nav-bar'
@@ -22,7 +21,7 @@ const HomePage: React.FC = () => {
     const handleScroll = () => {
       const position = window.scrollY
 
-      if (position >= 600) {
+      if (position >= 100) {
         // 스크롤 진행후
         setHeaderDesign('bg-white text-neutral shadow-md shadow-neutral/5')
         setShownLogo(true)
@@ -57,7 +56,6 @@ const HomePage: React.FC = () => {
       <div ref={projectRef}>
         <ProjectsScreen />
       </div>
-      {/* <LastScreen /> */}
     </div>
   )
 }

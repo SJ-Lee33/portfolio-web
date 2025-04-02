@@ -7,15 +7,19 @@ export default async function ProjectSummary({
   role,
   contribution,
   skill,
+  startDate,
   releaseDate,
   duration,
+  updatedAt,
 }: {
   thumbnail: string
   role: string
   contribution: string
   skill?: string[]
+  startDate: string
   releaseDate: string
   duration: string
+  updatedAt: string
 }) {
   let skillsList = '-'
   if (skill) skillsList = Object.values(skill).join(', ')
@@ -29,19 +33,24 @@ export default async function ProjectSummary({
   }
 
   return (
-    <div className="flex flex-col md:flex-row w-full h-auto rounded-b-md items-center md:items-start justify-center gap-10 px-[80px] pt-[80px] ">
+    <div className="flex flex-col lg:flex-row w-full h-auto rounded-b-md items-center lg:items-start justify-center gap-10 px-[80px] pt-[80px] ">
       {/* 썸네일 */}
-      <Image
-        src={thumbnail}
-        alt="project thumbnail"
-        width={400}
-        height={400}
-        className="w-[400px] h-auto object-contain mr-0 md:mr-10 mb-10 md:mb-0 shadow-xl shadow-neutralLight/30 rounded-md"
-      />
+      <div className="mr-0 lg:mr-10 mb-10 lg:mb-0">
+        <div className="text-body-s text-right font-light mb-3 mr-1">
+          최근수정일: {` ${formatDate(updatedAt, true)}`}
+        </div>
+        <Image
+          src={thumbnail}
+          alt="project thumbnail"
+          width={400}
+          height={400}
+          className="w-[400px] h-auto object-contain shadow-xl shadow-neutralLight/30 rounded-md"
+        />
+      </div>
       {/* 구분선 - 모바일일 때만 */}
-      <div className="block md:hidden w-full h-[1px] bg-neutralLight/50" />
+      <div className="block lg:hidden w-full h-[1px] bg-neutralLight/50" />
       {/* 요약 */}
-      <div className="flex flex-col gap-3 text-body-m font-light md:py-3 ">
+      <div className="flex flex-col gap-3 text-body-m font-light lg:py-3 ">
         <div className="flex gap-2.5">
           <Title title="역할" />
           {role}
@@ -52,14 +61,8 @@ export default async function ProjectSummary({
         </div>
         <div className="flex gap-2.5">
           <Title title="기간" />
-          {` ${formatDate(releaseDate)} (${duration})`}
+          {` ${formatDate(startDate)} - ${formatDate(releaseDate)} (${duration})`}
         </div>
-        {/* <div className="flex flex-col w-auto gap-3 mt-5">
-          <p className="font-semibold border-b pb-2 border-neutralLight/50">
-            기술
-          </p>
-          <SkillDisplay skills={skill} />
-      </div> */}
         <div className="flex gap-2.5">
           <Title title="기술" />
           <div className="flex flex-col gap-2">

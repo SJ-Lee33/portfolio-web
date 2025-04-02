@@ -5,7 +5,23 @@ import { formatDate } from '@/utils/formatDate'
 import SkillDisplay from '@/components/skill-display'
 import classNames from 'classnames'
 
-export default function ProjectItem(project: ProjectListDto) {
+type ProjectListProps = ProjectListDto & {
+  index: number | 0
+}
+export default function ProjectItem(project: ProjectListProps) {
+  const NumberCircle = ({ index }: { index: number }) => {
+    return (
+      <div
+        className={`z-10 absolute -top-1 -left-2 
+      flex items-center justify-center h-8 w-8 rounded-full
+      font-semibold text-body-s 
+      text-soft bg-primary 
+      duration-300 group-hover:text-primaryDark group-hover:bg-soft group-hover:border-2 group-hover:border-primaryDark`}
+      >
+        {index + 1}
+      </div>
+    )
+  }
   return (
     <div
       className={classNames(
@@ -18,9 +34,14 @@ export default function ProjectItem(project: ProjectListDto) {
     >
       {/* 썸네일 */}
       <div className="relative h-[180px] pb-4 sm:h-[230px] xs:col-span-1 xs:pb-0">
+        {/* 번호 */}
+        <NumberCircle index={project.index} />
         {/* 라벨 */}
         <div
-          className={`z-10 absolute top-2 left-2 py-1 px-2 text-caption flex items-center bg-white opacity-90 text-neutral rounded-md font-medium`}
+          className={`z-10 absolute top-2 right-2 
+            py-1 px-2 flex items-center
+            font-medium text-caption text-neutral
+          bg-white opacity-90 rounded-md `}
         >
           <ProjectTypeLabel projectTypes={project.projectTypes} />
         </div>
@@ -62,7 +83,7 @@ export default function ProjectItem(project: ProjectListDto) {
         {/* 출시일&기술스택 */}
         <div className="flex flex-col gap-2 px-2 md:px-4">
           <div className="text-body-s text-neutralLight group-hover:text-white duration-300 font-light mt-3">
-            {formatDate(project.releaseDate)}
+            {formatDate(project.startDate)} - {formatDate(project.releaseDate)}
           </div>
           <SkillDisplay skills={project.skill} small />
         </div>

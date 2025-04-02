@@ -64,6 +64,7 @@ const getData = async ({
      "id":_id,
      title,
      projectTypes,
+     startDate,
      releaseDate,
      skill,
      summary,

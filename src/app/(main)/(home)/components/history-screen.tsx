@@ -9,7 +9,7 @@ export default function HistoryScreen() {
   if (isLoading) return <LoadingSpinner />
 
   return (
-    <div className="p-12 text-neutral">
+    <div className="py-20 px-12 text-neutral">
       {/* 제목 */}
       <div className="text-headline-l font-extrabold">History</div>
 
@@ -26,8 +26,8 @@ export default function HistoryScreen() {
           <div className="flex flex-col gap-3">
             <div>이화여자대학교 소프트웨어학부 컴퓨터공학전공</div>
             <div>
-              <div>2024 INNOS inc.</div>
-              <p>2022-24 IRUTI inc.</p>
+              <p>24.08 - 25.05 (주)INNOS</p>
+              <p>22.06 - 24.05 (주)이루티</p>
             </div>
           </div>
         </div>

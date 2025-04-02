@@ -14,12 +14,13 @@ export function Scroll({ profileRef, projectRef }: ScrollProps) {
 
   useEffect(() => {
     const path = window.location.pathname
-
-    if (path === '/profile') {
-      profileRef.current?.scrollIntoView({ behavior: 'smooth' })
-    } else if (path === '/project' || (path === '/project' && type)) {
-      projectRef.current?.scrollIntoView({ behavior: 'auto' })
-    }
+    requestAnimationFrame(() => {
+      if (path === '/profile') {
+        profileRef.current?.scrollIntoView({ behavior: 'smooth' })
+      } else if (path === '/project' || (path === '/project' && type)) {
+        projectRef.current?.scrollIntoView({ behavior: 'auto' })
+      }
+    })
   }, [type, profileRef, projectRef])
 
   return null

@@ -23,7 +23,6 @@ type Props = {
 
 export default async function Page({ params: { slug } }: Props) {
   const project = await getProjectById(slug)
-
   const components: any = {
     block: {
       h3: ({ children }: { children: any }) => (
@@ -75,10 +74,12 @@ export default async function Page({ params: { slug } }: Props) {
         <ProjectSummary
           contribution={project.contribution}
           duration={project.duration}
+          startDate={project.startDate}
           releaseDate={project.releaseDate}
           role={project.role}
           skill={project.skill}
           thumbnail={project.thumbnail}
+          updatedAt={project.updatedAt}
         />
 
         <div className="flex flex-col px-4 py-12 md:px-[50px] lg:px-[80px] w-full">
@@ -130,7 +131,7 @@ export default async function Page({ params: { slug } }: Props) {
             <>
               <ProjectHeader>{'관련 프로젝트'}</ProjectHeader>
               <div className="h-[50px]" />
-              {project.relatedProjects.map((reference: any) => {
+              {project.relatedProjects.map((reference: any, index: number) => {
                 let relatedProject = reference.reference
                 return (
                   <Link
@@ -144,9 +145,11 @@ export default async function Page({ params: { slug } }: Props) {
                       title={relatedProject.title}
                       projectTypes={relatedProject.projectTypes}
                       type={relatedProject.type}
+                      startDate={relatedProject.startDate}
                       releaseDate={relatedProject.releaseDate}
                       thumbnail={relatedProject.thumbnail}
                       skill={relatedProject?.skill}
+                      index={index}
                     />
                   </Link>
                 )

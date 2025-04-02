@@ -8,6 +8,7 @@ interface ProjectSchema {
     marketing: boolean
   }
 
+  startDate: string
   releaseDate: string
   duration: string
 
@@ -36,4 +37,5 @@ interface ProjectSchema {
       thumbnail: ProjectSchema['thumbnail']
     }
   }[]
+  updatedAt: string
 }
