@@ -1,7 +1,6 @@
 export type ProjectDTO = Pick<
   ProjectSchema,
   | 'id'
-  | 'contents'
   | 'troubleShootings'
   | 'contribution'
   | 'duration'
@@ -15,4 +14,8 @@ export type ProjectDTO = Pick<
   | 'imageUrls'
   | 'relatedProjects'
   | 'updatedAt'
+  | 'contentOverview'
+  | 'contentContribution'
+  | 'contentSkill'
+  | 'contentReflection'
 >

@@ -12,11 +12,11 @@ export default function ProjectItem(project: ProjectListProps) {
   const NumberCircle = ({ index }: { index: number }) => {
     return (
       <div
-        className={`z-10 absolute -top-1 -left-2 
+        className={`z-5 absolute -top-1 -left-2 
       flex items-center justify-center h-8 w-8 rounded-full
       font-semibold text-body-s 
       text-soft bg-primary 
-      duration-300 group-hover:text-primaryDark group-hover:bg-soft group-hover:border-2 group-hover:border-primaryDark`}
+      duration-300 group-hover:text-primaryDark group-hover:bg-white group-hover:border-2 group-hover:border-primaryDark`}
       >
         {index + 1}
       </div>
@@ -38,7 +38,7 @@ export default function ProjectItem(project: ProjectListProps) {
         <NumberCircle index={project.index} />
         {/* 라벨 */}
         <div
-          className={`z-10 absolute top-2 right-2 
+          className={`z-5 absolute top-2 right-2 
             py-1 px-2 flex items-center
             font-medium text-caption text-neutral
           bg-white opacity-90 rounded-md `}
@@ -68,7 +68,7 @@ export default function ProjectItem(project: ProjectListProps) {
         <div className="flex flex-col gap-2">
           <div
             className={classNames(
-              'py-1 px-2 md:px-4 bg-neutralLighter/80 rounded-md',
+              'py-1 px-2 md:px-4 bg-primaryLighter rounded-md',
               'group-hover:bg-secondary duration-300',
               'font-extrabold text-body-l md:text-title-m',
             )}

@@ -11,9 +11,10 @@ export default function ProjectSubheader({
   return (
     <div
       className={classNames(
-        'flex gap-1 items-center bg-neutralLighter/70 px-4 md:px-10 py-1 mb-2 mt-[50px] text-title-m font-bold text-start',
-        color == 'red' && 'text-red mt-[60px]',
-        color == 'blue' && 'text-primary mt-8',
+        'flex gap-1 items-center px-4 md:px-10 py-1 mb-2 mt-[50px] text-title-m font-bold text-start',
+        color == 'red' && 'text-red mt-[60px] bg-neutralLighter',
+        color == 'blue' && 'text-primary mt-8 bg-neutralLighter',
+        color == undefined && 'bg-primaryLighter',
       )}
     >
       <BsFillCaretRightFill /> {children}

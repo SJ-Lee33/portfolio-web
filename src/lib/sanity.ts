@@ -2,10 +2,12 @@ import { createClient } from '@sanity/client'
 import imageUrlBuilder from '@sanity/image-url'
 
 const SANITY_DATASET = 'production'
-
+if (!process.env.SANITY_PROJECT_ID) {
+  throw new Error('Missing SANITY_PROJECT_ID in .env.local')
+}
 export const client = createClient({
-  projectId: process.env.SANITY_PROJECT_ID,
-  dataset: SANITY_DATASET,
+  projectId: process.env.SANITY_PROJECT_ID!,
+  dataset: SANITY_DATASET!,
   useCdn: false,
   apiVersion: '2024-08-07', // use current date (YYYY-MM-DD) to target the latest API version
   token: process.env.SANITY_SECRET_TOKEN,
