@@ -130,7 +130,7 @@ export default async function Page({ params: { slug } }: Props) {
             <>
               <ProjectHeader>{'관련 프로젝트'}</ProjectHeader>
               <div className="h-[50px]" />
-              {project.relatedProjects.map((reference: any) => {
+              {project.relatedProjects.map((reference: any, index: number) => {
                 let relatedProject = reference.reference
                 return (
                   <Link
@@ -147,6 +147,7 @@ export default async function Page({ params: { slug } }: Props) {
                       releaseDate={relatedProject.releaseDate}
                       thumbnail={relatedProject.thumbnail}
                       skill={relatedProject?.skill}
+                      index={index}
                     />
                   </Link>
                 )
