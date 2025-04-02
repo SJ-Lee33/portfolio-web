@@ -27,7 +27,7 @@ export default function SkillIcon({
         height={small ? 35 : 65}
       />
       {!small && (
-        <div className="absolute bottom-0 left-1/2 h-full w-full flex justify-center items-center text-center transform -translate-x-1/2 bg-neutral text-white text-body-s opacity-0 group-hover:opacity-80 transition-opacity duration-300">
+        <div className="h-full w-full rounded-lg absolute bottom-0 left-1/2 flex justify-center items-center text-center transform -translate-x-1/2 bg-neutral text-white text-body-s opacity-0 group-hover:opacity-80 transition-opacity duration-300">
           {item.title}
         </div>
       )}

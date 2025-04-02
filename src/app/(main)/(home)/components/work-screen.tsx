@@ -13,25 +13,25 @@ interface WorkProps {
 export default function WorkScreen() {
   const WORKS: WorkProps[] = [
     {
-      job: 'Developer & Designer & Marketer & Service Operator',
-      company: 'IRUTI inc.',
-      period: '2022.07 - 2024.08 (2년 1개월)',
+      job: 'FE 개발 | QC | 마케팅 · 기획',
+      company: '(주)INNOS / 중견 제조업',
+      period: '2024.08 - 2025.05 (10개월)',
       summary: [
-        '미술 관련 플랫폼 솔루션을 개발해 매출 달성',
-        '요구사항에 맞는 새로운 기술을 도입해 빠르고 안정적인 기획 및 개발',
-        '체크리스트를 작성해 단위 테스트 실행 및 유지보수 진행',
-        '실제 고객과 소통하며 SNS 마케팅 및 서비스 운영',
+        '웹사이트 UI/UX 기획 · FE 개발',
+        '마케팅 · 홍보 자산 개발 [사업계획서, 브로슈어 등]',
+        'HW 및 게임SW 버그 테스트, 오류/개선 사항 도출',
+        'YOUTUBE 홍보 채널 기획 및 개발',
       ],
     },
     {
-      job: 'Technical QA & Designer & Marketer',
-      company: 'INNOS inc.',
-      period: '2024.08 - 2024.09 (1개월)',
+      job: 'FE 개발 | UI/UX 디자인 | 마케팅 · 기획 | 운영',
+      company: '(주)이루티 / 스타트업',
+      period: '2022.06 - 2024.05 (2년)',
       summary: [
-        '제품의 기능 및 개발 버그 테스트 및 오류/개선 사항 도출',
-        '디지털 낚시 아케이드 팝업 부스 준비 및 홍보물 제작',
-        '광고판촉 채널 조사, 디자인 및 제작',
-        '홈페이지 UI/UX 디자인',
+        '웹 플랫폼 솔루션 기획 → 개발 → 운영 A to Z',
+        'Next.js + Typescript 기반 프론트엔드 개발 주도',
+        '미디어 재생을 위한 Android TV용 애플리케이션 개발',
+        'SNS 마케팅, 오프라인 세일즈, CS 및 서비스 운영',
       ],
     },
   ]
