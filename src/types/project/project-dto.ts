@@ -6,6 +6,7 @@ export type ProjectDTO = Pick<
   | 'contribution'
   | 'duration'
   | 'projectTypes'
+  | 'startDate'
   | 'releaseDate'
   | 'role'
   | 'skill'
@@ -13,4 +14,5 @@ export type ProjectDTO = Pick<
   | 'title'
   | 'imageUrls'
   | 'relatedProjects'
+  | 'updatedAt'
 >

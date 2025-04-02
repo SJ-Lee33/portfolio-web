@@ -7,6 +7,7 @@ export default async function ProjectSummary({
   role,
   contribution,
   skill,
+  startDate,
   releaseDate,
   duration,
 }: {
@@ -14,6 +15,7 @@ export default async function ProjectSummary({
   role: string
   contribution: string
   skill?: string[]
+  startDate: string
   releaseDate: string
   duration: string
 }) {
@@ -52,14 +54,8 @@ export default async function ProjectSummary({
         </div>
         <div className="flex gap-2.5">
           <Title title="기간" />
-          {` ${formatDate(releaseDate)} (${duration})`}
+          {` ${formatDate(startDate)} - ${formatDate(releaseDate)} (${duration})`}
         </div>
-        {/* <div className="flex flex-col w-auto gap-3 mt-5">
-          <p className="font-semibold border-b pb-2 border-neutralLight/50">
-            기술
-          </p>
-          <SkillDisplay skills={skill} />
-      </div> */}
         <div className="flex gap-2.5">
           <Title title="기술" />
           <div className="flex flex-col gap-2">

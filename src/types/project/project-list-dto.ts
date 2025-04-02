@@ -4,6 +4,7 @@ export type ProjectListDto = {
   ProjectSchema,
   | 'id'
   | 'projectTypes'
+  | 'startDate'
   | 'releaseDate'
   | 'skill'
   | 'summary'

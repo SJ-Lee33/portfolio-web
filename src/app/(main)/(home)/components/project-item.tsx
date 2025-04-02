@@ -6,7 +6,7 @@ import SkillDisplay from '@/components/skill-display'
 import classNames from 'classnames'
 
 type ProjectListProps = ProjectListDto & {
-  index?: number
+  index: number | 0
 }
 export default function ProjectItem(project: ProjectListProps) {
   const NumberCircle = ({ index }: { index: number }) => {
@@ -34,7 +34,8 @@ export default function ProjectItem(project: ProjectListProps) {
     >
       {/* 썸네일 */}
       <div className="relative h-[180px] pb-4 sm:h-[230px] xs:col-span-1 xs:pb-0">
-        {project.index && <NumberCircle index={project.index} />}
+        {/* 번호 */}
+        <NumberCircle index={project.index} />
         {/* 라벨 */}
         <div
           className={`z-10 absolute top-2 right-2 
@@ -82,7 +83,7 @@ export default function ProjectItem(project: ProjectListProps) {
         {/* 출시일&기술스택 */}
         <div className="flex flex-col gap-2 px-2 md:px-4">
           <div className="text-body-s text-neutralLight group-hover:text-white duration-300 font-light mt-3">
-            {formatDate(project.releaseDate)}
+            {formatDate(project.startDate)} - {formatDate(project.releaseDate)}
           </div>
           <SkillDisplay skills={project.skill} small />
         </div>

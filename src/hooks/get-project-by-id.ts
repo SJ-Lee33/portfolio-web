@@ -1,5 +1,6 @@
 import { client } from '@/lib/sanity'
 import { ProjectDTO } from '@/types/project/project-dto'
+import { getDurationDate } from '@/utils/calculateDuration'
 
 export const getProjectById = async (
   id: string,
@@ -12,9 +13,10 @@ export const getProjectById = async (
                 contents,
                 troubleShootings,
                 contribution,
-                duration,
                 projectTypes,
+                startDate,
                 releaseDate,
+                updatedAt,
                 role,
                 skill,
                 "thumbnail":thumbnail.asset->url,
@@ -41,10 +43,17 @@ export const getProjectById = async (
         cache: 'no-store', // 캐시 사용 안 함
       },
     )
-    const { ...rest } = data
+    const { startDate, releaseDate, ...rest } = data
+    const duration =
+      startDate && releaseDate
+        ? getDurationDate(startDate, releaseDate)
+        : undefined
 
     const result = {
       ...rest,
+      startDate,
+      releaseDate,
+      duration,
     } as ProjectDTO
 
     return { ...result }

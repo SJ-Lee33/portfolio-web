@@ -25,6 +25,7 @@ export default function ProjectList() {
                 title={project.title}
                 projectTypes={project.projectTypes}
                 type={project.type}
+                startDate={project.startDate}
                 releaseDate={project.releaseDate}
                 summary={project.summary}
                 thumbnail={project.thumbnail}

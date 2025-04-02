@@ -75,6 +75,7 @@ export default async function Page({ params: { slug } }: Props) {
         <ProjectSummary
           contribution={project.contribution}
           duration={project.duration}
+          startDate={project.startDate}
           releaseDate={project.releaseDate}
           role={project.role}
           skill={project.skill}
@@ -144,6 +145,7 @@ export default async function Page({ params: { slug } }: Props) {
                       title={relatedProject.title}
                       projectTypes={relatedProject.projectTypes}
                       type={relatedProject.type}
+                      startDate={relatedProject.startDate}
                       releaseDate={relatedProject.releaseDate}
                       thumbnail={relatedProject.thumbnail}
                       skill={relatedProject?.skill}
