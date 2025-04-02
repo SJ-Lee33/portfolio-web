@@ -9,6 +9,7 @@ export default function MobileNavBar({ shownLogo }: { shownLogo?: boolean }) {
       <Link
         lang="en"
         href={value}
+        scroll={false}
         className={classNames(
           'text-body-m font-extralight',
           'hover:text-primaryPressed hover:text-primary hover:font-bold',

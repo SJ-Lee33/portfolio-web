@@ -9,6 +9,7 @@ export default function DesktopNavBar({ shownLogo }: { shownLogo?: boolean }) {
       <Link
         lang="en"
         href={value}
+        scroll={false}
         className={classNames(
           'text-title-s font-extralight',
           'hover:text-primaryPressed hover:text-primary hover:font-extrabold',
