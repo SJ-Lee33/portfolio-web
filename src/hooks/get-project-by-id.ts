@@ -16,7 +16,6 @@ export const getProjectById = async (
                 projectTypes,
                 startDate,
                 releaseDate,
-                updatedAt,
                 role,
                 skill,
                 "thumbnail":thumbnail.asset->url,
@@ -48,12 +47,13 @@ export const getProjectById = async (
       startDate && releaseDate
         ? getDurationDate(startDate, releaseDate)
         : undefined
-
+    const updatedAt = data._updatedAt
     const result = {
       ...rest,
       startDate,
       releaseDate,
       duration,
+      updatedAt,
     } as ProjectDTO
 
     return { ...result }

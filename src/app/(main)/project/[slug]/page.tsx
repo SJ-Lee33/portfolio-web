@@ -23,7 +23,6 @@ type Props = {
 
 export default async function Page({ params: { slug } }: Props) {
   const project = await getProjectById(slug)
-
   const components: any = {
     block: {
       h3: ({ children }: { children: any }) => (
@@ -80,6 +79,7 @@ export default async function Page({ params: { slug } }: Props) {
           role={project.role}
           skill={project.skill}
           thumbnail={project.thumbnail}
+          updatedAt={project.updatedAt}
         />
 
         <div className="flex flex-col px-4 py-12 md:px-[50px] lg:px-[80px] w-full">
