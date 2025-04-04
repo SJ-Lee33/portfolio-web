@@ -14,6 +14,7 @@ import ProjectImages from './components/project-images'
 import Link from 'next/link'
 import ProjectItem from '../../(home)/components/project-item'
 import NavBar from '@/components/nav-bar/nav-bar'
+import ProjectContent from './components/project-content'
 
 type Props = {
   params: {
@@ -23,7 +24,8 @@ type Props = {
 
 export default async function Page({ params: { slug } }: Props) {
   const project = await getProjectById(slug)
-  const components: any = {
+  if (!project) return <LoadingSpinner />
+  const portableComponents: any = {
     block: {
       h3: ({ children }: { children: any }) => (
         <ProjectHeader>{children}</ProjectHeader>
@@ -41,16 +43,14 @@ export default async function Page({ params: { slug } }: Props) {
       ),
     },
     types: {
-      image: ({ value }: { value: { asset: { _ref: string } } }) => (
-        <ProjectImage asset={value.asset} />
+      image: ({ value }: { value: { url: string } }) => (
+        <ProjectImage url={value.url} />
       ),
       code: ({ value }: { value: { code: string; language: string } }) => (
         <ProjectCodebox value={value} />
       ),
     },
   }
-  if (!project) return <LoadingSpinner />
-
   return (
     <>
       <header className="w-full fixed top-0 z-50">
@@ -84,9 +84,14 @@ export default async function Page({ params: { slug } }: Props) {
 
         <div className="flex flex-col px-4 py-12 md:px-[50px] lg:px-[80px] w-full">
           {/* 내용 */}
-          <PortableText value={project.contents} components={components} />
+          <ProjectContent
+            overview={project.contentOverview}
+            contribution={project.contentContribution}
+            skill={project.contentSkill}
+            reflection={project.contentReflection}
+          />
 
-          {/* 트러블슈팅  */}
+          {/* 트러블슈팅 */}
           {project?.troubleShootings && (
             <>
               <ProjectHeader>{'트러블 슈팅'}</ProjectHeader>
@@ -107,14 +112,13 @@ export default async function Page({ params: { slug } }: Props) {
                     {/* 내용 */}
                     <PortableText
                       value={item.troubleShootingContent}
-                      components={components}
+                      components={portableComponents}
                     />
                   </div>
                 )
               })}
             </>
           )}
-
           {/* 사진 갤러리 */}
           {project?.imageUrls && (
             <>

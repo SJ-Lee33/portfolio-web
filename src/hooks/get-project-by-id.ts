@@ -1,6 +1,7 @@
 import { client } from '@/lib/sanity'
 import { ProjectDTO } from '@/types/project/project-dto'
 import { getDurationDate } from '@/utils/calculateDuration'
+import { enrichPortableTextWithImageUrl } from '@/utils/enrichPortableImage'
 
 export const getProjectById = async (
   id: string,
@@ -10,7 +11,10 @@ export const getProjectById = async (
       `*[_type == "project" && _id == $id]{
                 ...,
                 "id": _id,
-                contents,
+                contentOverview,
+                contentContribution,
+                contentSkill,
+                contentReflection,
                 troubleShootings,
                 contribution,
                 projectTypes,
@@ -27,6 +31,7 @@ export const getProjectById = async (
                         "id": _id,
                         "title": title,
                         "projectTypes": projectTypes,
+                        "startDate": startDate,
                         "releaseDate": releaseDate,
                         "skill": skill,
                         "summary": summary,
@@ -50,6 +55,12 @@ export const getProjectById = async (
     const updatedAt = data._updatedAt
     const result = {
       ...rest,
+      contentOverview: enrichPortableTextWithImageUrl(data.contentOverview),
+      contentContribution: enrichPortableTextWithImageUrl(
+        data.contentContribution,
+      ),
+      contentSkill: enrichPortableTextWithImageUrl(data.contentSkill),
+      contentReflection: enrichPortableTextWithImageUrl(data.contentReflection),
       startDate,
       releaseDate,
       duration,

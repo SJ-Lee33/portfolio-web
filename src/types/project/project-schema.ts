@@ -18,7 +18,11 @@ interface ProjectSchema {
 
   summary?: string
   thumbnail: string
-  contents: [] // portable text
+  contentOverview: [] // portable text
+  contentContribution: [] // portable text
+  contentSkill: [] // portable text
+  contentReflection: [] // portable text
+
   troubleShootings?: {
     troubleShootingType: number
     troubleShootingTitle: string
