@@ -12,8 +12,9 @@ export default function ProjectImages({
   return (
     <div
       className={classNames(
-        'px-4 gap-4 columns-2 mt-[60px] mb-3',
-        'md:px-10 md:columns-3',
+        'px-4 gap-4 columns-1 mt-[60px] mb-3',
+        'lg:px-10 lg:columns-3',
+        'sm:columns-2',
       )}
     >
       {/* 썸네일 */}

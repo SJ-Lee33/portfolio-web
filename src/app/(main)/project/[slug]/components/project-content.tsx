@@ -6,9 +6,11 @@ import classNames from 'classnames'
 import ProjectHeader from './project-header'
 import ProjectSubheader from './project-subheader'
 import ProjectPlanetext from './project-plaintext'
-import ProjectListitems from './project-listitems'
+import ProjectListBullet from './project-listbullet'
 import ProjectImage from './project-image'
 import ProjectCodebox from './project-codebox'
+import ProjectListNumber from './project-listnumber'
+import ProjectQuote from './project-quote'
 
 export default function ProjectContent({
   overview,
@@ -34,10 +36,16 @@ export default function ProjectContent({
       normal: ({ children }: { children: any }) => (
         <ProjectPlanetext>{children}</ProjectPlanetext>
       ),
+      quote: ({ children }: { children: any }) => (
+        <ProjectQuote>{children}</ProjectQuote>
+      ),
     },
     listItem: {
       bullet: ({ children }: { children: any }) => (
-        <ProjectListitems>{children}</ProjectListitems>
+        <ProjectListBullet>{children}</ProjectListBullet>
+      ),
+      number: ({ children }: { children: any }) => (
+        <ProjectListNumber>{children}</ProjectListNumber>
       ),
     },
     types: {
