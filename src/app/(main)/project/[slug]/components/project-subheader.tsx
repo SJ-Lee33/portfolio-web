@@ -1,20 +1,13 @@
 import classNames from 'classnames'
 import { BsFillCaretRightFill } from 'react-icons/bs'
 
-export default function ProjectSubheader({
-  children,
-  color,
-}: {
-  children: any
-  color?: 'red' | 'blue'
-}) {
+export default function ProjectSubheader({ children }: { children: any }) {
   return (
     <div
       className={classNames(
-        'flex gap-1 items-center px-4 md:px-10 py-1 mb-2 mt-[50px] text-title-m font-bold text-start',
-        color == 'red' && 'text-red mt-[60px] bg-neutralLighter',
-        color == 'blue' && 'text-primary mt-8 bg-neutralLighter',
-        color == undefined && 'bg-primaryLighter',
+        'flex gap-1 items-center bg-primaryLighter',
+        'px-4 md:px-10 py-1 mb-2 mt-[50px]',
+        'text-title-m font-bold text-start',
       )}
     >
       <BsFillCaretRightFill /> {children}
