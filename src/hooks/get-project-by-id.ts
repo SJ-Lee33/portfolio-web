@@ -2,6 +2,7 @@ import { client } from '@/lib/sanity'
 import { ProjectDTO } from '@/types/project/project-dto'
 import { getDurationDate } from '@/utils/calculateDuration'
 import { enrichPortableTextWithImageUrl } from '@/utils/enrichPortableImage'
+import { urlFor } from '@/lib/sanity'
 
 export const getProjectById = async (
   id: string,
@@ -47,12 +48,22 @@ export const getProjectById = async (
         cache: 'no-store', // 캐시 사용 안 함
       },
     )
-    const { startDate, releaseDate, ...rest } = data
+    const { startDate, releaseDate, troubleShootings, ...rest } = data
+
     const duration =
       startDate && releaseDate
         ? getDurationDate(startDate, releaseDate)
         : undefined
+
     const updatedAt = data._updatedAt
+
+    const enrichedTroubleShootings = troubleShootings?.map((item: any) => ({
+      ...item,
+      troubleShootingContent: enrichPortableTextWithImageUrl(
+        item.troubleShootingContent,
+      ),
+    }))
+
     const result = {
       ...rest,
       contentOverview: enrichPortableTextWithImageUrl(data.contentOverview),
@@ -61,6 +72,8 @@ export const getProjectById = async (
       ),
       contentSkill: enrichPortableTextWithImageUrl(data.contentSkill),
       contentReflection: enrichPortableTextWithImageUrl(data.contentReflection),
+      troubleShootings: enrichedTroubleShootings,
+
       startDate,
       releaseDate,
       duration,
