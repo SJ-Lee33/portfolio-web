@@ -1,9 +1,16 @@
-import { HistoryDTO } from '@/types/history/history-dto'
+import { sanityFetch } from '@/sanity/lib/live'
+import { HISTORY_QUERY } from '@/sanity/lib/queries'
+import { HISTORY_QUERYResult } from '@/sanity/types'
 import classNames from 'classnames'
 import { PortableText } from 'next-sanity'
 import { FaCircle } from 'react-icons/fa6'
 
-export default function History({ history }: { history: HistoryDTO[] }) {
+export default async function History() {
+  const { data: history } = (await sanityFetch<typeof HISTORY_QUERY>({
+    query: HISTORY_QUERY,
+  })) as { data: HISTORY_QUERYResult }
+  type HistoryItem = NonNullable<HISTORY_QUERYResult>[number]
+
   const components: any = {
     listItem: {
       bullet: ({ children }: { children: any }) => (
@@ -14,7 +21,7 @@ export default function History({ history }: { history: HistoryDTO[] }) {
     },
   }
 
-  const Container = ({ item }: { item: HistoryDTO }) => {
+  const Container = ({ item }: { item: HistoryItem }) => {
     return (
       <div className="flex flex-col text-neutral mb-10">
         <div
@@ -29,7 +36,7 @@ export default function History({ history }: { history: HistoryDTO[] }) {
         </div>
 
         <ul className="ml-4">
-          <PortableText value={item.content} components={components} />
+          <PortableText value={item.content ?? []} components={components} />
         </ul>
       </div>
     )

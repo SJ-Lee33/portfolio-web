@@ -361,6 +361,7 @@ export type SanityAssetSourceData = {
 }
 
 export type AllSanitySchemaTypes =
+  | History
   | Study
   | BlockContent
   | SanityImagePaletteSwatch
@@ -376,6 +377,30 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
 export declare const internalGroqTypeReferenceTo: unique symbol
 // Source: ./src/sanity/lib/queries.ts
+// Variable: HISTORY_QUERY
+// Query: *[_type == "history" && !(_id in path('drafts.**')) ] | order(year){    'id': _id,    year,    content, }
+export type HISTORY_QUERYResult = Array<{
+  id: string
+  year: 0 | 2020 | 2021 | 2022 | 2023 | 2024 | 2025 | null
+  content: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+    listItem?: 'bullet' | 'number'
+    markDefs?: Array<{
+      href?: string
+      _type: 'link'
+      _key: string
+    }>
+    level?: number
+    _type: 'block'
+    _key: string
+  }> | null
+}>
 // Variable: STUDY_TYPE_QUERY
 // Query: *[_type == "studylist"]{  _id, title}
 export type STUDY_TYPE_QUERYResult = Array<never>

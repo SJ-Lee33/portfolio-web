@@ -1,5 +1,12 @@
 import { defineQuery } from 'next-sanity'
 
+// 이력
+export const HISTORY_QUERY =
+  defineQuery(`*[_type == "history" && !(_id in path('drafts.**')) ] | order(year){
+    'id': _id,
+    year,
+    content,
+ }`)
 // 스터디 종류
 export const STUDY_TYPE_QUERY = defineQuery(`*[_type == "studylist"]{
   _id, title
