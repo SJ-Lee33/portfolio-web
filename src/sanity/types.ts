@@ -13,14 +13,18 @@
  */
 
 // Source: schema.json
-export type Study = {
+export type Project = {
   _id: string
-  _type: 'study'
+  _type: 'project'
   _createdAt: string
   _updatedAt: string
   _rev: string
+  projectTypes?: {
+    development?: boolean
+    marketing?: boolean
+    design?: boolean
+  }
   title?: string
-  serial?: number
   skill?: Array<string>
   thumbnail?: {
     asset?: {
@@ -32,7 +36,308 @@ export type Study = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
-    alt?: string
+    _type: 'image'
+  }
+  role?: string
+  contribution?: string
+  startDate?: string
+  releaseDate?: string
+  summary?: string
+  contentOverview?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+        _key: string
+      }
+    | ({
+        _key: string
+      } & Code)
+  >
+  contentContribution?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+        _key: string
+      }
+    | ({
+        _key: string
+      } & Code)
+  >
+  contentSkill?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+        _key: string
+      }
+    | ({
+        _key: string
+      } & Code)
+  >
+  contentReflection?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+        _key: string
+      }
+    | ({
+        _key: string
+      } & Code)
+  >
+  troubleShootings?: Array<{
+    troubleShootingType?: 0 | 1
+    troubleShootingTitle?: string
+    troubleShootingContent?: Array<
+      | {
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?:
+            | 'normal'
+            | 'h1'
+            | 'h2'
+            | 'h3'
+            | 'h4'
+            | 'h5'
+            | 'h6'
+            | 'blockquote'
+          listItem?: 'bullet' | 'number'
+          markDefs?: Array<{
+            href?: string
+            _type: 'link'
+            _key: string
+          }>
+          level?: number
+          _type: 'block'
+          _key: string
+        }
+      | {
+          asset?: {
+            _ref: string
+            _type: 'reference'
+            _weak?: boolean
+            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+          }
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+          _key: string
+        }
+      | ({
+          _key: string
+        } & Code)
+    >
+    _key: string
+  }>
+  images?: Array<{
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+    _key: string
+  }>
+  relatedProjects?: Array<{
+    reference?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'project'
+    }
+    _key: string
+  }>
+}
+
+export type History = {
+  _id: string
+  _type: 'history'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  year?: 0 | 2020 | 2021 | 2022 | 2023 | 2024 | 2025
+  content?: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+    listItem?: 'bullet' | 'number'
+    markDefs?: Array<{
+      href?: string
+      _type: 'link'
+      _key: string
+    }>
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+}
+
+export type Study = {
+  _id: string
+  _type: 'study'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  serial?: number
+  title?: string
+  skill?: Array<string>
+  thumbnail?: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
     _type: 'image'
   }
   learningGoal?: Array<
@@ -43,8 +348,16 @@ export type Study = {
           _type: 'span'
           _key: string
         }>
-        style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'blockquote'
-        listItem?: 'bullet'
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+        listItem?: 'bullet' | 'number'
         markDefs?: Array<{
           href?: string
           _type: 'link'
@@ -64,10 +377,12 @@ export type Study = {
         media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        alt?: string
         _type: 'image'
         _key: string
       }
+    | ({
+        _key: string
+      } & Code)
   >
   learningOutcome?: Array<
     | {
@@ -77,8 +392,16 @@ export type Study = {
           _type: 'span'
           _key: string
         }>
-        style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'blockquote'
-        listItem?: 'bullet'
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+        listItem?: 'bullet' | 'number'
         markDefs?: Array<{
           href?: string
           _type: 'link'
@@ -98,10 +421,12 @@ export type Study = {
         media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        alt?: string
         _type: 'image'
         _key: string
       }
+    | ({
+        _key: string
+      } & Code)
   >
   learningProcess?: Array<
     | {
@@ -111,8 +436,16 @@ export type Study = {
           _type: 'span'
           _key: string
         }>
-        style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'blockquote'
-        listItem?: 'bullet'
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+        listItem?: 'bullet' | 'number'
         markDefs?: Array<{
           href?: string
           _type: 'link'
@@ -132,10 +465,12 @@ export type Study = {
         media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        alt?: string
         _type: 'image'
         _key: string
       }
+    | ({
+        _key: string
+      } & Code)
   >
   learningInsight?: Array<
     | {
@@ -145,8 +480,16 @@ export type Study = {
           _type: 'span'
           _key: string
         }>
-        style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'blockquote'
-        listItem?: 'bullet'
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+        listItem?: 'bullet' | 'number'
         markDefs?: Array<{
           href?: string
           _type: 'link'
@@ -166,10 +509,12 @@ export type Study = {
         media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        alt?: string
         _type: 'image'
         _key: string
       }
+    | ({
+        _key: string
+      } & Code)
   >
   learningPlan?: Array<
     | {
@@ -179,8 +524,16 @@ export type Study = {
           _type: 'span'
           _key: string
         }>
-        style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'blockquote'
-        listItem?: 'bullet'
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+        listItem?: 'bullet' | 'number'
         markDefs?: Array<{
           href?: string
           _type: 'link'
@@ -200,47 +553,22 @@ export type Study = {
         media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        alt?: string
         _type: 'image'
         _key: string
       }
+    | ({
+        _key: string
+      } & Code)
   >
 }
 
-export type BlockContent = Array<
-  | {
-      children?: Array<{
-        marks?: Array<string>
-        text?: string
-        _type: 'span'
-        _key: string
-      }>
-      style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'blockquote'
-      listItem?: 'bullet'
-      markDefs?: Array<{
-        href?: string
-        _type: 'link'
-        _key: string
-      }>
-      level?: number
-      _type: 'block'
-      _key: string
-    }
-  | {
-      asset?: {
-        _ref: string
-        _type: 'reference'
-        _weak?: boolean
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-      }
-      media?: unknown
-      hotspot?: SanityImageHotspot
-      crop?: SanityImageCrop
-      alt?: string
-      _type: 'image'
-      _key: string
-    }
->
+export type Code = {
+  _type: 'code'
+  language?: string
+  filename?: string
+  code?: string
+  highlightedLines?: Array<number>
+}
 
 export type SanityImagePaletteSwatch = {
   _type: 'sanity.imagePaletteSwatch'
@@ -361,9 +689,10 @@ export type SanityAssetSourceData = {
 }
 
 export type AllSanitySchemaTypes =
+  | Project
   | History
   | Study
-  | BlockContent
+  | Code
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -401,11 +730,237 @@ export type HISTORY_QUERYResult = Array<{
     _key: string
   }> | null
 }>
+// Variable: PROJECT_LIST_QUERY_TG
+// Query: *[  _type == "project" &&  !(_id in path("drafts.**")) &&  ($projectType == null || select(  $projectType == "development" => projectTypes.development == true,  $projectType == "design"      => projectTypes.design == true,  $projectType == "marketing"   => projectTypes.marketing == true,  true))] | order(releaseDate desc) [  0...50]{  "id": _id,  title,  projectTypes,  startDate,  releaseDate,  "skill": skill[],  summary,  "thumbnail": coalesce(thumbnail.asset->url, "")}
+export type PROJECT_LIST_QUERY_TGResult = Array<{
+  id: string
+  title: string | null
+  projectTypes: {
+    development?: boolean
+    marketing?: boolean
+    design?: boolean
+  } | null
+  startDate: string | null
+  releaseDate: string | null
+  skill: Array<string> | null
+  summary: string | null
+  thumbnail: string | ''
+}>
+// Variable: PROJECT_COUNT_QUERY
+// Query: count(*[  _type == "project" &&  !(_id in path("drafts.**")) &&  ($projectType == null || select(  $projectType == "development" => projectTypes.development == true,  $projectType == "design"      => projectTypes.design == true,  $projectType == "marketing"   => projectTypes.marketing == true,  true))])
+export type PROJECT_COUNT_QUERYResult = number
+// Variable: PROJECT_QUERY
+// Query: *[  _type == "project" ][0]{  // "키 이름" : 표현식  // 따옴표 없으면 동일한 이름  "id": _id,  title,  projectTypes,  startDate,  releaseDate,  duration,    role,  contribution,  "skill": skill[],  summary,  "thumbnail": coalesce(thumbnail.asset->url, ""),  "contentOverview": contentOverview[],  "contentContribution": contentContribution[],  "contentSkill": contentSkill[],  "contentReflection": contentReflection[],    troubleShooting,  imgUrls,  relatedProjects,  updatedAt}
+export type PROJECT_QUERYResult = {
+  id: string
+  title: string | null
+  projectTypes: {
+    development?: boolean
+    marketing?: boolean
+    design?: boolean
+  } | null
+  startDate: string | null
+  releaseDate: string | null
+  duration: null
+  role: string | null
+  contribution: string | null
+  skill: Array<string> | null
+  summary: string | null
+  thumbnail: string | ''
+  contentOverview: Array<
+    | ({
+        _key: string
+      } & Code)
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          | 'blockquote'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'normal'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+        _key: string
+      }
+  > | null
+  contentContribution: Array<
+    | ({
+        _key: string
+      } & Code)
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          | 'blockquote'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'normal'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+        _key: string
+      }
+  > | null
+  contentSkill: Array<
+    | ({
+        _key: string
+      } & Code)
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          | 'blockquote'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'normal'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+        _key: string
+      }
+  > | null
+  contentReflection: Array<
+    | ({
+        _key: string
+      } & Code)
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          | 'blockquote'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'normal'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+        _key: string
+      }
+  > | null
+  troubleShooting: null
+  imgUrls: null
+  relatedProjects: Array<{
+    reference?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'project'
+    }
+    _key: string
+  }> | null
+  updatedAt: null
+} | null
 // Variable: STUDY_TYPE_QUERY
 // Query: *[_type == "studylist"]{  _id, title}
 export type STUDY_TYPE_QUERYResult = Array<never>
 // Variable: STUDY_LIST_QUERY
-// Query: *[  _type == "study" && defined(serial)] | order(serial asc) {  "slug": string(serial)         // 정적 경로용 문자열 슬러그}
+// Query: *[  _type == "study" && defined(serial)] | order(serial asc) {  "slug": string(serial)}
 export type STUDY_LIST_QUERYResult = Array<{
   slug: string | null
 }>
@@ -418,6 +973,9 @@ export type STUDY_QUERYResult = {
   skill: Array<string> | null
   thumbnail: string | ''
   learningGoal: Array<
+    | ({
+        _key: string
+      } & Code)
     | {
         children?: Array<{
           marks?: Array<string>
@@ -425,8 +983,16 @@ export type STUDY_QUERYResult = {
           _type: 'span'
           _key: string
         }>
-        style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'normal'
-        listItem?: 'bullet'
+        style?:
+          | 'blockquote'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'normal'
+        listItem?: 'bullet' | 'number'
         markDefs?: Array<{
           href?: string
           _type: 'link'
@@ -446,12 +1012,14 @@ export type STUDY_QUERYResult = {
         media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        alt?: string
         _type: 'image'
         _key: string
       }
   > | null
   learningOutcome: Array<
+    | ({
+        _key: string
+      } & Code)
     | {
         children?: Array<{
           marks?: Array<string>
@@ -459,8 +1027,16 @@ export type STUDY_QUERYResult = {
           _type: 'span'
           _key: string
         }>
-        style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'normal'
-        listItem?: 'bullet'
+        style?:
+          | 'blockquote'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'normal'
+        listItem?: 'bullet' | 'number'
         markDefs?: Array<{
           href?: string
           _type: 'link'
@@ -480,12 +1056,14 @@ export type STUDY_QUERYResult = {
         media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        alt?: string
         _type: 'image'
         _key: string
       }
   > | null
   learningProcess: Array<
+    | ({
+        _key: string
+      } & Code)
     | {
         children?: Array<{
           marks?: Array<string>
@@ -493,8 +1071,16 @@ export type STUDY_QUERYResult = {
           _type: 'span'
           _key: string
         }>
-        style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'normal'
-        listItem?: 'bullet'
+        style?:
+          | 'blockquote'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'normal'
+        listItem?: 'bullet' | 'number'
         markDefs?: Array<{
           href?: string
           _type: 'link'
@@ -514,12 +1100,14 @@ export type STUDY_QUERYResult = {
         media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        alt?: string
         _type: 'image'
         _key: string
       }
   > | null
   learningInsight: Array<
+    | ({
+        _key: string
+      } & Code)
     | {
         children?: Array<{
           marks?: Array<string>
@@ -527,8 +1115,16 @@ export type STUDY_QUERYResult = {
           _type: 'span'
           _key: string
         }>
-        style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'normal'
-        listItem?: 'bullet'
+        style?:
+          | 'blockquote'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'normal'
+        listItem?: 'bullet' | 'number'
         markDefs?: Array<{
           href?: string
           _type: 'link'
@@ -548,12 +1144,14 @@ export type STUDY_QUERYResult = {
         media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        alt?: string
         _type: 'image'
         _key: string
       }
   > | null
   learningPlan: Array<
+    | ({
+        _key: string
+      } & Code)
     | {
         children?: Array<{
           marks?: Array<string>
@@ -561,8 +1159,16 @@ export type STUDY_QUERYResult = {
           _type: 'span'
           _key: string
         }>
-        style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'normal'
-        listItem?: 'bullet'
+        style?:
+          | 'blockquote'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'normal'
+        listItem?: 'bullet' | 'number'
         markDefs?: Array<{
           href?: string
           _type: 'link'
@@ -582,7 +1188,6 @@ export type STUDY_QUERYResult = {
         media?: unknown
         hotspot?: SanityImageHotspot
         crop?: SanityImageCrop
-        alt?: string
         _type: 'image'
         _key: string
       }
@@ -594,8 +1199,12 @@ export type STUDY_QUERYResult = {
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
+    "*[_type == \"history\" && !(_id in path('drafts.**')) ] | order(year){\n    'id': _id,\n    year,\n    content,\n }": HISTORY_QUERYResult
+    '\n*[\n  _type == "project" &&\n  !(_id in path("drafts.**")) &&\n  ($projectType == null || select(\n  $projectType == "development" => projectTypes.development == true,\n  $projectType == "design"      => projectTypes.design == true,\n  $projectType == "marketing"   => projectTypes.marketing == true,\n  true\n))\n] | order(releaseDate desc) [\n  0...50\n]{\n  "id": _id,\n  title,\n  projectTypes,\n  startDate,\n  releaseDate,\n  "skill": skill[],\n  summary,\n  "thumbnail": coalesce(thumbnail.asset->url, "")\n}\n': PROJECT_LIST_QUERY_TGResult
+    '\ncount(*[\n  _type == "project" &&\n  !(_id in path("drafts.**")) &&\n  ($projectType == null || select(\n  $projectType == "development" => projectTypes.development == true,\n  $projectType == "design"      => projectTypes.design == true,\n  $projectType == "marketing"   => projectTypes.marketing == true,\n  true\n))\n])\n': PROJECT_COUNT_QUERYResult
+    '\n*[\n  _type == "project" \n][0]{\n  // "\uD0A4 \uC774\uB984" : \uD45C\uD604\uC2DD\n  // \uB530\uC634\uD45C \uC5C6\uC73C\uBA74 \uB3D9\uC77C\uD55C \uC774\uB984\n  "id": _id,\n  title,\n  projectTypes,\n  startDate,\n  releaseDate,\n  duration,\n  \n  role,\n  contribution,\n  "skill": skill[],\n\n  summary,\n  "thumbnail": coalesce(thumbnail.asset->url, ""),\n  "contentOverview": contentOverview[],\n  "contentContribution": contentContribution[],\n  "contentSkill": contentSkill[],\n  "contentReflection": contentReflection[],\n  \n  troubleShooting,\n  imgUrls,\n  relatedProjects,\n  updatedAt\n}\n': PROJECT_QUERYResult
     '*[_type == "studylist"]{\n  _id, title\n}': STUDY_TYPE_QUERYResult
-    '\n*[\n  _type == "study" && defined(serial)\n] | order(serial asc) {\n  "slug": string(serial)         // \uC815\uC801 \uACBD\uB85C\uC6A9 \uBB38\uC790\uC5F4 \uC2AC\uB7EC\uADF8\n}\n': STUDY_LIST_QUERYResult
+    '\n*[\n  _type == "study" && defined(serial)\n] | order(serial asc) {\n  "slug": string(serial)\n}\n': STUDY_LIST_QUERYResult
     '\n*[\n  _type == "study" &&\n  defined(serial) &&\n  (\n    serial == $sNum ||           // number \uBE44\uAD50\n    string(serial) == $sStr      // string \uBE44\uAD50\n  )\n][0]{\n  // "\uD0A4 \uC774\uB984" : \uD45C\uD604\uC2DD\n  // \uB530\uC634\uD45C \uC5C6\uC73C\uBA74 \uB3D9\uC77C\uD55C \uC774\uB984\n  "id": _id,\n  title,\n  serial,\n  "skill": skill[],\n  "thumbnail": coalesce(thumbnail.asset->url, ""),\n  "learningGoal": learningGoal[],\n  "learningOutcome": learningOutcome[],\n  "learningProcess": learningProcess[],\n  "learningInsight": learningInsight[],\n  "learningPlan": learningPlan[],\n  updatedAt\n}\n': STUDY_QUERYResult
   }
 }

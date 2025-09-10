@@ -1,11 +1,13 @@
 'use client'
 
-import { useTypeSearchParam } from '@/app/(main)/project/hooks/use-type-search-param'
+import { ProjectType } from '@/sanity/schemaTypes/const/projectType'
 import classNames from 'classnames'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 
 export default function ProjectNavBar() {
-  const type = useTypeSearchParam()
+  const sp = useSearchParams()
+  const projectType = sp.get('projectType') as ProjectType | null
 
   const NavLink = ({
     href,
@@ -28,6 +30,7 @@ export default function ProjectNavBar() {
           'focus:bg-primaryDarker',
           isActive && 'bg-primary text-white font-extrabold',
         )}
+        scroll={false}
       >
         {children}
       </Link>
@@ -43,19 +46,25 @@ export default function ProjectNavBar() {
         'min-h-[40px]',
       )}
     >
-      <NavLink href="/project" isActive={!type}>
+      <NavLink href="/project" isActive={!projectType}>
         <li>전체</li>
       </NavLink>
       <NavLink
-        href="/project?type=development"
-        isActive={type === 'development'}
+        href="/project?projectType=development"
+        isActive={projectType === 'development'}
       >
         <li>개발</li>
       </NavLink>
-      <NavLink href="/project?type=design" isActive={type === 'design'}>
+      <NavLink
+        href="/project?projectType=design"
+        isActive={projectType === 'design'}
+      >
         <li>디자인</li>
       </NavLink>
-      <NavLink href="/project?type=marketing" isActive={type === 'marketing'}>
+      <NavLink
+        href="/project?projectType=marketing"
+        isActive={projectType === 'marketing'}
+      >
         <li>마케팅</li>
       </NavLink>
     </ul>
