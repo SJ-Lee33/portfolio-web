@@ -24,8 +24,18 @@ export const STUDY_QUERY = defineQuery(`
     string(serial) == $sStr      // string 비교
   )
 ][0]{
+  // "키 이름" : 표현식
+  // 따옴표 없으면 동일한 이름
   "id": _id,
   title,
-  serial
+  serial,
+  "skill": skill[],
+  "thumbnail": coalesce(thumbnail.asset->url, ""),
+  "learningGoal": learningGoal[],
+  "learningOutcome": learningOutcome[],
+  "learningProcess": learningProcess[],
+  "learningInsight": learningInsight[],
+  "learningPlan": learningPlan[],
+  updatedAt
 }
 `)
