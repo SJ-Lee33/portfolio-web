@@ -1,5 +1,5 @@
-import {defineType, defineField} from 'sanity'
-import {skills} from '../const/skills'
+import { defineType, defineField } from 'sanity'
+import { skills } from '../const/skills'
 
 const typeField = defineField({
   title: '분류',
@@ -38,9 +38,9 @@ const skillField = defineField({
   title: '기술스택',
   name: 'skill',
   type: 'array',
-  of: [{type: 'string'}],
+  of: [{ type: 'string' }],
   options: {
-    list: [...skills.map((skill) => ({title: skill, value: skill}))],
+    list: [...skills.map((skill) => ({ title: skill, value: skill }))],
   },
   validation: (Rule) => Rule.required(),
 })
@@ -93,7 +93,7 @@ const studyListField = defineField({
           title: '학습 포스팅 목록',
           name: 'studyRecord',
           type: 'reference',
-          to: [{type: 'study'}],
+          to: [{ type: 'study' }],
           options: {
             disableNew: false, // 새로운 문서 생성 활성화
           },
@@ -104,7 +104,7 @@ const studyListField = defineField({
           title: 'studyRecord.title',
         },
         prepare(selection) {
-          const {title} = selection
+          const { title } = selection
           return {
             title: title || '제목 없음', // 제목이 없을 경우 '제목 없음'으로 표시
           }
@@ -115,8 +115,8 @@ const studyListField = defineField({
 })
 
 export default defineType({
-  title: '학습 목록',
-  name: 'studyList',
+  title: '학습 카테고리',
+  name: 'studyCategory',
   type: 'document',
   fields: [
     typeField,

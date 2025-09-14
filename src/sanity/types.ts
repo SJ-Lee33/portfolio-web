@@ -13,6 +13,288 @@
  */
 
 // Source: schema.json
+export type StudyCategory = {
+  _id: string
+  _type: 'studyCategory'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  projectTypes?: {
+    development?: boolean
+    marketing?: boolean
+    design?: boolean
+  }
+  title?: string
+  skill?: Array<string>
+  thumbnail?: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  startDate?: string
+  endDate?: string
+  summary?: string
+  relatedStudies?: Array<{
+    studyRecord?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'study'
+    }
+    _key: string
+  }>
+}
+
+export type Study = {
+  _id: string
+  _type: 'study'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  serial?: number
+  title?: string
+  skill?: Array<string>
+  thumbnail?: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  learningGoal?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+        _key: string
+      }
+    | ({
+        _key: string
+      } & Code)
+  >
+  learningOutcome?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+        _key: string
+      }
+    | ({
+        _key: string
+      } & Code)
+  >
+  learningProcess?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+        _key: string
+      }
+    | ({
+        _key: string
+      } & Code)
+  >
+  learningInsight?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+        _key: string
+      }
+    | ({
+        _key: string
+      } & Code)
+  >
+  learningPlan?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+        _key: string
+      }
+    | ({
+        _key: string
+      } & Code)
+  >
+}
+
 export type Project = {
   _id: string
   _type: 'project'
@@ -320,249 +602,6 @@ export type History = {
   }>
 }
 
-export type Study = {
-  _id: string
-  _type: 'study'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  serial?: number
-  title?: string
-  skill?: Array<string>
-  thumbnail?: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-    }
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
-  learningGoal?: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'normal'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'blockquote'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-    | ({
-        _key: string
-      } & Code)
-  >
-  learningOutcome?: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'normal'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'blockquote'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-    | ({
-        _key: string
-      } & Code)
-  >
-  learningProcess?: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'normal'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'blockquote'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-    | ({
-        _key: string
-      } & Code)
-  >
-  learningInsight?: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'normal'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'blockquote'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-    | ({
-        _key: string
-      } & Code)
-  >
-  learningPlan?: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'normal'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'blockquote'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-    | ({
-        _key: string
-      } & Code)
-  >
-}
-
 export type Code = {
   _type: 'code'
   language?: string
@@ -690,9 +729,10 @@ export type SanityAssetSourceData = {
 }
 
 export type AllSanitySchemaTypes =
+  | StudyCategory
+  | Study
   | Project
   | History
-  | Study
   | Code
   | SanityImagePaletteSwatch
   | SanityImagePalette

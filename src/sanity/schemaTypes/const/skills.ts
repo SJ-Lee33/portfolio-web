@@ -5,6 +5,8 @@ export const skills = [
   'Python',
 
   'PyTorch',
+  'NLP',
+  'CV',
   'AI Math',
 
   'HTML',
