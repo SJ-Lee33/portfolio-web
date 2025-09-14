@@ -26,9 +26,9 @@ export default function DesktopNavBar({ shownLogo }: { shownLogo?: boolean }) {
         <ul className="flex justify-center gap-8">
           <Chip value={NAVIGATION_PATH.profile} />
           <Chip value={NAVIGATION_PATH.project} />
-          <Chip value={NAVIGATION_PATH.developer} />
-          <Chip value={NAVIGATION_PATH.designer} />
-          <Chip value={NAVIGATION_PATH.marketer} />
+          <Chip value={NAVIGATION_PATH.development} />
+          <Chip value={NAVIGATION_PATH.design} />
+          <Chip value={NAVIGATION_PATH.marketing} />
         </ul>
       </nav>
       {shownLogo && <Logo horizontal />}

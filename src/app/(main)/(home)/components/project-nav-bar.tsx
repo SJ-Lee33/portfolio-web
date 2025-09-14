@@ -1,5 +1,6 @@
 'use client'
 
+import { NAVIGATION_PATH } from '@/const/navigation'
 import { ProjectType } from '@/sanity/schemaTypes/const/projectType'
 import classNames from 'classnames'
 import Link from 'next/link'
@@ -50,19 +51,19 @@ export default function ProjectNavBar() {
         <li>전체</li>
       </NavLink>
       <NavLink
-        href="/project?projectType=development"
+        href={NAVIGATION_PATH.development}
         isActive={projectType === 'development'}
       >
         <li>개발</li>
       </NavLink>
       <NavLink
-        href="/project?projectType=design"
+        href={NAVIGATION_PATH.design}
         isActive={projectType === 'design'}
       >
         <li>디자인</li>
       </NavLink>
       <NavLink
-        href="/project?projectType=marketing"
+        href={NAVIGATION_PATH.marketing}
         isActive={projectType === 'marketing'}
       >
         <li>마케팅</li>
