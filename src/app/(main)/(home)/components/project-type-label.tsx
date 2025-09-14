@@ -1,5 +1,4 @@
 import React from 'react'
-import { ProjectListDto } from '@/types/project/project-list-dto'
 
 export default function ProjectTypeLabel({
   projectTypes,

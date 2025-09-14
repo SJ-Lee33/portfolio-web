@@ -6,10 +6,8 @@ import React from 'react'
 import {
   PROJECT_COUNT_QUERYResult,
   PROJECT_LIST_QUERY_TGResult,
-  PROJECT_QUERYResult,
 } from '@/sanity/types'
 import { ProjectType } from '@/sanity/schemaTypes/const/projectType'
-import getProjectList from '@/hooks/get-project-list'
 
 export default async function ProjectList({
   projectType,

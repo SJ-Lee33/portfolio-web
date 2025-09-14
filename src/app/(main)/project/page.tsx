@@ -15,5 +15,5 @@ export default async function Page({
       : null
 
   // ✅ 같은 홈 셸을 렌더하되, 프로젝트 섹션으로 자동 스크롤
-  return <HomePage projectType={projectType} autoScrollTo="projects" />
+  return <HomePage projectType={projectType} autoScrollTo="project" />
 }

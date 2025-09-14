@@ -3,9 +3,9 @@
 import { useEffect } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 
-export default function ScrollToProjectsOnRoute({
-  targetId = 'projects',
-  whenPathStartsWith = '/project',
+export default function ScrollTo({
+  targetId = 'profile',
+  whenPathStartsWith = `/${targetId}`,
   offset = 0, // 고정 헤더 높이
   behavior = 'smooth',
 }: {
