@@ -10,8 +10,13 @@ import ProjectContent from './components/project-content'
 import ProjectTroubleShooting from './components/project-troubleshooting'
 import getProject from '@/hooks/get-project'
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const project = await getProject(params.slug)
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const project = await getProject(slug)
 
   return (
     <>
