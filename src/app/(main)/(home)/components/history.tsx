@@ -1,15 +1,13 @@
-import { sanityFetch } from '@/sanity/lib/live'
-import { HISTORY_QUERY } from '@/sanity/lib/queries'
+import getHistory from '@/hooks/get-history'
 import { HISTORY_QUERYResult } from '@/sanity/types'
 import classNames from 'classnames'
 import { PortableText } from 'next-sanity'
 import { FaCircle } from 'react-icons/fa6'
 
+type HistoryItem = NonNullable<HISTORY_QUERYResult>[number]
+
 export default async function History() {
-  const { data: history } = (await sanityFetch<typeof HISTORY_QUERY>({
-    query: HISTORY_QUERY,
-  })) as { data: HISTORY_QUERYResult }
-  type HistoryItem = NonNullable<HISTORY_QUERYResult>[number]
+  const history = await getHistory()
 
   const components: any = {
     listItem: {
@@ -56,8 +54,8 @@ export default async function History() {
           'md:grid md:grid-cols-5 md:gap-8', // md ~
         )}
       >
-        {history.map((item, index) => (
-          <Container key={index} item={item} />
+        {history.map((item: HistoryItem, index: number) => (
+          <Container key={item.year} item={item} />
         ))}
       </div>
     </div>
