@@ -2,7 +2,6 @@ import { type SchemaTypeDefinition } from 'sanity'
 
 import history from './history/history'
 import project from './project/project'
-import studyList from './study/studyList'
 import study from './study/study'
 
 // export const schema: { types: SchemaTypeDefinition[] } = {

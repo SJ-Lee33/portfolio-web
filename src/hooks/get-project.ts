@@ -8,10 +8,14 @@ import { notFound } from 'next/navigation'
 export type ProjectItem = PROJECT_QUERYResult & {
   duration: string
 }
-export default async function getProject(id: string) {
+export default async function getProject(slug: string) {
+  const sStr = slug.trim()
+  const parsed = Number(sStr)
+  const sNum = Number.isFinite(parsed) ? parsed : -1
+
   const { data: project } = (await sanityFetch<typeof PROJECT_QUERY>({
     query: PROJECT_QUERY,
-    params: { id }, // 숫자/문자열 모두 대비
+    params: { sStr, sNum }, // 숫자/문자열 모두 대비
   })) as { data: PROJECT_QUERYResult }
 
   if (!project) notFound()

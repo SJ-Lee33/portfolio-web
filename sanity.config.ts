@@ -9,14 +9,16 @@ import {
   type DocumentActionsContext,
 } from 'sanity'
 import { structureTool } from 'sanity/structure'
-// import {media} from 'sanity-plugin-media'
 import { codeInput } from '@sanity/code-input'
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import { apiVersion, dataset, projectId } from './src/sanity/env'
 import { schema } from './src/sanity/schemaTypes'
 import { structure } from './src/sanity/structure'
-import { PublishWithSerialActionAtStudy } from './src/sanity/lib/publish-with-serial'
+import { createPublishWithSerialAction } from './src/sanity/lib/publish-with-serial'
+const PublishWithSerial = createPublishWithSerialAction({
+  types: ['study', 'project'],
+})
 
 export default defineConfig({
   basePath: '/studio',
@@ -32,7 +34,6 @@ export default defineConfig({
     // Vision is for querying with GROQ from inside the Studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({ defaultApiVersion: apiVersion }),
-    // media(),
     codeInput(),
   ],
   document: {
@@ -40,12 +41,11 @@ export default defineConfig({
       prev: DocumentActionComponent[],
       context: DocumentActionsContext,
     ): DocumentActionComponent[] => {
-      if (context.schemaType === 'study') {
-        const withoutDefaultPublish = prev.filter((a) => a.action !== 'publish')
-
+      if (context.schemaType === 'study' || context.schemaType === 'project') {
+        const withoutDefault = prev.filter((a) => a.action !== 'publish')
         return [
-          PublishWithSerialActionAtStudy,
-          ...withoutDefaultPublish,
+          PublishWithSerial,
+          ...withoutDefault,
         ] as DocumentActionComponent[]
       }
       return prev

@@ -1,6 +1,6 @@
 import { defineType, defineField } from 'sanity'
 import { skills } from '../const/skills'
-import { apiVersion } from '@/sanity/env'
+import { apiVersion } from '../../env'
 
 const serialField = defineField({
   name: 'serial',

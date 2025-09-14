@@ -5,10 +5,11 @@ import { PROJECT_COUNT_QUERY, PROJECT_LIST_QUERY } from '@/sanity/lib/queries'
 import React from 'react'
 import {
   PROJECT_COUNT_QUERYResult,
-  PROJECT_LIST_QUERYResult,
+  PROJECT_LIST_QUERY_TGResult,
   PROJECT_QUERYResult,
 } from '@/sanity/types'
 import { ProjectType } from '@/sanity/schemaTypes/const/projectType'
+import getProjectList from '@/hooks/get-project-list'
 
 export default async function ProjectList({
   projectType,
@@ -25,8 +26,9 @@ export default async function ProjectList({
   const { data: projectList } = (await sanityFetch<typeof PROJECT_LIST_QUERY>({
     query: PROJECT_LIST_QUERY,
     params: { projectType, offset, limit: pageSize }, // ← key는 projectType
-  })) as { data: PROJECT_LIST_QUERYResult }
+  })) as { data: PROJECT_LIST_QUERY_TGResult }
 
+  // const d = getProjectList(projectType)
   // 프로젝트 총 수
   const { data: count } = (await sanityFetch<typeof PROJECT_COUNT_QUERY>({
     query: PROJECT_COUNT_QUERY,
@@ -43,21 +45,22 @@ export default async function ProjectList({
     return `?${sp.toString()}`
   }
 
-  type ProjectListItem = PROJECT_LIST_QUERYResult[number]
+  type ProjectListItem = PROJECT_LIST_QUERY_TGResult[number]
 
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-2 text-title-s rounded-md">
         {projectList.map((project: ProjectListItem, index: number) => (
-          <React.Fragment key={project.id}>
+          <React.Fragment key={project.slug}>
             {index > 0 && <div className="border-t border-neutralLight m-4" />}
             <Link
-              href={`/project/${project.id}`}
+              href={`/project/${project.slug}`}
               target="_blank"
               className="w-full"
             >
               <ProjectItem
                 id={project.id}
+                slug={project.slug}
                 title={project.title}
                 projectTypes={project.projectTypes ?? null}
                 startDate={project.startDate}

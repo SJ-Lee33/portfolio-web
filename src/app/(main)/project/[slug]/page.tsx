@@ -10,12 +10,6 @@ import ProjectContent from './components/project-content'
 import ProjectTroubleShooting from './components/project-troubleshooting'
 import getProject from '@/hooks/get-project'
 
-type Props = {
-  params: {
-    slug: string
-  }
-}
-
 export default async function Page({ params }: { params: { slug: string } }) {
   const project = await getProject(params.slug)
 
@@ -103,6 +97,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                   >
                     <ProjectItem
                       id={relatedProject.id}
+                      slug={relatedProject.slug}
                       title={relatedProject.title}
                       projectTypes={relatedProject.projectTypes}
                       summary={relatedProject.summary}

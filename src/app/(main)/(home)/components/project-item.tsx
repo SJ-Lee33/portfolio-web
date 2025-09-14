@@ -3,9 +3,9 @@ import Image from 'next/image'
 import { formatDate } from '@/utils/formatDate'
 import SkillDisplay from '@/components/skill-display'
 import classNames from 'classnames'
-import { PROJECT_LIST_QUERYResult } from '@/sanity/types'
+import { PROJECT_LIST_QUERY_TGResult } from '@/sanity/types'
 
-type ProjectListProps = PROJECT_LIST_QUERYResult[number] & {
+type ProjectListProps = PROJECT_LIST_QUERY_TGResult[number] & {
   index: number | 0
 }
 export default function ProjectItem(project: ProjectListProps) {
@@ -43,7 +43,7 @@ export default function ProjectItem(project: ProjectListProps) {
             font-medium text-caption text-neutral
           bg-white opacity-90 rounded-md `}
         >
-          <ProjectTypeLabel projectTypes={project.projectTypes} />
+          <ProjectTypeLabel projectTypes={project.projectTypes!} />
         </div>
         {/* 이미지  */}
         <Image
