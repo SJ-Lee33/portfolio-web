@@ -5,7 +5,8 @@ import SkillsScreen from './components/skills-screen'
 import WorkScreen from './components/work-screen'
 import HeaderClient from './components/header-client'
 import ProjectsScreen from './components/projects-screen'
-import ScrollToProjectsOnRoute from './scroll-to-project'
+import ScrollToProjectsOnRoute from './hook/scroll-to-project'
+import ScrollToProfileOnRoute from './hook/scroll-to-profile'
 
 export default async function HomePage({
   projectType,
@@ -16,6 +17,7 @@ export default async function HomePage({
 }) {
   return (
     <div>
+      <ScrollToProfileOnRoute targetId="profile" offset={20} />
       <ScrollToProjectsOnRoute targetId="projects" offset={50} />
 
       {/* 최상단 헤더 */}
@@ -29,8 +31,8 @@ export default async function HomePage({
       {/* 이력 */}
       <section id="profile">
         <HistoryScreen />
-        <WorkScreen />
       </section>
+      <WorkScreen />
 
       {/* 스킬 */}
       <SkillsScreen />
