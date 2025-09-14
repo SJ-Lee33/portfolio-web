@@ -2,6 +2,7 @@ import C from '/public/images/logo-c.png'
 import Csharp from '/public/images/logo-csharp.png'
 import Java from '/public/images/logo-java.png'
 import Python from '/public/images/logo-python.png'
+import PyTorch from '/public/images/logo-pytorch.png'
 import Html from '/public/images/logo-html.png'
 import Css from '/public/images/logo-css.png'
 import React from '/public/images/logo-react.png'
@@ -36,12 +37,12 @@ import Hancom from '/public/images/logo-hancom.png'
 
 export const SkillList = [
   /**
-   * programming - 0~5
-   * frontend - 5~18
-   * backend - 18~21
-   * design - 21~26
-   * document - 26~30
-   * cooperation - 30~34
+   * programming - 0~6
+   * frontend - 6~19
+   * backend - 19~22
+   * design - 22~27
+   * document - 27~31
+   * cooperation - 31~35
    */
 
   // programming
@@ -60,6 +61,10 @@ export const SkillList = [
   {
     title: 'Python',
     icon: Python,
+  },
+  {
+    title: 'PyTorch',
+    icon: PyTorch,
   },
   { title: 'Unity', icon: Unity },
 
