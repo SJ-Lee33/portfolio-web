@@ -22,34 +22,6 @@ export const PROJECT_LIST_QUERY = defineQuery(`
       true
     ) // 전부 false면 전체 불러오기
   )
-] | order(coalesce(releaseDate, _updatedAt, _createdAt) desc) [
-  $offset...($offset + $limit)
-]{
-  "id": _id,
-  title,
-  projectTypes,
-  startDate,
-  releaseDate,
-  "skill": skill[],
-  summary,
-  "thumbnail": coalesce(thumbnail.asset->url, "")
-}
-`)
-
-// --- 타입젠용: 상수 슬라이스(예: 0..50) → TypeGen만 이걸 읽어 타입 생성 ---
-export const PROJECT_LIST_QUERY_TG = defineQuery(`
-*[
-  _type == "project" &&
-  !(_id in path("drafts.**")) &&
-  (
-    $projectType == null ||
-    select(
-      $projectType == "development" => coalesce(projectTypes.development, false) == true,
-      $projectType == "design"      => coalesce(projectTypes.design, false) == true,
-      $projectType == "marketing"   => coalesce(projectTypes.marketing, false) == true,
-      true
-    )
-  )
 ] | order(coalesce(releaseDate, _updatedAt, _createdAt) desc) [0...50]{
   "id": _id,
   title,
@@ -82,32 +54,46 @@ count(*[
 // 단일 프로젝트 포스트
 export const PROJECT_QUERY = defineQuery(`
 *[
-  _type == "project" 
+  _type == "project" && 
+  defined(serial) 
 ][0]{
   // "키 이름" : 표현식
   // 따옴표 없으면 동일한 이름
+  serial,
   "id": _id,
+
   title,
   projectTypes,
   startDate,
   releaseDate,
-  duration,
-  
   role,
+  // duration,
   contribution,
-  "skill": skill[],
+  "updatedAt": _updatedAt,
 
-  summary,
+  skill[],
+
   "thumbnail": coalesce(thumbnail.asset->url, ""),
-  "contentOverview": contentOverview[],
-  "contentContribution": contentContribution[],
-  "contentSkill": contentSkill[],
-  "contentReflection": contentReflection[],
+  contentOverview[],
+  contentContribution[],
+  contentSkill[],
+  contentReflection[],
   
-  troubleShooting,
-  imgUrls,
-  relatedProjects,
-  updatedAt
+  troubleShootings[],
+  "imgUrls": coalesce(images[].asset->url, ""),
+  // "imgUrls": images[].asset->url,
+  "relatedProjects": relatedProjects[]{
+    "reference": reference->{
+      "id": _id,
+      title,
+      projectTypes,
+      startDate,
+      releaseDate,
+      skill[],
+      summary,
+      "thumbnail": coalesce(thumbnail.asset->url, "")
+    }
+  }
 }
 `)
 

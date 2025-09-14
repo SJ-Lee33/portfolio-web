@@ -5,7 +5,7 @@ import { PROJECT_COUNT_QUERY, PROJECT_LIST_QUERY } from '@/sanity/lib/queries'
 import React from 'react'
 import {
   PROJECT_COUNT_QUERYResult,
-  PROJECT_LIST_QUERY_TGResult,
+  PROJECT_LIST_QUERYResult,
   PROJECT_QUERYResult,
 } from '@/sanity/types'
 import { ProjectType } from '@/sanity/schemaTypes/const/projectType'
@@ -25,7 +25,7 @@ export default async function ProjectList({
   const { data: projectList } = (await sanityFetch<typeof PROJECT_LIST_QUERY>({
     query: PROJECT_LIST_QUERY,
     params: { projectType, offset, limit: pageSize }, // ← key는 projectType
-  })) as { data: PROJECT_LIST_QUERY_TGResult }
+  })) as { data: PROJECT_LIST_QUERYResult }
 
   // 프로젝트 총 수
   const { data: count } = (await sanityFetch<typeof PROJECT_COUNT_QUERY>({
@@ -43,7 +43,7 @@ export default async function ProjectList({
     return `?${sp.toString()}`
   }
 
-  type ProjectListItem = PROJECT_LIST_QUERY_TGResult[number]
+  type ProjectListItem = PROJECT_LIST_QUERYResult[number]
 
   return (
     <div className="flex flex-col gap-6">

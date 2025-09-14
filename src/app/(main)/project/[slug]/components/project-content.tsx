@@ -18,10 +18,10 @@ export default function ProjectContent({
   skill,
   reflection,
 }: {
-  overview: []
-  contribution: []
-  skill: []
-  reflection: []
+  overview: any
+  contribution: any
+  skill: any
+  reflection: any
 }) {
   const [activeTab, setActiveTab] = useState('contentOverview')
   const contentSectionRef = useRef<HTMLDivElement>(null)
