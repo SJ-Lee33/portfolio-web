@@ -3,13 +3,16 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { STUDY_QUERY } from '@/sanity/lib/queries'
 import { STUDY_QUERYResult } from '@/sanity/types'
-import Image from 'next/image'
-import { urlFor } from '@/sanity/lib/image'
 
 export const revalidate = 60
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const sStr = params.slug.trim()
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const sStr = slug.trim()
   const parsed = Number(sStr)
   const sNum = Number.isFinite(parsed) ? parsed : -1
 
@@ -25,18 +28,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <h1 className="text-4xl font-bold">{post.title}</h1>
       <p className="text-sm text-zinc-500">Serial: {post.serial}</p>
       <hr />
-      <Image
-        className="w-full aspect-[800/300]"
-        src={urlFor(post.thumbnail)
-          .width(800)
-          .height(300)
-          .quality(80)
-          .auto('format')
-          .url()}
-        alt=""
-        width="800"
-        height="300"
-      />
       <Link href="/study">&larr; Return to index</Link>
     </main>
   )
