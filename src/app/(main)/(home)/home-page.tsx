@@ -12,7 +12,7 @@ export default async function HomePage({
   autoScrollTo,
 }: {
   projectType: 'development' | 'design' | 'marketing' | null
-  autoScrollTo?: 'project' | 'profile' | undefined
+  autoScrollTo?: 'project' | 'profile'
 }) {
   return (
     <div>

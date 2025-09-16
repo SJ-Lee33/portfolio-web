@@ -9,6 +9,12 @@ import { useSearchParams } from 'next/navigation'
 export default function ProjectNavBar() {
   const sp = useSearchParams()
   const projectType = sp.get('projectType') as ProjectType | null
+  const navHref = (pt?: string) => {
+    const qs = new URLSearchParams()
+    if (pt) qs.set('projectType', pt)
+    // 탭 전환 시 page를 1로 (쿼리에 page 안 넣기)
+    return `/?${qs.toString()}`
+  }
 
   const NavLink = ({
     href,

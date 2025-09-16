@@ -12,6 +12,7 @@ export const HISTORY_QUERY =
 export const PROJECT_LIST_QUERY = defineQuery(`
 *[
   _type == "project" && 
+  !(_id in path("drafts.**")) &&
   defined(serial) &&
   (
     $projectType == null ||
@@ -22,38 +23,7 @@ export const PROJECT_LIST_QUERY = defineQuery(`
       true
     ) // 전부 false면 전체 불러오기
   )
-] | order(coalesce(releaseDate, _updatedAt, _createdAt) desc) [
-  $offset...($offset + $limit)
-]{
-  "id": _id,
-  "slug": string(serial),
-  title,
-  projectTypes,
-  startDate,
-  releaseDate,
-  "skill": skill[],
-  summary,
-  "thumbnail": coalesce(thumbnail.asset->url, "")
-}
-`)
-
-// --- 타입젠용: 상수 슬라이스(예: 0..50) → TypeGen만 이걸 읽어 타입 생성 ---
-export const PROJECT_LIST_QUERY_TG = defineQuery(`
-*[
-  _type == "project" && 
-  defined(serial) &&
-  (
-    $projectType == null ||
-    select(
-      $projectType == "development" => coalesce(projectTypes.development, false) == true,
-      $projectType == "design"      => coalesce(projectTypes.design, false) == true,
-      $projectType == "marketing"   => coalesce(projectTypes.marketing, false) == true,
-      true
-    ) // 전부 false면 전체 불러오기
-  )
-] | order(coalesce(releaseDate, _updatedAt, _createdAt) desc) [
-0...50
-]{
+] | order(coalesce(releaseDate, _updatedAt, _createdAt) desc) {
   "id": _id,
   "slug": string(serial),
   title,

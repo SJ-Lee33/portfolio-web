@@ -4,10 +4,10 @@ import HomePage from './(main)/(home)/home-page'
 export default async function MainPage({
   searchParams,
 }: {
-  searchParams: { projectType?: string }
+  searchParams: Promise<{ projectType?: string }>
 }) {
-  const sp = await searchParams
-  const raw = sp.projectType
+  const { projectType: raw } = await searchParams
+
   const projectType: ProjectType | null =
     raw === 'development' || raw === 'design' || raw === 'marketing'
       ? (raw as ProjectType)
