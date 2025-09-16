@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic'
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { projectType?: string }
+  searchParams: Promise<{ projectType?: string }>
 }) {
   const sp = await searchParams
   const raw = sp.projectType
