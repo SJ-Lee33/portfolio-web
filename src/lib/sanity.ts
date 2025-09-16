@@ -1,26 +1,26 @@
 import { createClient } from '@sanity/client'
 import imageUrlBuilder from '@sanity/image-url'
+import { apiVersion, dataset, projectId, token } from '../sanity/env'
 
-const SANITY_DATASET = 'production'
-if (!process.env.SANITY_PROJECT_ID) {
+if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
   throw new Error('Missing SANITY_PROJECT_ID in .env.local')
 }
 export const client = createClient({
-  projectId: process.env.SANITY_PROJECT_ID!,
-  dataset: SANITY_DATASET!,
-  useCdn: false,
-  apiVersion: '2024-08-07', // use current date (YYYY-MM-DD) to target the latest API version
-  token: process.env.SANITY_SECRET_TOKEN,
+  projectId,
+  dataset,
+  apiVersion,
+  token,
+  useCdn: false, // 가이드에선 true로 했었음
 })
 
-export const assetsURL = `https://${process.env.SANITY_PROJECT_ID}.api.sanity.io/v2024-08-07/assets/images/${SANITY_DATASET}`
+export const assetsURL = `https://${projectId}.api.sanity.io/v${apiVersion}/assets/images/${dataset}`
 
 export const uploadAsset = async (file: Blob) => {
   const res = await fetch(assetsURL, {
     method: 'POST',
     headers: {
       'Content-Type': file.type,
-      Authorization: `Bearer ${process.env.SANITY_SECRET_TOKEN}`,
+      Authorization: `Bearer ${token}`,
     },
     body: file,
   })

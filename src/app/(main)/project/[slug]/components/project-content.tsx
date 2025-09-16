@@ -8,20 +8,22 @@ import ProjectSubheader from './project-subheader'
 import ProjectPlanetext from './project-plaintext'
 import ProjectListBullet from './project-listbullet'
 import ProjectImage from './project-image'
-import ProjectCodebox from './project-codebox'
 import ProjectListNumber from './project-listnumber'
 import ProjectQuote from './project-quote'
-
+import dynamic from 'next/dynamic'
+const ProjectCodebox = dynamic(() => import('./project-codebox'), {
+  ssr: false,
+})
 export default function ProjectContent({
   overview,
   contribution,
   skill,
   reflection,
 }: {
-  overview: []
-  contribution: []
-  skill: []
-  reflection: []
+  overview: any
+  contribution: any
+  skill: any
+  reflection: any
 }) {
   const [activeTab, setActiveTab] = useState('contentOverview')
   const contentSectionRef = useRef<HTMLDivElement>(null)
@@ -52,8 +54,14 @@ export default function ProjectContent({
       image: ({ value }: { value: { url: string } }) => (
         <ProjectImage url={value.url} />
       ),
-      code: ({ value }: { value: { code: string; language: string } }) => (
-        <ProjectCodebox value={value} />
+      code: ({ value }: { value: { code: string; language?: string } }) => (
+        // 서버와 클라의 마크업 차이를 무시(안전장치)
+        <div
+          className="px-4 md:px-10 text-body-m mt-2 mb-[30px] overflow-auto"
+          suppressHydrationWarning
+        >
+          <ProjectCodebox code={value.code} language={value.language} />
+        </div>
       ),
     },
   }

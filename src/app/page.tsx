@@ -1,15 +1,17 @@
+import { ProjectType } from '@/sanity/schemaTypes/const/projectType'
 import HomePage from './(main)/(home)/home-page'
-import { Suspense } from 'react'
-import { LoadingSpinner } from '@/components/loading-spinner'
 
-export default function MainPage() {
-  return (
-    <div className="w-screen">
-      <main>
-        <Suspense fallback={<LoadingSpinner />}>
-          <HomePage />
-        </Suspense>
-      </main>
-    </div>
-  )
+export default async function MainPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ projectType?: string }>
+}) {
+  const { projectType: raw } = await searchParams
+
+  const projectType: ProjectType | null =
+    raw === 'development' || raw === 'design' || raw === 'marketing'
+      ? (raw as ProjectType)
+      : null
+
+  return <HomePage projectType={projectType} />
 }

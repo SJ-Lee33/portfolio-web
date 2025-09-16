@@ -1,11 +1,20 @@
 'use client'
 
-import { useTypeSearchParam } from '@/app/(main)/project/hooks/use-type-search-param'
+import { NAVIGATION_PATH } from '@/const/navigation'
+import { ProjectType } from '@/sanity/schemaTypes/const/projectType'
 import classNames from 'classnames'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 
 export default function ProjectNavBar() {
-  const type = useTypeSearchParam()
+  const sp = useSearchParams()
+  const projectType = sp.get('projectType') as ProjectType | null
+  const navHref = (pt?: string) => {
+    const qs = new URLSearchParams()
+    if (pt) qs.set('projectType', pt)
+    // 탭 전환 시 page를 1로 (쿼리에 page 안 넣기)
+    return `/?${qs.toString()}`
+  }
 
   const NavLink = ({
     href,
@@ -28,6 +37,7 @@ export default function ProjectNavBar() {
           'focus:bg-primaryDarker',
           isActive && 'bg-primary text-white font-extrabold',
         )}
+        scroll={false}
       >
         {children}
       </Link>
@@ -43,19 +53,25 @@ export default function ProjectNavBar() {
         'min-h-[40px]',
       )}
     >
-      <NavLink href="/project" isActive={!type}>
+      <NavLink href="/project" isActive={!projectType}>
         <li>전체</li>
       </NavLink>
       <NavLink
-        href="/project?type=development"
-        isActive={type === 'development'}
+        href={NAVIGATION_PATH.development}
+        isActive={projectType === 'development'}
       >
         <li>개발</li>
       </NavLink>
-      <NavLink href="/project?type=design" isActive={type === 'design'}>
+      <NavLink
+        href={NAVIGATION_PATH.design}
+        isActive={projectType === 'design'}
+      >
         <li>디자인</li>
       </NavLink>
-      <NavLink href="/project?type=marketing" isActive={type === 'marketing'}>
+      <NavLink
+        href={NAVIGATION_PATH.marketing}
+        isActive={projectType === 'marketing'}
+      >
         <li>마케팅</li>
       </NavLink>
     </ul>

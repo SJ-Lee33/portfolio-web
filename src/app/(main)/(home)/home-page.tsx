@@ -1,63 +1,44 @@
-'use client'
-
-import React, { useRef, Suspense } from 'react'
+import React from 'react'
 import FirstScreen from './components/first-screen'
 import HistoryScreen from './components/history-screen'
-import ProjectsScreen from './components/projects-screen'
-import { LoadingSpinner } from '@/components/loading-spinner'
-import { Scroll } from './components/scroll'
-import NavBar from '@/components/nav-bar/nav-bar'
-import { useEffect, useState } from 'react'
 import SkillsScreen from './components/skills-screen'
 import WorkScreen from './components/work-screen'
+import HeaderClient from './components/header-client'
+import ProjectsScreen from './components/projects-screen'
+import ScrollTo from './hook/scroll-to'
 
-const HomePage: React.FC = () => {
-  const profileRef = useRef<HTMLDivElement>(null)
-  const projectRef = useRef<HTMLDivElement>(null)
-  const [headerDesign, setHeaderDesign] = useState('text-white')
-  const [shownLogo, setShownLogo] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const position = window.scrollY
-
-      if (position >= 100) {
-        // 스크롤 진행후
-        setHeaderDesign('bg-white text-neutral shadow-md shadow-neutral/5')
-        setShownLogo(true)
-      } else {
-        // 맨위일때
-        setHeaderDesign('bg-opacity-0 text-white')
-        setShownLogo(false)
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
-
+export default async function HomePage({
+  projectType,
+  autoScrollTo,
+}: {
+  projectType: 'development' | 'design' | 'marketing' | null
+  autoScrollTo?: 'project' | 'profile'
+}) {
   return (
     <div>
-      <Suspense fallback={<LoadingSpinner />}>
-        <Scroll profileRef={profileRef} projectRef={projectRef} />
-      </Suspense>
+      <ScrollTo targetId={autoScrollTo} offset={50} />
+
+      {/* 최상단 헤더 */}
       <header className="w-full fixed top-0 z-50">
-        <NavBar shownLogo={shownLogo} headerDesign={headerDesign} />
+        <HeaderClient />
       </header>
+
+      {/* 첫화면 */}
       <FirstScreen />
-      <div ref={profileRef}>
+
+      {/* 이력 */}
+      <section id="profile">
         <HistoryScreen />
-        <WorkScreen />
-      </div>
+      </section>
+      <WorkScreen />
+
+      {/* 스킬 */}
       <SkillsScreen />
-      <div ref={projectRef}>
-        <ProjectsScreen />
-      </div>
+
+      {/* 프로젝트 */}
+      <section id="project">
+        <ProjectsScreen projectType={projectType} />
+      </section>
     </div>
   )
 }
-
-export default HomePage

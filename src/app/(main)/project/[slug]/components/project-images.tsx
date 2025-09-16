@@ -5,7 +5,7 @@ export default function ProjectImages({
   images,
   thumbnail,
 }: {
-  images: string[]
+  images: (string | null)[]
   thumbnail: string
 }) {
   const imageCss = 'w-full h-auto shadow-lg shadow-neutralLight/20 rounded-sm'
@@ -30,18 +30,19 @@ export default function ProjectImages({
       </div>
 
       {/* 추가 스크린샷 */}
-      {images.map((item, index) => (
-        <div key={index} className="mb-4 break-inside-avoid">
-          <Image
-            alt={`screenshot-${index}`}
-            src={item}
-            width={250}
-            height={250}
-            className={imageCss}
-            style={{ objectFit: 'cover' }}
-          />
-        </div>
-      ))}
+      {images &&
+        images.map((item, index) => (
+          <div key={index} className="mb-4 break-inside-avoid">
+            <Image
+              alt={`screenshot-${index}`}
+              src={item || ''}
+              width={250}
+              height={250}
+              className={imageCss}
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
+        ))}
     </div>
   )
 }

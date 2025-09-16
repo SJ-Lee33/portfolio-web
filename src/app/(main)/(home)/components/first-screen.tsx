@@ -8,20 +8,19 @@ export default function FirstScreen() {
       style={{ backgroundImage: `url(${backgroundImage.src})` }}
     >
       {/* 메인 문구 */}
-      <div className="flex flex-col justify-center text-[3rem] text-white font-extralight">
-        <div>
-          <span className="font-medium">실무 경험</span>이 풍부한
+      <div className="flex flex-col justify-center text-white font-extralight">
+        <div className="text-title-l">IT 스타트업 - 제조업 업무경험</div>
+        <div className="text-headline-m font-medium">
+          고객을 위한 개발을 합니다.
         </div>
-        <div>
-          <span className="font-medium">전천후 유틸리티</span>
-        </div>
-        <div>
-          <span className="font-bold">개발자 이소진 입니다.</span>
+
+        <div className="mt-10 text-[2.5rem]">
+          <span className="font-bold text-[3.5rem] mr-4">이 소 진</span> Sojin
+          Lee
         </div>
         <div className="text-title-m mt-5">
-          다양한 프로젝트 경험으로
-          <br />
-          <b>개발 · 기획 · 운영 · 디자인 </b>까지 !
+          <span className="font-bold mr-3">개발 · 기획 · 운영 · 디자인 </span>
+          다양한 프로젝트 경험 보유
         </div>
       </div>
 

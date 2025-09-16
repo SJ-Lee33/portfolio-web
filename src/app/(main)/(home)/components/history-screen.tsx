@@ -1,13 +1,6 @@
-'use client'
-
 import History from './history'
-import { useHistory } from '../../profile/hooks/use-history'
-import { LoadingSpinner } from '@/components/loading-spinner'
 
 export default function HistoryScreen() {
-  const { history, isLoading } = useHistory()
-  if (isLoading) return <LoadingSpinner />
-
   return (
     <div className="py-20 px-12 text-neutral">
       {/* 제목 */}
@@ -50,7 +43,7 @@ export default function HistoryScreen() {
 
       {/* 경력 */}
       <div className="mt-[140px]">
-        <History history={history} />
+        <History />
       </div>
     </div>
   )

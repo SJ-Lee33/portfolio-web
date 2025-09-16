@@ -2,24 +2,21 @@ import ProjectHeader from './components/project-header'
 import ProjectSummary from './components/project-summary'
 import ProjectTitle from './components/project-title'
 import ProjectTypeLabel from '../../(home)/components/project-type-label'
-import { getProjectById } from '@/hooks/get-project-by-id'
-import { LoadingSpinner } from '@/components/loading-spinner'
 import ProjectImages from './components/project-images'
 import Link from 'next/link'
 import ProjectItem from '../../(home)/components/project-item'
 import NavBar from '@/components/nav-bar/nav-bar'
 import ProjectContent from './components/project-content'
 import ProjectTroubleShooting from './components/project-troubleshooting'
+import getProject from '@/hooks/get-project'
 
-type Props = {
-  params: {
-    slug: string
-  }
-}
-
-export default async function Page({ params: { slug } }: Props) {
-  const project = await getProjectById(slug)
-  if (!project) return <LoadingSpinner />
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const project = await getProject(slug)
 
   return (
     <>
@@ -38,16 +35,16 @@ export default async function Page({ params: { slug } }: Props) {
         </div>
 
         {/* 제목 (상단고정) */}
-        <ProjectTitle title={project.title} />
+        <ProjectTitle title={project.title || ''} />
 
         {/* 요약 */}
         <ProjectSummary
-          contribution={project.contribution}
-          duration={project.duration}
-          startDate={project.startDate}
-          releaseDate={project.releaseDate}
-          role={project.role}
-          skill={project.skill}
+          contribution={project.contribution || ''}
+          duration={project.duration || ''}
+          startDate={project.startDate || ''}
+          releaseDate={project.releaseDate || ''}
+          role={project.role || ''}
+          skill={project.skill || []}
           thumbnail={project.thumbnail}
           updatedAt={project.updatedAt}
         />
@@ -68,6 +65,7 @@ export default async function Page({ params: { slug } }: Props) {
               {project.troubleShootings.map((item: any, index: any) => {
                 return (
                   <ProjectTroubleShooting
+                    key={index}
                     index={index + 1}
                     title={item.troubleShootingTitle}
                     content={item.troubleShootingContent}
@@ -78,11 +76,11 @@ export default async function Page({ params: { slug } }: Props) {
           )}
 
           {/* 사진 갤러리 */}
-          {project?.imageUrls && (
+          {project.imgUrls && (
             <>
               <ProjectHeader>{'스크린샷'}</ProjectHeader>
               <ProjectImages
-                images={project.imageUrls}
+                images={project.imgUrls}
                 thumbnail={project.thumbnail}
               />
             </>
@@ -104,9 +102,10 @@ export default async function Page({ params: { slug } }: Props) {
                   >
                     <ProjectItem
                       id={relatedProject.id}
+                      slug={relatedProject.slug}
                       title={relatedProject.title}
                       projectTypes={relatedProject.projectTypes}
-                      type={relatedProject.type}
+                      summary={relatedProject.summary}
                       startDate={relatedProject.startDate}
                       releaseDate={relatedProject.releaseDate}
                       thumbnail={relatedProject.thumbnail}

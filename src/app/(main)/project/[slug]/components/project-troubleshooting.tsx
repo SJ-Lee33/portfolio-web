@@ -1,13 +1,18 @@
+'use client'
+
 import { PortableText } from 'next-sanity'
-import ProjectCodebox from './project-codebox'
 import ProjectImage from './project-image'
 import ProjectListBullet from './project-listbullet'
 import ProjectPlanetext from './project-plaintext'
 import ProjectQuote from './project-quote'
 import Troubleshootingheader from './project-troubleshooting-header'
 import ProjectListNumber from './project-listnumber'
+import dynamic from 'next/dynamic'
+const ProjectCodebox = dynamic(() => import('./project-codebox'), {
+  ssr: false,
+})
 
-export default async function ProjectTroubleShooting({
+export default function ProjectTroubleShooting({
   index,
   title,
   content,
@@ -41,7 +46,12 @@ export default async function ProjectTroubleShooting({
         <ProjectImage url={value.url} />
       ),
       code: ({ value }: { value: { code: string; language: string } }) => (
-        <ProjectCodebox value={value} />
+        <div
+          className="px-4 md:px-10 text-body-m mt-2 mb-[30px] overflow-auto"
+          suppressHydrationWarning
+        >
+          <ProjectCodebox code={value.code} language={value.language} />
+        </div>
       ),
     },
   }

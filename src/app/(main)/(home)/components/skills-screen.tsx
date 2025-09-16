@@ -8,7 +8,7 @@ export default function SkillsScreen() {
         <div className="text-headline-l font-extrabold">Skills & Tools</div>
         <div className="text-body-m">
           <p className="font-bold">#개발자 #디자이너 #마케터</p>
-          <p>다양한 분야의 업무 경험을 가지고 있습니다.</p>
+          <p>다양한 분야에 업무 경험을 가지고 있습니다.</p>
         </div>
       </div>
 
