@@ -119,7 +119,7 @@ export const STUDY_LIST_QUERY = defineQuery(`
 `)
 
 // 카테고리 목록들과, 각 목록 별 최근 문서 5개
-export const STUDY_CATEGORY_QUERY = defineQuery(`
+export const STUDY_CATEGORY_AND_RECENT_QUERY = defineQuery(`
   *[
     _type == "studyCategory" &&
     !(_id in path("drafts.**")) &&        // ⬅️ 루트에서 draft 제외

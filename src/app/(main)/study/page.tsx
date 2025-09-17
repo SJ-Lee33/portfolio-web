@@ -1,17 +1,18 @@
 import { sanityFetch } from '@/sanity/lib/live'
-import { STUDY_CATEGORY_QUERY, STUDY_LIST_QUERY } from '@/sanity/lib/queries'
-import { STUDY_CATEGORY_QUERYResult } from '@/sanity/types'
+import {
+  STUDY_CATEGORY_AND_RECENT_QUERY,
+  STUDY_LIST_QUERY,
+} from '@/sanity/lib/queries'
+import { STUDY_CATEGORY_AND_RECENT_QUERYResult } from '@/sanity/types'
 import Image from 'next/image'
 import Link from 'next/link'
 
 export const revalidate = 60
 
 export default async function Page() {
-  // const { data } = await sanityFetch({ query: STUDY_LIST_QUERY })
-
-  const { data } = (await sanityFetch<typeof STUDY_CATEGORY_QUERY>({
-    query: STUDY_CATEGORY_QUERY,
-  })) as { data: STUDY_CATEGORY_QUERYResult }
+  const { data } = (await sanityFetch<typeof STUDY_CATEGORY_AND_RECENT_QUERY>({
+    query: STUDY_CATEGORY_AND_RECENT_QUERY,
+  })) as { data: STUDY_CATEGORY_AND_RECENT_QUERYResult }
 
   console.log(data)
   return (
