@@ -13,45 +13,6 @@
  */
 
 // Source: schema.json
-export type StudyCategory = {
-  _id: string
-  _type: 'studyCategory'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  projectTypes?: {
-    development?: boolean
-    marketing?: boolean
-    design?: boolean
-  }
-  title?: string
-  skill?: Array<string>
-  thumbnail?: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-    }
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
-  startDate?: string
-  endDate?: string
-  summary?: string
-  relatedStudies?: Array<{
-    studyRecord?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'study'
-    }
-    _key: string
-  }>
-}
-
 export type Study = {
   _id: string
   _type: 'study'
@@ -60,6 +21,12 @@ export type Study = {
   _rev: string
   serial?: number
   title?: string
+  studyCategory?: {
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    [internalGroqTypeReferenceTo]?: 'studyCategory'
+  }
   skill?: Array<string>
   thumbnail?: {
     asset?: {
@@ -73,7 +40,7 @@ export type Study = {
     crop?: SanityImageCrop
     _type: 'image'
   }
-  learningGoal?: Array<
+  body?: Array<
     | {
         children?: Array<{
           marks?: Array<string>
@@ -117,182 +84,35 @@ export type Study = {
         _key: string
       } & Code)
   >
-  learningOutcome?: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'normal'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'blockquote'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-    | ({
-        _key: string
-      } & Code)
-  >
-  learningProcess?: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'normal'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'blockquote'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-    | ({
-        _key: string
-      } & Code)
-  >
-  learningInsight?: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'normal'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'blockquote'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-    | ({
-        _key: string
-      } & Code)
-  >
-  learningPlan?: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'normal'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'blockquote'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-    | ({
-        _key: string
-      } & Code)
-  >
+}
+
+export type StudyCategory = {
+  _id: string
+  _type: 'studyCategory'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  studyTypes?: {
+    development?: boolean
+    marketing?: boolean
+    design?: boolean
+  }
+  title?: string
+  slug?: string
+  skill?: Array<string>
+  thumbnail?: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  summary?: string
 }
 
 export type Project = {
@@ -729,8 +549,8 @@ export type SanityAssetSourceData = {
 }
 
 export type AllSanitySchemaTypes =
-  | StudyCategory
   | Study
+  | StudyCategory
   | Project
   | History
   | Code
@@ -792,10 +612,9 @@ export type PROJECT_LIST_QUERYResult = Array<{
 // Query: count(*[  _type == "project" &&  !(_id in path("drafts.**")) &&  (    $projectType == null ||    select(      $projectType == "development" => coalesce(projectTypes.development, false) == true,      $projectType == "design"      => coalesce(projectTypes.design, false) == true,      $projectType == "marketing"   => coalesce(projectTypes.marketing, false) == true,      true    )  )])
 export type PROJECT_COUNT_QUERYResult = number
 // Variable: PROJECT_QUERY
-// Query: *[  _type == "project" &&   defined(serial) &&  (    serial == $sNum ||           // number 비교    string(serial) == $sStr      // string 비교  )][0]{  // "키 이름" : 표현식  // 따옴표 없으면 동일한 이름  serial,  "id": _id,  title,  summary,  projectTypes,  startDate,  releaseDate,  role,  // duration,  contribution,  "updatedAt": _updatedAt,  skill[],  "thumbnail": coalesce(thumbnail.asset->url, ""),  contentOverview[],  contentContribution[],  contentSkill[],  contentReflection[],    troubleShootings[],  "imgUrls": coalesce(images[].asset->url, ""),  // "imgUrls": images[].asset->url,  "relatedProjects": relatedProjects[]{    "reference": reference->{      "id": _id,      title,      projectTypes,      startDate,      releaseDate,      skill[],      summary,      "thumbnail": coalesce(thumbnail.asset->url, "")    }  }}
+// Query: *[  _type == "project" &&   defined(serial) &&  (    serial == $sNum ||           // number 비교    string(serial) == $sStr      // string 비교  )][0]{  // "키 이름" : 표현식  // 따옴표 없으면 동일한 이름  serial,  title,  summary,  projectTypes,  startDate,  releaseDate,  role,  // duration,  contribution,  "updatedAt": _updatedAt,  skill[],  "thumbnail": coalesce(thumbnail.asset->url, ""),  contentOverview[],  contentContribution[],  contentSkill[],  contentReflection[],    troubleShootings[],  "imgUrls": coalesce(images[].asset->url, ""),  // "imgUrls": images[].asset->url,  "relatedProjects": relatedProjects[]{    "reference": reference->{      title,      projectTypes,      startDate,      releaseDate,      skill[],      summary,      "thumbnail": coalesce(thumbnail.asset->url, "")    }  }}
 export type PROJECT_QUERYResult = {
   serial: number | null
-  id: string
   title: string | null
   summary: string | null
   projectTypes: {
@@ -1038,7 +857,6 @@ export type PROJECT_QUERYResult = {
   imgUrls: Array<string | null> | ''
   relatedProjects: Array<{
     reference: {
-      id: string
       title: string | null
       projectTypes: {
         development?: boolean
@@ -1053,23 +871,59 @@ export type PROJECT_QUERYResult = {
     } | null
   }> | null
 } | null
-// Variable: STUDY_TYPE_QUERY
-// Query: *[_type == "studylist"]{  _id, title}
-export type STUDY_TYPE_QUERYResult = Array<never>
 // Variable: STUDY_LIST_QUERY
-// Query: *[  _type == "study" && defined(serial)] | order(serial asc) {  "slug": string(serial)}
+// Query: *[  _type == "study" &&   !(_id in path("drafts.**")) &&  defined(serial) ] | order(serial desc) {  "slug": string(serial),  title,  "skill": skill[],  "thumbnail": coalesce(thumbnail.asset->url, ""),  studyTypes,  "createdAt":_createdAt,  "updatedAt":_updatedAt,}
 export type STUDY_LIST_QUERYResult = Array<{
   slug: string | null
+  title: string | null
+  skill: Array<string> | null
+  thumbnail: string | ''
+  studyTypes: null
+  createdAt: string
+  updatedAt: string
 }>
+// Variable: STUDY_CATEGORY_QUERY
+// Query: *[    _type == "studyCategory" &&    !(_id in path("drafts.**")) &&        // ⬅️ 루트에서 draft 제외    defined(slug)                 // ⬅️ slug 없는 문서 제외(안전망)  ] | order(title asc) {    _id,    title,    slug,    "recentFivePosts": *[      _type == "study" &&       !(_id in path("drafts.**")) &&      references(^._id)    ] | order(_createdAt desc)[0...5]{      _id,      title,      "slug": string(serial),      "createdAt": _createdAt,      "thumbnail": coalesce(thumbnail.asset->url, ""),      summary    }  }
+export type STUDY_CATEGORY_QUERYResult = Array<{
+  _id: string
+  title: string | null
+  slug: string | null
+  recentFivePosts: Array<{
+    _id: string
+    title: string | null
+    slug: string | null
+    createdAt: string
+    thumbnail: string | ''
+    summary: null
+  }>
+}>
+// Variable: STUDY_CATEGORY_PAGE_QUERY
+// Query: *[_type=="studyCategory" && slug==$categorySlug][0]{  _id,  title,  slug,  summary,  // 총 개수  "totalCount": count(*[    _type=="study" && !(_id in path("drafts.**")) && references(^._id)  ]),  // 페이지 슬라이스  "studyPosts": *[    _type=="study" && !(_id in path("drafts.**")) && references(^._id)  ] | order(_createdAt desc){    _id,    title,    serial,    "slug": string(serial), // 라우팅 키: /study/[serial]    "createdAt": _createdAt,    "thumbnail": coalesce(thumbnail.asset->url,""),    summary  }}
+export type STUDY_CATEGORY_PAGE_QUERYResult = {
+  _id: string
+  title: string | null
+  slug: string | null
+  summary: string | null
+  totalCount: number
+  studyPosts: Array<{
+    _id: string
+    title: string | null
+    serial: number | null
+    slug: string | null
+    createdAt: string
+    thumbnail: string | ''
+    summary: null
+  }>
+} | null
 // Variable: STUDY_QUERY
-// Query: *[  _type == "study" &&  defined(serial) &&  (    serial == $sNum ||           // number 비교    string(serial) == $sStr      // string 비교  )][0]{  // "키 이름" : 표현식  // 따옴표 없으면 동일한 이름  "id": _id,  title,  serial,  "skill": skill[],  "thumbnail": coalesce(thumbnail.asset->url, ""),  "learningGoal": learningGoal[],  "learningOutcome": learningOutcome[],  "learningProcess": learningProcess[],  "learningInsight": learningInsight[],  "learningPlan": learningPlan[],  updatedAt}
+// Query: *[  _type == "study" &&  defined(serial) &&  (    serial == $sNum ||           // number 비교    string(serial) == $sStr      // string 비교  )][0]{  // "키 이름" : 표현식  // 따옴표 없으면 동일한 이름  "slug": string(serial),  title,  serial,  "skill": skill[],  "thumbnail": coalesce(thumbnail.asset->url, ""),  "body": body[],  "createdAt":_createdAt,  "updatedAt":_updatedAt,}
 export type STUDY_QUERYResult = {
-  id: string
+  slug: string | null
   title: string | null
   serial: number | null
   skill: Array<string> | null
   thumbnail: string | ''
-  learningGoal: Array<
+  body: Array<
     | ({
         _key: string
       } & Code)
@@ -1113,183 +967,8 @@ export type STUDY_QUERYResult = {
         _key: string
       }
   > | null
-  learningOutcome: Array<
-    | ({
-        _key: string
-      } & Code)
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'blockquote'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'normal'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-  > | null
-  learningProcess: Array<
-    | ({
-        _key: string
-      } & Code)
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'blockquote'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'normal'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-  > | null
-  learningInsight: Array<
-    | ({
-        _key: string
-      } & Code)
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'blockquote'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'normal'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-  > | null
-  learningPlan: Array<
-    | ({
-        _key: string
-      } & Code)
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'blockquote'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'normal'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-  > | null
-  updatedAt: null
+  createdAt: string
+  updatedAt: string
 } | null
 
 // Query TypeMap
@@ -1299,9 +978,10 @@ declare module '@sanity/client' {
     "*[_type == \"history\" && !(_id in path('drafts.**')) ] | order(year){\n    'id': _id,\n    year,\n    content,\n }": HISTORY_QUERYResult
     '\n*[\n  _type == "project" && \n  !(_id in path("drafts.**")) &&\n  defined(serial) &&\n  (\n    $projectType == null ||\n    select(\n      $projectType == "development" => coalesce(projectTypes.development, false) == true,\n      $projectType == "design"      => coalesce(projectTypes.design, false) == true,\n      $projectType == "marketing"   => coalesce(projectTypes.marketing, false) == true,\n      true\n    ) // \uC804\uBD80 false\uBA74 \uC804\uCCB4 \uBD88\uB7EC\uC624\uAE30\n  )\n] | order(coalesce(releaseDate, _updatedAt, _createdAt) desc) {\n  "id": _id,\n  "slug": string(serial),\n  title,\n  projectTypes,\n  startDate,\n  releaseDate,\n  "skill": skill[],\n  summary,\n  "thumbnail": coalesce(thumbnail.asset->url, "")\n}\n': PROJECT_LIST_QUERYResult
     '\ncount(*[\n  _type == "project" &&\n  !(_id in path("drafts.**")) &&\n  (\n    $projectType == null ||\n    select(\n      $projectType == "development" => coalesce(projectTypes.development, false) == true,\n      $projectType == "design"      => coalesce(projectTypes.design, false) == true,\n      $projectType == "marketing"   => coalesce(projectTypes.marketing, false) == true,\n      true\n    )\n  )\n])\n': PROJECT_COUNT_QUERYResult
-    '\n*[\n  _type == "project" && \n  defined(serial) &&\n  (\n    serial == $sNum ||           // number \uBE44\uAD50\n    string(serial) == $sStr      // string \uBE44\uAD50\n  )\n][0]{\n  // "\uD0A4 \uC774\uB984" : \uD45C\uD604\uC2DD\n  // \uB530\uC634\uD45C \uC5C6\uC73C\uBA74 \uB3D9\uC77C\uD55C \uC774\uB984\n  serial,\n  "id": _id,\n\n  title,\n  summary,\n  projectTypes,\n  startDate,\n  releaseDate,\n  role,\n  // duration,\n  contribution,\n  "updatedAt": _updatedAt,\n\n  skill[],\n\n  "thumbnail": coalesce(thumbnail.asset->url, ""),\n  contentOverview[],\n  contentContribution[],\n  contentSkill[],\n  contentReflection[],\n  \n  troubleShootings[],\n  "imgUrls": coalesce(images[].asset->url, ""),\n  // "imgUrls": images[].asset->url,\n  "relatedProjects": relatedProjects[]{\n    "reference": reference->{\n      "id": _id,\n      title,\n      projectTypes,\n      startDate,\n      releaseDate,\n      skill[],\n      summary,\n      "thumbnail": coalesce(thumbnail.asset->url, "")\n    }\n  }\n}\n': PROJECT_QUERYResult
-    '*[_type == "studylist"]{\n  _id, title\n}': STUDY_TYPE_QUERYResult
-    '\n*[\n  _type == "study" && defined(serial)\n] | order(serial asc) {\n  "slug": string(serial)\n}\n': STUDY_LIST_QUERYResult
-    '\n*[\n  _type == "study" &&\n  defined(serial) &&\n  (\n    serial == $sNum ||           // number \uBE44\uAD50\n    string(serial) == $sStr      // string \uBE44\uAD50\n  )\n][0]{\n  // "\uD0A4 \uC774\uB984" : \uD45C\uD604\uC2DD\n  // \uB530\uC634\uD45C \uC5C6\uC73C\uBA74 \uB3D9\uC77C\uD55C \uC774\uB984\n  "id": _id,\n  title,\n  serial,\n  "skill": skill[],\n  "thumbnail": coalesce(thumbnail.asset->url, ""),\n  "learningGoal": learningGoal[],\n  "learningOutcome": learningOutcome[],\n  "learningProcess": learningProcess[],\n  "learningInsight": learningInsight[],\n  "learningPlan": learningPlan[],\n  updatedAt\n}\n': STUDY_QUERYResult
+    '\n*[\n  _type == "project" && \n  defined(serial) &&\n  (\n    serial == $sNum ||           // number \uBE44\uAD50\n    string(serial) == $sStr      // string \uBE44\uAD50\n  )\n][0]{\n  // "\uD0A4 \uC774\uB984" : \uD45C\uD604\uC2DD\n  // \uB530\uC634\uD45C \uC5C6\uC73C\uBA74 \uB3D9\uC77C\uD55C \uC774\uB984\n  serial,\n  title,\n  summary,\n  projectTypes,\n  startDate,\n  releaseDate,\n  role,\n  // duration,\n  contribution,\n  "updatedAt": _updatedAt,\n\n  skill[],\n\n  "thumbnail": coalesce(thumbnail.asset->url, ""),\n  contentOverview[],\n  contentContribution[],\n  contentSkill[],\n  contentReflection[],\n  \n  troubleShootings[],\n  "imgUrls": coalesce(images[].asset->url, ""),\n  // "imgUrls": images[].asset->url,\n  "relatedProjects": relatedProjects[]{\n    "reference": reference->{\n      title,\n      projectTypes,\n      startDate,\n      releaseDate,\n      skill[],\n      summary,\n      "thumbnail": coalesce(thumbnail.asset->url, "")\n    }\n  }\n}\n': PROJECT_QUERYResult
+    '\n*[\n  _type == "study" && \n  !(_id in path("drafts.**")) &&\n  defined(serial) \n] | order(serial desc) {\n  "slug": string(serial),\n  title,\n  "skill": skill[],\n  "thumbnail": coalesce(thumbnail.asset->url, ""),\n  studyTypes,\n  "createdAt":_createdAt,\n  "updatedAt":_updatedAt,\n}\n': STUDY_LIST_QUERYResult
+    '\n  *[\n    _type == "studyCategory" &&\n    !(_id in path("drafts.**")) &&        // \u2B05\uFE0F \uB8E8\uD2B8\uC5D0\uC11C draft \uC81C\uC678\n    defined(slug)                 // \u2B05\uFE0F slug \uC5C6\uB294 \uBB38\uC11C \uC81C\uC678(\uC548\uC804\uB9DD)\n  ] | order(title asc) {\n    _id,\n    title,\n    slug,\n    "recentFivePosts": *[\n      _type == "study" && \n      !(_id in path("drafts.**")) &&\n      references(^._id)\n    ] | order(_createdAt desc)[0...5]{\n      _id,\n      title,\n      "slug": string(serial),\n      "createdAt": _createdAt,\n      "thumbnail": coalesce(thumbnail.asset->url, ""),\n      summary\n    }\n  }\n': STUDY_CATEGORY_QUERYResult
+    '\n*[_type=="studyCategory" && slug==$categorySlug][0]{\n  _id,\n  title,\n  slug,\n  summary,\n  // \uCD1D \uAC1C\uC218\n  "totalCount": count(*[\n    _type=="study" && !(_id in path("drafts.**")) && references(^._id)\n  ]),\n  // \uD398\uC774\uC9C0 \uC2AC\uB77C\uC774\uC2A4\n  "studyPosts": *[\n    _type=="study" && !(_id in path("drafts.**")) && references(^._id)\n  ] | order(_createdAt desc){\n    _id,\n    title,\n    serial,\n    "slug": string(serial), // \uB77C\uC6B0\uD305 \uD0A4: /study/[serial]\n    "createdAt": _createdAt,\n    "thumbnail": coalesce(thumbnail.asset->url,""),\n    summary\n  }\n}\n': STUDY_CATEGORY_PAGE_QUERYResult
+    '\n*[\n  _type == "study" &&\n  defined(serial) &&\n  (\n    serial == $sNum ||           // number \uBE44\uAD50\n    string(serial) == $sStr      // string \uBE44\uAD50\n  )\n][0]{\n  // "\uD0A4 \uC774\uB984" : \uD45C\uD604\uC2DD\n  // \uB530\uC634\uD45C \uC5C6\uC73C\uBA74 \uB3D9\uC77C\uD55C \uC774\uB984\n  "slug": string(serial),\n  title,\n  serial,\n  "skill": skill[],\n  "thumbnail": coalesce(thumbnail.asset->url, ""),\n  "body": body[],\n  "createdAt":_createdAt,\n  "updatedAt":_updatedAt,\n}\n': STUDY_QUERYResult
   }
 }

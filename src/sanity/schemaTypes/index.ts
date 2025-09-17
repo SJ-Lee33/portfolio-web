@@ -1,6 +1,6 @@
 import history from './history/history'
 import project from './project/project'
+import studyCategory from './study/study-category'
 import study from './study/study'
-import studyList from './study/studyList'
 
-export const schema = [history, project, studyList, study]
+export const schema = [history, project, studyCategory, study]
