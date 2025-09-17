@@ -36,7 +36,10 @@ export default async function Page({
 
         {/* 제목 (상단고정) */}
         <ProjectTitle title={project.title || ''} />
+      </div>
 
+      {/* 본문 */}
+      <div className="mx-auto max-w-mobile md:max-w-desktop">
         {/* 요약 */}
         <ProjectSummary
           contribution={project.contribution || ''}

@@ -5,8 +5,6 @@ import HeaderClient from '../(home)/components/header-client'
 import { formatDate } from '@/utils/formatDate'
 import SkillDisplay from '@/components/skill-display'
 
-export const revalidate = 60
-
 export default async function Page() {
   const studyCategoryAndRecent = await getStudyCategoryAndRecent()
 
@@ -17,7 +15,8 @@ export default async function Page() {
         <HeaderClient atStudyPage />
       </header>
 
-      <div className="mt-[50px] mx-auto flex flex-col max-w-[768px] justify-center p-12 text-neutral">
+      {/* 본문 */}
+      <div className="mt-[50px] mx-auto max-w-mobile md:max-w-desktop flex flex-col justify-center p-12 text-neutral">
         {/* 제목 */}
         <div className="text-headline-l font-extrabold my-10">학습 일지</div>
 

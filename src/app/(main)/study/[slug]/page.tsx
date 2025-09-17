@@ -4,8 +4,6 @@ import Link from 'next/link'
 import { STUDY_QUERY } from '@/sanity/lib/queries'
 import { STUDY_QUERYResult } from '@/sanity/types'
 
-export const revalidate = 60
-
 export default async function Page({
   params,
 }: {
@@ -24,7 +22,7 @@ export default async function Page({
   if (!post) notFound()
 
   return (
-    <main className="container mx-auto grid grid-cols-1 gap-6 p-12">
+    <main className="mx-auto max-w-mobile md:max-w-desktop grid grid-cols-1 gap-6 p-12">
       <h1 className="text-4xl font-bold">{post.title}</h1>
       <p className="text-sm text-zinc-500">Serial: {post.serial}</p>
       <hr />

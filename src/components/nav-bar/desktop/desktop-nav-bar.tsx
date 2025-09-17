@@ -1,9 +1,8 @@
 import { MENU, NAVIGATION_PATH } from '@/const/navigation'
 import classNames from 'classnames'
 import Link from 'next/link'
-import Logo from '../logo'
 
-export default function DesktopNavBar({ shownLogo }: { shownLogo?: boolean }) {
+export default function DesktopNavBar() {
   const Chip = ({ value }: { value: string }) => {
     return (
       <Link
@@ -21,7 +20,9 @@ export default function DesktopNavBar({ shownLogo }: { shownLogo?: boolean }) {
   }
 
   return (
-    <div className="flex justify-between items-center h-[65px] px-10 ">
+    <div
+      className={`flex justify-between items-center h-[65px] px-10 mx-auto max-w-desktop `}
+    >
       <nav className="flex items-center">
         <ul className="flex justify-center gap-8">
           <Chip value={NAVIGATION_PATH.profile} />
@@ -31,7 +32,6 @@ export default function DesktopNavBar({ shownLogo }: { shownLogo?: boolean }) {
           <Chip value={NAVIGATION_PATH.marketing} />
         </ul>
       </nav>
-      {shownLogo && <Logo horizontal />}
     </div>
   )
 }

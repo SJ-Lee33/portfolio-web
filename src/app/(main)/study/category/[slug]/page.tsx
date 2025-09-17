@@ -37,22 +37,22 @@ export default async function StudyCategoryPage({
   params,
   searchParams,
 }: {
-  params: { slug: string }
-  searchParams: { page?: string }
+  params: Promise<{ slug: string }>
+  searchParams: Promise<{ page?: string }>
 }) {
-  const page = Math.max(1, Number(searchParams.page ?? '1'))
+  const { slug } = await params
+  const page = Math.max(1, Number((await searchParams) ?? '1'))
   const offset = (page - 1) * PAGE_SIZE
   const end = offset + PAGE_SIZE
-
   const { data } = (await sanityFetch<typeof STUDY_CATEGORY_PAGE_QUERY>({
     query: STUDY_CATEGORY_PAGE_QUERY,
-    params: { categorySlug: params.slug, offset, end },
+    params: { categorySlug: slug, offset, end },
   })) as { data: STUDY_CATEGORY_PAGE_QUERYResult }
 
   const totalPages = Math.max(1, Math.ceil((data?.totalCount ?? 0) / PAGE_SIZE))
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-10">
+    <main className="mx-auto max-w-mobile md:max-w-desktop px-4 py-10">
       <header className="mb-6">
         <h1 className="text-3xl font-bold">{data?.title}</h1>
         {data?.summary && <p className="mt-2 text-gray-600">{data.summary}</p>}
@@ -104,18 +104,14 @@ export default async function StudyCategoryPage({
           className="mt-8 flex items-center justify-center gap-2"
           aria-label="Pagination"
         >
-          <PaginationLink
-            slug={params.slug}
-            page={page - 1}
-            disabled={page <= 1}
-          >
+          <PaginationLink slug={slug} page={page - 1} disabled={page <= 1}>
             이전
           </PaginationLink>
           <span className="text-sm text-gray-600">
             {page} / {totalPages}
           </span>
           <PaginationLink
-            slug={params.slug}
+            slug={slug}
             page={page + 1}
             disabled={page >= totalPages}
           >
