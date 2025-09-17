@@ -14,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body>
+      <body className="mb-[100px]">
         <TopButton />
         {children}
       </body>

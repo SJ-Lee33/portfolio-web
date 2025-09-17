@@ -118,7 +118,7 @@ export const STUDY_LIST_QUERY = defineQuery(`
 }
 `)
 
-// 카테고리 목록들과, 각 목록 별 최근 문서 5개
+// 카테고리 목록들과, 각 목록 별 최근 문서 3개
 export const STUDY_CATEGORY_AND_RECENT_QUERY = defineQuery(`
   *[
     _type == "studyCategory" &&
@@ -128,15 +128,20 @@ export const STUDY_CATEGORY_AND_RECENT_QUERY = defineQuery(`
     _id,
     title,
     slug,
+    skill[],
+    studyTypes,
+    summary,
+    "thumbnail": coalesce(thumbnail.asset->url, ""),
     "recentFivePosts": *[
       _type == "study" && 
       !(_id in path("drafts.**")) &&
       references(^._id)
-    ] | order(_createdAt desc)[0...5]{
+    ] | order(_createdAt desc)[0...3]{
       _id,
       title,
       "slug": string(serial),
       "createdAt": _createdAt,
+      "updatedAt":_updatedAt,
       "thumbnail": coalesce(thumbnail.asset->url, ""),
       summary
     }
