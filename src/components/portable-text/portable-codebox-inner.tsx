@@ -1,8 +1,7 @@
 'use client'
-
 import { CodeBlock, dracula } from 'react-code-blocks'
 
-export default function ProjectCodebox({
+export default function CodeBoxInner({
   code,
   language,
 }: {

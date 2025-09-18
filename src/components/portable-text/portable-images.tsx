@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import Image from 'next/image'
 
-export default function ProjectImages({
+export default function PortableImages({
   images,
   thumbnail,
 }: {

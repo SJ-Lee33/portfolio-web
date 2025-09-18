@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-export default function ProjectPlanetext({
+export default function PortablePlanetext({
   children,
 }: {
   children: React.ReactNode

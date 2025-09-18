@@ -1,8 +1,8 @@
-import ProjectHeader from './components/project-header'
+import PortableHeader from '../../../../components/portable-text/portable-header'
 import ProjectSummary from './components/project-summary'
 import ProjectTitle from './components/project-title'
 import ProjectTypeLabel from '../../(home)/components/project-type-label'
-import ProjectImages from './components/project-images'
+import PortableImages from '../../../../components/portable-text/portable-images'
 import Link from 'next/link'
 import ProjectItem from '../../(home)/components/project-item'
 import NavBar from '@/components/nav-bar/nav-bar'
@@ -64,7 +64,7 @@ export default async function Page({
           {/* 트러블슈팅 */}
           {project?.troubleShootings && (
             <>
-              <ProjectHeader>{'트러블 슈팅'}</ProjectHeader>
+              <PortableHeader>{'트러블 슈팅'}</PortableHeader>
               {project.troubleShootings.map((item: any, index: any) => {
                 return (
                   <ProjectTroubleShooting
@@ -81,8 +81,8 @@ export default async function Page({
           {/* 사진 갤러리 */}
           {project.imgUrls && (
             <>
-              <ProjectHeader>{'스크린샷'}</ProjectHeader>
-              <ProjectImages
+              <PortableHeader>{'스크린샷'}</PortableHeader>
+              <PortableImages
                 images={project.imgUrls}
                 thumbnail={project.thumbnail}
               />
@@ -92,7 +92,7 @@ export default async function Page({
           {/* 관련 프로젝트  */}
           {project?.relatedProjects && (
             <>
-              <ProjectHeader>{'관련 프로젝트'}</ProjectHeader>
+              <PortableHeader>{'관련 프로젝트'}</PortableHeader>
               <div className="h-[50px]" />
               {project.relatedProjects.map((reference: any, index: number) => {
                 let relatedProject = reference.reference

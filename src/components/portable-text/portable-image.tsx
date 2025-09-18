@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-export default function ProjectImage({ url }: { url: string }) {
+export default function PortableImage({ url }: { url: string }) {
   return (
     <div className="p-4 md:px-10 mt-2 mb-[30px]">
       <Image

@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { BsFillCaretRightFill } from 'react-icons/bs'
 
-export default function ProjectSubheader({ children }: { children: any }) {
+export default function PortableSubheader({ children }: { children: any }) {
   return (
     <div
       className={classNames(

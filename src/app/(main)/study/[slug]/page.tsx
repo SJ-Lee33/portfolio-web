@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { STUDY_QUERY } from '@/sanity/lib/queries'
 import { STUDY_QUERYResult } from '@/sanity/types'
+import Portable from '@/components/portable-text/portable-text-component'
 
 export default async function Page({
   params,
@@ -26,6 +27,8 @@ export default async function Page({
       <h1 className="text-4xl font-bold">{post.title}</h1>
       <p className="text-sm text-zinc-500">Serial: {post.serial}</p>
       <hr />
+      <Portable value={post.body} />
+
       <Link href="/study">&larr; Return to index</Link>
     </main>
   )
