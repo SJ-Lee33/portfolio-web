@@ -13,6 +13,12 @@
  */
 
 // Source: schema.json
+export type Math = {
+  _type: 'math'
+  tex?: string
+  display?: 'inline' | 'block'
+}
+
 export type Study = {
   _id: string
   _type: 'study'
@@ -83,6 +89,9 @@ export type Study = {
     | ({
         _key: string
       } & Code)
+    | ({
+        _key: string
+      } & Math)
   >
 }
 
@@ -549,6 +558,7 @@ export type SanityAssetSourceData = {
 }
 
 export type AllSanitySchemaTypes =
+  | Math
   | Study
   | StudyCategory
   | Project
@@ -936,6 +946,9 @@ export type STUDY_QUERYResult = {
     | ({
         _key: string
       } & Code)
+    | ({
+        _key: string
+      } & Math)
     | {
         children?: Array<{
           marks?: Array<string>
