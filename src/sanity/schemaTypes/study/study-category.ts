@@ -3,7 +3,7 @@ import { skills } from '../const/skills'
 
 const typeField = defineField({
   title: '분류',
-  name: 'projectTypes',
+  name: 'studyTypes',
   type: 'object',
   fields: [
     {
@@ -60,58 +60,17 @@ const summaryField = defineField({
   validation: (Rule) => Rule.required(),
 })
 
-const startDateField = defineField({
-  title: '공부 시작일',
-  name: 'startDate',
-  type: 'date',
-  options: {
-    dateFormat: 'YYYY-MM',
-    // calendarTodayLabel: 'Today',
-  },
-})
-
-const endDateField = defineField({
-  title: '공부 마무리일',
-  name: 'endDate',
-  type: 'date',
-  options: {
-    dateFormat: 'YYYY-MM',
-    // calendarTodayLabel: 'Today',
-  },
-})
-
-const studyListField = defineField({
-  title: '학습 기록',
-  description: '공부 포스팅 리스트',
-  name: 'relatedStudies',
-  type: 'array',
-  of: [
-    {
-      type: 'object',
-      fields: [
-        {
-          title: '학습 포스팅 목록',
-          name: 'studyRecord',
-          type: 'reference',
-          to: [{ type: 'study' }],
-          options: {
-            disableNew: false, // 새로운 문서 생성 활성화
-          },
-        },
-      ],
-      preview: {
-        select: {
-          title: 'studyRecord.title',
-        },
-        prepare(selection) {
-          const { title } = selection
-          return {
-            title: title || '제목 없음', // 제목이 없을 경우 '제목 없음'으로 표시
-          }
-        },
-      },
-    },
-  ],
+const slugField = defineField({
+  title: 'slug로 사용할 이름(영문)',
+  name: 'slug',
+  type: 'string',
+  validation: (Rule) =>
+    Rule.required()
+      .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {
+        name: 'kebab-case',
+        invert: false,
+      })
+      .error('영문 소문자/숫자/하이픈만 사용, 앞뒤 하이픈 금지'),
 })
 
 export default defineType({
@@ -121,19 +80,17 @@ export default defineType({
   fields: [
     typeField,
     titleField,
+    slugField,
 
     skillField,
     thumbnailField,
 
-    startDateField,
-    endDateField,
-
     summaryField,
-    studyListField,
   ],
   preview: {
     select: {
       title: 'title',
+      subtitle: 'slug',
     },
   },
 })

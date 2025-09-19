@@ -36,7 +36,7 @@ export const PROJECT_LIST_QUERY = defineQuery(`
 }
 `)
 
-// 총 포스트 개수
+// 총 프로젝트 개수
 export const PROJECT_COUNT_QUERY = defineQuery(`
 count(*[
   _type == "project" &&
@@ -66,8 +66,6 @@ export const PROJECT_QUERY = defineQuery(`
   // "키 이름" : 표현식
   // 따옴표 없으면 동일한 이름
   serial,
-  "id": _id,
-
   title,
   summary,
   projectTypes,
@@ -91,7 +89,6 @@ export const PROJECT_QUERY = defineQuery(`
   // "imgUrls": images[].asset->url,
   "relatedProjects": relatedProjects[]{
     "reference": reference->{
-      "id": _id,
       title,
       projectTypes,
       startDate,
@@ -104,17 +101,76 @@ export const PROJECT_QUERY = defineQuery(`
 }
 `)
 
-// 스터디 종류
-export const STUDY_TYPE_QUERY = defineQuery(`*[_type == "studylist"]{
-  _id, title
-}`)
-
 // 전체 스터디 목록
 export const STUDY_LIST_QUERY = defineQuery(`
 *[
-  _type == "study" && defined(serial)
-] | order(serial asc) {
-  "slug": string(serial)
+  _type == "study" && 
+  !(_id in path("drafts.**")) &&
+  defined(serial) 
+] | order(serial desc) {
+  "slug": string(serial),
+  title,
+  "skill": skill[],
+  "thumbnail": coalesce(thumbnail.asset->url, ""),
+  studyTypes,
+  "createdAt":_createdAt,
+  "updatedAt":_updatedAt,
+}
+`)
+
+// 카테고리 목록들과, 각 목록 별 최근 문서 3개
+export const STUDY_CATEGORY_AND_RECENT_QUERY = defineQuery(`
+  *[
+    _type == "studyCategory" &&
+    !(_id in path("drafts.**")) &&        // ⬅️ 루트에서 draft 제외
+    defined(slug)                 // ⬅️ slug 없는 문서 제외(안전망)
+  ] | order(title asc) {
+    _id,
+    title,
+    slug,
+    skill[],
+    studyTypes,
+    summary,
+    "thumbnail": coalesce(thumbnail.asset->url, ""),
+    "recentFivePosts": *[
+      _type == "study" && 
+      !(_id in path("drafts.**")) &&
+      references(^._id)
+    ] | order(_createdAt desc)[0...3]{
+      _id,
+      title,
+      "slug": string(serial),
+      "createdAt": _createdAt,
+      "updatedAt":_updatedAt,
+      "thumbnail": coalesce(thumbnail.asset->url, ""),
+      summary
+    }
+  }
+`)
+
+// 카테고리 별 문서 목록 전체
+export const STUDY_CATEGORY_PAGE_QUERY = defineQuery(`
+*[_type=="studyCategory" && slug==$categorySlug][0]{
+  _id,
+  title,
+  slug,
+  summary,
+  // 총 개수
+  "totalCount": count(*[
+    _type=="study" && !(_id in path("drafts.**")) && references(^._id)
+  ]),
+  // 페이지 슬라이스
+  "studyPosts": *[
+    _type=="study" && !(_id in path("drafts.**")) && references(^._id)
+  ] | order(_createdAt desc){
+    _id,
+    title,
+    serial,
+    "slug": string(serial), // 라우팅 키: /study/[serial]
+    "createdAt": _createdAt,
+    "thumbnail": coalesce(thumbnail.asset->url,""),
+    summary
+  }
 }
 `)
 
@@ -130,16 +186,13 @@ export const STUDY_QUERY = defineQuery(`
 ][0]{
   // "키 이름" : 표현식
   // 따옴표 없으면 동일한 이름
-  "id": _id,
+  "slug": string(serial),
   title,
   serial,
   "skill": skill[],
   "thumbnail": coalesce(thumbnail.asset->url, ""),
-  "learningGoal": learningGoal[],
-  "learningOutcome": learningOutcome[],
-  "learningProcess": learningProcess[],
-  "learningInsight": learningInsight[],
-  "learningPlan": learningPlan[],
-  updatedAt
+  "body": body[],
+  "createdAt":_createdAt,
+  "updatedAt":_updatedAt,
 }
 `)

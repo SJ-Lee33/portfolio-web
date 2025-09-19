@@ -2,7 +2,9 @@ import History from './history'
 
 export default function HistoryScreen() {
   return (
-    <div className="py-20 px-12 text-neutral">
+    <div
+      className={`mx-auto max-w-mobile md:max-w-desktop py-20 px-12 text-neutral`}
+    >
       {/* 제목 */}
       <div className="text-headline-l font-extrabold">History</div>
 

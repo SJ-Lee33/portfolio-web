@@ -3,30 +3,43 @@
 import NavBar from '@/components/nav-bar/nav-bar'
 import { useEffect, useState } from 'react'
 
-export default function HeaderClient() {
-  const [headerDesign, setHeaderDesign] = useState('text-white')
-  const [shownLogo, setShownLogo] = useState(false)
+const FIXED = 'bg-white text-neutral-900 shadow-md shadow-black/5'
+const TOP = 'bg-white/0 text-white'
+
+export default function HeaderClient({
+  atStudyPage,
+}: {
+  atStudyPage?: boolean
+}) {
+  const [headerDesign, setHeaderDesign] = useState(() =>
+    atStudyPage ? FIXED : TOP,
+  )
+  const [shownLogo, setShownLogo] = useState(() => !!atStudyPage)
 
   useEffect(() => {
-    const handleScroll = () => {
-      const position = window.scrollY
+    // 스터디 페이지면 고정 상태로 설정하고 스크롤 리스너는 달지 않음
+    if (atStudyPage) {
+      setHeaderDesign(FIXED)
+      setShownLogo(true)
+      return
+    }
 
-      if (position >= 100) {
-        // 스크롤 진행후
-        setHeaderDesign('bg-white text-neutral shadow-md shadow-neutral/5')
-        setShownLogo(true)
+    const handleScroll = () => {
+      const y = window.scrollY
+      if (y >= 100) {
+        setHeaderDesign((p) => (p === FIXED ? p : FIXED))
+        setShownLogo((p) => (p ? p : true))
       } else {
-        // 맨위일때
-        setHeaderDesign('bg-opacity-0 text-white')
-        setShownLogo(false)
+        setHeaderDesign((p) => (p === TOP ? p : TOP))
+        setShownLogo((p) => (p ? false : p))
       }
     }
 
+    // 초기 위치 반영 + 리스너 등록
+    handleScroll()
     window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [atStudyPage])
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
   return <NavBar shownLogo={shownLogo} headerDesign={headerDesign} />
 }

@@ -1,14 +1,14 @@
-import ProjectHeader from './components/project-header'
-import ProjectSummary from './components/project-summary'
-import ProjectTitle from './components/project-title'
-import ProjectTypeLabel from '../../(home)/components/project-type-label'
-import ProjectImages from './components/project-images'
-import Link from 'next/link'
-import ProjectItem from '../../(home)/components/project-item'
 import NavBar from '@/components/nav-bar/nav-bar'
-import ProjectContent from './components/project-content'
-import ProjectTroubleShooting from './components/project-troubleshooting'
 import getProject from '@/hooks/get-project'
+import ProjectTypeLabel from '../../(home)/components/project-type-label'
+import ProjectTitle from './components/project-title'
+import ProjectSummary from './components/project-summary'
+import ProjectContent from './components/project-content'
+import PortableHeader from '@/components/portable-text/portable-header'
+// import ProjectTroubleShooting from './components/project-troubleshooting'
+import PortableImages from '@/components/portable-text/portable-images'
+// import Link from 'next/link'
+// import ProjectItem from '../../(home)/components/project-item'
 
 export default async function Page({
   params,
@@ -36,7 +36,10 @@ export default async function Page({
 
         {/* 제목 (상단고정) */}
         <ProjectTitle title={project.title || ''} />
+      </div>
 
+      {/* 본문 */}
+      <div className="mx-auto max-w-mobile md:max-w-desktop">
         {/* 요약 */}
         <ProjectSummary
           contribution={project.contribution || ''}
@@ -59,9 +62,9 @@ export default async function Page({
           />
 
           {/* 트러블슈팅 */}
-          {project?.troubleShootings && (
+          {/* {project?.troubleShootings && (
             <>
-              <ProjectHeader>{'트러블 슈팅'}</ProjectHeader>
+              <PortableHeader>{'트러블 슈팅'}</PortableHeader>
               {project.troubleShootings.map((item: any, index: any) => {
                 return (
                   <ProjectTroubleShooting
@@ -73,13 +76,13 @@ export default async function Page({
                 )
               })}
             </>
-          )}
+          )} */}
 
           {/* 사진 갤러리 */}
           {project.imgUrls && (
             <>
-              <ProjectHeader>{'스크린샷'}</ProjectHeader>
-              <ProjectImages
+              <PortableHeader>{'스크린샷'}</PortableHeader>
+              <PortableImages
                 images={project.imgUrls}
                 thumbnail={project.thumbnail}
               />
@@ -87,9 +90,9 @@ export default async function Page({
           )}
 
           {/* 관련 프로젝트  */}
-          {project?.relatedProjects && (
+          {/* {project?.relatedProjects && (
             <>
-              <ProjectHeader>{'관련 프로젝트'}</ProjectHeader>
+              <PortableHeader>{'관련 프로젝트'}</PortableHeader>
               <div className="h-[50px]" />
               {project.relatedProjects.map((reference: any, index: number) => {
                 let relatedProject = reference.reference
@@ -116,7 +119,7 @@ export default async function Page({
                 )
               })}
             </>
-          )}
+          )} */}
         </div>
       </div>
     </>

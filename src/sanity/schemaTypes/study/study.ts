@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity'
+import { defineType, defineField, defineArrayMember } from 'sanity'
 import { skills } from '../const/skills'
 import { apiVersion } from '../../env'
 
@@ -50,6 +50,14 @@ const titleField = defineField({
   validation: (Rule) => Rule.required(),
 })
 
+const categoryField = defineField({
+  title: '카테고리',
+  name: 'studyCategory',
+  type: 'reference',
+  to: [{ type: 'studyCategory' }],
+  validation: (Rule) => Rule.required(),
+})
+
 const skillField = defineField({
   title: '기술 스택',
   name: 'skill',
@@ -68,10 +76,11 @@ const thumbnailField = defineField({
   validation: (Rule) => Rule.required(),
 })
 
-const learningGoalField = defineField({
-  title: '학습 목표',
-  name: 'learningGoal',
-  description: '이번 포스팅에서 다루는 내용의 서론',
+const bodyField = defineField({
+  title: '본문',
+  name: 'body',
+  description:
+    '학습 목표 - 성과(습득지식/기술) - 과정 - 인사이트 - 심화학습계획',
   type: 'array',
   of: [
     {
@@ -83,78 +92,7 @@ const learningGoalField = defineField({
     {
       type: 'code',
     },
-  ],
-})
-
-const learningOutcomeField = defineField({
-  title: '학습 성과',
-  name: 'learningOutcome',
-  description: '습득한 지식/기술, 결론만 적기',
-  type: 'array',
-  of: [
-    {
-      type: 'block',
-    },
-    {
-      type: 'image',
-    },
-    {
-      type: 'code',
-    },
-  ],
-})
-
-const learningProcessField = defineField({
-  title: '학습 과정',
-  name: 'learningProcess',
-  description: '무엇을 어떻게 배웠는지 설명 적기',
-  type: 'array',
-  of: [
-    {
-      type: 'block',
-    },
-    {
-      type: 'image',
-    },
-    {
-      type: 'code',
-    },
-  ],
-})
-
-const learningInsightField = defineField({
-  title: '아쉬움과 인사이트',
-  name: 'learningInsight',
-  description: '아려웠던 점, 부족했던 점, 교훈, 인사이트',
-  type: 'array',
-  of: [
-    {
-      type: 'block',
-    },
-    {
-      type: 'image',
-    },
-    {
-      type: 'code',
-    },
-  ],
-})
-
-const learningPlanField = defineField({
-  title: '앞으로의 계획',
-  name: 'learningPlan',
-  description: '더 심화된 액션 플랜이 있다면 적기',
-  type: 'array',
-  of: [
-    {
-      type: 'block',
-    },
-    {
-      type: 'image',
-    },
-    {
-      type: 'code',
-    },
+    defineArrayMember({ type: 'math' }), // ← 수식 블록 추가
   ],
 })
 
@@ -165,19 +103,24 @@ export default defineType({
   fields: [
     serialField,
     titleField,
+    categoryField,
 
     skillField,
     thumbnailField,
 
-    learningGoalField,
-    learningOutcomeField,
-    learningProcessField,
-    learningInsightField,
-    learningPlanField,
+    bodyField,
+  ],
+  orderings: [
+    {
+      title: 'Published, New → Old',
+      name: 'publishedDesc',
+      by: [{ field: '_publishedAt', direction: 'desc' }],
+    },
   ],
   preview: {
     select: {
       title: 'title',
+      subtitle: 'studyCategory.title',
     },
   },
 })

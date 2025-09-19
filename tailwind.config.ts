@@ -10,8 +10,13 @@ const config: Config = {
     extend: {
       screens: {
         // 사용자 정의 브레이크포인트
+        md: '890px',
         xs: '480px',
         xxl: '1550px',
+      },
+      maxWidth: {
+        desktop: '80%',
+        mobile: '90%',
       },
     },
     colors: {

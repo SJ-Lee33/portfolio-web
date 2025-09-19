@@ -1,6 +1,6 @@
 import { BiSolidQuoteLeft } from 'react-icons/bi'
 
-export default function ProjectQuote({ children }: { children: any }) {
+export default function PortableQuote({ children }: { children: any }) {
   return (
     <div
       className={

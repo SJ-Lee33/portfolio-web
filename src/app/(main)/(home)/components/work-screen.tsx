@@ -35,7 +35,7 @@ export default function WorkScreen() {
     return (
       <div className="flex flex-col gap-3 my-10 ">
         {/* 제목 */}
-        <div className="flex flex-col gap-2 md:flex-row md:justify-between">
+        <div className="flex flex-col gap-2 ">
           {/* 좌 */}
           <div className="font-bold">
             <span className="text-title-m">{work.job}</span>
@@ -58,7 +58,7 @@ export default function WorkScreen() {
     )
   }
   return (
-    <div className="p-12 text-neutral">
+    <div className={`p-12 text-neutral mx-auto max-w-mobile md:max-w-desktop `}>
       {/* 제목 */}
       <div className="text-headline-l font-extrabold">Work Experience</div>
 
