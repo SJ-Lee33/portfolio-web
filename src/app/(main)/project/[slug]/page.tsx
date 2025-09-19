@@ -1,14 +1,14 @@
-import PortableHeader from '../../../../components/portable-text/portable-header'
-import ProjectSummary from './components/project-summary'
-import ProjectTitle from './components/project-title'
-import ProjectTypeLabel from '../../(home)/components/project-type-label'
-import PortableImages from '../../../../components/portable-text/portable-images'
-import Link from 'next/link'
-import ProjectItem from '../../(home)/components/project-item'
 import NavBar from '@/components/nav-bar/nav-bar'
-import ProjectContent from './components/project-content'
-import ProjectTroubleShooting from './components/project-troubleshooting'
 import getProject from '@/hooks/get-project'
+import ProjectTypeLabel from '../../(home)/components/project-type-label'
+import ProjectTitle from './components/project-title'
+import ProjectSummary from './components/project-summary'
+import ProjectContent from './components/project-content'
+import PortableHeader from '@/components/portable-text/portable-header'
+// import ProjectTroubleShooting from './components/project-troubleshooting'
+import PortableImages from '@/components/portable-text/portable-images'
+// import Link from 'next/link'
+// import ProjectItem from '../../(home)/components/project-item'
 
 export default async function Page({
   params,
@@ -62,7 +62,7 @@ export default async function Page({
           />
 
           {/* 트러블슈팅 */}
-          {project?.troubleShootings && (
+          {/* {project?.troubleShootings && (
             <>
               <PortableHeader>{'트러블 슈팅'}</PortableHeader>
               {project.troubleShootings.map((item: any, index: any) => {
@@ -76,7 +76,7 @@ export default async function Page({
                 )
               })}
             </>
-          )}
+          )} */}
 
           {/* 사진 갤러리 */}
           {project.imgUrls && (
@@ -90,7 +90,7 @@ export default async function Page({
           )}
 
           {/* 관련 프로젝트  */}
-          {project?.relatedProjects && (
+          {/* {project?.relatedProjects && (
             <>
               <PortableHeader>{'관련 프로젝트'}</PortableHeader>
               <div className="h-[50px]" />
@@ -119,7 +119,7 @@ export default async function Page({
                 )
               })}
             </>
-          )}
+          )} */}
         </div>
       </div>
     </>
