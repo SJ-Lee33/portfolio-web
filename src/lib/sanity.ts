@@ -2,8 +2,8 @@ import { createClient } from '@sanity/client'
 import imageUrlBuilder from '@sanity/image-url'
 import { apiVersion, dataset, projectId, token } from '../sanity/env'
 
-if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
-  throw new Error('Missing SANITY_PROJECT_ID in .env.local')
+if (!process.env.SANITY_STUDIO_PROJECT_ID) {
+  throw new Error('Missing SANITY_STUDIO_PROJECT_ID in .env.local')
 }
 export const client = createClient({
   projectId,
