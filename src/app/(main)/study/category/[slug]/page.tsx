@@ -6,6 +6,9 @@ import { sanityFetch } from '@/sanity/lib/live' // 프로젝트 헬퍼 경로에
 import { STUDY_CATEGORY_PAGE_QUERY } from '@/sanity/lib/queries'
 import { STUDY_CATEGORY_PAGE_QUERYResult } from '@/sanity/types'
 import { formatDate } from '@/utils/formatDate'
+import { getAllStudyInCategory } from '@/hooks/get-study'
+import HeaderClient from '@/app/(main)/(home)/components/header-client'
+import SkillDisplay from '@/components/skill-display'
 
 type StudyListItem = {
   _id: string
@@ -35,118 +38,110 @@ const PAGE_SIZE = 10
 
 export default async function StudyCategoryPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ slug: string }>
-  searchParams: Promise<{ page?: string }>
 }) {
   const { slug } = await params
-  const page = Math.max(1, Number((await searchParams) ?? '1'))
-  const offset = (page - 1) * PAGE_SIZE
-  const end = offset + PAGE_SIZE
-  const { data } = (await sanityFetch<typeof STUDY_CATEGORY_PAGE_QUERY>({
-    query: STUDY_CATEGORY_PAGE_QUERY,
-    params: { categorySlug: slug, offset, end },
-  })) as { data: STUDY_CATEGORY_PAGE_QUERYResult }
-
-  const totalPages = Math.max(1, Math.ceil((data?.totalCount ?? 0) / PAGE_SIZE))
+  const data = await getAllStudyInCategory(slug)
 
   return (
-    <main className="mx-auto max-w-mobile md:max-w-desktop px-4 py-10">
-      <header className="mb-6">
-        <h1 className="text-3xl font-bold">{data?.title}</h1>
-        {data?.summary && <p className="mt-2 text-gray-600">{data.summary}</p>}
+    <div>
+      {/* 최상단 헤더 */}
+      <header className="w-full fixed top-0 z-50">
+        <HeaderClient atStudyPage />
       </header>
 
-      {data?.studyPosts?.length ? (
-        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {data.studyPosts.map((post: any) => (
-            <li key={post._id} className="rounded-lg border p-3">
-              <Link href={`/study/${post.slug}`}>
-                <div className="flex gap-3">
-                  {post.thumbnail ? (
-                    <Image
-                      src={post.thumbnail}
-                      alt={post.title}
-                      width={120}
-                      height={80}
-                      className="h-20 w-32 rounded object-cover"
-                    />
-                  ) : (
-                    <div className="h-20 w-32 rounded bg-gray-100" />
-                  )}
-                  <div className="min-w-0">
-                    <h3 className="truncate text-base font-semibold">
-                      {post.title}
-                    </h3>
-                    <div className="mt-1 text-xs text-gray-500">
-                      {/* {new Date(post.publishedAt).toLocaleDateString()} */}
-                      {formatDate(post.createdAt, { day: true })}
-                    </div>
-                    {post.summary && (
-                      <p className="mt-1 line-clamp-2 text-sm text-gray-600">
-                        {post.summary}
-                      </p>
-                    )}
-                  </div>
+      {/* 본문 */}
+      <div className="my-[50px] mx-auto max-w-mobile md:max-w-desktop flex flex-col justify-center p-12 text-neutral">
+        {/* 제목 */}
+        <div className="text-headline-l font-extrabold my-10">
+          학습 일지 <span className="font-light">- {data.title} </span>
+        </div>
+
+        {/* 카테고리의 모든 글*/}
+        <section className="flex flex-col gap-6 bg-neutralLighter p-5 border-t-[6px] border-primary">
+          {/* 카테고리 이름 */}
+          <div className="flex w-full h-[120px] gap-5 ">
+            {/* 썸네일 */}
+            <div className="w-[300px] relative ">
+              <Image
+                src={data.thumbnail}
+                alt="썸네일"
+                className="w-full object-cover shadow-md rounded-md "
+                fill
+              />
+            </div>
+            <div className="flex flex-col w-full justify-between">
+              {/* 스터디 카테고리 설명  */}
+              <div className="text-title-m font-bold">{data.title}</div>
+              <div className="text-body-m text-neutral font-light mb-4">
+                {data.summary}
+              </div>
+              <SkillDisplay skills={data.skill!} small />
+            </div>
+          </div>
+
+          {/* 구분선 */}
+          <div className="h-[0.5px] w-full bg-neutral opacity-50" />
+
+          {/* 최신 글 3개 */}
+          <div>
+            {data.studyPosts.length ? (
+              <>
+                <div className="text-neutral font-light text-body-m mb-2">
+                  ▼ 날짜순 정렬
                 </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className="text-sm text-gray-500">아직 게시된 글이 없습니다.</p>
-      )}
+                <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <>
+                    {data.studyPosts.map((post: any) => (
+                      <li
+                        key={post.slug}
+                        className="rounded p-2 hover:bg-primary group"
+                      >
+                        <Link href={`/study/${post.slug}`}>
+                          <div className="flex flex-col gap-3">
+                            {/* 글 썸네일  */}
+                            <div className="h-[200px] w-full relative">
+                              <Image
+                                src={post.thumbnail}
+                                alt={post.title}
+                                fill
+                                className="object-cover rounded shadow-lg"
+                              />
+                            </div>
 
-      {/* 페이지네이션 */}
-      {totalPages > 1 && (
-        <nav
-          className="mt-8 flex items-center justify-center gap-2"
-          aria-label="Pagination"
-        >
-          <PaginationLink slug={slug} page={page - 1} disabled={page <= 1}>
-            이전
-          </PaginationLink>
-          <span className="text-sm text-gray-600">
-            {page} / {totalPages}
-          </span>
-          <PaginationLink
-            slug={slug}
-            page={page + 1}
-            disabled={page >= totalPages}
-          >
-            다음
-          </PaginationLink>
-        </nav>
-      )}
-    </main>
-  )
-}
+                            {/* 제목, 최근 업데이트 */}
+                            <div>
+                              <div className="text-body-l font-bold group-hover:text-white">
+                                {post.title}
+                              </div>
 
-function PaginationLink({
-  slug,
-  page,
-  disabled,
-  children,
-}: {
-  slug: string
-  page: number
-  disabled?: boolean
-  children: React.ReactNode
-}) {
-  if (disabled || page < 1) {
-    return (
-      <span className="cursor-not-allowed rounded border px-3 py-1 text-gray-400">
-        {children}
-      </span>
-    )
-  }
-  return (
-    <Link
-      href={`/study-category/${slug}?page=${page}`}
-      className="rounded border px-3 py-1 hover:bg-gray-50"
-    >
-      {children}
-    </Link>
+                              <div className="mt-1 text-body-s text-neutralLight group-hover:text-white font-light">
+                                최근 수정일 :{' '}
+                                {formatDate(post.updatedAt, {
+                                  day: true,
+                                })}
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      </li>
+                    ))}
+                  </>
+                </ul>
+              </>
+            ) : (
+              <p className="text-neutral font-light text-body-m mb-2">
+                아직 게시된 글이 없습니다.
+              </p>
+            )}
+          </div>
+        </section>
+
+        <Link href="/study" className="mt-10">
+          &larr; 전체 목록 보기
+        </Link>
+      </div>
+    </div>
   )
 }

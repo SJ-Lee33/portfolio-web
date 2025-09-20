@@ -140,10 +140,8 @@ export const STUDY_CATEGORY_AND_RECENT_QUERY = defineQuery(`
       _id,
       title,
       "slug": string(serial),
-      "createdAt": _createdAt,
       "updatedAt":_updatedAt,
       "thumbnail": coalesce(thumbnail.asset->url, ""),
-      summary
     }
   }
 `)
@@ -155,6 +153,8 @@ export const STUDY_CATEGORY_PAGE_QUERY = defineQuery(`
   title,
   slug,
   summary,
+  "thumbnail": coalesce(thumbnail.asset->url, ""),
+  skill[],
   // 총 개수
   "totalCount": count(*[
     _type=="study" && !(_id in path("drafts.**")) && references(^._id)
@@ -165,11 +165,9 @@ export const STUDY_CATEGORY_PAGE_QUERY = defineQuery(`
   ] | order(_createdAt desc){
     _id,
     title,
-    serial,
     "slug": string(serial), // 라우팅 키: /study/[serial]
-    "createdAt": _createdAt,
+    "updatedAt": _updatedAt,
     "thumbnail": coalesce(thumbnail.asset->url,""),
-    summary
   }
 }
 `)
