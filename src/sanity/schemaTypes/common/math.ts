@@ -11,7 +11,6 @@ export default defineType({
       name: 'display',
       title: 'Display',
       type: 'string',
-      options: { list: ['inline', 'block'] },
       initialValue: 'inline',
     }),
   ],

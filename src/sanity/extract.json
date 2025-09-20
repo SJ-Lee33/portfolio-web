@@ -22,17 +22,7 @@
         "display": {
           "type": "objectAttribute",
           "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "inline"
-              },
-              {
-                "type": "string",
-                "value": "block"
-              }
-            ]
+            "type": "string"
           },
           "optional": true
         }

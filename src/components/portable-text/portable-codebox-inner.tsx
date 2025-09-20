@@ -1,5 +1,5 @@
 'use client'
-import { CodeBlock, dracula } from 'react-code-blocks'
+import { CodeBlock, github } from 'react-code-blocks'
 
 export default function CodeBoxInner({
   code,
@@ -9,6 +9,6 @@ export default function CodeBoxInner({
   language?: string
 }) {
   return (
-    <CodeBlock text={code} language={language || 'plaintext'} theme={dracula} />
+    <CodeBlock text={code} language={language || 'plaintext'} theme={github} />
   )
 }
