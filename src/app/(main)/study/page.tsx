@@ -69,7 +69,7 @@ export default async function Page() {
                             <Link href={`/study/${post.slug}`}>
                               <div className="flex flex-col gap-3">
                                 {/* 글 썸네일  */}
-                                <div className="h-[200px] w-full relative ">
+                                <div className="h-[200px] w-full relative">
                                   <Image
                                     src={post.thumbnail}
                                     alt={post.title}
@@ -79,27 +79,16 @@ export default async function Page() {
                                 </div>
 
                                 {/* 제목, 최근 업데이트 */}
-                                <div className="">
-                                  <div className="text-title-s font-bold group-hover:text-white">
+                                <div>
+                                  <div className="text-body-l font-bold group-hover:text-white">
                                     {post.title}
                                   </div>
 
-                                  <div className="flex gap-2 text-body-s text-neutralLight group-hover:text-white font-light">
-                                    <span>
-                                      등록일 :{' '}
-                                      {formatDate(post.createdAt, {
-                                        day: true,
-                                        yyFormat: true,
-                                      })}
-                                    </span>
-                                    <span>|</span>
-                                    <span>
-                                      최근 수정일 :{' '}
-                                      {formatDate(post.updatedAt, {
-                                        day: true,
-                                        yyFormat: true,
-                                      })}
-                                    </span>
+                                  <div className="mt-1 text-body-s text-neutralLight group-hover:text-white font-light">
+                                    최근 수정일 :{' '}
+                                    {formatDate(post.updatedAt, {
+                                      day: true,
+                                    })}
                                   </div>
                                 </div>
                               </div>

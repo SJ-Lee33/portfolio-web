@@ -188,11 +188,49 @@ export const STUDY_QUERY = defineQuery(`
   // 따옴표 없으면 동일한 이름
   "slug": string(serial),
   title,
+  "categoryTitle": studyCategory->title,
+  "categorySlug": studyCategory->slug,
   serial,
   "skill": skill[],
   "thumbnail": coalesce(thumbnail.asset->url, ""),
   "body": body[],
   "createdAt":_createdAt,
   "updatedAt":_updatedAt,
+}
+`)
+
+export const STUDY_NEIGHBORS_QUERY = defineQuery(`
+*[
+  _type == "study" &&
+  defined(serial) &&
+  (serial == $sNum || string(serial) == $sStr)
+][0]{
+  // 현재 문서의 기준 값
+  "categoryId": category._ref,
+  "serial": serial,
+
+  // 직전(위) 최대 2개: serial이 더 작은 것들, 내림차순으로 앞에서 2개
+  "prev": *[
+    _type == "study" &&
+    defined(serial) &&
+    serial < ^.serial &&
+    select(defined(^.categoryId) => category._ref == ^.categoryId, true)
+  ] | order(serial desc) [0...2]{
+    "slug": string(serial),
+    title,
+    "date": coalesce(_createdAt, _updatedAt)
+  },
+
+  // 직후(아래) 최대 2개: serial이 더 큰 것들, 오름차순으로 앞에서 2개
+  "next": *[
+    _type == "study" &&
+    defined(serial) &&
+    serial > ^.serial &&
+    select(defined(^.categoryId) => category._ref == ^.categoryId, true)
+  ] | order(serial asc) [0...2]{
+    "slug": string(serial),
+    title,
+    "date": coalesce(_createdAt, _updatedAt)
+  }
 }
 `)
