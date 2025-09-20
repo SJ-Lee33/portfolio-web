@@ -16,7 +16,7 @@
 export type Math = {
   _type: 'math'
   tex?: string
-  display?: 'inline' | 'block'
+  display?: string
 }
 
 export type Study = {

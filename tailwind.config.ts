@@ -51,7 +51,7 @@ const config: Config = {
       'title-s': `clamp(1.1rem, 0.8vw, 1.5rem)`,
       'body-l': `clamp(1.0rem, 0.75vw, 1.25rem)`,
       'body-m': `clamp(0.94rem, 0.65vw, 1.2rem)`,
-      'body-s': `clamp(0.75rem, 0.6vw, 1.0rem)`,
+      'body-s': `clamp(0.85rem, 0.6vw, 1.0rem)`,
       caption: `clamp(0.6rem, 0.6vw, 0.8rem)`,
     },
     fontFamily: {

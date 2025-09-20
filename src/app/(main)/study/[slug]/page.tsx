@@ -4,6 +4,9 @@ import Link from 'next/link'
 import { STUDY_QUERY } from '@/sanity/lib/queries'
 import { STUDY_QUERYResult } from '@/sanity/types'
 import Portable from '@/components/portable-text/portable-text-component'
+import { getStudy } from '@/hooks/get-study'
+import NavBar from '@/components/nav-bar/nav-bar'
+import ProjectTitle from '../../project/[slug]/components/project-title'
 
 export default async function Page({
   params,
@@ -11,25 +14,29 @@ export default async function Page({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const sStr = slug.trim()
-  const parsed = Number(sStr)
-  const sNum = Number.isFinite(parsed) ? parsed : -1
-
-  const { data: post } = (await sanityFetch<typeof STUDY_QUERY>({
-    query: STUDY_QUERY,
-    params: { sStr, sNum }, // 숫자/문자열 모두 대비
-  })) as { data: STUDY_QUERYResult }
-
-  if (!post) notFound()
+  const study = await getStudy(slug)
 
   return (
-    <main className="mx-auto max-w-mobile md:max-w-desktop grid grid-cols-1 gap-6 p-12">
-      <h1 className="text-4xl font-bold">{post.title}</h1>
-      <p className="text-sm text-zinc-500">Serial: {post.serial}</p>
-      <hr />
-      <Portable value={post.body} />
+    <>
+      <header className="w-full fixed top-0 z-50">
+        <NavBar
+          headerDesign="bg-white text-neutral shadow-md shadow-neutral/5"
+          shownLogo
+        />
+      </header>
+
+      <div className="flex flex-col items-center w-full mt-[90px] md:mt-[65px]">
+        {/* 제목 (상단고정) */}
+        <ProjectTitle title={study.title || ''} />
+      </div>
+
+      {/* 본문 */}
+      <div className="mx-auto max-w-mobile md:max-w-desktop">
+        {/* 내용 */}
+        <Portable value={study.body!} />
+      </div>
 
       <Link href="/study">&larr; Return to index</Link>
-    </main>
+    </>
   )
 }

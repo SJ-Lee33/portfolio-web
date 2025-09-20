@@ -8,10 +8,9 @@ export default function PortableMath({
     tex?: string
     latex?: string
     mathml?: string
-    display?: 'inline' | 'block'
   }
 }) {
-  const Tag = value.display === 'block' ? 'div' : 'span'
+  const Tag = 'div'
   const tex = value.tex ?? value.latex ?? ''
   const mathml = value.mathml ?? ''
 
@@ -23,12 +22,12 @@ export default function PortableMath({
   // 아니면 TeX → KaTeX
   const html = katex.renderToString(tex, {
     throwOnError: false,
-    displayMode: value.display === 'block',
   })
+
   return (
     <Tag
       dangerouslySetInnerHTML={{ __html: html }}
-      className="px-4 py-1 md:px-10"
+      className="px-4 py-3 md:px-10"
     />
   )
 }

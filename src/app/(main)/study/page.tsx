@@ -1,9 +1,9 @@
-import getStudyCategoryAndRecent from '@/hooks/get-study'
 import Image from 'next/image'
 import Link from 'next/link'
 import HeaderClient from '../(home)/components/header-client'
 import { formatDate } from '@/utils/formatDate'
 import SkillDisplay from '@/components/skill-display'
+import { getStudyCategoryAndRecent } from '@/hooks/get-study'
 
 export default async function Page() {
   const studyCategoryAndRecent = await getStudyCategoryAndRecent()
