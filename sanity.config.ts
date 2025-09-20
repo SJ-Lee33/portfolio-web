@@ -23,8 +23,8 @@ const PublishWithSerial = createPublishWithSerialAction({
 export default defineConfig({
   basePath: '/studio',
   title: 'portfolio',
-  projectId: projectId,
-  dataset: dataset,
+  projectId: process.env.SANITY_PROJECT_ID!,
+  dataset: process.env.SANITY_DATASET!,
   // Add and edit the content schema in the './sanity/schemaTypes' folder
   schema: {
     types: schema,
@@ -33,7 +33,7 @@ export default defineConfig({
     structureTool({ structure }),
     // Vision is for querying with GROQ from inside the Studio
     // https://www.sanity.io/docs/the-vision-plugin
-    visionTool({ defaultApiVersion: apiVersion }),
+    visionTool({ defaultApiVersion: process.env.SANITY_API_VERSION! }),
     codeInput(),
   ],
   document: {
