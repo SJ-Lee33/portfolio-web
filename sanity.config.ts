@@ -23,7 +23,7 @@ const PublishWithSerial = createPublishWithSerialAction({
 export default defineConfig({
   basePath: '/studio',
   title: 'portfolio',
-  projectId: process.env.SANITY_PROJECT_ID!,
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID!,
   dataset: process.env.SANITY_DATASET!,
   // Add and edit the content schema in the './sanity/schemaTypes' folder
   schema: {

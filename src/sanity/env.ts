@@ -12,9 +12,9 @@ export const dataset = assertValue(
 
 export const projectId = assertValue(
   process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ||
-    process.env.SANITY_PROJECT_ID ||
+    process.env.SANITY_STUDIO_PROJECT_ID ||
     'oblkb0f0',
-  'Missing environment variable: SANITY_STUDIO_ID',
+  'Missing environment variable: SANITY_STUDIO_PROJECT_ID',
 )
 
 export const token = process.env.SANITY_SECRET_TOKEN
