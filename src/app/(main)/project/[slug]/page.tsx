@@ -79,7 +79,7 @@ export default async function Page({
           )} */}
 
           {/* 사진 갤러리 */}
-          {project.imgUrls && (
+          {/* {project.imgUrls && (
             <>
               <PortableHeader>{'스크린샷'}</PortableHeader>
               <PortableImages
@@ -87,7 +87,7 @@ export default async function Page({
                 thumbnail={project.thumbnail}
               />
             </>
-          )}
+          )} */}
 
           {/* 관련 프로젝트  */}
           {/* {project?.relatedProjects && (
