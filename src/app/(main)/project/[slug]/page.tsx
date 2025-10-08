@@ -3,13 +3,11 @@ import getProject from '@/hooks/get-project'
 import ProjectTypeLabel from '../../(home)/components/project-type-label'
 import ProjectTitle from './components/project-title'
 import ProjectSummary from './components/project-summary'
-import ProjectContent from './components/project-content'
 import PortableHeader from '@/components/portable-text/portable-header'
-// import ProjectTroubleShooting from './components/project-troubleshooting'
 import PortableImages from '@/components/portable-text/portable-images'
 import Portable from '@/components/portable-text/portable-text-component'
-// import Link from 'next/link'
-// import ProjectItem from '../../(home)/components/project-item'
+import Link from 'next/link'
+import ProjectItem from '../../(home)/components/project-item'
 
 export default async function Page({
   params,
@@ -55,30 +53,7 @@ export default async function Page({
 
           <div className="flex flex-col">
             {/* 내용 */}
-            <Portable value={project.}/>
-            {/* <ProjectContent
-              overview={project.contentOverview}
-              contribution={project.contentContribution}
-              skill={project.contentSkill}
-              reflection={project.contentReflection}
-            /> */}
-
-            {/* 트러블슈팅 */}
-            {/* {project?.troubleShootings && (
-            <>
-              <PortableHeader>{'트러블 슈팅'}</PortableHeader>
-              {project.troubleShootings.map((item: any, index: any) => {
-                return (
-                  <ProjectTroubleShooting
-                    key={index}
-                    index={index + 1}
-                    title={item.troubleShootingTitle}
-                    content={item.troubleShootingContent}
-                  />
-                )
-              })}
-            </>
-          )} */}
+            <Portable value={project.content!} />
 
             {/* 사진 갤러리 */}
             {project.imgUrls && (
@@ -92,38 +67,40 @@ export default async function Page({
             )}
 
             {/* 관련 프로젝트  */}
-            {/* {project?.relatedProjects && (
-            <>
-              <PortableHeader>{'관련 프로젝트'}</PortableHeader>
-              <div className="h-[50px]" />
-              {project.relatedProjects.map((reference: any, index: number) => {
-                let relatedProject = reference.reference
-                return (
-                  <Link
-                    href={`/project/${relatedProject.id}`}
-                    key={relatedProject.id}
-                    target="_blank"
-                    className="w-full"
-                  >
-                    <ProjectItem
-                      id={relatedProject.id}
-                      slug={relatedProject.slug}
-                      title={relatedProject.title}
-                      projectTypes={relatedProject.projectTypes}
-                      summary={relatedProject.summary}
-                      startDate={relatedProject.startDate}
-                      releaseDate={relatedProject.releaseDate}
-                      thumbnail={relatedProject.thumbnail}
-                      skill={relatedProject?.skill}
-                      index={index}
-                    />
-                  </Link>
-                )
-              })}
-            </>
-          )} */}
+            {project?.relatedProjects && (
+              <>
+                <PortableHeader>{'관련 프로젝트'}</PortableHeader>
+                <div className="h-[20px]" />
+                {project.relatedProjects.map(
+                  (reference: any, index: number) => {
+                    let relatedProject = reference.reference
+                    return (
+                      <Link
+                        href={`/project/${relatedProject.serial}`}
+                        key={relatedProject.serial}
+                        target="_blank"
+                        className="w-full"
+                      >
+                        <ProjectItem
+                          id={relatedProject.id}
+                          slug={relatedProject.slug}
+                          title={relatedProject.title}
+                          projectTypes={relatedProject.projectTypes}
+                          summary={relatedProject.summary}
+                          startDate={relatedProject.startDate}
+                          releaseDate={relatedProject.releaseDate}
+                          thumbnail={relatedProject.thumbnail}
+                          skill={relatedProject?.skill}
+                          index={index}
+                        />
+                      </Link>
+                    )
+                  },
+                )}
+              </>
+            )}
           </div>
-        </div>{' '}
+        </div>
       </div>
     </>
   )

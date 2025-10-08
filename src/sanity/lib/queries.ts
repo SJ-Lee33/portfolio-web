@@ -79,6 +79,7 @@ export const PROJECT_QUERY = defineQuery(`
   skill[],
 
   "thumbnail": coalesce(thumbnail.asset->url, ""),
+  content[],
   contentOverview[],
   contentContribution[],
   contentSkill[],
@@ -90,6 +91,7 @@ export const PROJECT_QUERY = defineQuery(`
   "relatedProjects": relatedProjects[]{
     "reference": reference->{
       title,
+      serial,
       projectTypes,
       startDate,
       releaseDate,

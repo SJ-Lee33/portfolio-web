@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity'
+import { defineType, defineField, defineArrayMember } from 'sanity'
 import { skills } from '../const/skills'
 import { apiVersion } from '../../env'
 
@@ -150,6 +150,7 @@ const contentField = defineField({
     {
       type: 'code',
     },
+    defineArrayMember({ type: 'math' }), // ← 수식 블록 추가
   ],
 })
 

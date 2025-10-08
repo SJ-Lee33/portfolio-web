@@ -20,7 +20,7 @@ export default function PortableImages({
       {/* 썸네일 */}
       <div className="mb-4 break-inside-avoid">
         <Image
-          alt={`screenshot-thumbnail`}
+          alt={'screenshot-thumbnail'}
           src={thumbnail}
           width={250}
           height={250}
