@@ -3,12 +3,12 @@ import classNames from 'classnames'
 import Link from 'next/link'
 
 export default function DesktopNavBar() {
-  const Chip = ({ value }: { value: string }) => {
+  const Chip = ({ value, scroll }: { value: string; scroll?: boolean }) => {
     return (
       <Link
         lang="en"
         href={value}
-        scroll={false}
+        scroll={scroll || false}
         className={classNames(
           'text-title-s font-extralight',
           'hover:text-primaryPressed hover:text-primary hover:font-extrabold',
@@ -30,6 +30,7 @@ export default function DesktopNavBar() {
           <Chip value={NAVIGATION_PATH.development} />
           <Chip value={NAVIGATION_PATH.design} />
           <Chip value={NAVIGATION_PATH.marketing} />
+          <Chip value={NAVIGATION_PATH.study} scroll />
         </ul>
       </nav>
     </div>

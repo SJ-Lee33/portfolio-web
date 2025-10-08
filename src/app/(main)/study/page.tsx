@@ -18,7 +18,12 @@ export default async function Page() {
       {/* 본문 */}
       <div className="mt-[50px] mx-auto max-w-mobile md:max-w-desktop flex flex-col justify-center p-12 text-neutral">
         {/* 제목 */}
-        <div className="text-headline-l font-extrabold my-10">학습 일지</div>
+        <div className="text-headline-l font-extrabold my-10">
+          <div>학습 일지</div>
+          <div className="text-title-m font-normal italic">
+            " 배우는 방법을 보면 그 사람을 알 수 있다 " - 출처 이소진
+          </div>
+        </div>
 
         {/* 카테고리 + 최신글 3개 */}
         <div className="flex flex-col gap-10">

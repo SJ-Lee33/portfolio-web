@@ -5,6 +5,7 @@ export const NAVIGATION_PATH = {
   development: '/project?projectType=development',
   design: '/project?projectType=design',
   marketing: '/project?projectType=marketing',
+  study: '/study',
 }
 
 export const MENU = [
@@ -27,5 +28,9 @@ export const MENU = [
   {
     title: 'MARKETER',
     value: NAVIGATION_PATH.marketing,
+  },
+  {
+    title: 'STUDY',
+    value: NAVIGATION_PATH.study,
   },
 ]

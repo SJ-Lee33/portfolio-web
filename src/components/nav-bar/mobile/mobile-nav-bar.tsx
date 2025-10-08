@@ -9,7 +9,7 @@ export default function MobileNavBar({ shownLogo }: { shownLogo?: boolean }) {
       <Link
         lang="en"
         href={value}
-        scroll={false}
+        scroll={true}
         className={classNames(
           'text-body-m font-extralight',
           'hover:text-primaryPressed hover:text-primary hover:font-bold',
@@ -27,6 +27,7 @@ export default function MobileNavBar({ shownLogo }: { shownLogo?: boolean }) {
         <ul className="flex gap-10">
           <Chip value={NAVIGATION_PATH.profile} />
           <Chip value={NAVIGATION_PATH.project} />
+          <Chip value={NAVIGATION_PATH.study} />
         </ul>
       </nav>
     </div>
