@@ -7,6 +7,7 @@ import ProjectContent from './components/project-content'
 import PortableHeader from '@/components/portable-text/portable-header'
 // import ProjectTroubleShooting from './components/project-troubleshooting'
 import PortableImages from '@/components/portable-text/portable-images'
+import Portable from '@/components/portable-text/portable-text-component'
 // import Link from 'next/link'
 // import ProjectItem from '../../(home)/components/project-item'
 
@@ -33,36 +34,37 @@ export default async function Page({
           <ProjectTypeLabel projectTypes={project.projectTypes} />
           <div className="h-[1px] w-[40px] bg-white" />
         </div>
-
         {/* 제목 (상단고정) */}
         <ProjectTitle title={project.title || ''} />
-      </div>
-
-      {/* 본문 */}
-      <div className="mx-auto max-w-mobile md:max-w-desktop">
-        {/* 요약 */}
-        <ProjectSummary
-          contribution={project.contribution || ''}
-          duration={project.duration || ''}
-          startDate={project.startDate || ''}
-          releaseDate={project.releaseDate || ''}
-          role={project.role || ''}
-          skill={project.skill || []}
-          thumbnail={project.thumbnail}
-          updatedAt={project.updatedAt}
-        />
-
-        <div className="flex flex-col px-4 pt-12 mb-[100px] md:px-[50px] lg:px-[80px] w-full">
-          {/* 내용 */}
-          <ProjectContent
-            overview={project.contentOverview}
-            contribution={project.contentContribution}
-            skill={project.contentSkill}
-            reflection={project.contentReflection}
+        {/* 본문 */}
+        <div className="mx-auto max-w-mobile md:max-w-desktop">
+          {/* 요약 */}
+          <ProjectSummary
+            contribution={project.contribution || ''}
+            duration={project.duration || ''}
+            startDate={project.startDate || ''}
+            releaseDate={project.releaseDate || ''}
+            role={project.role || ''}
+            skill={project.skill || []}
+            thumbnail={project.thumbnail}
+            updatedAt={project.updatedAt}
           />
 
-          {/* 트러블슈팅 */}
-          {/* {project?.troubleShootings && (
+          {/* 구분선 */}
+          <div className="w-full h-[0.5px] bg-neutralLight my-10" />
+
+          <div className="flex flex-col">
+            {/* 내용 */}
+            <Portable value={project.}/>
+            {/* <ProjectContent
+              overview={project.contentOverview}
+              contribution={project.contentContribution}
+              skill={project.contentSkill}
+              reflection={project.contentReflection}
+            /> */}
+
+            {/* 트러블슈팅 */}
+            {/* {project?.troubleShootings && (
             <>
               <PortableHeader>{'트러블 슈팅'}</PortableHeader>
               {project.troubleShootings.map((item: any, index: any) => {
@@ -78,19 +80,19 @@ export default async function Page({
             </>
           )} */}
 
-          {/* 사진 갤러리 */}
-          {/* {project.imgUrls && (
-            <>
-              <PortableHeader>{'스크린샷'}</PortableHeader>
-              <PortableImages
-                images={project.imgUrls}
-                thumbnail={project.thumbnail}
-              />
-            </>
-          )} */}
+            {/* 사진 갤러리 */}
+            {project.imgUrls && (
+              <>
+                <PortableHeader>{'스크린샷'}</PortableHeader>
+                <PortableImages
+                  images={project.imgUrls}
+                  thumbnail={project.thumbnail}
+                />
+              </>
+            )}
 
-          {/* 관련 프로젝트  */}
-          {/* {project?.relatedProjects && (
+            {/* 관련 프로젝트  */}
+            {/* {project?.relatedProjects && (
             <>
               <PortableHeader>{'관련 프로젝트'}</PortableHeader>
               <div className="h-[50px]" />
@@ -120,7 +122,8 @@ export default async function Page({
               })}
             </>
           )} */}
-        </div>
+          </div>
+        </div>{' '}
       </div>
     </>
   )

@@ -4,11 +4,14 @@ export const skills = [
   'Java',
   'Python',
 
+  'AI',
   'PyTorch',
   'NLP',
   'CV',
-  'AI Math',
+  'Recsys',
 
+  'Web',
+  'Mobile App',
   'HTML',
   'React',
   'React Native',
@@ -34,5 +37,6 @@ export const skills = [
   'Adobe Premiere Pro',
   'Adobe After Effects',
 
+  'Game',
   'Unity',
 ]
