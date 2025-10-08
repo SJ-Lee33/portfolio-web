@@ -10,7 +10,7 @@ import PortableListBullet from '@/components/portable-text/portable-listbullet'
 import PortableListNumber from '@/components/portable-text/portable-listnumber'
 import PortableImage from '@/components/portable-text/portable-image'
 import PortableCodebox from '@/components/portable-text/portable-codebox'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useMemo, useRef } from 'react'
 
 // 한글 포함 슬러그화 (중복 방지를 위해 used 카운터 사용)
 function slugify(text: string, used: Record<string, number>) {
@@ -53,33 +53,11 @@ export default function Portable({ value }: { value: any[] }) {
     return { headings: hs, idByKey: map, headingIds: hs.map((h) => h.id) }
   }, [value])
 
-  // 2) 현재 활성 heading 추적
-  const [activeId, setActiveId] = useState<string | null>(null)
-  useEffect(() => {
-    if (!headings.length) return
-    const io = new IntersectionObserver(
-      (entries) => {
-        const vis = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
-        if (vis[0]?.target?.id) setActiveId(vis[0].target.id)
-      },
-      {
-        rootMargin: '-120px 0px -70% 0px', // 고정 헤더 높이에 맞게 조정
-        threshold: [0, 1],
-      },
-    )
-    const els = headings
-      .map((h) => document.getElementById(h.id))
-      .filter(Boolean) as HTMLElement[]
-    els.forEach((el) => io.observe(el))
-    return () => io.disconnect()
-  }, [headings])
-
-  // 3) 렌더 시에도 h1/h2에 정확히 같은 id 부여
+  // 2) 렌더 시에도 h1/h2에 정확히 같은 id 부여
   // _key로 매칭이 안 되는 경우(없을 때)는 headingIds 순서를 따라 부여
   const seqRef = useRef(0)
-  const SCROLL_MT = 'scroll-mt-[120px]'
+  const SCROLL_MT = 'scroll-mt-[160px]'
+
   const components: any = {
     block: {
       h1: ({ children, value: blk }: { children: any; value: any }) => {
@@ -116,6 +94,22 @@ export default function Portable({ value }: { value: any[] }) {
         <PortableQuote>{children}</PortableQuote>
       ),
     },
+    list: {
+      bullet: ({ children }: { children: React.ReactNode }) => (
+        <ul
+          className="
+          list-disc
+          [&_ul]:-ml-2 [&_ul]:list-[circle]  
+          [&_ul_ul]:-ml-2 [&_ul_ul]:list-[square]
+        "
+        >
+          {children}
+        </ul>
+      ),
+      number: ({ children }: { children: React.ReactNode }) => (
+        <ol className="list-decimal">{children}</ol>
+      ),
+    },
     listItem: {
       bullet: ({ children }: { children: any }) => (
         <PortableListBullet>{children}</PortableListBullet>
@@ -140,7 +134,7 @@ export default function Portable({ value }: { value: any[] }) {
     },
   }
 
-  // 4) 우측 TOC: URL 변경 없이 스크롤만
+  // 3) 우측 TOC: URL 변경 없이 스크롤만
   const Toc = () =>
     headings.length ? (
       <nav className="hidden md:block sticky top-[140px] h-fit max-w-60 mt-[80px] ml-6 pl-4 border-l border-neutral ">
@@ -149,7 +143,7 @@ export default function Portable({ value }: { value: any[] }) {
         </div>
         <ul className="space-y-1 text-body-s">
           {headings.map((h) => (
-            <li key={h.id} className={h.level === 2 ? 'ml-2' : ''}>
+            <li key={h.id}>
               <button
                 type="button"
                 onClick={() =>
@@ -159,12 +153,10 @@ export default function Portable({ value }: { value: any[] }) {
                 }
                 className={[
                   'block w-full text-left truncate leading-5 cursor-pointer',
-                  activeId === h.id
-                    ? 'text-primary font-medium'
-                    : 'text-neutralLight font-light hover:text-primary',
+                  'text-neutralLight font-light hover:text-primary hover:font-bold',
                 ].join(' ')}
-                aria-current={activeId === h.id ? 'true' : 'false'}
               >
+                {h.level == 2 && '┗ '}
                 {h.text}
               </button>
             </li>

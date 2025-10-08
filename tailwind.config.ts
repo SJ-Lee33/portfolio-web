@@ -36,6 +36,8 @@ const config: Config = {
       neutralLight: '#666666',
       neutralLighter: '#f3f3f3',
 
+      lemon: '#FFF4CC',
+
       black: '#000000',
       white: '#ffffff',
     },
