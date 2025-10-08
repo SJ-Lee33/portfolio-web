@@ -209,25 +209,25 @@ export const STUDY_NEIGHBORS_QUERY = defineQuery(`
   "categoryId": category._ref,
   "serial": serial,
 
-  // 직전(위) 최대 2개: serial이 더 작은 것들, 내림차순으로 앞에서 2개
+  // 직전(위) 최대 2개: serial이 더 작은 것들, 앞에서 4개
   "prev": *[
     _type == "study" &&
     defined(serial) &&
     serial < ^.serial &&
     select(defined(^.categoryId) => category._ref == ^.categoryId, true)
-  ] | order(serial desc) [0...2]{
+  ] | order(serial desc) [0...4]{
     "slug": string(serial),
     title,
     "date": coalesce(_createdAt, _updatedAt)
   },
 
-  // 직후(아래) 최대 2개: serial이 더 큰 것들, 오름차순으로 앞에서 2개
+  // 직후(아래) 최대 2개: serial이 더 큰 것들, 앞에서 4개
   "next": *[
     _type == "study" &&
     defined(serial) &&
     serial > ^.serial &&
     select(defined(^.categoryId) => category._ref == ^.categoryId, true)
-  ] | order(serial asc) [0...2]{
+  ] | order(serial desc) [0...4]{
     "slug": string(serial),
     title,
     "date": coalesce(_createdAt, _updatedAt)
