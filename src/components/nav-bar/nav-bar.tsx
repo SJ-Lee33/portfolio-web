@@ -16,7 +16,7 @@ export default function NavBar({
         <MobileNavBar shownLogo={shownLogo} />
       </div>
       <div className="hidden md:block">
-        <DesktopNavBar shownLogo={shownLogo} />
+        <DesktopNavBar />
       </div>
     </div>
   )

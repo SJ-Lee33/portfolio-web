@@ -10,8 +10,13 @@ const config: Config = {
     extend: {
       screens: {
         // 사용자 정의 브레이크포인트
+        md: '890px',
         xs: '480px',
         xxl: '1550px',
+      },
+      maxWidth: {
+        desktop: '80%',
+        mobile: '90%',
       },
     },
     colors: {
@@ -31,6 +36,8 @@ const config: Config = {
       neutralLight: '#666666',
       neutralLighter: '#f3f3f3',
 
+      lemon: '#FFF4CC',
+
       black: '#000000',
       white: '#ffffff',
     },
@@ -46,7 +53,7 @@ const config: Config = {
       'title-s': `clamp(1.1rem, 0.8vw, 1.5rem)`,
       'body-l': `clamp(1.0rem, 0.75vw, 1.25rem)`,
       'body-m': `clamp(0.94rem, 0.65vw, 1.2rem)`,
-      'body-s': `clamp(0.75rem, 0.6vw, 1.0rem)`,
+      'body-s': `clamp(0.85rem, 0.6vw, 1.0rem)`,
       caption: `clamp(0.6rem, 0.6vw, 0.8rem)`,
     },
     fontFamily: {

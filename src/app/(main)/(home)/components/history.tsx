@@ -1,9 +1,14 @@
-import { HistoryDTO } from '@/types/history/history-dto'
+import getHistory from '@/hooks/get-history'
+import { HISTORY_QUERYResult } from '@/sanity/types'
 import classNames from 'classnames'
 import { PortableText } from 'next-sanity'
 import { FaCircle } from 'react-icons/fa6'
 
-export default function History({ history }: { history: HistoryDTO[] }) {
+type HistoryItem = NonNullable<HISTORY_QUERYResult>[number]
+
+export default async function History() {
+  const history = await getHistory()
+
   const components: any = {
     listItem: {
       bullet: ({ children }: { children: any }) => (
@@ -14,7 +19,7 @@ export default function History({ history }: { history: HistoryDTO[] }) {
     },
   }
 
-  const Container = ({ item }: { item: HistoryDTO }) => {
+  const Container = ({ item }: { item: HistoryItem }) => {
     return (
       <div className="flex flex-col text-neutral mb-10">
         <div
@@ -29,7 +34,7 @@ export default function History({ history }: { history: HistoryDTO[] }) {
         </div>
 
         <ul className="ml-4">
-          <PortableText value={item.content} components={components} />
+          <PortableText value={item.content ?? []} components={components} />
         </ul>
       </div>
     )
@@ -49,8 +54,8 @@ export default function History({ history }: { history: HistoryDTO[] }) {
           'md:grid md:grid-cols-5 md:gap-8', // md ~
         )}
       >
-        {history.map((item, index) => (
-          <Container key={index} item={item} />
+        {history.map((item: HistoryItem, index: number) => (
+          <Container key={item.year} item={item} />
         ))}
       </div>
     </div>

@@ -1,25 +1,21 @@
-import ProjectHeader from './components/project-header'
-import ProjectSummary from './components/project-summary'
-import ProjectTitle from './components/project-title'
+import NavBar from '@/components/nav-bar/nav-bar'
+import getProject from '@/hooks/get-project'
 import ProjectTypeLabel from '../../(home)/components/project-type-label'
-import { getProjectById } from '@/hooks/get-project-by-id'
-import { LoadingSpinner } from '@/components/loading-spinner'
-import ProjectImages from './components/project-images'
+import ProjectTitle from './components/project-title'
+import ProjectSummary from './components/project-summary'
+import PortableHeader from '@/components/portable-text/portable-header'
+import PortableImages from '@/components/portable-text/portable-images'
+import Portable from '@/components/portable-text/portable-text-component'
 import Link from 'next/link'
 import ProjectItem from '../../(home)/components/project-item'
-import NavBar from '@/components/nav-bar/nav-bar'
-import ProjectContent from './components/project-content'
-import ProjectTroubleShooting from './components/project-troubleshooting'
 
-type Props = {
-  params: {
-    slug: string
-  }
-}
-
-export default async function Page({ params: { slug } }: Props) {
-  const project = await getProjectById(slug)
-  if (!project) return <LoadingSpinner />
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const project = await getProject(slug)
 
   return (
     <>
@@ -36,88 +32,74 @@ export default async function Page({ params: { slug } }: Props) {
           <ProjectTypeLabel projectTypes={project.projectTypes} />
           <div className="h-[1px] w-[40px] bg-white" />
         </div>
-
         {/* 제목 (상단고정) */}
-        <ProjectTitle title={project.title} />
-
-        {/* 요약 */}
-        <ProjectSummary
-          contribution={project.contribution}
-          duration={project.duration}
-          startDate={project.startDate}
-          releaseDate={project.releaseDate}
-          role={project.role}
-          skill={project.skill}
-          thumbnail={project.thumbnail}
-          updatedAt={project.updatedAt}
-        />
-
-        <div className="flex flex-col px-4 pt-12 mb-[100px] md:px-[50px] lg:px-[80px] w-full">
-          {/* 내용 */}
-          <ProjectContent
-            overview={project.contentOverview}
-            contribution={project.contentContribution}
-            skill={project.contentSkill}
-            reflection={project.contentReflection}
+        <ProjectTitle title={project.title || ''} />
+        {/* 본문 */}
+        <div className="mx-auto max-w-mobile md:max-w-desktop">
+          {/* 요약 */}
+          <ProjectSummary
+            contribution={project.contribution || ''}
+            duration={project.duration || ''}
+            startDate={project.startDate || ''}
+            releaseDate={project.releaseDate || ''}
+            role={project.role || ''}
+            skill={project.skill || []}
+            thumbnail={project.thumbnail}
+            updatedAt={project.updatedAt}
           />
 
-          {/* 트러블슈팅 */}
-          {project?.troubleShootings && (
-            <>
-              <ProjectHeader>{'트러블 슈팅'}</ProjectHeader>
-              {project.troubleShootings.map((item: any, index: any) => {
-                return (
-                  <ProjectTroubleShooting
-                    index={index + 1}
-                    title={item.troubleShootingTitle}
-                    content={item.troubleShootingContent}
-                  />
-                )
-              })}
-            </>
-          )}
+          {/* 구분선 */}
+          <div className="w-full h-[0.5px] bg-neutralLight my-10" />
 
-          {/* 사진 갤러리 */}
-          {project?.imageUrls && (
-            <>
-              <ProjectHeader>{'스크린샷'}</ProjectHeader>
-              <ProjectImages
-                images={project.imageUrls}
-                thumbnail={project.thumbnail}
-              />
-            </>
-          )}
+          <div className="flex flex-col">
+            {/* 내용 */}
+            <Portable value={project.content!} />
 
-          {/* 관련 프로젝트  */}
-          {project?.relatedProjects && (
-            <>
-              <ProjectHeader>{'관련 프로젝트'}</ProjectHeader>
-              <div className="h-[50px]" />
-              {project.relatedProjects.map((reference: any, index: number) => {
-                let relatedProject = reference.reference
-                return (
-                  <Link
-                    href={`/project/${relatedProject.id}`}
-                    key={relatedProject.id}
-                    target="_blank"
-                    className="w-full"
-                  >
-                    <ProjectItem
-                      id={relatedProject.id}
-                      title={relatedProject.title}
-                      projectTypes={relatedProject.projectTypes}
-                      type={relatedProject.type}
-                      startDate={relatedProject.startDate}
-                      releaseDate={relatedProject.releaseDate}
-                      thumbnail={relatedProject.thumbnail}
-                      skill={relatedProject?.skill}
-                      index={index}
-                    />
-                  </Link>
-                )
-              })}
-            </>
-          )}
+            {/* 사진 갤러리 */}
+            {project.imgUrls && (
+              <>
+                <PortableHeader>{'스크린샷'}</PortableHeader>
+                <PortableImages
+                  images={project.imgUrls}
+                  thumbnail={project.thumbnail}
+                />
+              </>
+            )}
+
+            {/* 관련 프로젝트  */}
+            {project?.relatedProjects && (
+              <>
+                <PortableHeader>{'관련 프로젝트'}</PortableHeader>
+                <div className="h-[20px]" />
+                {project.relatedProjects.map(
+                  (reference: any, index: number) => {
+                    let relatedProject = reference.reference
+                    return (
+                      <Link
+                        href={`/project/${relatedProject.serial}`}
+                        key={relatedProject.serial}
+                        target="_blank"
+                        className="w-full"
+                      >
+                        <ProjectItem
+                          id={relatedProject.id}
+                          slug={relatedProject.slug}
+                          title={relatedProject.title}
+                          projectTypes={relatedProject.projectTypes}
+                          summary={relatedProject.summary}
+                          startDate={relatedProject.startDate}
+                          releaseDate={relatedProject.releaseDate}
+                          thumbnail={relatedProject.thumbnail}
+                          skill={relatedProject?.skill}
+                          index={index}
+                        />
+                      </Link>
+                    )
+                  },
+                )}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </>

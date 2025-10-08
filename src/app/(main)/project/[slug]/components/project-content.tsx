@@ -3,60 +3,35 @@
 import { useState, useRef } from 'react'
 import { PortableText } from 'next-sanity'
 import classNames from 'classnames'
-import ProjectHeader from './project-header'
-import ProjectSubheader from './project-subheader'
-import ProjectPlanetext from './project-plaintext'
-import ProjectListBullet from './project-listbullet'
-import ProjectImage from './project-image'
-import ProjectCodebox from './project-codebox'
-import ProjectListNumber from './project-listnumber'
-import ProjectQuote from './project-quote'
-
+import PortableHeader from '../../../../../components/portable-text/portable-header'
+import PortableSubheader from '../../../../../components/portable-text/portable-subheader'
+import PortablePlanetext from '../../../../../components/portable-text/portable-plaintext'
+import PortableListBullet from '../../../../../components/portable-text/portable-listbullet'
+import PortableImage from '../../../../../components/portable-text/portable-image'
+import PortableListNumber from '../../../../../components/portable-text/portable-listnumber'
+import PortableQuote from '../../../../../components/portable-text/portable-quote'
+import dynamic from 'next/dynamic'
+import Portable from '@/components/portable-text/portable-text-component'
+const ProjectCodebox = dynamic(
+  () => import('../../../../../components/portable-text/portable-codebox'),
+  {
+    ssr: false,
+  },
+)
 export default function ProjectContent({
   overview,
   contribution,
   skill,
   reflection,
 }: {
-  overview: []
-  contribution: []
-  skill: []
-  reflection: []
+  overview: any
+  contribution: any
+  skill: any
+  reflection: any
 }) {
   const [activeTab, setActiveTab] = useState('contentOverview')
   const contentSectionRef = useRef<HTMLDivElement>(null)
-  const portableComponents: any = {
-    block: {
-      h3: ({ children }: { children: any }) => (
-        <ProjectHeader>{children}</ProjectHeader>
-      ),
-      h4: ({ children }: { children: any }) => (
-        <ProjectSubheader>{children}</ProjectSubheader>
-      ),
-      normal: ({ children }: { children: any }) => (
-        <ProjectPlanetext>{children}</ProjectPlanetext>
-      ),
-      quote: ({ children }: { children: any }) => (
-        <ProjectQuote>{children}</ProjectQuote>
-      ),
-    },
-    listItem: {
-      bullet: ({ children }: { children: any }) => (
-        <ProjectListBullet>{children}</ProjectListBullet>
-      ),
-      number: ({ children }: { children: any }) => (
-        <ProjectListNumber>{children}</ProjectListNumber>
-      ),
-    },
-    types: {
-      image: ({ value }: { value: { url: string } }) => (
-        <ProjectImage url={value.url} />
-      ),
-      code: ({ value }: { value: { code: string; language: string } }) => (
-        <ProjectCodebox value={value} />
-      ),
-    },
-  }
+
   const tabs = [
     { id: 'contentOverview', label: '개요', value: overview },
     { id: 'contentContribution', label: '기여도', value: contribution },
@@ -95,11 +70,7 @@ export default function ProjectContent({
           {tabs.map(
             (tab) =>
               activeTab === tab.id && (
-                <PortableText
-                  key={tab.id}
-                  value={tab.value}
-                  components={portableComponents}
-                />
+                <Portable key={tab.id} value={tab.value} />
               ),
           )}
         </div>

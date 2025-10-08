@@ -1,0 +1,42 @@
+export const skills = [
+  'C/C++',
+  'C#',
+  'Java',
+  'Python',
+
+  'AI',
+  'PyTorch',
+  'NLP',
+  'CV',
+  'Recsys',
+
+  'Web',
+  'Mobile App',
+  'HTML',
+  'React',
+  'React Native',
+  'Expo',
+  'Next.js',
+  'JavaScript',
+  'TypeScript',
+  'Kotlin',
+  'Flutter',
+  'CSS',
+  'Styled Components',
+  'Tailwind CSS',
+  'Recoil',
+
+  'Sanity',
+  'Cloudinary',
+  'Firebase',
+  'AWS',
+
+  'Figma',
+  'Adobe Photoshop',
+  'Adobe Illustrator',
+  'Adobe Premiere Pro',
+  'Adobe After Effects',
+
+  'Game',
+  'Unity',
+]

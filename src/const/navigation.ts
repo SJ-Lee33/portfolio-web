@@ -2,9 +2,10 @@ export const NAVIGATION_PATH = {
   home: '/',
   profile: '/profile',
   project: '/project',
-  developer: '/project?type=development',
-  designer: '/project?type=design',
-  marketer: '/project?type=marketing',
+  development: '/project?projectType=development',
+  design: '/project?projectType=design',
+  marketing: '/project?projectType=marketing',
+  study: '/study',
 }
 
 export const MENU = [
@@ -18,14 +19,18 @@ export const MENU = [
   },
   {
     title: 'DEVELOPER',
-    value: NAVIGATION_PATH.developer,
+    value: NAVIGATION_PATH.development,
   },
   {
     title: 'DESIGNER',
-    value: NAVIGATION_PATH.designer,
+    value: NAVIGATION_PATH.design,
   },
   {
     title: 'MARKETER',
-    value: NAVIGATION_PATH.marketer,
+    value: NAVIGATION_PATH.marketing,
+  },
+  {
+    title: 'STUDY',
+    value: NAVIGATION_PATH.study,
   },
 ]

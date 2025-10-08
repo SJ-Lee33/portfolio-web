@@ -31,21 +31,21 @@ export default function Skills() {
   }
 
   /**
-   * programming - 0~5
-   * frontend - 5~18
-   * backend - 18~21
-   * design - 21~26
-   * document - 26~30
-   * cooperation - 30~34
+   * programming - 0~6
+   * frontend - 6~19
+   * backend - 19~22
+   * design - 22~27
+   * document - 27~31
+   * cooperation - 31~35
    */
   return (
     <div className="flex w-full flex-col gap-10 p-4 mt-3 bg-neutralLighter/80 rounded-md">
-      <Container title="PROGRAMMING" start={0} end={5} />
-      <Container title="WEB & APP" start={5} end={18} />
-      <Container title="DATA" start={18} end={21} />
-      <Container title="DESIGN" start={21} end={26} />
-      <Container title="DOCUMENT" start={26} end={30} />
-      <Container title="COOPERATION" start={30} end={34} />
+      <Container title="PROGRAMMING" start={0} end={6} />
+      <Container title="WEB & APP" start={6} end={19} />
+      <Container title="DATA" start={19} end={22} />
+      <Container title="DESIGN" start={22} end={27} />
+      <Container title="DOCUMENT" start={27} end={31} />
+      <Container title="COOPERATION" start={31} end={35} />
     </div>
   )
 }

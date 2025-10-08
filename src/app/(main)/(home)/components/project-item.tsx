@@ -1,11 +1,11 @@
-import { ProjectListDto } from '@/types/project/project-list-dto'
 import ProjectTypeLabel from './project-type-label'
 import Image from 'next/image'
 import { formatDate } from '@/utils/formatDate'
 import SkillDisplay from '@/components/skill-display'
 import classNames from 'classnames'
+import { PROJECT_LIST_QUERYResult } from '@/sanity/types'
 
-type ProjectListProps = ProjectListDto & {
+type ProjectListProps = PROJECT_LIST_QUERYResult[number] & {
   index: number | 0
 }
 export default function ProjectItem(project: ProjectListProps) {
@@ -43,7 +43,7 @@ export default function ProjectItem(project: ProjectListProps) {
             font-medium text-caption text-neutral
           bg-white opacity-90 rounded-md `}
         >
-          <ProjectTypeLabel projectTypes={project.projectTypes} />
+          <ProjectTypeLabel projectTypes={project.projectTypes!} />
         </div>
         {/* 이미지  */}
         <Image
@@ -83,9 +83,10 @@ export default function ProjectItem(project: ProjectListProps) {
         {/* 출시일&기술스택 */}
         <div className="flex flex-col gap-2 px-2 md:px-4">
           <div className="text-body-s text-neutralLight group-hover:text-white duration-300 font-light mt-3">
-            {formatDate(project.startDate)} - {formatDate(project.releaseDate)}
+            {formatDate(project.startDate!)} -{' '}
+            {formatDate(project.releaseDate!)}
           </div>
-          <SkillDisplay skills={project.skill} small />
+          <SkillDisplay skills={project.skill!} small />
         </div>
       </div>
     </div>

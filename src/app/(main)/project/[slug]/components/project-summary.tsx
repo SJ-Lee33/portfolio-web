@@ -37,7 +37,7 @@ export default async function ProjectSummary({
       {/* 썸네일 */}
       <div className="mr-0 lg:mr-10 mb-10 lg:mb-0">
         <div className="text-body-s text-right font-light mb-3 mr-1">
-          최근수정일: {` ${formatDate(updatedAt, true)}`}
+          최근수정일: {` ${formatDate(updatedAt, { day: true })}`}
         </div>
         <Image
           src={thumbnail}
