@@ -103,9 +103,9 @@ const roleField = defineField({
 })
 
 const contributionField = defineField({
-  title: '핵심 기여',
+  title: '핵심 성과',
   name: 'contribution',
-  description: '핵심 기여 내용을 쉼표로 구분',
+  description: '핵심 성과 내용을 쉼표로 구분',
   type: 'text',
   validation: (Rule) => Rule.required(),
 })
@@ -133,6 +133,24 @@ const summaryField = defineField({
   name: 'summary',
   type: 'text',
   description: '리스트에 표시될 요약 설명, 어미 없어도 됨.',
+})
+
+const contentField = defineField({
+  title: '프로젝트 설명',
+  name: 'content',
+  description: '개요, 기여, 사용 기술, 느낀점 등',
+  type: 'array',
+  of: [
+    {
+      type: 'block',
+    },
+    {
+      type: 'image',
+    },
+    {
+      type: 'code',
+    },
+  ],
 })
 
 const contentOverviewField = defineField({
@@ -316,14 +334,16 @@ export default defineType({
     typeField,
     titleField,
 
-    skillField,
-    thumbnailField,
     roleField,
     contributionField,
+    skillField,
+    thumbnailField,
     startDateField,
     releaseDateField,
 
-    summaryField,
+    summaryField, // delete
+
+    contentField,
 
     contentOverviewField,
     contentContributionField,

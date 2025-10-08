@@ -16,7 +16,7 @@
 export type Math = {
   _type: 'math'
   tex?: string
-  display?: string
+  display?: 'inline' | 'block'
 }
 
 export type Study = {
@@ -137,6 +137,8 @@ export type Project = {
     design?: boolean
   }
   title?: string
+  role?: string
+  contribution?: string
   skill?: Array<string>
   thumbnail?: {
     asset?: {
@@ -150,11 +152,53 @@ export type Project = {
     crop?: SanityImageCrop
     _type: 'image'
   }
-  role?: string
-  contribution?: string
   startDate?: string
   releaseDate?: string
   summary?: string
+  content?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+        _key: string
+      }
+    | ({
+        _key: string
+      } & Code)
+  >
   contentOverview?: Array<
     | {
         children?: Array<{
@@ -893,7 +937,7 @@ export type STUDY_LIST_QUERYResult = Array<{
   updatedAt: string
 }>
 // Variable: STUDY_CATEGORY_AND_RECENT_QUERY
-// Query: *[    _type == "studyCategory" &&    !(_id in path("drafts.**")) &&        // ⬅️ 루트에서 draft 제외    defined(slug)                 // ⬅️ slug 없는 문서 제외(안전망)  ] | order(title asc) {    _id,    title,    slug,    skill[],    studyTypes,    summary,    "thumbnail": coalesce(thumbnail.asset->url, ""),    "recentFivePosts": *[      _type == "study" &&       !(_id in path("drafts.**")) &&      references(^._id)    ] | order(_createdAt desc)[0...3]{      _id,      title,      "slug": string(serial),      "createdAt": _createdAt,      "updatedAt":_updatedAt,      "thumbnail": coalesce(thumbnail.asset->url, ""),      summary    }  }
+// Query: *[    _type == "studyCategory" &&    !(_id in path("drafts.**")) &&        // ⬅️ 루트에서 draft 제외    defined(slug)                 // ⬅️ slug 없는 문서 제외(안전망)  ] | order(title asc) {    _id,    title,    slug,    skill[],    studyTypes,    summary,    "thumbnail": coalesce(thumbnail.asset->url, ""),    "recentFivePosts": *[      _type == "study" &&       !(_id in path("drafts.**")) &&      references(^._id)    ] | order(_createdAt desc)[0...3]{      _id,      title,      "slug": string(serial),      "updatedAt":_updatedAt,      "thumbnail": coalesce(thumbnail.asset->url, ""),    }  }
 export type STUDY_CATEGORY_AND_RECENT_QUERYResult = Array<{
   _id: string
   title: string | null
@@ -910,14 +954,12 @@ export type STUDY_CATEGORY_AND_RECENT_QUERYResult = Array<{
     _id: string
     title: string | null
     slug: string | null
-    createdAt: string
     updatedAt: string
     thumbnail: string | ''
-    summary: null
   }>
 }>
 // Variable: STUDY_CATEGORY_PAGE_QUERY
-// Query: *[_type=="studyCategory" && slug==$categorySlug][0]{  _id,  title,  slug,  summary,  "thumbnail": coalesce(thumbnail.asset->url, ""),  skill[],  // 총 개수  "totalCount": count(*[    _type=="study" && !(_id in path("drafts.**")) && references(^._id)  ]),  // 페이지 슬라이스  "studyPosts": *[    _type=="study" && !(_id in path("drafts.**")) && references(^._id)  ] | order(_createdAt desc){    _id,    title,    serial,    "slug": string(serial), // 라우팅 키: /study/[serial]    "createdAt": _createdAt,    "thumbnail": coalesce(thumbnail.asset->url,""),    summary  }}
+// Query: *[_type=="studyCategory" && slug==$categorySlug][0]{  _id,  title,  slug,  summary,  "thumbnail": coalesce(thumbnail.asset->url, ""),  skill[],  // 총 개수  "totalCount": count(*[    _type=="study" && !(_id in path("drafts.**")) && references(^._id)  ]),  // 페이지 슬라이스  "studyPosts": *[    _type=="study" && !(_id in path("drafts.**")) && references(^._id)  ] | order(_createdAt desc){    _id,    title,    "slug": string(serial), // 라우팅 키: /study/[serial]    "updatedAt": _updatedAt,    "thumbnail": coalesce(thumbnail.asset->url,""),  }}
 export type STUDY_CATEGORY_PAGE_QUERYResult = {
   _id: string
   title: string | null
@@ -929,11 +971,9 @@ export type STUDY_CATEGORY_PAGE_QUERYResult = {
   studyPosts: Array<{
     _id: string
     title: string | null
-    serial: number | null
     slug: string | null
-    createdAt: string
+    updatedAt: string
     thumbnail: string | ''
-    summary: null
   }>
 } | null
 // Variable: STUDY_QUERY
@@ -1022,8 +1062,8 @@ declare module '@sanity/client' {
     '\ncount(*[\n  _type == "project" &&\n  !(_id in path("drafts.**")) &&\n  (\n    $projectType == null ||\n    select(\n      $projectType == "development" => coalesce(projectTypes.development, false) == true,\n      $projectType == "design"      => coalesce(projectTypes.design, false) == true,\n      $projectType == "marketing"   => coalesce(projectTypes.marketing, false) == true,\n      true\n    )\n  )\n])\n': PROJECT_COUNT_QUERYResult
     '\n*[\n  _type == "project" && \n  defined(serial) &&\n  (\n    serial == $sNum ||           // number \uBE44\uAD50\n    string(serial) == $sStr      // string \uBE44\uAD50\n  )\n][0]{\n  // "\uD0A4 \uC774\uB984" : \uD45C\uD604\uC2DD\n  // \uB530\uC634\uD45C \uC5C6\uC73C\uBA74 \uB3D9\uC77C\uD55C \uC774\uB984\n  serial,\n  title,\n  summary,\n  projectTypes,\n  startDate,\n  releaseDate,\n  role,\n  // duration,\n  contribution,\n  "updatedAt": _updatedAt,\n\n  skill[],\n\n  "thumbnail": coalesce(thumbnail.asset->url, ""),\n  contentOverview[],\n  contentContribution[],\n  contentSkill[],\n  contentReflection[],\n  \n  troubleShootings[],\n  "imgUrls": coalesce(images[].asset->url, ""),\n  // "imgUrls": images[].asset->url,\n  "relatedProjects": relatedProjects[]{\n    "reference": reference->{\n      title,\n      projectTypes,\n      startDate,\n      releaseDate,\n      skill[],\n      summary,\n      "thumbnail": coalesce(thumbnail.asset->url, "")\n    }\n  }\n}\n': PROJECT_QUERYResult
     '\n*[\n  _type == "study" && \n  !(_id in path("drafts.**")) &&\n  defined(serial) \n] | order(serial desc) {\n  "slug": string(serial),\n  title,\n  "skill": skill[],\n  "thumbnail": coalesce(thumbnail.asset->url, ""),\n  studyTypes,\n  "createdAt":_createdAt,\n  "updatedAt":_updatedAt,\n}\n': STUDY_LIST_QUERYResult
-    '\n  *[\n    _type == "studyCategory" &&\n    !(_id in path("drafts.**")) &&        // \u2B05\uFE0F \uB8E8\uD2B8\uC5D0\uC11C draft \uC81C\uC678\n    defined(slug)                 // \u2B05\uFE0F slug \uC5C6\uB294 \uBB38\uC11C \uC81C\uC678(\uC548\uC804\uB9DD)\n  ] | order(title asc) {\n    _id,\n    title,\n    slug,\n    skill[],\n    studyTypes,\n    summary,\n    "thumbnail": coalesce(thumbnail.asset->url, ""),\n    "recentFivePosts": *[\n      _type == "study" && \n      !(_id in path("drafts.**")) &&\n      references(^._id)\n    ] | order(_createdAt desc)[0...3]{\n      _id,\n      title,\n      "slug": string(serial),\n      "createdAt": _createdAt,\n      "updatedAt":_updatedAt,\n      "thumbnail": coalesce(thumbnail.asset->url, ""),\n      summary\n    }\n  }\n': STUDY_CATEGORY_AND_RECENT_QUERYResult
-    '\n*[_type=="studyCategory" && slug==$categorySlug][0]{\n  _id,\n  title,\n  slug,\n  summary,\n  "thumbnail": coalesce(thumbnail.asset->url, ""),\n  skill[],\n  // \uCD1D \uAC1C\uC218\n  "totalCount": count(*[\n    _type=="study" && !(_id in path("drafts.**")) && references(^._id)\n  ]),\n  // \uD398\uC774\uC9C0 \uC2AC\uB77C\uC774\uC2A4\n  "studyPosts": *[\n    _type=="study" && !(_id in path("drafts.**")) && references(^._id)\n  ] | order(_createdAt desc){\n    _id,\n    title,\n    serial,\n    "slug": string(serial), // \uB77C\uC6B0\uD305 \uD0A4: /study/[serial]\n    "createdAt": _createdAt,\n    "thumbnail": coalesce(thumbnail.asset->url,""),\n    summary\n  }\n}\n': STUDY_CATEGORY_PAGE_QUERYResult
+    '\n  *[\n    _type == "studyCategory" &&\n    !(_id in path("drafts.**")) &&        // \u2B05\uFE0F \uB8E8\uD2B8\uC5D0\uC11C draft \uC81C\uC678\n    defined(slug)                 // \u2B05\uFE0F slug \uC5C6\uB294 \uBB38\uC11C \uC81C\uC678(\uC548\uC804\uB9DD)\n  ] | order(title asc) {\n    _id,\n    title,\n    slug,\n    skill[],\n    studyTypes,\n    summary,\n    "thumbnail": coalesce(thumbnail.asset->url, ""),\n    "recentFivePosts": *[\n      _type == "study" && \n      !(_id in path("drafts.**")) &&\n      references(^._id)\n    ] | order(_createdAt desc)[0...3]{\n      _id,\n      title,\n      "slug": string(serial),\n      "updatedAt":_updatedAt,\n      "thumbnail": coalesce(thumbnail.asset->url, ""),\n    }\n  }\n': STUDY_CATEGORY_AND_RECENT_QUERYResult
+    '\n*[_type=="studyCategory" && slug==$categorySlug][0]{\n  _id,\n  title,\n  slug,\n  summary,\n  "thumbnail": coalesce(thumbnail.asset->url, ""),\n  skill[],\n  // \uCD1D \uAC1C\uC218\n  "totalCount": count(*[\n    _type=="study" && !(_id in path("drafts.**")) && references(^._id)\n  ]),\n  // \uD398\uC774\uC9C0 \uC2AC\uB77C\uC774\uC2A4\n  "studyPosts": *[\n    _type=="study" && !(_id in path("drafts.**")) && references(^._id)\n  ] | order(_createdAt desc){\n    _id,\n    title,\n    "slug": string(serial), // \uB77C\uC6B0\uD305 \uD0A4: /study/[serial]\n    "updatedAt": _updatedAt,\n    "thumbnail": coalesce(thumbnail.asset->url,""),\n  }\n}\n': STUDY_CATEGORY_PAGE_QUERYResult
     '\n*[\n  _type == "study" &&\n  defined(serial) &&\n  (\n    serial == $sNum ||           // number \uBE44\uAD50\n    string(serial) == $sStr      // string \uBE44\uAD50\n  )\n][0]{\n  // "\uD0A4 \uC774\uB984" : \uD45C\uD604\uC2DD\n  // \uB530\uC634\uD45C \uC5C6\uC73C\uBA74 \uB3D9\uC77C\uD55C \uC774\uB984\n  "slug": string(serial),\n  title,\n  "categoryTitle": studyCategory->title,\n  "categorySlug": studyCategory->slug,\n  serial,\n  "skill": skill[],\n  "thumbnail": coalesce(thumbnail.asset->url, ""),\n  "body": body[],\n  "createdAt":_createdAt,\n  "updatedAt":_updatedAt,\n}\n': STUDY_QUERYResult
     '\n*[\n  _type == "study" &&\n  defined(serial) &&\n  (serial == $sNum || string(serial) == $sStr)\n][0]{\n  // \uD604\uC7AC \uBB38\uC11C\uC758 \uAE30\uC900 \uAC12\n  "categoryId": category._ref,\n  "serial": serial,\n\n  // \uC9C1\uC804(\uC704) \uCD5C\uB300 2\uAC1C: serial\uC774 \uB354 \uC791\uC740 \uAC83\uB4E4, \uB0B4\uB9BC\uCC28\uC21C\uC73C\uB85C \uC55E\uC5D0\uC11C 2\uAC1C\n  "prev": *[\n    _type == "study" &&\n    defined(serial) &&\n    serial < ^.serial &&\n    select(defined(^.categoryId) => category._ref == ^.categoryId, true)\n  ] | order(serial desc) [0...2]{\n    "slug": string(serial),\n    title,\n    "date": coalesce(_createdAt, _updatedAt)\n  },\n\n  // \uC9C1\uD6C4(\uC544\uB798) \uCD5C\uB300 2\uAC1C: serial\uC774 \uB354 \uD070 \uAC83\uB4E4, \uC624\uB984\uCC28\uC21C\uC73C\uB85C \uC55E\uC5D0\uC11C 2\uAC1C\n  "next": *[\n    _type == "study" &&\n    defined(serial) &&\n    serial > ^.serial &&\n    select(defined(^.categoryId) => category._ref == ^.categoryId, true)\n  ] | order(serial asc) [0...2]{\n    "slug": string(serial),\n    title,\n    "date": coalesce(_createdAt, _updatedAt)\n  }\n}\n': STUDY_NEIGHBORS_QUERYResult
   }
