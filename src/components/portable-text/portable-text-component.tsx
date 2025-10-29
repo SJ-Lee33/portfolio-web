@@ -11,6 +11,7 @@ import PortableListNumber from '@/components/portable-text/portable-listnumber'
 import PortableImage from '@/components/portable-text/portable-image'
 import PortableCodebox from '@/components/portable-text/portable-codebox'
 import { useMemo, useRef } from 'react'
+import PortableTable from './portable-table'
 
 // 한글 포함 슬러그화 (중복 방지를 위해 used 카운터 사용)
 function slugify(text: string, used: Record<string, number>) {
@@ -131,6 +132,12 @@ export default function Portable({ value }: { value: any[] }) {
         </div>
       ),
       math: ({ value }: any) => <PortableMath value={value} />,
+
+      featureTable: ({ value }: { value: any }) => (
+        <div className="my-6 overflow-x-auto">
+          <PortableTable value={value} />
+        </div>
+      ),
     },
   }
 

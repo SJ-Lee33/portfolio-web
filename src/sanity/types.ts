@@ -13,6 +13,14 @@
  */
 
 // Source: schema.json
+export type FeatureTable = {
+  _type: 'featureTable'
+  caption?: string
+  mode?: 'rowHeader' | 'colHeader' | 'bothHeader'
+  dense?: boolean
+  table?: Table
+}
+
 export type Math = {
   _type: 'math'
   tex?: string
@@ -92,6 +100,9 @@ export type Study = {
     | ({
         _key: string
       } & Math)
+    | ({
+        _key: string
+      } & FeatureTable)
   >
 }
 
@@ -201,6 +212,9 @@ export type Project = {
     | ({
         _key: string
       } & Math)
+    | ({
+        _key: string
+      } & FeatureTable)
   >
   contentOverview?: Array<
     | {
@@ -478,6 +492,20 @@ export type History = {
   }>
 }
 
+export type Table = {
+  _type: 'table'
+  rows?: Array<
+    {
+      _key: string
+    } & TableRow
+  >
+}
+
+export type TableRow = {
+  _type: 'tableRow'
+  cells?: Array<string>
+}
+
 export type Code = {
   _type: 'code'
   language?: string
@@ -605,11 +633,14 @@ export type SanityAssetSourceData = {
 }
 
 export type AllSanitySchemaTypes =
+  | FeatureTable
   | Math
   | Study
   | StudyCategory
   | Project
   | History
+  | Table
+  | TableRow
   | Code
   | SanityImagePaletteSwatch
   | SanityImagePalette
@@ -690,6 +721,9 @@ export type PROJECT_QUERYResult = {
     | ({
         _key: string
       } & Code)
+    | ({
+        _key: string
+      } & FeatureTable)
     | ({
         _key: string
       } & Math)
@@ -1041,6 +1075,9 @@ export type STUDY_QUERYResult = {
     | ({
         _key: string
       } & Code)
+    | ({
+        _key: string
+      } & FeatureTable)
     | ({
         _key: string
       } & Math)
