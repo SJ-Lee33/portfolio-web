@@ -92,7 +92,8 @@ const bodyField = defineField({
     {
       type: 'code',
     },
-    defineArrayMember({ type: 'math' }), // ← 수식 블록 추가
+    defineArrayMember({ type: 'math' }), // 수식 블록 추가
+    defineArrayMember({ type: 'featureTable' }), // 표 추가
   ],
 })
 
