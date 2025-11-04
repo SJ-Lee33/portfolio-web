@@ -5,7 +5,7 @@ import { apiVersion } from '../../env'
 const serialField = defineField({
   name: 'serial',
   title: 'Serial Number',
-  description: '문서 번호 - 자동발급',
+  description: '문서 번호 - 번호는 자동 발급되며, 발행 시 최종 검증됩니다.',
   type: 'number',
   readOnly: ({ document }) => Boolean(document?.serial),
   validation: (Rule) =>
@@ -40,7 +40,18 @@ const serialField = defineField({
       )
 
       return dup === 0 || '이미 사용 중인 번호입니다.'
-    }).warning('번호는 자동 발급되며, 발행 시 최종 검증됩니다.'),
+    }),
+})
+
+const isPublicField = defineField({
+  title: '공개 여부',
+  name: 'isPublic',
+  type: 'boolean',
+  initialValue: true,
+  description: '비활성화 시, 웹사이트에는 표시되지 않음',
+  options: {
+    layout: 'switch',
+  },
 })
 
 const titleField = defineField({
@@ -103,6 +114,8 @@ export default defineType({
   type: 'document',
   fields: [
     serialField,
+    isPublicField,
+    
     titleField,
     categoryField,
 
@@ -122,6 +135,19 @@ export default defineType({
     select: {
       title: 'title',
       subtitle: 'studyCategory.title',
+      isPublic: 'isPublic',
+      serial: 'serial',  
+    },
+    prepare({ title, subtitle, isPublic, serial }) {
+      const visibility = isPublic === false ? '🔒 비공개' : '🌐 공개'
+      const serialLabel = serial ? `[${serial}] ` : '' 
+
+      return {
+        title: `${serialLabel}${title || '(제목 없음)'}`, // 번호 + 제목
+        subtitle: `${visibility} | ${subtitle || '카테고리 없음'}`, 
+      }
     },
   },
+
+  
 })

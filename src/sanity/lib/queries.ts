@@ -14,6 +14,7 @@ export const PROJECT_LIST_QUERY = defineQuery(`
   _type == "project" && 
   !(_id in path("drafts.**")) &&
   defined(serial) &&
+  isPublic != false &&
   (
     $projectType == null ||
     select(
@@ -41,6 +42,7 @@ export const PROJECT_COUNT_QUERY = defineQuery(`
 count(*[
   _type == "project" &&
   !(_id in path("drafts.**")) &&
+  isPublic != false &&
   (
     $projectType == null ||
     select(
@@ -58,6 +60,7 @@ export const PROJECT_QUERY = defineQuery(`
 *[
   _type == "project" && 
   defined(serial) &&
+  // isPublic != false &&
   (
     serial == $sNum ||           // number 비교
     string(serial) == $sStr      // string 비교
@@ -66,6 +69,7 @@ export const PROJECT_QUERY = defineQuery(`
   // "키 이름" : 표현식
   // 따옴표 없으면 동일한 이름
   serial,
+  isPublic,
   title,
   summary,
   projectTypes,
@@ -108,6 +112,7 @@ export const STUDY_LIST_QUERY = defineQuery(`
 *[
   _type == "study" && 
   !(_id in path("drafts.**")) &&
+  isPublic != false &&
   defined(serial) 
 ] | order(serial desc) {
   "slug": string(serial),
@@ -125,7 +130,8 @@ export const STUDY_CATEGORY_AND_RECENT_QUERY = defineQuery(`
   *[
     _type == "studyCategory" &&
     !(_id in path("drafts.**")) &&        // ⬅️ 루트에서 draft 제외
-    defined(slug)                 // ⬅️ slug 없는 문서 제외(안전망)
+    defined(slug) &&                 // ⬅️ slug 없는 문서 제외(안전망)
+    isPublic != false
   ] | order(title asc) {
     _id,
     title,
@@ -137,6 +143,7 @@ export const STUDY_CATEGORY_AND_RECENT_QUERY = defineQuery(`
     "recentFivePosts": *[
       _type == "study" && 
       !(_id in path("drafts.**")) &&
+      isPublic != false &&
       references(^._id)
     ] | order(_createdAt desc)[0...3]{
       _id,
@@ -159,11 +166,11 @@ export const STUDY_CATEGORY_PAGE_QUERY = defineQuery(`
   skill[],
   // 총 개수
   "totalCount": count(*[
-    _type=="study" && !(_id in path("drafts.**")) && references(^._id)
+    _type=="study" && !(_id in path("drafts.**")) && references(^._id) && isPublic != false 
   ]),
   // 페이지 슬라이스
   "studyPosts": *[
-    _type=="study" && !(_id in path("drafts.**")) && references(^._id)
+    _type=="study" && !(_id in path("drafts.**")) && references(^._id) && isPublic != false
   ] | order(_createdAt desc){
     _id,
     title,
@@ -179,6 +186,7 @@ export const STUDY_QUERY = defineQuery(`
 *[
   _type == "study" &&
   defined(serial) &&
+  // isPublic != false &&
   (
     serial == $sNum ||           // number 비교
     string(serial) == $sStr      // string 비교
@@ -187,6 +195,7 @@ export const STUDY_QUERY = defineQuery(`
   // "키 이름" : 표현식
   // 따옴표 없으면 동일한 이름
   "slug": string(serial),
+  isPublic,
   title,
   "categoryTitle": studyCategory->title,
   "categorySlug": studyCategory->slug,
@@ -203,6 +212,7 @@ export const STUDY_NEIGHBORS_QUERY = defineQuery(`
 *[
   _type == "study" &&
   defined(serial) &&
+  isPublic != false &&
   (serial == $sNum || string(serial) == $sStr)
 ][0]{
   // 현재 문서의 기준 값
@@ -214,6 +224,7 @@ export const STUDY_NEIGHBORS_QUERY = defineQuery(`
     _type == "study" &&
     defined(serial) &&
     serial < ^.serial &&
+    isPublic != false &&
     select(defined(^.categoryId) => category._ref == ^.categoryId, true)
   ] | order(serial desc) [0...4]{
     "slug": string(serial),
@@ -226,6 +237,7 @@ export const STUDY_NEIGHBORS_QUERY = defineQuery(`
     _type == "study" &&
     defined(serial) &&
     serial > ^.serial &&
+    isPublic != false &&
     select(defined(^.categoryId) => category._ref == ^.categoryId, true)
   ] | order(serial desc) [0...4]{
     "slug": string(serial),
