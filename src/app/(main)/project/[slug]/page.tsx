@@ -8,6 +8,7 @@ import PortableImages from '@/components/portable-text/portable-images'
 import Portable from '@/components/portable-text/portable-text-component'
 import Link from 'next/link'
 import ProjectItem from '../../(home)/components/project-item'
+import { redirect } from 'next/navigation'
 
 export default async function Page({
   params,
@@ -16,7 +17,9 @@ export default async function Page({
 }) {
   const { slug } = await params
   const project = await getProject(slug)
-
+  if (!project?.isPublic) {
+    redirect('/private-warning')
+  }
   return (
     <>
       <header className="w-full fixed top-0 z-50">

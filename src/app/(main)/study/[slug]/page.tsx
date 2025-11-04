@@ -6,6 +6,7 @@ import ProjectTitle from '../../project/[slug]/components/project-title'
 import { formatDate } from '@/utils/formatDate'
 import { BsFillCaretRightFill } from 'react-icons/bs'
 import { IoDocumentText } from 'react-icons/io5'
+import { redirect } from 'next/navigation'
 type NeighborItem = {
   title: string
   date: string
@@ -20,6 +21,11 @@ export default async function Page({
 }) {
   const { slug } = await params
   const study = await getStudy(slug)
+  // 비공개 포스트면 리다이렉트
+  if (!study?.isPublic) {
+    redirect('/private-warning')
+  }
+
   const neighbors = await getStudyNeighbors(slug)
 
   const prevNeighborList = (neighbors?.prev ?? []) as NeighborItem[]

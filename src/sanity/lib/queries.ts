@@ -60,7 +60,7 @@ export const PROJECT_QUERY = defineQuery(`
 *[
   _type == "project" && 
   defined(serial) &&
-  isPublic != false &&
+  // isPublic != false &&
   (
     serial == $sNum ||           // number 비교
     string(serial) == $sStr      // string 비교
@@ -69,6 +69,7 @@ export const PROJECT_QUERY = defineQuery(`
   // "키 이름" : 표현식
   // 따옴표 없으면 동일한 이름
   serial,
+  isPublic,
   title,
   summary,
   projectTypes,
@@ -185,7 +186,7 @@ export const STUDY_QUERY = defineQuery(`
 *[
   _type == "study" &&
   defined(serial) &&
-  isPublic != false &&
+  // isPublic != false &&
   (
     serial == $sNum ||           // number 비교
     string(serial) == $sStr      // string 비교
@@ -194,6 +195,7 @@ export const STUDY_QUERY = defineQuery(`
   // "키 이름" : 표현식
   // 따옴표 없으면 동일한 이름
   "slug": string(serial),
+  isPublic,
   title,
   "categoryTitle": studyCategory->title,
   "categorySlug": studyCategory->slug,
