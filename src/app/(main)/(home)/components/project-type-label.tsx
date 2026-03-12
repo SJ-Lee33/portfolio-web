@@ -1,10 +1,16 @@
-import { ProjectType } from '@/sanity/schemaTypes/const/projectType'
 import React from 'react'
 
 export default function ProjectTypeLabel({
   projectTypes,
 }: {
-  projectTypes: ProjectType[]
+  projectTypes:
+    | {
+        engineering?: boolean
+        planning?: boolean
+        design?: boolean
+      }
+    | null
+    | undefined
 }) {
   const MAP: { [key: string]: string } = {
     engineering: '개발',
