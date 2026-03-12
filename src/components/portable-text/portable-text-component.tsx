@@ -13,6 +13,7 @@ import PortableCodebox from '@/components/portable-text/portable-codebox'
 import { useMemo, useRef } from 'react'
 import PortableTable from './portable-table'
 import { urlFor } from '@/sanity/lib/image'
+import classNames from 'classnames'
 
 // 한글 포함 슬러그화 (중복 방지를 위해 used 카운터 사용)
 function slugify(text: string, used: Record<string, number>) {
@@ -145,13 +146,13 @@ export default function Portable({ value }: { value: any[] }) {
   // 3) 우측 TOC: URL 변경 없이 스크롤만
   const Toc = () =>
     headings.length ? (
-      <nav className="hidden md:block sticky top-[140px] h-fit max-w-60 mt-[80px] ml-6 pl-4 border-l border-neutral ">
+      <nav className="-z-10 hidden md:block sticky top-[140px] h-fit max-w-60 mt-[80px] ml-6 pl-4 pt-4 border-l border-neutral ">
         <div className="text-body-s font-semibold mb-3 text-neutralLight">
           목차
         </div>
         <ul className="space-y-1 text-body-s">
           {headings.map((h) => (
-            <li key={h.id}>
+            <li key={h.id} className={h.level === 2 ? 'pl-4' : ''}>
               <button
                 type="button"
                 onClick={() =>
@@ -159,12 +160,13 @@ export default function Portable({ value }: { value: any[] }) {
                     .getElementById(h.id)
                     ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
                 }
-                className={[
-                  'block w-full text-left truncate leading-5 cursor-pointer',
-                  'text-neutralLight font-light hover:text-primary hover:font-bold',
-                ].join(' ')}
+                className={classNames(
+                  'block w-full text-left truncate leading-5 cursor-pointer hover:text-primary',
+                  h.level === 1
+                    ? 'font-semibold text-neutral mt-3'
+                    : 'font-light text-neutralLight',
+                )}
               >
-                {h.level == 2 && '┗ '}
                 {h.text}
               </button>
             </li>

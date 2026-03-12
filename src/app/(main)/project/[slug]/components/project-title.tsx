@@ -4,7 +4,7 @@ export default function ProjectTitle({ title }: { title: string }) {
   return (
     <div
       className={classNames(
-        'sticky z-5',
+        'sticky z-10',
         'top-[91px] md:top-[65px]',
         'flex items-center justify-center text-center',
         'w-full px-10 py-3 bg-secondary rounded-b-md',
