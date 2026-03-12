@@ -66,7 +66,7 @@ const typeField = defineField({
       type: 'boolean',
     },
     {
-      title: '마케팅',
+      title: '기획',
       name: 'planning',
       initialValue: false,
       type: 'boolean',
@@ -380,7 +380,7 @@ export default defineType({
       // true인 항목만 한국어로 표시
       const typeLabels: Record<string, string> = {
         engineering: '개발',
-        planning: '마케팅',
+        planning: '기획',
         design: '디자인',
       }
 

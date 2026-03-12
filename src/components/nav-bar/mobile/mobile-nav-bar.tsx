@@ -27,7 +27,7 @@ export default function MobileNavBar({ shownLogo }: { shownLogo?: boolean }) {
         <ul className="flex gap-10">
           <Chip value={NAVIGATION_PATH.profile} />
           <Chip value={NAVIGATION_PATH.project} />
-          <Chip value={NAVIGATION_PATH.study} />
+          {/* <Chip value={NAVIGATION_PATH.study} /> */}
         </ul>
       </nav>
     </div>

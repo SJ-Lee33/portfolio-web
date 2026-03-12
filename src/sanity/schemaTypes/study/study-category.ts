@@ -13,7 +13,7 @@ const typeField = defineField({
       type: 'boolean',
     },
     {
-      title: '마케팅',
+      title: '기획',
       name: 'planning',
       initialValue: false,
       type: 'boolean',

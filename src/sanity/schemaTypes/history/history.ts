@@ -1,13 +1,14 @@
-import {defineType, defineField} from 'sanity'
+import { defineType, defineField } from 'sanity'
 
 const YEARS = [
-  {title: '이전', value: 0},
-  {title: '2020', value: 2020},
-  {title: '2021', value: 2021},
-  {title: '2022', value: 2022},
-  {title: '2023', value: 2023},
-  {title: '2024', value: 2024},
-  {title: '2025', value: 2025}
+  { title: '이전', value: 0 },
+  { title: '2020', value: 2020 },
+  { title: '2021', value: 2021 },
+  { title: '2022', value: 2022 },
+  { title: '2023', value: 2023 },
+  { title: '2024', value: 2024 },
+  { title: '2025', value: 2025 },
+  { title: '2026', value: 2026 },
 ]
 
 const yearField = defineField({
@@ -42,9 +43,10 @@ export default defineType({
     select: {
       year: 'year',
     },
-    prepare: ({year}) => {
+    prepare: ({ year }) => {
       const yearName =
-        year && YEARS.flatMap((option) => (option.value === year ? [option.title] : []))
+        year &&
+        YEARS.flatMap((option) => (option.value === year ? [option.title] : []))
       return {
         title: `${yearName}년의 이력`,
       }

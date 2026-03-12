@@ -28,9 +28,9 @@ export default function DesktopNavBar() {
           <Chip value={NAVIGATION_PATH.profile} />
           <Chip value={NAVIGATION_PATH.project} />
           <Chip value={NAVIGATION_PATH.engineering} />
-          <Chip value={NAVIGATION_PATH.design} />
           <Chip value={NAVIGATION_PATH.planning} />
-          <Chip value={NAVIGATION_PATH.study} scroll />
+          <Chip value={NAVIGATION_PATH.design} />
+          {/* <Chip value={NAVIGATION_PATH.study} scroll /> */}
         </ul>
       </nav>
     </div>

@@ -9,6 +9,7 @@ import Portable from '@/components/portable-text/portable-text-component'
 import Link from 'next/link'
 import ProjectItem from '../../(home)/components/project-item'
 import { redirect } from 'next/navigation'
+import { ProjectType } from '@/sanity/schemaTypes/const/projectType'
 
 export default async function Page({
   params,
@@ -20,6 +21,11 @@ export default async function Page({
   if (!project?.isPublic) {
     redirect('/private-warning')
   }
+
+  const projectTypes: ProjectType[] = (
+    ['engineering', 'design', 'planning'] as ProjectType[]
+  ).filter((type) => project.projectTypes?.[type])
+  console.log(project.projectTypes)
   return (
     <>
       <header className="w-full fixed top-0 z-50">
@@ -32,7 +38,7 @@ export default async function Page({
       <div className="flex flex-col items-center w-full mt-[90px] md:mt-[65px]">
         {/* 분류 */}
         <div className="flex flex-col w-full items-center text-center font-light text-body-l bg-secondary text-white pt-4 gap-4">
-          <ProjectTypeLabel projectTypes={project.projectTypes} />
+          <ProjectTypeLabel projectTypes={projectTypes} />
           <div className="h-[1px] w-[40px] bg-white" />
         </div>
         {/* 제목 (상단고정) */}

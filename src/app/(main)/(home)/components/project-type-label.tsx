@@ -4,7 +4,7 @@ import React from 'react'
 export default function ProjectTypeLabel({
   projectTypes,
 }: {
-  projectTypes: ProjectType | null
+  projectTypes: ProjectType[]
 }) {
   const MAP: { [key: string]: string } = {
     engineering: '개발',

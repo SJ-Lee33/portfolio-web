@@ -681,8 +681,8 @@ export type HISTORY_QUERYResult = Array<{
     _key: string
   }> | null
 }>
-
 // Variable: PROJECT_LIST_QUERY
+// Query: *[  _type == "project" &&   !(_id in path("drafts.**")) &&  defined(serial) &&  isPublic != false &&  (    $projectType == null ||    select(      $projectType == "engineering" => coalesce(projectTypes.engineering, false) == true,      $projectType == "design"      => coalesce(projectTypes.design, false) == true,      $projectType == "planning"   => coalesce(projectTypes.planning, false) == true,      true    ) // 전부 false면 전체 불러오기  )] | order(coalesce(releaseDate, _updatedAt, _createdAt) desc) {  "id": _id,  "slug": string(serial),  title,  projectTypes,  startDate,  releaseDate,  "skill": skill[],  summary,  "thumbnail": coalesce(thumbnail.asset->url, "")}
 export type PROJECT_LIST_QUERYResult = Array<{
   id: string
   slug: string | null
@@ -699,8 +699,10 @@ export type PROJECT_LIST_QUERYResult = Array<{
   thumbnail: string | ''
 }>
 // Variable: PROJECT_COUNT_QUERY
+// Query: count(*[  _type == "project" &&  !(_id in path("drafts.**")) &&  isPublic != false &&  (    $projectType == null ||    select(      $projectType == "engineering" => coalesce(projectTypes.engineering, false) == true,      $projectType == "design"      => coalesce(projectTypes.design, false) == true,      $projectType == "planning"   => coalesce(projectTypes.planning, false) == true,      true    )  )])
 export type PROJECT_COUNT_QUERYResult = number
 // Variable: PROJECT_QUERY
+// Query: *[  _type == "project" &&   defined(serial) &&  // isPublic != false &&  (    serial == $sNum ||           // number 비교    string(serial) == $sStr      // string 비교  )][0]{  // "키 이름" : 표현식  // 따옴표 없으면 동일한 이름  serial,  isPublic,  title,  summary,  projectTypes,  startDate,  releaseDate,  role,  // duration,  contribution,  "updatedAt": _updatedAt,  skill[],  "thumbnail": coalesce(thumbnail.asset->url, ""),  content[],  contentOverview[],  contentContribution[],  contentSkill[],  contentReflection[],    troubleShootings[],  "imgUrls": coalesce(images[].asset->url, ""),  // "imgUrls": images[].asset->url,  "relatedProjects": relatedProjects[]{    "reference": reference->{      title,      serial,      projectTypes,      startDate,      releaseDate,      skill[],      summary,      "thumbnail": coalesce(thumbnail.asset->url, "")    }  }}
 export type PROJECT_QUERYResult = {
   serial: number | null
   isPublic: boolean | null

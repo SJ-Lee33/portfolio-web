@@ -72,7 +72,7 @@ export default function ProjectNavBar() {
         href={NAVIGATION_PATH.planning}
         isActive={projectType === 'planning'}
       >
-        <li>마케팅</li>
+        <li>기획</li>
       </NavLink>
     </ul>
   )
