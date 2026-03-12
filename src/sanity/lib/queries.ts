@@ -18,9 +18,9 @@ export const PROJECT_LIST_QUERY = defineQuery(`
   (
     $projectType == null ||
     select(
-      $projectType == "development" => coalesce(projectTypes.development, false) == true,
+      $projectType == "engineering" => coalesce(projectTypes.engineering, false) == true,
       $projectType == "design"      => coalesce(projectTypes.design, false) == true,
-      $projectType == "marketing"   => coalesce(projectTypes.marketing, false) == true,
+      $projectType == "planning"   => coalesce(projectTypes.planning, false) == true,
       true
     ) // 전부 false면 전체 불러오기
   )
@@ -46,9 +46,9 @@ count(*[
   (
     $projectType == null ||
     select(
-      $projectType == "development" => coalesce(projectTypes.development, false) == true,
+      $projectType == "engineering" => coalesce(projectTypes.engineering, false) == true,
       $projectType == "design"      => coalesce(projectTypes.design, false) == true,
-      $projectType == "marketing"   => coalesce(projectTypes.marketing, false) == true,
+      $projectType == "planning"   => coalesce(projectTypes.planning, false) == true,
       true
     )
   )

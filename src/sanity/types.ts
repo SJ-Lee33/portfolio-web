@@ -114,8 +114,8 @@ export type StudyCategory = {
   _updatedAt: string
   _rev: string
   studyTypes?: {
-    development?: boolean
-    marketing?: boolean
+    engineering?: boolean
+    planning?: boolean
     design?: boolean
   }
   title?: string
@@ -145,8 +145,8 @@ export type Project = {
   serial?: number
   isPublic?: boolean
   projectTypes?: {
-    development?: boolean
-    marketing?: boolean
+    engineering?: boolean
+    planning?: boolean
     design?: boolean
   }
   title?: string
@@ -681,15 +681,15 @@ export type HISTORY_QUERYResult = Array<{
     _key: string
   }> | null
 }>
+
 // Variable: PROJECT_LIST_QUERY
-// Query: *[  _type == "project" &&   !(_id in path("drafts.**")) &&  defined(serial) &&  isPublic != false &&  (    $projectType == null ||    select(      $projectType == "development" => coalesce(projectTypes.development, false) == true,      $projectType == "design"      => coalesce(projectTypes.design, false) == true,      $projectType == "marketing"   => coalesce(projectTypes.marketing, false) == true,      true    ) // 전부 false면 전체 불러오기  )] | order(coalesce(releaseDate, _updatedAt, _createdAt) desc) {  "id": _id,  "slug": string(serial),  title,  projectTypes,  startDate,  releaseDate,  "skill": skill[],  summary,  "thumbnail": coalesce(thumbnail.asset->url, "")}
 export type PROJECT_LIST_QUERYResult = Array<{
   id: string
   slug: string | null
   title: string | null
   projectTypes: {
-    development?: boolean
-    marketing?: boolean
+    engineering?: boolean
+    planning?: boolean
     design?: boolean
   } | null
   startDate: string | null
@@ -699,18 +699,16 @@ export type PROJECT_LIST_QUERYResult = Array<{
   thumbnail: string | ''
 }>
 // Variable: PROJECT_COUNT_QUERY
-// Query: count(*[  _type == "project" &&  !(_id in path("drafts.**")) &&  isPublic != false &&  (    $projectType == null ||    select(      $projectType == "development" => coalesce(projectTypes.development, false) == true,      $projectType == "design"      => coalesce(projectTypes.design, false) == true,      $projectType == "marketing"   => coalesce(projectTypes.marketing, false) == true,      true    )  )])
 export type PROJECT_COUNT_QUERYResult = number
 // Variable: PROJECT_QUERY
-// Query: *[  _type == "project" &&   defined(serial) &&  // isPublic != false &&  (    serial == $sNum ||           // number 비교    string(serial) == $sStr      // string 비교  )][0]{  // "키 이름" : 표현식  // 따옴표 없으면 동일한 이름  serial,  isPublic,  title,  summary,  projectTypes,  startDate,  releaseDate,  role,  // duration,  contribution,  "updatedAt": _updatedAt,  skill[],  "thumbnail": coalesce(thumbnail.asset->url, ""),  content[],  contentOverview[],  contentContribution[],  contentSkill[],  contentReflection[],    troubleShootings[],  "imgUrls": coalesce(images[].asset->url, ""),  // "imgUrls": images[].asset->url,  "relatedProjects": relatedProjects[]{    "reference": reference->{      title,      serial,      projectTypes,      startDate,      releaseDate,      skill[],      summary,      "thumbnail": coalesce(thumbnail.asset->url, "")    }  }}
 export type PROJECT_QUERYResult = {
   serial: number | null
   isPublic: boolean | null
   title: string | null
   summary: string | null
   projectTypes: {
-    development?: boolean
-    marketing?: boolean
+    engineering?: boolean
+    planning?: boolean
     design?: boolean
   } | null
   startDate: string | null
@@ -1001,8 +999,8 @@ export type PROJECT_QUERYResult = {
       title: string | null
       serial: number | null
       projectTypes: {
-        development?: boolean
-        marketing?: boolean
+        engineering?: boolean
+        planning?: boolean
         design?: boolean
       } | null
       startDate: string | null
@@ -1032,8 +1030,8 @@ export type STUDY_CATEGORY_AND_RECENT_QUERYResult = Array<{
   slug: string | null
   skill: Array<string> | null
   studyTypes: {
-    development?: boolean
-    marketing?: boolean
+    engineering?: boolean
+    planning?: boolean
     design?: boolean
   } | null
   summary: string | null
@@ -1150,8 +1148,8 @@ import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
     "*[_type == \"history\" && !(_id in path('drafts.**')) ] | order(year){\n    'id': _id,\n    year,\n    content,\n }": HISTORY_QUERYResult
-    '\n*[\n  _type == "project" && \n  !(_id in path("drafts.**")) &&\n  defined(serial) &&\n  isPublic != false &&\n  (\n    $projectType == null ||\n    select(\n      $projectType == "development" => coalesce(projectTypes.development, false) == true,\n      $projectType == "design"      => coalesce(projectTypes.design, false) == true,\n      $projectType == "marketing"   => coalesce(projectTypes.marketing, false) == true,\n      true\n    ) // \uC804\uBD80 false\uBA74 \uC804\uCCB4 \uBD88\uB7EC\uC624\uAE30\n  )\n] | order(coalesce(releaseDate, _updatedAt, _createdAt) desc) {\n  "id": _id,\n  "slug": string(serial),\n  title,\n  projectTypes,\n  startDate,\n  releaseDate,\n  "skill": skill[],\n  summary,\n  "thumbnail": coalesce(thumbnail.asset->url, "")\n}\n': PROJECT_LIST_QUERYResult
-    '\ncount(*[\n  _type == "project" &&\n  !(_id in path("drafts.**")) &&\n  isPublic != false &&\n  (\n    $projectType == null ||\n    select(\n      $projectType == "development" => coalesce(projectTypes.development, false) == true,\n      $projectType == "design"      => coalesce(projectTypes.design, false) == true,\n      $projectType == "marketing"   => coalesce(projectTypes.marketing, false) == true,\n      true\n    )\n  )\n])\n': PROJECT_COUNT_QUERYResult
+    '\n*[\n  _type == "project" && \n  !(_id in path("drafts.**")) &&\n  defined(serial) &&\n  isPublic != false &&\n  (\n    $projectType == null ||\n    select(\n      $projectType == "engineering" => coalesce(projectTypes.engineering, false) == true,\n      $projectType == "design"      => coalesce(projectTypes.design, false) == true,\n      $projectType == "planning"   => coalesce(projectTypes.planning, false) == true,\n      true\n    ) // \uC804\uBD80 false\uBA74 \uC804\uCCB4 \uBD88\uB7EC\uC624\uAE30\n  )\n] | order(coalesce(releaseDate, _updatedAt, _createdAt) desc) {\n  "id": _id,\n  "slug": string(serial),\n  title,\n  projectTypes,\n  startDate,\n  releaseDate,\n  "skill": skill[],\n  summary,\n  "thumbnail": coalesce(thumbnail.asset->url, "")\n}\n': PROJECT_LIST_QUERYResult
+    '\ncount(*[\n  _type == "project" &&\n  !(_id in path("drafts.**")) &&\n  isPublic != false &&\n  (\n    $projectType == null ||\n    select(\n      $projectType == "engineering" => coalesce(projectTypes.engineering, false) == true,\n      $projectType == "design"      => coalesce(projectTypes.design, false) == true,\n      $projectType == "planning"   => coalesce(projectTypes.planning, false) == true,\n      true\n    )\n  )\n])\n': PROJECT_COUNT_QUERYResult
     '\n*[\n  _type == "project" && \n  defined(serial) &&\n  // isPublic != false &&\n  (\n    serial == $sNum ||           // number \uBE44\uAD50\n    string(serial) == $sStr      // string \uBE44\uAD50\n  )\n][0]{\n  // "\uD0A4 \uC774\uB984" : \uD45C\uD604\uC2DD\n  // \uB530\uC634\uD45C \uC5C6\uC73C\uBA74 \uB3D9\uC77C\uD55C \uC774\uB984\n  serial,\n  isPublic,\n  title,\n  summary,\n  projectTypes,\n  startDate,\n  releaseDate,\n  role,\n  // duration,\n  contribution,\n  "updatedAt": _updatedAt,\n\n  skill[],\n\n  "thumbnail": coalesce(thumbnail.asset->url, ""),\n  content[],\n  contentOverview[],\n  contentContribution[],\n  contentSkill[],\n  contentReflection[],\n  \n  troubleShootings[],\n  "imgUrls": coalesce(images[].asset->url, ""),\n  // "imgUrls": images[].asset->url,\n  "relatedProjects": relatedProjects[]{\n    "reference": reference->{\n      title,\n      serial,\n      projectTypes,\n      startDate,\n      releaseDate,\n      skill[],\n      summary,\n      "thumbnail": coalesce(thumbnail.asset->url, "")\n    }\n  }\n}\n': PROJECT_QUERYResult
     '\n*[\n  _type == "study" && \n  !(_id in path("drafts.**")) &&\n  isPublic != false &&\n  defined(serial) \n] | order(serial desc) {\n  "slug": string(serial),\n  title,\n  "skill": skill[],\n  "thumbnail": coalesce(thumbnail.asset->url, ""),\n  studyTypes,\n  "createdAt":_createdAt,\n  "updatedAt":_updatedAt,\n}\n': STUDY_LIST_QUERYResult
     '\n  *[\n    _type == "studyCategory" &&\n    !(_id in path("drafts.**")) &&        // \u2B05\uFE0F \uB8E8\uD2B8\uC5D0\uC11C draft \uC81C\uC678\n    defined(slug) &&                 // \u2B05\uFE0F slug \uC5C6\uB294 \uBB38\uC11C \uC81C\uC678(\uC548\uC804\uB9DD)\n    isPublic != false\n  ] | order(title asc) {\n    _id,\n    title,\n    slug,\n    skill[],\n    studyTypes,\n    summary,\n    "thumbnail": coalesce(thumbnail.asset->url, ""),\n    "recentFivePosts": *[\n      _type == "study" && \n      !(_id in path("drafts.**")) &&\n      isPublic != false &&\n      references(^._id)\n    ] | order(_createdAt desc)[0...3]{\n      _id,\n      title,\n      "slug": string(serial),\n      "updatedAt":_updatedAt,\n      "thumbnail": coalesce(thumbnail.asset->url, ""),\n    }\n  }\n': STUDY_CATEGORY_AND_RECENT_QUERYResult

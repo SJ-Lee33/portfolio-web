@@ -1,1 +1,1 @@
-export type ProjectType = 'development' | 'design' | 'marketing'
+export type ProjectType = 'engineering' | 'design' | 'planning'

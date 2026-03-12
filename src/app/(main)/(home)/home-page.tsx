@@ -11,7 +11,7 @@ export default async function HomePage({
   projectType,
   autoScrollTo,
 }: {
-  projectType: 'development' | 'design' | 'marketing' | null
+  projectType: 'engineering' | 'design' | 'planning' | null
   autoScrollTo?: 'project' | 'profile'
 }) {
   return (

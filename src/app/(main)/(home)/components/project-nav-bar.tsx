@@ -57,8 +57,8 @@ export default function ProjectNavBar() {
         <li>전체</li>
       </NavLink>
       <NavLink
-        href={NAVIGATION_PATH.development}
-        isActive={projectType === 'development'}
+        href={NAVIGATION_PATH.engineering}
+        isActive={projectType === 'engineering'}
       >
         <li>개발</li>
       </NavLink>
@@ -69,8 +69,8 @@ export default function ProjectNavBar() {
         <li>디자인</li>
       </NavLink>
       <NavLink
-        href={NAVIGATION_PATH.marketing}
-        isActive={projectType === 'marketing'}
+        href={NAVIGATION_PATH.planning}
+        isActive={projectType === 'planning'}
       >
         <li>마케팅</li>
       </NavLink>

@@ -610,14 +610,14 @@
         "value": {
           "type": "object",
           "attributes": {
-            "development": {
+            "engineering": {
               "type": "objectAttribute",
               "value": {
                 "type": "boolean"
               },
               "optional": true
             },
-            "marketing": {
+            "planning": {
               "type": "objectAttribute",
               "value": {
                 "type": "boolean"
@@ -791,14 +791,14 @@
         "value": {
           "type": "object",
           "attributes": {
-            "development": {
+            "engineering": {
               "type": "objectAttribute",
               "value": {
                 "type": "boolean"
               },
               "optional": true
             },
-            "marketing": {
+            "planning": {
               "type": "objectAttribute",
               "value": {
                 "type": "boolean"

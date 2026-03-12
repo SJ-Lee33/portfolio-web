@@ -61,13 +61,13 @@ const typeField = defineField({
   fields: [
     {
       title: '개발',
-      name: 'development',
+      name: 'engineering',
       initialValue: false,
       type: 'boolean',
     },
     {
       title: '마케팅',
-      name: 'marketing',
+      name: 'planning',
       initialValue: false,
       type: 'boolean',
     },
@@ -369,18 +369,18 @@ export default defineType({
     imagesField,
     relatedProjectsField,
   ],
-   preview: {
+  preview: {
     select: {
       title: 'title',
       types: 'projectTypes', // 객체 전체 선택
       isPublic: 'isPublic',
-      serial: 'serial',  
+      serial: 'serial',
     },
-    prepare({ title, types = {}, isPublic, serial}) {
+    prepare({ title, types = {}, isPublic, serial }) {
       // true인 항목만 한국어로 표시
       const typeLabels: Record<string, string> = {
-        development: '개발',
-        marketing: '마케팅',
+        engineering: '개발',
+        planning: '마케팅',
         design: '디자인',
       }
 
@@ -391,7 +391,7 @@ export default defineType({
 
       const visibility = isPublic === false ? '🔒 비공개' : '🌐 공개'
 
-      const serialLabel = serial ? `[${serial}] ` : '' 
+      const serialLabel = serial ? `[${serial}] ` : ''
 
       return {
         title: `${serialLabel}${title || '(제목 없음)'}`, // 번호 + 제목

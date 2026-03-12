@@ -8,13 +8,13 @@ const typeField = defineField({
   fields: [
     {
       title: '개발',
-      name: 'development',
+      name: 'engineering',
       initialValue: false,
       type: 'boolean',
     },
     {
       title: '마케팅',
-      name: 'marketing',
+      name: 'planning',
       initialValue: false,
       type: 'boolean',
     },

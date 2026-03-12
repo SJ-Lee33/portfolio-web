@@ -27,9 +27,9 @@ export default function DesktopNavBar() {
         <ul className="flex justify-center gap-8">
           <Chip value={NAVIGATION_PATH.profile} />
           <Chip value={NAVIGATION_PATH.project} />
-          <Chip value={NAVIGATION_PATH.development} />
+          <Chip value={NAVIGATION_PATH.engineering} />
           <Chip value={NAVIGATION_PATH.design} />
-          <Chip value={NAVIGATION_PATH.marketing} />
+          <Chip value={NAVIGATION_PATH.planning} />
           <Chip value={NAVIGATION_PATH.study} scroll />
         </ul>
       </nav>

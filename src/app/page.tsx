@@ -9,7 +9,7 @@ export default async function MainPage({
   const { projectType: raw } = await searchParams
 
   const projectType: ProjectType | null =
-    raw === 'development' || raw === 'design' || raw === 'marketing'
+    raw === 'engineering' || raw === 'design' || raw === 'planning'
       ? (raw as ProjectType)
       : null
 

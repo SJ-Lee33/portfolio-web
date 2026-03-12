@@ -1,17 +1,14 @@
+import { ProjectType } from '@/sanity/schemaTypes/const/projectType'
 import React from 'react'
 
 export default function ProjectTypeLabel({
   projectTypes,
 }: {
-  projectTypes: {
-    development?: boolean
-    marketing?: boolean
-    design?: boolean
-  } | null
+  projectTypes: ProjectType | null
 }) {
   const MAP: { [key: string]: string } = {
-    development: '개발',
-    marketing: '마케팅',
+    engineering: '개발',
+    planning: '기획',
     design: '디자인',
   }
   const typeLabels = Object.entries(projectTypes!)
