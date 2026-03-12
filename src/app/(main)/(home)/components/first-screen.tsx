@@ -15,16 +15,22 @@ export default function FirstScreen() {
         <div className="flex flex-col justify-center text-white font-extralight">
           <div className="text-title-l">IT 스타트업 - 제조업 업무경험</div>
           <div className="text-headline-m font-medium">
-            고객을 위한 개발을 합니다.
+            전주기 책임 경험을 바탕으로
+          </div>
+          <div className="text-title-l">
+            문제 정의와 구조 설계에 강점이 있습니다.
           </div>
 
           <div className="mt-10 text-[2.5rem]">
             <span className="font-bold text-[3.5rem] mr-4">이 소 진</span> Sojin
             Lee
           </div>
-          <div className="flex flex-col md:flex-row md:gap-2 text-title-m mt-5">
-            <span className="font-bold">개발 · 기획 · 운영 · 디자인 </span>
-            <span>다양한 프로젝트 경험 보유</span>
+          <div className="flex flex-col text-title-m mt-5">
+            무에서 유를 창조하며
+            <div className="font-bold">
+              사용자 여정 설계부터 운영 데이터 분석
+            </div>
+            Product 중심 기획/개발자
           </div>
         </div>
 

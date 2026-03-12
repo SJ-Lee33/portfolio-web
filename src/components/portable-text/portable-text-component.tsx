@@ -12,6 +12,7 @@ import PortableImage from '@/components/portable-text/portable-image'
 import PortableCodebox from '@/components/portable-text/portable-codebox'
 import { useMemo, useRef } from 'react'
 import PortableTable from './portable-table'
+import { urlFor } from '@/sanity/lib/image'
 
 // 한글 포함 슬러그화 (중복 방지를 위해 used 카운터 사용)
 function slugify(text: string, used: Record<string, number>) {
@@ -120,8 +121,8 @@ export default function Portable({ value }: { value: any[] }) {
       ),
     },
     types: {
-      image: ({ value }: { value: { url: string } }) => (
-        <PortableImage url={value.url} />
+      image: ({ value }: { value: any }) => (
+        <PortableImage url={urlFor(value).url()} />
       ),
       code: ({ value }: { value: { code: string; language?: string } }) => (
         <div

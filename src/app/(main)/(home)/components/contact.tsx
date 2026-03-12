@@ -31,7 +31,9 @@ export default function Contact() {
         {/* 원형 */}
         <div className="w-[80px] h-[80px] rounded-full font-bold text-center flex justify-center items-center bg-white/70 hover:bg-white">
           {/* 평소엔 아이콘  */}
-          <div className={`block group-hover:hidden text-body-l text-${color}`}>
+          <div
+            className={`block group-hover:hidden text-title-s text-${color}`}
+          >
             {icon}
           </div>
 

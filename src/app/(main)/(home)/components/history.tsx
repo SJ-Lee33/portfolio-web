@@ -23,19 +23,18 @@ export default async function History() {
     return (
       <div className="flex flex-col text-neutral mb-10">
         <div
-          className={classNames(
-            'block w-full h-[0.5px] bg-neutralLight -mb-2',
-            'md:hidden',
-          )}
+          className={classNames('block w-full h-[0.5px] bg-neutralLight -mb-2')}
         />
-        <div className="flex flex-col gap-2 md:gap-3">
-          <FaCircle className="w-[15px]" />
-          <div className="text-title-s font-bold mb-2">{item.year}</div>
-        </div>
+        <div className="mx-4">
+          <div className="flex flex-col gap-2 md:gap-3">
+            <FaCircle className="w-[15px]" />
+            <div className="text-title-s font-bold mb-2">{item.year}</div>
+          </div>
 
-        <ul className="ml-4">
-          <PortableText value={item.content ?? []} components={components} />
-        </ul>
+          <ul className="ml-4">
+            <PortableText value={item.content ?? []} components={components} />
+          </ul>
+        </div>
       </div>
     )
   }
@@ -44,14 +43,9 @@ export default async function History() {
     <div className="flex flex-col">
       <div
         className={classNames(
-          'hidden',
-          'md:block md:w-full md:h-[0.5px] md:bg-neutralLight md:-mb-2', // md ~
-        )}
-      />
-      <div
-        className={classNames(
-          'flex flex-col gap-5',
-          'md:grid md:grid-cols-5 md:gap-8', // md ~
+          'flex flex-col',
+          'sm:grid sm:grid-cols-3', // sm
+          'md:grid md:grid-cols-4', // md ~
         )}
       >
         {history.map((item: HistoryItem, index: number) => (

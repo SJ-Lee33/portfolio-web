@@ -21,8 +21,11 @@ export default function HistoryScreen() {
           <div className="flex flex-col gap-3">
             <div>이화여자대학교 소프트웨어학부 컴퓨터공학전공</div>
             <div>
-              <p>24.08 - 25.05 (주)INNOS</p>
-              <p>22.06 - 24.05 (주)이루티</p>
+              <p className="text-body-s">총 2년 10개월</p>
+              <div>
+                <p>24.08 - 25.05 (주)INNOS</p>
+                <p>22.06 - 24.05 (주)이루티</p>
+              </div>
             </div>
           </div>
         </div>

@@ -25,11 +25,10 @@ export default function ProjectItem(project: ProjectListProps) {
   return (
     <div
       className={classNames(
-        'xs:grid xs:gap-5 p-4 text-neutral',
+        'flex flex-col gap-5 p-4 text-neutral',
         'group hover:bg-secondary hover:text-white duration-300',
-        'xs:grid-cols-3', // xs ~ md
-        'lg:grid-cols-4', // lg ~ xl
-        'xxl:grid-cols-5', // xxl ~
+        'sm:grid sm:grid-cols-4', // sm ~
+        'xxl:grid xxl:grid-cols-5', // xxl ~
       )}
     >
       {/* 썸네일 */}
@@ -59,8 +58,7 @@ export default function ProjectItem(project: ProjectListProps) {
       <div
         className={classNames(
           'flex flex-col justify-between',
-          'xs:col-span-2', // xs ~ lg
-          'lg:col-span-3', // lg ~ xl
+          'sm:col-span-3', // sm
           'xxl:col-span-4', // xxl ~
         )}
       >
@@ -75,7 +73,7 @@ export default function ProjectItem(project: ProjectListProps) {
           >
             {project.title}
           </div>
-          <div className="text-body-m md:text-body-l px-2 md:px-4">
+          <div className="text-body-m sm:text-body-l px-2 md:px-4">
             {project?.summary}
           </div>
         </div>
