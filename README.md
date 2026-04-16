@@ -5,15 +5,19 @@ Next.js 기반 프론트엔드와 Sanity CMS를 결합하여 콘텐츠 관리와
 
 ## Run Summary
 
-Frontend 실행: `npm run dev`
-Sanity Studio 접속: `localhost:3000/studio`
-Sanity Studio 배포: `npx sanity deploy`
+| 항목               | 명령어                         |
+| ------------------ | ------------------------------ |
+| Frontend 실행      | `npm run dev`                  |
+| Sanity Studio 접속 | `http://localhost:3000/studio` |
+| Sanity Studio 배포 | `npx sanity deploy`            |
+| TypeGen 실행       | `npx sanity typegen generate`  |
 
 ## 프로젝트 목포
 
 - 콘텐츠 관리와 프론트엔드 분리
 - Next.js App Router 기반의 구조적 라우팅
 - Sanity Studio를 동일 프로젝트 내부에서 운영
+- 타입 안정성을 고려한 데이터 흐름 설계
 
 --
 
@@ -37,6 +41,29 @@ Sanity Studio 배포: `npx sanity deploy`
 
 --
 
+# System Archetecture
+
+                ┌──────────────────────┐
+                │      Sanity CMS      │
+                │   (Content Editor)   │
+                └─────────┬────────────┘
+                          │
+                          │ GROQ Query
+                          │
+                ┌─────────▼────────────┐
+                │     Next.js App      │
+                │   (Frontend Layer)   │
+                └─────────┬────────────┘
+                          │
+                          │ SSR / SSG
+                          │
+                ┌─────────▼────────────┐
+                │        Browser        │
+                │     Portfolio UI      │
+                └──────────────────────┘
+
+--
+
 # Local Development
 
 ## 1) Frontend 실행
@@ -49,7 +76,6 @@ Sanity Studio 배포: `npx sanity deploy`
 ## 2) Sanity Studio 실행
 
 Sanity Studio는 **Next.js 프로젝트 내부에 통합** 되어 있습니다.
-다음 경로로 접근할 수 있습니다.
 
 ```
 http://localhost:3000/studio
@@ -64,6 +90,35 @@ Sanity Studio를 배포하려면 다음 명령어를 실행합니다.
 ```
 npx sanity deploy
 ```
+
+# Sanity Type Generation (TypeGen)
+
+GROQ Query 결과를 TypeScript 타입으로 자동 생성하기 위해
+Sanity TypeGen을 사용합니다.
+
+## 사용법
+
+### 1. 쿼리 정의
+
+```typescript
+import { defineQuery } from 'next-sanity'
+
+export const RESUME_QUERY = defineQuery(`
+  *[_type == "resume"][0]{
+    "resumeUrl": file.asset->url
+  }
+`)
+```
+
+### 2. 타입 생성
+
+`npx sanity typegen generate`
+실행 시, `RESUME_QUERYResult` 자동 생성됨
+
+### 주의사항
+
+- Query 수정 후 반드시 재실행 필요
+- Schema 변경 후에도 재실행 필요
 
 --
 

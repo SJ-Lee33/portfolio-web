@@ -1,5 +1,15 @@
 import { defineQuery } from 'next-sanity'
 
+// 레주메 다운로드 링크
+export const RESUME_QUERY = defineQuery(`
+*[
+  _type == "resume" &&
+  !(_id in path("drafts.**"))
+][0]{
+  "resumeUrl": file.asset->url
+}
+`)
+
 // 이력
 export const HISTORY_QUERY =
   defineQuery(`*[_type == "history" && !(_id in path('drafts.**')) ] | order(year){

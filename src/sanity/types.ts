@@ -107,6 +107,22 @@ export type Study = {
   >
 }
 
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop'
+  top?: number
+  bottom?: number
+  left?: number
+  right?: number
+}
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot'
+  x?: number
+  y?: number
+  height?: number
+  width?: number
+}
+
 export type StudyCategory = {
   _id: string
   _type: 'studyCategory'
@@ -467,13 +483,40 @@ export type Project = {
   }>
 }
 
+export type Table = {
+  _type: 'table'
+  rows?: Array<
+    {
+      _key: string
+    } & TableRow
+  >
+}
+
+export type Resume = {
+  _id: string
+  _type: 'resume'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  file?: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+    }
+    media?: unknown
+    _type: 'file'
+  }
+}
+
 export type History = {
   _id: string
   _type: 'history'
   _createdAt: string
   _updatedAt: string
   _rev: string
-  year?: 0 | 2020 | 2021 | 2022 | 2023 | 2024 | 2025
+  year?: 0 | 2020 | 2021 | 2022 | 2023 | 2024 | 2025 | 2026
   content?: Array<{
     children?: Array<{
       marks?: Array<string>
@@ -492,15 +535,6 @@ export type History = {
     _type: 'block'
     _key: string
   }>
-}
-
-export type Table = {
-  _type: 'table'
-  rows?: Array<
-    {
-      _key: string
-    } & TableRow
-  >
 }
 
 export type TableRow = {
@@ -542,20 +576,15 @@ export type SanityImageDimensions = {
   aspectRatio?: number
 }
 
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x?: number
-  y?: number
-  height?: number
-  width?: number
-}
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top?: number
-  bottom?: number
-  left?: number
-  right?: number
+export type SanityImageMetadata = {
+  _type: 'sanity.imageMetadata'
+  location?: Geopoint
+  dimensions?: SanityImageDimensions
+  palette?: SanityImagePalette
+  lqip?: string
+  blurHash?: string
+  hasAlpha?: boolean
+  isOpaque?: boolean
 }
 
 export type SanityFileAsset = {
@@ -578,6 +607,13 @@ export type SanityFileAsset = {
   path?: string
   url?: string
   source?: SanityAssetSourceData
+}
+
+export type SanityAssetSourceData = {
+  _type: 'sanity.assetSourceData'
+  name?: string
+  id?: string
+  url?: string
 }
 
 export type SanityImageAsset = {
@@ -603,17 +639,6 @@ export type SanityImageAsset = {
   source?: SanityAssetSourceData
 }
 
-export type SanityImageMetadata = {
-  _type: 'sanity.imageMetadata'
-  location?: Geopoint
-  dimensions?: SanityImageDimensions
-  palette?: SanityImagePalette
-  lqip?: string
-  blurHash?: string
-  hasAlpha?: boolean
-  isOpaque?: boolean
-}
-
 export type Geopoint = {
   _type: 'geopoint'
   lat?: number
@@ -627,41 +652,40 @@ export type Slug = {
   source?: string
 }
 
-export type SanityAssetSourceData = {
-  _type: 'sanity.assetSourceData'
-  name?: string
-  id?: string
-  url?: string
-}
-
 export type AllSanitySchemaTypes =
   | FeatureTable
   | Math
   | Study
+  | SanityImageCrop
+  | SanityImageHotspot
   | StudyCategory
   | Project
-  | History
   | Table
+  | Resume
+  | History
   | TableRow
   | Code
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
-  | SanityImageHotspot
-  | SanityImageCrop
-  | SanityFileAsset
-  | SanityImageAsset
   | SanityImageMetadata
+  | SanityFileAsset
+  | SanityAssetSourceData
+  | SanityImageAsset
   | Geopoint
   | Slug
-  | SanityAssetSourceData
 export declare const internalGroqTypeReferenceTo: unique symbol
 // Source: ./src/sanity/lib/queries.ts
+// Variable: RESUME_QUERY
+// Query: *[  _type == "resume" &&  !(_id in path("drafts.**"))][0]{  "resumeUrl": file.asset->url}
+export type RESUME_QUERYResult = {
+  resumeUrl: string | null
+} | null
 // Variable: HISTORY_QUERY
 // Query: *[_type == "history" && !(_id in path('drafts.**')) ] | order(year){    'id': _id,    year,    content, }
 export type HISTORY_QUERYResult = Array<{
   id: string
-  year: 0 | 2020 | 2021 | 2022 | 2023 | 2024 | 2025 | null
+  year: 0 | 2020 | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 | null
   content: Array<{
     children?: Array<{
       marks?: Array<string>
@@ -1149,6 +1173,7 @@ export type STUDY_NEIGHBORS_QUERYResult = {
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
+    '\n*[\n  _type == "resume" &&\n  !(_id in path("drafts.**"))\n][0]{\n  "resumeUrl": file.asset->url\n}\n': RESUME_QUERYResult
     "*[_type == \"history\" && !(_id in path('drafts.**')) ] | order(year){\n    'id': _id,\n    year,\n    content,\n }": HISTORY_QUERYResult
     '\n*[\n  _type == "project" && \n  !(_id in path("drafts.**")) &&\n  defined(serial) &&\n  isPublic != false &&\n  (\n    $projectType == null ||\n    select(\n      $projectType == "engineering" => coalesce(projectTypes.engineering, false) == true,\n      $projectType == "design"      => coalesce(projectTypes.design, false) == true,\n      $projectType == "planning"   => coalesce(projectTypes.planning, false) == true,\n      true\n    ) // \uC804\uBD80 false\uBA74 \uC804\uCCB4 \uBD88\uB7EC\uC624\uAE30\n  )\n] | order(coalesce(releaseDate, _updatedAt, _createdAt) desc) {\n  "id": _id,\n  "slug": string(serial),\n  title,\n  projectTypes,\n  startDate,\n  releaseDate,\n  "skill": skill[],\n  summary,\n  "thumbnail": coalesce(thumbnail.asset->url, "")\n}\n': PROJECT_LIST_QUERYResult
     '\ncount(*[\n  _type == "project" &&\n  !(_id in path("drafts.**")) &&\n  isPublic != false &&\n  (\n    $projectType == null ||\n    select(\n      $projectType == "engineering" => coalesce(projectTypes.engineering, false) == true,\n      $projectType == "design"      => coalesce(projectTypes.design, false) == true,\n      $projectType == "planning"   => coalesce(projectTypes.planning, false) == true,\n      true\n    )\n  )\n])\n': PROJECT_COUNT_QUERYResult
