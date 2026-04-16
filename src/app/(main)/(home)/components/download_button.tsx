@@ -16,11 +16,11 @@ export default function DownloadButton({ url }: Props) {
       onClick={handleClick}
       className="
         fixed top-20 right-6 z-50
-        flex items-center gap-2
+        flex items-center gap-3
 
         px-5 py-3
         bg-white/80 backdrop-blur-md
-        text-black font-semibold
+        text-black
 
         rounded-full shadow-lg
 
@@ -30,8 +30,14 @@ export default function DownloadButton({ url }: Props) {
         transition-all duration-200
       "
     >
-      <FaDownload className="text-sm" />
-      <span>경력기술서 다운로드</span>
+      {/* 아이콘 */}
+      <FaDownload className="text-base shrink-0" />
+
+      {/* 텍스트 영역 */}
+      <div className="flex flex-col leading-tight text-left">
+        <span className="font-semibold text-sm">경력기술서 다운로드</span>
+        <span className="text-[10px] opacity-70">pdf file download</span>
+      </div>
     </button>
   )
 }

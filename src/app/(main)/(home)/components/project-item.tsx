@@ -22,6 +22,7 @@ export default function ProjectItem(project: ProjectListProps) {
       </div>
     )
   }
+
   return (
     <div
       className={classNames(
@@ -50,7 +51,7 @@ export default function ProjectItem(project: ProjectListProps) {
           alt="project thumbnail"
           width={300}
           height={300}
-          className="w-full h-full object-cover bg-secondary rounded-md shadow-lg shadow-neutralLight/30"
+          className="w-full h-full object-cover bg-none rounded-md shadow-lg shadow-neutralLight/30"
         />
       </div>
 

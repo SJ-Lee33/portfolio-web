@@ -13,7 +13,7 @@ export default function ProjectsScreen({
     >
       <div className="w-full h-[0.5px] bg-neutralLight my-10" />
       <ProjectNavBar />
-      <div className="flex px-5 text-body-s">▼ 출시일 순 정렬</div>
+      <div className="flex px-5 text-body-s">▼ 최신순</div>
       <ProjectList projectType={projectType} />
     </div>
   )

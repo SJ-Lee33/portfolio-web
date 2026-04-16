@@ -7,6 +7,8 @@ import { PROJECT_LIST_QUERYResult } from '@/sanity/types'
 import { ProjectType } from '@/sanity/schemaTypes/const/projectType'
 import { unstable_noStore } from 'next/cache'
 
+type ProjectListItem = PROJECT_LIST_QUERYResult[number]
+
 export default async function ProjectList({
   projectType,
 }: {
@@ -19,8 +21,6 @@ export default async function ProjectList({
     query: PROJECT_LIST_QUERY,
     params: { projectType }, // ← key는 projectType
   })) as { data: PROJECT_LIST_QUERYResult }
-
-  type ProjectListItem = PROJECT_LIST_QUERYResult[number]
 
   return (
     <div className="flex flex-col gap-6">

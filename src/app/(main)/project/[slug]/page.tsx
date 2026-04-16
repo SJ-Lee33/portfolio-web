@@ -9,7 +9,6 @@ import Portable from '@/components/portable-text/portable-text-component'
 import Link from 'next/link'
 import ProjectItem from '../../(home)/components/project-item'
 import { redirect } from 'next/navigation'
-import { ProjectType } from '@/sanity/schemaTypes/const/projectType'
 
 export default async function Page({
   params,
@@ -21,7 +20,6 @@ export default async function Page({
   if (!project?.isPublic) {
     redirect('/private-warning')
   }
-
   return (
     <>
       <header className="w-full fixed top-0 z-50">
