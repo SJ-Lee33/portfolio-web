@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 const CodeBoxInner = dynamic(() => import('./portable-codebox-inner'), {
   ssr: false,
   loading: () => (
-    <pre className="rounded-md p-3 overflow-x-auto text-sm bg-neutral-50 text-neutral-700">
+    <pre className="rounded-md p-3 overflow-x-auto text-body-m bg-neutral/50">
       <code />
     </pre>
   ),

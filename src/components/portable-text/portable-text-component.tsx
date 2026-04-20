@@ -6,14 +6,13 @@ import PortableHeader from '@/components/portable-text/portable-header'
 import PortableSubheader from '@/components/portable-text/portable-subheader'
 import PortablePlanetext from '@/components/portable-text/portable-plaintext'
 import PortableQuote from '@/components/portable-text/portable-quote'
-import PortableListBullet from '@/components/portable-text/portable-listbullet'
-import PortableListNumber from '@/components/portable-text/portable-listnumber'
 import PortableImage from '@/components/portable-text/portable-image'
 import PortableCodebox from '@/components/portable-text/portable-codebox'
 import { useMemo, useRef } from 'react'
 import PortableTable from './portable-table'
 import { urlFor } from '@/sanity/lib/image'
 import classNames from 'classnames'
+import PortableList from './portable-list'
 
 function slugify(text: string, used: Record<string, number>) {
   const base = text
@@ -99,20 +98,16 @@ export default function Portable({ value, hideToc = false }: Props) {
     },
     list: {
       bullet: ({ children }: { children: React.ReactNode }) => (
-        <ul className="list-disc [&_ul]:-ml-2 [&_ul]:list-[circle] [&_ul_ul]:-ml-2 [&_ul_ul]:list-[square]">
-          {children}
-        </ul>
+        <div className="bg-white border border-neutralLight/50 rounded-xl p-5 m-5 shadow-sm">
+          <ul className="list-disc pl-5 space-y-1.5 text-body-m">{children}</ul>
+        </div>
       ),
       number: ({ children }: { children: React.ReactNode }) => (
-        <ol className="list-decimal">{children}</ol>
-      ),
-    },
-    listItem: {
-      bullet: ({ children }: { children: any }) => (
-        <PortableListBullet>{children}</PortableListBullet>
-      ),
-      number: ({ children }: { children: any }) => (
-        <PortableListNumber>{children}</PortableListNumber>
+        <div className="bg-white border border-neutralLight/50 rounded-xl p-5 m-5 shadow-sm">
+          <ol className="list-decimal pl-5 space-y-1.5 text-body-m">
+            {children}
+          </ol>
+        </div>
       ),
     },
     types: {
@@ -123,7 +118,7 @@ export default function Portable({ value, hideToc = false }: Props) {
       },
       code: ({ value }: { value: { code: string; language?: string } }) => (
         <div
-          className="px-4 md:px-10 text-body-m mt-2 mb-[30px] overflow-auto"
+          className="pl-5 text-body-m mt-2 mb-[20px] overflow-auto"
           suppressHydrationWarning
         >
           <PortableCodebox code={value.code} language={value.language} />
@@ -131,7 +126,7 @@ export default function Portable({ value, hideToc = false }: Props) {
       ),
       math: ({ value }: any) => <PortableMath value={value} />,
       featureTable: ({ value }: { value: any }) => (
-        <div className="my-6 overflow-x-auto">
+        <div className="my-6 ml-4 overflow-x-auto">
           <PortableTable value={value} />
         </div>
       ),

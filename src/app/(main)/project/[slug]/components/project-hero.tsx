@@ -64,7 +64,7 @@ export default function ProjectHero({ project }: Props) {
           {/* 메타 정보 */}
           <div className="flex-1 min-w-0">
             {/* 분류 + 연도 */}
-            <div className="flex items-center gap-4 mb-3 text-body-m">
+            <div className="flex items-center gap-4 mb-3 text-body-s">
               <ProjectTypeLabel projectTypes={project.projectTypes} badge />
               <div>
                 {formatDate(project.startDate!)} -{' '}
@@ -95,7 +95,7 @@ export default function ProjectHero({ project }: Props) {
                     <p className="text-body-m font-semibold text-neutral uppercase tracking-wide mb-1">
                       {kpi.label}
                     </p>
-                    <p className="text-title-m font-extrabold text-primaryDark leading-none mb-1">
+                    <p className="text-title-m font-extrabold text-primary leading-none mb-1">
                       {kpi.value}
                     </p>
                     {kpi.sub && (

@@ -39,16 +39,12 @@ export default function ProjectOverviewSection({ desc, highlights }: Props) {
     <section id="overview" className="scroll-mt-28">
       {/* 섹션 헤더 */}
       <div className="flex items-center gap-3 mb-2">
-        <h2 className="text-xl font-bold text-gray-900">Overview</h2>
+        <h2 className="text-title-l font-bold">Overview</h2>
       </div>
-      <div className="h-px bg-gray-100 mb-6" />
+      <div className="h-[1.5px] bg-neutralLighter mb-6" />
 
       {/* 한 줄 설명 */}
-      {desc && (
-        <p className="text-gray-500 text-sm mb-6 max-w-2xl leading-relaxed">
-          {desc}
-        </p>
-      )}
+      {desc && <p className="text-body-m mb-6 leading-relaxed">{desc}</p>}
 
       {/* 하이라이트 카드 그리드 */}
       {highlights.length > 0 && (
@@ -58,16 +54,14 @@ export default function ProjectOverviewSection({ desc, highlights }: Props) {
             return (
               <div
                 key={h.label}
-                className="flex items-start gap-3 bg-white border border-gray-100 rounded-xl p-4 hover:border-blue-200 hover:shadow-md transition-all duration-200"
+                className="flex items-start gap-3 bg-white border border-neutralLight/30 rounded-xl p-4 hover:border-primaryLight hover:shadow-md transition-all duration-200"
               >
-                <div className="w-9 h-9 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <IconComp size={20} className="text-blue-600" />
+                <div className="w-9 h-9 bg-primaryLighter/50 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <IconComp size={20} className="text-primary" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-gray-800 mb-0.5">
-                    {h.label}
-                  </p>
-                  <p className="text-xs text-gray-500 leading-relaxed">
+                  <p className="text-body-l font-semibold mb-0.5">{h.label}</p>
+                  <p className="text-body-s text-neutral leading-relaxed">
                     {h.desc}
                   </p>
                 </div>

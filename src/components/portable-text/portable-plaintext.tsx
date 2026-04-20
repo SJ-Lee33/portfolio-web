@@ -26,7 +26,7 @@ export default function PortablePlanetext({
   }
 
   return (
-    <div className="w-full px-4 py-1 md:px-10 text-body-l">
+    <div className="w-full px-2 py-1 md:px-4 text-body-l">
       {Array.isArray(children)
         ? children.map(renderChild)
         : renderChild(children)}

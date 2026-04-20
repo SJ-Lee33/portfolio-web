@@ -17,12 +17,12 @@ export default function PortableTable({ value }: PortableTableProps) {
   const colCount = rows[0]?.cells?.length ?? 0
 
   return (
-    <div className="w-full my-6 overflow-x-auto rounded-2xl border border-gray-100">
+    <div className="w-full overflow-x-auto rounded-lg border border-neutralLight">
       <table
-        className={`w-full border-collapse ${dense ? 'text-xs' : 'text-sm'}`}
+        className={`w-full border-collapse ${dense ? 'text-body-m' : 'text-body-m'}`}
       >
         {caption && (
-          <caption className="px-5 py-2 text-xs text-gray-400 text-left bg-gray-50 border-b border-gray-100">
+          <caption className="px-5 py-2 text-body-s text-neutralLight text-left bg-soft/50 font-bold border-b border-neutralLight">
             {caption}
           </caption>
         )}
@@ -36,9 +36,8 @@ export default function PortableTable({ value }: PortableTableProps) {
               <tr
                 key={row._key ?? i}
                 className={`
-                  border-b border-gray-50 last:border-none
-                  transition-colors duration-150
-                  ${isHeaderRow ? 'bg-gray-50' : 'hover:bg-gray-50/80'}
+                  border-b border-neutralLight last:border-none
+                  transition-colors duration-150               
                 `}
               >
                 {row.cells.map((cell, j) => {
@@ -53,14 +52,16 @@ export default function PortableTable({ value }: PortableTableProps) {
                     <Tag
                       key={j}
                       className={[
-                        'px-5 py-3 align-top text-left',
+                        'px-5 py-3 align-top text-left ',
                         isHeader
-                          ? 'font-semibold text-gray-500 uppercase tracking-wide text-xs bg-gray-50'
-                          : 'text-gray-700 font-normal',
+                          ? 'bg-neutralLight/20 text-neutral/80 text-body-s font-extrabold hover:bg-neutralLight'
+                          : 'font-normal white hover:bg-neutralLighter',
                         // 첫 번째 열 헤더면 border-r
                         isHeaderCol && !isHeaderRow
-                          ? 'border-r border-gray-100 font-semibold text-gray-600 text-xs uppercase tracking-wide bg-gray-50'
-                          : '',
+                          ? 'border-r border-neutralLight font-semibold uppercase tracking-wide'
+                          : !isHeader
+                            ? 'bg-white'
+                            : '',
                       ]
                         .join(' ')
                         .trim()}

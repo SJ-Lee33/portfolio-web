@@ -11,27 +11,27 @@ interface Props {
 
 export default function ProjectResultSection({ outcomes, metrics }: Props) {
   return (
-    <section id="result" className="scroll-mt-28">
+    <section id="result" className="scroll-mt-28 mt-[80px]">
       <div className="flex items-center gap-3 mb-2">
-        <h2 className="text-xl font-bold text-gray-900">Result</h2>
+        <h2 className="text-title-l font-bold">Result</h2>
       </div>
-      <div className="h-px bg-gray-100 mb-6" />
+      <div className="h-[1.5px] bg-neutralLighter mb-6" />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {/* Outcomes */}
         {outcomes.length > 0 && (
-          <div className="bg-white border border-gray-100 rounded-2xl p-5">
+          <div className="bg-white border border-neutralLight/50 rounded-xl p-5">
             <div className="flex items-center gap-2 mb-4">
-              <CheckCircle2 size={16} className="text-emerald-500" />
-              <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">
+              <CheckCircle2 size={16} className="text-emerald" />
+              <p className="text-body-s font-bold text-neutral/80 uppercase tracking-wide">
                 Outcomes
               </p>
             </div>
             <ul className="space-y-3">
               {outcomes.map((o, i) => (
                 <li key={i} className="flex items-start gap-2.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0 mt-1.5" />
-                  <p className="text-sm text-gray-700 leading-relaxed">{o}</p>
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary/80 flex-shrink-0 mt-2.5" />
+                  <p className="text-body-m leading-relaxed">{o}</p>
                 </li>
               ))}
             </ul>
@@ -40,10 +40,10 @@ export default function ProjectResultSection({ outcomes, metrics }: Props) {
 
         {/* Before / After Metrics */}
         {metrics.length > 0 && (
-          <div className="bg-white border border-gray-100 rounded-2xl p-5">
+          <div className="bg-white border border-neutralLight/50 rounded-xl p-5">
             <div className="flex items-center gap-2 mb-4">
-              <TrendingUp size={16} className="text-blue-500" />
-              <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">
+              <TrendingUp size={16} className="text-primary" />
+              <p className="text-body-s font-bold text-neutral/80 uppercase tracking-wide">
                 Before / After Metrics
               </p>
             </div>
@@ -98,30 +98,30 @@ function MetricBar({ metric: m }: { metric: ResultMetric }) {
     ? `${Math.round(((m.before - m.after) / m.before) * 100)}% 감소`
     : `${m.after}${m.unit ?? ''}`
 
-  const barColor = m.color === 'emerald' ? 'bg-emerald-500' : 'bg-blue-500'
+  const barColor = m.color === 'emerald' ? 'bg-emerald' : 'bg-primary'
 
   return (
     <div ref={ref}>
       <div className="flex items-center justify-between mb-2">
-        <p className="text-sm font-semibold text-gray-800">{m.label}</p>
-        <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-100">
+        <p className="text-body-m font-semibold">{m.label}</p>
+        <span className="text-body-s font-bold text-emerald bg-emerald/10 px-2 py-0.5 rounded-md border border-emerald">
           {badge}
         </span>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2 pb-3">
         {/* Before */}
         <div>
-          <div className="flex justify-between text-[10px] text-gray-400 mb-1">
+          <div className="flex justify-between text-caption mb-1 text-neutral/50">
             <span>Before</span>
             <span>
               {m.before}
               {m.unit ?? ''}
             </span>
           </div>
-          <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
+          <div className="h-3 bg-neutralLight/50 rounded-full overflow-hidden">
             <div
-              className="h-full bg-red-300 rounded-full transition-all duration-700 ease-out"
+              className="h-full bg-blush rounded-full transition-all duration-700 ease-out"
               style={{ width: visible ? `${beforePct}%` : '0%' }}
             />
           </div>
@@ -129,11 +129,11 @@ function MetricBar({ metric: m }: { metric: ResultMetric }) {
 
         {/* After */}
         <div>
-          <div className="flex justify-between text-[10px] text-gray-400 mb-1">
+          <div className="flex justify-between text-caption mb-1 text-neutral/50">
             <span>After</span>
             <span>{afterLabel}</span>
           </div>
-          <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
+          <div className="h-3 bg-neutralLight/50 rounded-full overflow-hidden">
             <div
               className={`h-full ${barColor} rounded-full transition-all duration-700 ease-out delay-150`}
               style={{ width: visible ? `${afterPct}%` : '0%' }}

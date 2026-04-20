@@ -48,7 +48,7 @@ export default async function Page({
       </div>
 
       {/* 본문 영역 */}
-      <div className="max-w-[1440px] mx-auto px-5 md:px-20 py-10 md:py-14">
+      <div className="max-w-[1440px] mx-auto px-5 md:px-20 py-10 md:py-14 bg-neutralLight/5">
         <div className="flex gap-10 md:gap-14 items-start">
           {/* 사이드바 (TOC) */}
           <ProjectSidebar
@@ -59,7 +59,7 @@ export default async function Page({
           />
 
           {/* 본문 섹션들 */}
-          <main className="flex-1 min-w-0 space-y-20">
+          <main className="flex-1 min-w-0 space-y-20 ">
             <ProjectSectionRenderer
               sections={sections}
               legacyContent={
@@ -79,9 +79,10 @@ export default async function Page({
               <ProjectRelated relatedProjects={project.relatedProjects} />
             )}
 
-            <div className="pb-20 border-t border-gray-100 pt-10">
-              <p className="text-xs text-gray-400 font-medium">
-                {project.title} · Portfolio
+            {/* 최하단 제목 */}
+            <div className="pb-20 border-t border-neutral/10 pt-10">
+              <p className="text-body-s text-neutral/60 font-medium">
+                {project.title} · Portfolio · Sojin Lee
               </p>
             </div>
           </main>

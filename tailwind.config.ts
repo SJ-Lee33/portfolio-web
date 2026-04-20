@@ -31,6 +31,7 @@ const config: Config = {
       secondary: '#5E78FF',
 
       red: '#FF4500',
+      blush: '#f87170',
 
       neutral: '#333333',
       neutralLight: '#c2c2c2',
@@ -40,6 +41,8 @@ const config: Config = {
 
       black: '#000000',
       white: '#ffffff',
+
+      emerald: '#0bb980',
     },
     fontSize: {
       'display-l': `clamp(3.0rem, 2.5vw, 5.0rem)`,

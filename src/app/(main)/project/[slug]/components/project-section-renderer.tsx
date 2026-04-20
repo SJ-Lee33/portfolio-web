@@ -56,46 +56,48 @@ export default function ProjectSectionRenderer({
         {/* 모바일 탭 네비게이션 */}
         <ProjectMobileNav navItems={navItems} />
 
-        {/* Overview 카드 섹션 (항상 맨 위) */}
-        {hasOverview && (
-          <ProjectOverviewSection
-            desc={overviewDesc}
-            highlights={overviewHighlights ?? []}
-          />
-        )}
+        <div className="p-5">
+          {/* Overview 카드 섹션 (항상 맨 위) */}
+          {hasOverview && (
+            <ProjectOverviewSection
+              desc={overviewDesc}
+              highlights={overviewHighlights ?? []}
+            />
+          )}
 
-        {/* 자유 섹션들 */}
-        {sections.map((section) => {
-          const id = slugify(section.title)
+          {/* 자유 섹션들 */}
+          {sections.map((section) => {
+            const id = slugify(section.title)
 
-          if (section._type === 'gallerySection') {
+            if (section._type === 'gallerySection') {
+              return (
+                <ProjectGallerySection
+                  key={id}
+                  id={id}
+                  title={section.title}
+                  images={section.images ?? []}
+                />
+              )
+            }
+
             return (
-              <ProjectGallerySection
+              <ProjectContentSection
                 key={id}
                 id={id}
                 title={section.title}
-                images={section.images ?? []}
+                body={Array.isArray(section.body) ? section.body : []}
               />
             )
-          }
+          })}
 
-          return (
-            <ProjectContentSection
-              key={id}
-              id={id}
-              title={section.title}
-              body={Array.isArray(section.body) ? section.body : []}
+          {/* Result 고정 섹션 (항상 맨 아래) */}
+          {hasResult && (
+            <ProjectResultSection
+              outcomes={resultOutcomes ?? []}
+              metrics={resultMetrics ?? []}
             />
-          )
-        })}
-
-        {/* Result 고정 섹션 (항상 맨 아래) */}
-        {hasResult && (
-          <ProjectResultSection
-            outcomes={resultOutcomes ?? []}
-            metrics={resultMetrics ?? []}
-          />
-        )}
+          )}
+        </div>
       </>
     )
   }

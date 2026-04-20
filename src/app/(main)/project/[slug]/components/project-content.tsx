@@ -8,7 +8,7 @@ import PortableSubheader from '../../../../../components/portable-text/portable-
 import PortablePlanetext from '../../../../../components/portable-text/portable-plaintext'
 import PortableListBullet from '../../../../../components/portable-text/portable-listbullet'
 import PortableImage from '../../../../../components/portable-text/portable-image'
-import PortableListNumber from '../../../../../components/portable-text/portable-listnumber'
+// import PortableListNumber from '../../../../../components/portable-text/portable-listnumber'
 import PortableQuote from '../../../../../components/portable-text/portable-quote'
 import dynamic from 'next/dynamic'
 import Portable from '@/components/portable-text/portable-text-component'
