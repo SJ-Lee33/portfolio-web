@@ -77,34 +77,32 @@ function SidebarClient({
   }
 
   return (
-    <aside className="hidden lg:flex flex-col w-[200px] xl:w-[220px] flex-shrink-0">
-      {/* sticky: NavBar(65px) + 약간의 여백 */}
-      <div className="sticky top-[85px]">
-        <p className="text-[10px] font-bold tracking-widest text-gray-400 uppercase mb-4 px-3">
-          Navigation
-        </p>
-        <nav className="flex flex-col gap-0.5">
-          {navItems.map((item) => {
-            const isActive = activeId === item.id
-            return (
-              <button
-                key={item.id}
-                onClick={() => scrollTo(item.id)}
-                className={`text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 relative ${
-                  isActive
-                    ? 'text-blue-600 bg-blue-50 font-semibold'
-                    : 'text-gray-500 hover:text-gray-800 hover:bg-gray-50'
-                }`}
-              >
-                {isActive && (
-                  <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-blue-600 rounded-r-full" />
-                )}
-                <span className="pl-1">{item.label}</span>
-              </button>
-            )
-          })}
-        </nav>
-      </div>
+    <aside className="hidden md:flex flex-col w-[200px] xl:w-[220px] flex-shrink-0 sticky top-[100px] self-start">
+      <p className="text-body-s font-bold tracking-widest text-neutral mb-4 px-3">
+        목차
+      </p>
+
+      <nav className="flex flex-col gap-0.5">
+        {navItems.map((item) => {
+          const isActive = activeId === item.id
+          return (
+            <button
+              key={item.id}
+              onClick={() => scrollTo(item.id)}
+              className={`text-left px-3 py-2.5 rounded-lg text-body-m font-medium transition-all duration-150 relative ${
+                isActive
+                  ? 'text-primary bg-primaryLighter/50 font-semibold'
+                  : 'text-neutral hover:bg-neutralLighter'
+              }`}
+            >
+              {isActive && (
+                <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-blue-600 rounded-r-full" />
+              )}
+              <span className="pl-1">{item.label}</span>
+            </button>
+          )
+        })}
+      </nav>
     </aside>
   )
 }

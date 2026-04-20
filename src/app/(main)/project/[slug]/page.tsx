@@ -48,9 +48,9 @@ export default async function Page({
       </div>
 
       {/* 본문 영역 */}
-      <div className="max-w-[1440px] mx-auto px-5 lg:px-20 py-10 lg:py-14">
-        <div className="flex gap-10 lg:gap-14 items-start">
-          {/* 사이드바 (sticky TOC) */}
+      <div className="max-w-[1440px] mx-auto px-5 md:px-20 py-10 md:py-14">
+        <div className="flex gap-10 md:gap-14 items-start">
+          {/* 사이드바 (TOC) */}
           <ProjectSidebar
             sections={sections}
             hasLegacy={hasLegacyContent ?? false}

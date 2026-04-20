@@ -35,7 +35,7 @@ export default function ProjectMobileNav({ navItems }: Props) {
   if (navItems.length === 0) return null
 
   return (
-    <div className="lg:hidden sticky top-[65px] z-40 bg-white border-b border-gray-200 shadow-sm">
+    <div className="md:hidden sticky top-[90px] z-40 bg-white border-b border-neutralLight">
       <div className="flex overflow-x-auto scrollbar-hide">
         {navItems.map((item) => {
           const isActive = activeId === item.id
@@ -43,10 +43,10 @@ export default function ProjectMobileNav({ navItems }: Props) {
             <button
               key={item.id}
               onClick={() => scrollTo(item.id)}
-              className={`flex-shrink-0 text-xs font-semibold px-4 py-3 border-b-2 transition-all duration-150 whitespace-nowrap ${
+              className={`flex-shrink-0 text-body-s font-semibold px-4 py-3 border-b-2 transition-all duration-150 whitespace-nowrap ${
                 isActive
-                  ? 'text-blue-600 border-blue-600'
-                  : 'text-gray-400 border-transparent hover:text-gray-700'
+                  ? 'text-primary border-primary'
+                  : 'text-neutral border-transparent hover:bg-neutralLighter'
               }`}
             >
               {item.label}
