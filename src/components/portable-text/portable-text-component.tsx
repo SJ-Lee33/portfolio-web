@@ -98,12 +98,12 @@ export default function Portable({ value, hideToc = false }: Props) {
     },
     list: {
       bullet: ({ children }: { children: React.ReactNode }) => (
-        <div className="bg-white border border-neutralLight/50 rounded-xl p-5 m-5 shadow-sm">
+        <div className="bg-white border border-neutralLight/40 rounded-xl p-5 my-5">
           <ul className="list-disc pl-5 space-y-1.5 text-body-m">{children}</ul>
         </div>
       ),
       number: ({ children }: { children: React.ReactNode }) => (
-        <div className="bg-white border border-neutralLight/50 rounded-xl p-5 m-5 shadow-sm">
+        <div className="bg-white border border-neutralLight/40 rounded-xl p-5 my-5">
           <ol className="list-decimal pl-5 space-y-1.5 text-body-m">
             {children}
           </ol>

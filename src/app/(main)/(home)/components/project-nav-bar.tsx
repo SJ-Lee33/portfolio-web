@@ -31,9 +31,8 @@ export default function ProjectNavBar() {
         className={classNames(
           'flex-1 justify-center text-center',
           'w-full py-4 rounded-full',
-          'text-neutral',
-          'text-body-m md:text-title-s',
-          'hover:bg-primaryDark hover:text-white hover:font-extrabold',
+          'text-neutral text-body-m md:text-title-s',
+          'border border-white hover:border-neutralLight hover:font-bold',
           'focus:bg-primaryDarker',
           isActive && 'bg-primary text-white font-extrabold',
         )}
@@ -63,16 +62,16 @@ export default function ProjectNavBar() {
         <li>개발</li>
       </NavLink>
       <NavLink
-        href={NAVIGATION_PATH.design}
-        isActive={projectType === 'design'}
-      >
-        <li>디자인</li>
-      </NavLink>
-      <NavLink
         href={NAVIGATION_PATH.planning}
         isActive={projectType === 'planning'}
       >
         <li>기획</li>
+      </NavLink>
+      <NavLink
+        href={NAVIGATION_PATH.design}
+        isActive={projectType === 'design'}
+      >
+        <li>디자인</li>
       </NavLink>
     </ul>
   )

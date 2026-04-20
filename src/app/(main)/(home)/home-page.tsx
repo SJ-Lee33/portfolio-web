@@ -6,12 +6,13 @@ import WorkScreen from './components/work-screen'
 import HeaderClient from './components/header-client'
 import ProjectsScreen from './components/projects-screen'
 import ScrollTo from './hook/scroll-to'
+import { ProjectType } from '@/sanity/schemaTypes/const/projectType'
 
 export default async function HomePage({
   projectType,
   autoScrollTo,
 }: {
-  projectType: 'engineering' | 'design' | 'planning' | null
+  projectType: ProjectType | null
   autoScrollTo?: 'project' | 'profile'
 }) {
   return (

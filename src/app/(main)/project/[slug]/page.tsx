@@ -43,7 +43,7 @@ export default async function Page({
       </header>
 
       {/* Hero — 흰 배경, 아래 그림자 */}
-      <div className="pt-[65px] bg-white shadow-lg shadow-neutralLight">
+      <div className="pt-[65px] bg-white shadow-xl shadow-neutralLight/20">
         <ProjectHero project={project} />
       </div>
 

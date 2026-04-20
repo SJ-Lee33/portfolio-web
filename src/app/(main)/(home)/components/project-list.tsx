@@ -23,32 +23,32 @@ export default async function ProjectList({
   })) as { data: PROJECT_LIST_QUERYResult }
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-2 text-title-s rounded-md">
-        {projectList.map((project: ProjectListItem, index: number) => (
-          <React.Fragment key={project.slug}>
-            {index > 0 && <div className="border-t border-neutralLight m-4" />}
-            <Link
-              href={`/project/${project.slug}`}
-              target="_blank"
-              className="w-full"
-            >
-              <ProjectItem
-                id={project.id}
-                slug={project.slug}
-                title={project.title}
-                projectTypes={project.projectTypes ?? null}
-                startDate={project.startDate}
-                releaseDate={project.releaseDate}
-                summary={project.summary}
-                thumbnail={project.thumbnail}
-                skill={project.skill}
-                index={index}
-              />
-            </Link>
-          </React.Fragment>
-        ))}
-      </div>
+    <div className="flex flex-col gap-1 md:gap-2 bg-neutralLighter">
+      {projectList.map((project: ProjectListItem, index: number) => (
+        <React.Fragment key={project.slug}>
+          {index > 0 && (
+            <div className="border-t border-neutralLight/50 m-2 md:m-4" />
+          )}
+          <Link
+            href={`/project/${project.slug}`}
+            target="_blank"
+            className="w-full p-4"
+          >
+            <ProjectItem
+              id={project.id}
+              slug={project.slug}
+              title={project.title}
+              projectTypes={project.projectTypes ?? null}
+              startDate={project.startDate}
+              releaseDate={project.releaseDate}
+              summary={project.summary}
+              thumbnail={project.thumbnail}
+              skill={project.skill}
+              index={index}
+            />
+          </Link>
+        </React.Fragment>
+      ))}
     </div>
   )
 }
