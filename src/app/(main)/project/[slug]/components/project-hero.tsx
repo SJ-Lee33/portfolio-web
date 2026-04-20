@@ -2,6 +2,8 @@ import { Globe, FileText, Play, ExternalLink, Layers } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
 import Image from 'next/image'
 import type { ProjectItem } from '@/hooks/get-project'
+import ProjectTypeLabel from '@/app/(main)/(home)/components/project-type-label'
+import { formatDate } from '@/utils/formatDate'
 
 const ICON_MAP: Record<string, React.ReactNode> = {
   github: <FaGithub size={15} />,
@@ -13,10 +15,9 @@ const ICON_MAP: Record<string, React.ReactNode> = {
 
 interface Props {
   project: ProjectItem
-  year: string
 }
 
-export default function ProjectHero({ project, year }: Props) {
+export default function ProjectHero({ project }: Props) {
   const techTags = project.skill ?? []
   const kpis = project.kpis ?? []
   const links = project.links ?? []
@@ -27,26 +28,17 @@ export default function ProjectHero({ project, year }: Props) {
         .filter(Boolean)
     : []
 
-  // 분류 뱃지 텍스트
-  const t = project.projectTypes ?? {}
-  const parts = [
-    t.engineering && '개발',
-    t.planning && '기획',
-    t.design && '디자인',
-  ].filter(Boolean)
-  const typeLabel = parts.length ? parts.join(' · ') : 'Project'
-
   return (
-    <section className="bg-white border-b border-gray-100 px-5 lg:px-20 py-10 lg:py-14">
+    <section className="px-5 md:px-20 py-10 md:py-14">
       <div className="max-w-[1440px] mx-auto">
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
           {/* 썸네일 */}
-          <div className="w-full lg:w-[260px] flex-shrink-0">
+          <div className="w-full md:w-[260px] flex-shrink-0">
             {project.thumbnail ? (
-              <div className="w-full lg:w-[260px] aspect-[3/4] rounded-2xl overflow-hidden relative border border-gray-100 shadow-sm">
+              <div className="w-full md:w-[260px] aspect-[3/4] rounded-2xl overflow-hidden relative border border-neutral shadow-sm">
                 <Image
                   src={project.thumbnail}
-                  alt={project.title ?? ''}
+                  alt={project.title ?? 'thumbnail image'}
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 260px"
@@ -54,17 +46,17 @@ export default function ProjectHero({ project, year }: Props) {
                 />
               </div>
             ) : (
-              <div className="w-full lg:w-[260px] aspect-[3/4] rounded-2xl overflow-hidden bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-100 flex items-center justify-center relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-blue-900/20" />
+              <div className="w-full md:w-[260px] aspect-[3/4] rounded-2xl overflow-hidden bg-gradient-to-br border border-neutral flex items-center justify-center relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/20" />
                 <div className="relative z-10 text-center px-6">
-                  <div className="w-20 h-20 bg-blue-600 rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                  <div className="w-20 h-20 bg-primary rounded-2xl mx-auto mb-4 flex items-center justify-center">
                     <Layers size={36} className="text-white" />
                   </div>
-                  <p className="text-blue-700 font-semibold text-sm tracking-wide uppercase">
-                    Project
+                  <p className="font-semibold text-body-s tracking-wide uppercase">
+                    Project Thumbnail Image
                   </p>
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-blue-900/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 h-32" />
               </div>
             )}
           </div>
@@ -72,23 +64,24 @@ export default function ProjectHero({ project, year }: Props) {
           {/* 메타 정보 */}
           <div className="flex-1 min-w-0">
             {/* 분류 + 연도 */}
-            <div className="flex items-center gap-2 mb-3">
-              <span className="text-xs font-semibold tracking-widest text-blue-600 uppercase bg-blue-50 px-3 py-1 rounded-full">
-                {typeLabel}
-              </span>
-              {year && <span className="text-xs text-gray-400">{year}</span>}
+            <div className="flex items-center gap-4 mb-3 text-body-m">
+              <ProjectTypeLabel projectTypes={project.projectTypes} badge />
+              <div>
+                {formatDate(project.startDate!)} -{' '}
+                {formatDate(project.releaseDate!)}
+              </div>
             </div>
 
             {/* 제목 */}
-            <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-3">
+            <h1 className="text-headline-l md:text-headline-m font-bold text-neutral leading-tight mb-3">
               {project.title}
             </h1>
 
             {/* 요약 */}
             {project.summary && (
-              <p className="text-base lg:text-lg text-gray-500 mb-8 font-medium leading-relaxed">
+              <div className="text-base text-neutral mb-8 leading-relaxed">
                 {project.summary}
-              </p>
+              </div>
             )}
 
             {/* KPI 카드 */}
@@ -97,16 +90,16 @@ export default function ProjectHero({ project, year }: Props) {
                 {kpis.map((kpi) => (
                   <div
                     key={kpi.label}
-                    className="bg-gray-50 border border-gray-100 rounded-xl p-4 hover:border-blue-200 hover:bg-blue-50/40 transition-all duration-200"
+                    className="bg-neutralLight/10 border border-neutralLight/30 rounded-xl p-4 hover:border-primaryLighter/70 hover:bg-primaryLighter/50 transition-all duration-200"
                   >
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">
+                    <p className="text-body-m font-semibold text-neutral uppercase tracking-wide mb-1">
                       {kpi.label}
                     </p>
-                    <p className="text-2xl lg:text-3xl font-black text-blue-600 leading-none mb-1">
+                    <p className="text-title-m font-extrabold text-primaryDark leading-none mb-1">
                       {kpi.value}
                     </p>
                     {kpi.sub && (
-                      <p className="text-xs text-gray-500">{kpi.sub}</p>
+                      <p className="text-body-s text-neutral">{kpi.sub}</p>
                     )}
                   </div>
                 ))}
@@ -119,7 +112,8 @@ export default function ProjectHero({ project, year }: Props) {
                 {techTags.map((s) => (
                   <span
                     key={s}
-                    className="flex items-center gap-1.5 text-xs font-semibold bg-white border border-gray-200 text-gray-600 px-3 py-1.5 rounded-lg hover:border-blue-300 hover:text-blue-700 transition-colors duration-150"
+                    className="flex items-center gap-1.5 text-caption font-semibold bg-white border border-neutralLight text-neutral px-3 py-1.5 rounded-md
+                     hover:border-primary hover:text-primary transition-colors duration-150"
                   >
                     {s}
                   </span>
@@ -133,13 +127,14 @@ export default function ProjectHero({ project, year }: Props) {
                 {roles.map((r) => (
                   <span
                     key={r}
-                    className="text-xs text-blue-600 bg-blue-50 border border-blue-100 px-3 py-1 rounded-md font-medium"
+                    className="text-body-s text-primary bg-primaryLighter/30 border border-primary px-3 py-0.5 rounded-md font-medium"
                   >
                     {r}
                   </span>
                 ))}
               </div>
             )}
+
             {/* 외부 링크 버튼 */}
             {links.length > 0 && (
               <div className="flex flex-wrap gap-3">
@@ -149,7 +144,7 @@ export default function ProjectHero({ project, year }: Props) {
                     href={link.url!}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`inline-flex items-center gap-2 text-sm font-semibold px-5 py-3 rounded-xl transition-all duration-200 hover:shadow-lg text-white hover:bg-neutral bg-neutral/80`}
+                    className={`inline-flex items-center gap-2 text-body-s font-semibold px-5 py-2 rounded-xl transition-all duration-200 hover:shadow-md text-white hover:bg-neutral bg-neutral/80`}
                   >
                     {ICON_MAP[link.icon!] ?? <ExternalLink size={15} />}
                     {link.label}

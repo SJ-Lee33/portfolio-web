@@ -84,7 +84,7 @@ export default function ProjectSectionRenderer({
               key={id}
               id={id}
               title={section.title}
-              body={section.body ?? []}
+              body={Array.isArray(section.body) ? section.body : []}
             />
           )
         })}

@@ -183,7 +183,6 @@ export type Project = {
     _type: 'image'
   }
   role?: string
-  contribution?: string
   kpis?: Array<{
     label?: string
     value?: string
@@ -620,7 +619,7 @@ export type PROJECT_QUERYResult = {
   startDate: string | null
   releaseDate: string | null
   role: string | null
-  contribution: string | null
+  contribution: null
   updatedAt: string
   skill: Array<string> | null
   kpis: Array<{

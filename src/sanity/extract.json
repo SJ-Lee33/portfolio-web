@@ -1018,13 +1018,6 @@
         },
         "optional": true
       },
-      "contribution": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
       "kpis": {
         "type": "objectAttribute",
         "value": {

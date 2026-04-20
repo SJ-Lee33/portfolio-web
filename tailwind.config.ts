@@ -20,21 +20,21 @@ const config: Config = {
       },
     },
     colors: {
-      soft: '#E6F0FA',
+      soft: '#eaf0fd',
 
-      primary: '#1E90FF',
-      primaryDark: '#0056b3',
-      primaryDarker: '#003d80',
-      primaryLight: '#63B8FF',
-      primaryLighter: '#e6f7f9',
+      primary: '#2d66eb',
+      primaryDark: '#1f47a5',
+      primaryDarker: '#12295e',
+      primaryLight: '#6c94f1',
+      primaryLighter: '#c0d1f9',
 
       secondary: '#5E78FF',
 
       red: '#FF4500',
 
       neutral: '#333333',
-      neutralLight: '#666666',
-      neutralLighter: '#f3f3f3',
+      neutralLight: '#c2c2c2',
+      neutralLighter: '#f9f9f9',
 
       lemon: '#FFF4CC',
 

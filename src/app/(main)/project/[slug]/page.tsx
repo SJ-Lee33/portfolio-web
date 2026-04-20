@@ -18,11 +18,13 @@ export default async function Page({
     redirect('/private-warning')
   }
 
-  const year = project.startDate ? project.startDate.slice(0, 4) : ''
+  // const year = project.startDate ? project.startDate.slice(0, 4) : ''
   const sections = project.sections ?? []
   const hasNewSections = sections.length > 0
   const hasLegacyContent =
-    !hasNewSections && project.content && project.content.length > 0
+    !hasNewSections &&
+    Array.isArray(project.content) &&
+    project.content.length > 0
 
   const hasOverview =
     (project.overviewHighlights?.length ?? 0) > 0 || !!project.overviewDesc
@@ -41,8 +43,8 @@ export default async function Page({
       </header>
 
       {/* Hero — 흰 배경, 아래 그림자 */}
-      <div className="pt-[65px] bg-white shadow-sm">
-        <ProjectHero project={project} year={year} />
+      <div className="pt-[65px] bg-white shadow-lg shadow-neutralLight">
+        <ProjectHero project={project} />
       </div>
 
       {/* 본문 영역 */}
@@ -60,7 +62,11 @@ export default async function Page({
           <main className="flex-1 min-w-0 space-y-20">
             <ProjectSectionRenderer
               sections={sections}
-              legacyContent={hasLegacyContent ? project.content : undefined}
+              legacyContent={
+                hasLegacyContent && Array.isArray(project.content)
+                  ? project.content
+                  : undefined
+              }
               legacyImgUrls={hasLegacyContent ? project.imgUrls : undefined}
               overviewDesc={project.overviewDesc}
               overviewHighlights={project.overviewHighlights}
