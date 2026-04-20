@@ -4,7 +4,7 @@ interface PortableTableProps {
     mode?: 'rowHeader' | 'colHeader' | 'bothHeader'
     dense?: boolean
     table?: {
-      rows?: { cells: string[] }[]
+      rows?: { cells: string[]; _key?: string }[]
     }
   }
 }
@@ -15,105 +15,63 @@ export default function PortableTable({ value }: PortableTableProps) {
   if (!rows.length) return null
 
   const colCount = rows[0]?.cells?.length ?? 0
-  const isColumnMode = mode === 'colHeader' || mode === 'bothHeader'
-  const isRowMode = mode === 'rowHeader'
-
-  // ✅ 나머지 열 개수
-  const restColCount = Math.max(colCount - 1, 1)
 
   return (
-    <div className="w-full px-3 my-6 overflow-x-auto">
+    <div className="w-full my-6 overflow-x-auto rounded-2xl border border-gray-100">
       <table
-        className={`w-full border-collapse ${
-          dense ? 'text-caption' : 'text-body-m'
-        }`}
-        style={{ tableLayout: 'fixed' }}
+        className={`w-full border-collapse ${dense ? 'text-xs' : 'text-sm'}`}
       >
-        {/* ✅ colgroup: 열 폭 비율 정의 */}
-        <colgroup>
-          {isColumnMode ? (
-            <>
-              {/* 첫 열: 25%까지 */}
-              <col
-                style={{
-                  maxWidth: '25%',
-                }}
-              />
-              {/* 나머지 열: 남은 75%를 균등 분배 */}
-              {Array.from({ length: restColCount }).map((_, idx) => (
-                <col
-                  key={idx}
-                  style={{
-                    width: `${75 / restColCount}%`,
-                  }}
-                />
-              ))}
-            </>
-          ) : isRowMode ? (
-            <>
-              {/* 모든 열을 전체 폭 기준 균등 분배 */}
-              {Array.from({ length: colCount }).map((_, idx) => (
-                <col
-                  key={idx}
-                  style={{
-                    width: `${100 / colCount}%`,
-                  }}
-                />
-              ))}
-            </>
-          ) : (
-            // 기본 fallback
-            <>
-              {Array.from({ length: colCount }).map((_, idx) => (
-                <col
-                  key={idx}
-                  style={{
-                    width: `${100 / colCount}%`,
-                  }}
-                />
-              ))}
-            </>
-          )}
-        </colgroup>
-
-        {/* ✅ 캡션 */}
         {caption && (
-          <caption className="p-2 text-body-s text-neutral-500">
+          <caption className="px-5 py-2 text-xs text-gray-400 text-left bg-gray-50 border-b border-gray-100">
             {caption}
           </caption>
         )}
 
-        {/* ✅ 표 본문 */}
         <tbody>
-          {rows.map((row, i) => (
-            <tr key={i}>
-              {row.cells.map((cell, j) => {
-                const isHeaderRow = mode === 'rowHeader' && i === 0
-                const isHeaderCol = mode === 'colHeader' && j === 0
-                const isHeaderBoth =
-                  mode === 'bothHeader' && (i === 0 || j === 0)
-                const isHeader = isHeaderRow || isHeaderCol || isHeaderBoth
-                const Tag = isHeader ? 'th' : 'td'
+          {rows.map((row, i) => {
+            const isHeaderRow = mode === 'rowHeader' && i === 0
+            const isColHeader = mode === 'colHeader' || mode === 'bothHeader'
 
-                return (
-                  <Tag
-                    key={j}
-                    className={[
-                      'border border-neutral px-3 py-2 align-top text-left truncate',
-                      isHeader ? 'bg-lemon/50 font-semibold' : '',
-                    ].join(' ')}
-                    style={{
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    {cell}
-                  </Tag>
-                )
-              })}
-            </tr>
-          ))}
+            return (
+              <tr
+                key={row._key ?? i}
+                className={`
+                  border-b border-gray-50 last:border-none
+                  transition-colors duration-150
+                  ${isHeaderRow ? 'bg-gray-50' : 'hover:bg-gray-50/80'}
+                `}
+              >
+                {row.cells.map((cell, j) => {
+                  const isHeaderCol =
+                    (mode === 'colHeader' || mode === 'bothHeader') && j === 0
+                  const isBothHeader = mode === 'bothHeader' && i === 0
+                  const isHeader = isHeaderRow || isHeaderCol || isBothHeader
+
+                  const Tag = isHeader ? 'th' : 'td'
+
+                  return (
+                    <Tag
+                      key={j}
+                      className={[
+                        'px-5 py-3 align-top text-left',
+                        isHeader
+                          ? 'font-semibold text-gray-500 uppercase tracking-wide text-xs bg-gray-50'
+                          : 'text-gray-700 font-normal',
+                        // 첫 번째 열 헤더면 border-r
+                        isHeaderCol && !isHeaderRow
+                          ? 'border-r border-gray-100 font-semibold text-gray-600 text-xs uppercase tracking-wide bg-gray-50'
+                          : '',
+                      ]
+                        .join(' ')
+                        .trim()}
+                    >
+                      {cell}
+                    </Tag>
+                  )
+                })}
+              </tr>
+            )
+          })}
         </tbody>
       </table>
     </div>

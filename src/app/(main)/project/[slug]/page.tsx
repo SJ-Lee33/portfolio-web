@@ -1,14 +1,10 @@
-import NavBar from '@/components/nav-bar/nav-bar'
-import getProject from '@/hooks/get-project'
-import ProjectTypeLabel from '../../(home)/components/project-type-label'
-import ProjectTitle from './components/project-title'
-import ProjectSummary from './components/project-summary'
-import PortableHeader from '@/components/portable-text/portable-header'
-import PortableImages from '@/components/portable-text/portable-images'
-import Portable from '@/components/portable-text/portable-text-component'
-import Link from 'next/link'
-import ProjectItem from '../../(home)/components/project-item'
 import { redirect } from 'next/navigation'
+import getProject from '@/hooks/get-project'
+import ProjectHero from './components/project-hero'
+import ProjectSidebar from './components/project-sidebar'
+import NavBar from '@/components/nav-bar/nav-bar'
+import ProjectSectionRenderer from './components/project-section-renderer'
+import ProjectRelated from './components/project-related'
 
 export default async function Page({
   params,
@@ -17,94 +13,74 @@ export default async function Page({
 }) {
   const { slug } = await params
   const project = await getProject(slug)
+
   if (!project?.isPublic) {
     redirect('/private-warning')
   }
+
+  const year = project.startDate ? project.startDate.slice(0, 4) : ''
+  const sections = project.sections ?? []
+  const hasNewSections = sections.length > 0
+  const hasLegacyContent =
+    !hasNewSections && project.content && project.content.length > 0
+
+  const hasOverview =
+    (project.overviewHighlights?.length ?? 0) > 0 || !!project.overviewDesc
+  const hasResult =
+    (project.resultOutcomes?.length ?? 0) > 0 ||
+    (project.resultMetrics?.length ?? 0) > 0
+
   return (
-    <>
+    <div className="min-h-screen bg-gray-50 font-sans antialiased">
+      {/* 상단 고정 헤더 */}
       <header className="w-full fixed top-0 z-50">
         <NavBar
-          headerDesign="bg-white text-neutral shadow-md shadow-neutral/5"
+          headerDesign="bg-white text-neutral shadow-sm border-b border-gray-100"
           shownLogo
         />
       </header>
 
-      <div className="flex flex-col items-center w-full mt-[90px] md:mt-[65px]">
-        {/* 분류 */}
-        <div className="flex flex-col w-full items-center text-center font-light text-body-l bg-secondary text-white pt-4 gap-4">
-          <ProjectTypeLabel projectTypes={project?.projectTypes} />
-          <div className="h-[1px] w-[40px] bg-white" />
-        </div>
-        {/* 제목 (상단고정) */}
-        <ProjectTitle title={project.title || ''} />
-        {/* 본문 */}
-        <div className="mx-auto max-w-mobile md:max-w-desktop">
-          {/* 요약 */}
-          <ProjectSummary
-            contribution={project.contribution || ''}
-            duration={project.duration || ''}
-            startDate={project.startDate || ''}
-            releaseDate={project.releaseDate || ''}
-            role={project.role || ''}
-            skill={project.skill || []}
-            thumbnail={project.thumbnail}
-            updatedAt={project.updatedAt}
+      {/* Hero — 흰 배경, 아래 그림자 */}
+      <div className="pt-[65px] bg-white shadow-sm">
+        <ProjectHero project={project} year={year} />
+      </div>
+
+      {/* 본문 영역 */}
+      <div className="max-w-[1440px] mx-auto px-5 lg:px-20 py-10 lg:py-14">
+        <div className="flex gap-10 lg:gap-14 items-start">
+          {/* 사이드바 (sticky TOC) */}
+          <ProjectSidebar
+            sections={sections}
+            hasLegacy={hasLegacyContent ?? false}
+            hasOverview={hasOverview}
+            hasResult={hasResult}
           />
 
-          {/* 구분선 */}
-          <div className="w-full h-[0.5px] bg-neutralLight my-10" />
+          {/* 본문 섹션들 */}
+          <main className="flex-1 min-w-0 space-y-20">
+            <ProjectSectionRenderer
+              sections={sections}
+              legacyContent={hasLegacyContent ? project.content : undefined}
+              legacyImgUrls={hasLegacyContent ? project.imgUrls : undefined}
+              overviewDesc={project.overviewDesc}
+              overviewHighlights={project.overviewHighlights}
+              resultOutcomes={project.resultOutcomes}
+              resultMetrics={project.resultMetrics}
+            />
 
-          <div className="flex flex-col">
-            {/* 내용 */}
-            <Portable value={project.content!} />
-
-            {/* 사진 갤러리 */}
-            {project.imgUrls && (
-              <>
-                <PortableHeader>{'스크린샷'}</PortableHeader>
-                <PortableImages
-                  images={project.imgUrls}
-                  thumbnail={project.thumbnail}
-                />
-              </>
+            {/* 관련 프로젝트 */}
+            {project.relatedProjects && project.relatedProjects.length > 0 && (
+              <ProjectRelated relatedProjects={project.relatedProjects} />
             )}
 
-            {/* 관련 프로젝트  */}
-            {project?.relatedProjects && (
-              <>
-                <PortableHeader>{'관련 프로젝트'}</PortableHeader>
-                <div className="h-[20px]" />
-                {project.relatedProjects.map(
-                  (reference: any, index: number) => {
-                    let relatedProject = reference.reference
-                    return (
-                      <Link
-                        href={`/project/${relatedProject.serial}`}
-                        key={relatedProject.serial}
-                        target="_blank"
-                        className="w-full"
-                      >
-                        <ProjectItem
-                          id={relatedProject.id}
-                          slug={relatedProject.slug}
-                          title={relatedProject.title}
-                          projectTypes={relatedProject.projectTypes}
-                          summary={relatedProject.summary}
-                          startDate={relatedProject.startDate}
-                          releaseDate={relatedProject.releaseDate}
-                          thumbnail={relatedProject.thumbnail}
-                          skill={relatedProject?.skill}
-                          index={index}
-                        />
-                      </Link>
-                    )
-                  },
-                )}
-              </>
-            )}
-          </div>
+            <div className="pb-20 border-t border-gray-100 pt-10">
+              <p className="text-xs text-gray-400 font-medium">
+                {project.title} · Portfolio
+              </p>
+            </div>
+          </main>
         </div>
       </div>
-    </>
+    </div>
   )
 }

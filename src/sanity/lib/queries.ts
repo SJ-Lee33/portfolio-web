@@ -72,12 +72,10 @@ export const PROJECT_QUERY = defineQuery(`
   defined(serial) &&
   // isPublic != false &&
   (
-    serial == $sNum ||           // number 비교
-    string(serial) == $sStr      // string 비교
+    serial == $sNum ||
+    string(serial) == $sStr
   )
 ][0]{
-  // "키 이름" : 표현식
-  // 따옴표 없으면 동일한 이름
   serial,
   isPublic,
   title,
@@ -86,22 +84,60 @@ export const PROJECT_QUERY = defineQuery(`
   startDate,
   releaseDate,
   role,
-  // duration,
   contribution,
   "updatedAt": _updatedAt,
 
   skill[],
+  kpis[],
+  "links": links[]{
+    label,
+    url,
+    icon
+  },
+
+  // Overview 카드 섹션
+  overviewDesc,
+  overviewHighlights[],
+
+  // Result 고정 섹션
+  resultOutcomes[],
+  resultMetrics[],
 
   "thumbnail": coalesce(thumbnail.asset->url, ""),
-  content[],
-  contentOverview[],
-  contentContribution[],
-  contentSkill[],
-  contentReflection[],
-  
-  troubleShootings[],
+
+  // 새 본문 섹션 배열
+  "sections": sections[]{
+    _type,
+    title,
+    // contentSection인 경우
+    body[]{
+      ...,
+      _type == "image" => {
+        ...,
+        "url": asset->url,
+        "width": asset->metadata.dimensions.width,
+        "height": asset->metadata.dimensions.height
+      }
+    },
+    // gallerySection인 경우
+    "images": images[]{
+      "url": asset->url,
+      "width": asset->metadata.dimensions.width,
+      "height": asset->metadata.dimensions.height,
+      caption
+    }
+  },
+
+  // 레거시 필드 (구버전 데이터 호환)
+  content[]{
+    ...,
+    _type == "image" => {
+      ...,
+      "url": asset->url
+    }
+  },
   "imgUrls": coalesce(images[].asset->url, ""),
-  // "imgUrls": images[].asset->url,
+
   "relatedProjects": relatedProjects[]{
     "reference": reference->{
       title,

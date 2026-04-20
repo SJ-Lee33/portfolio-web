@@ -15,7 +15,6 @@ import PortableTable from './portable-table'
 import { urlFor } from '@/sanity/lib/image'
 import classNames from 'classnames'
 
-// 한글 포함 슬러그화 (중복 방지를 위해 used 카운터 사용)
 function slugify(text: string, used: Record<string, number>) {
   const base = text
     .toLowerCase()
@@ -26,7 +25,6 @@ function slugify(text: string, used: Record<string, number>) {
   return n === 1 ? base : `${base}-${n}`
 }
 
-// 블록 내 텍스트만 뽑기
 function getPlainText(blk: any) {
   return (blk?.children ?? [])
     .map((c: any) => c?.text ?? '')
@@ -34,8 +32,16 @@ function getPlainText(blk: any) {
     .trim()
 }
 
-export default function Portable({ value }: { value: any[] }) {
-  // 1) h1/h2 수집 + 고유 id 생성
+interface Props {
+  value: any[]
+  /**
+   * true이면 우측 TOC를 렌더링하지 않음.
+   * 섹션 구조에서 사이드바가 TOC 역할을 하므로 내부 TOC 불필요.
+   */
+  hideToc?: boolean
+}
+
+export default function Portable({ value, hideToc = false }: Props) {
   const { headings, idByKey, headingIds } = useMemo(() => {
     const used: Record<string, number> = {}
     const hs: { id: string; text: string; level: 1 | 2; _key?: string }[] = []
@@ -56,20 +62,16 @@ export default function Portable({ value }: { value: any[] }) {
     return { headings: hs, idByKey: map, headingIds: hs.map((h) => h.id) }
   }, [value])
 
-  // 2) 렌더 시에도 h1/h2에 정확히 같은 id 부여
-  // _key로 매칭이 안 되는 경우(없을 때)는 headingIds 순서를 따라 부여
   const seqRef = useRef(0)
-  const SCROLL_MT = 'scroll-mt-[160px]'
+  // hideToc 모드에서는 scroll-mt를 28(112px)으로 — NavBar(65px) + 여유
+  const SCROLL_MT = hideToc ? 'scroll-mt-28' : 'scroll-mt-[160px]'
 
   const components: any = {
     block: {
       h1: ({ children, value: blk }: { children: any; value: any }) => {
         const text = getPlainText(blk)
         let id = (blk?._key && idByKey[blk._key]) || headingIds[seqRef.current]
-        if (!id) {
-          // 혹시라도 동기화가 어긋나면 슬러그로 안전 fallback
-          id = slugify(text || 'h1', {})
-        }
+        if (!id) id = slugify(text || 'h1', {})
         seqRef.current += 1
         return (
           <div id={id} className={SCROLL_MT}>
@@ -80,9 +82,7 @@ export default function Portable({ value }: { value: any[] }) {
       h2: ({ children, value: blk }: { children: any; value: any }) => {
         const text = getPlainText(blk)
         let id = (blk?._key && idByKey[blk._key]) || headingIds[seqRef.current]
-        if (!id) {
-          id = slugify(text || 'h2', {})
-        }
+        if (!id) id = slugify(text || 'h2', {})
         seqRef.current += 1
         return (
           <div id={id} className={SCROLL_MT}>
@@ -99,13 +99,7 @@ export default function Portable({ value }: { value: any[] }) {
     },
     list: {
       bullet: ({ children }: { children: React.ReactNode }) => (
-        <ul
-          className="
-          list-disc
-          [&_ul]:-ml-2 [&_ul]:list-[circle]  
-          [&_ul_ul]:-ml-2 [&_ul_ul]:list-[square]
-        "
-        >
+        <ul className="list-disc [&_ul]:-ml-2 [&_ul]:list-[circle] [&_ul_ul]:-ml-2 [&_ul_ul]:list-[square]">
           {children}
         </ul>
       ),
@@ -122,9 +116,11 @@ export default function Portable({ value }: { value: any[] }) {
       ),
     },
     types: {
-      image: ({ value }: { value: any }) => (
-        <PortableImage url={urlFor(value).url()} />
-      ),
+      image: ({ value }: { value: any }) => {
+        // GROQ에서 url 직접 주입된 경우와 asset 참조 방식 모두 지원
+        const url = value?.url ?? urlFor(value).url()
+        return <PortableImage url={url} />
+      },
       code: ({ value }: { value: { code: string; language?: string } }) => (
         <div
           className="px-4 md:px-10 text-body-m mt-2 mb-[30px] overflow-auto"
@@ -134,7 +130,6 @@ export default function Portable({ value }: { value: any[] }) {
         </div>
       ),
       math: ({ value }: any) => <PortableMath value={value} />,
-
       featureTable: ({ value }: { value: any }) => (
         <div className="my-6 overflow-x-auto">
           <PortableTable value={value} />
@@ -143,10 +138,10 @@ export default function Portable({ value }: { value: any[] }) {
     },
   }
 
-  // 3) 우측 TOC: URL 변경 없이 스크롤만
+  // hideToc=false(레거시 모드)일 때만 우측 TOC 표시
   const Toc = () =>
-    headings.length ? (
-      <nav className="-z-10 hidden md:block sticky top-[140px] h-fit max-w-60 mt-[80px] ml-6 pl-4 pt-4 border-l border-neutral ">
+    !hideToc && headings.length ? (
+      <nav className="-z-10 hidden md:block sticky top-[140px] h-fit max-w-60 mt-[80px] ml-6 pl-4 pt-4 border-l border-neutral">
         <div className="text-body-s font-semibold mb-3 text-neutralLight">
           목차
         </div>

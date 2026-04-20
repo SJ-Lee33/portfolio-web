@@ -166,8 +166,9 @@ export type Project = {
     design?: boolean
   }
   title?: string
-  role?: string
-  contribution?: string
+  summary?: string
+  startDate?: string
+  releaseDate?: string
   skill?: Array<string>
   thumbnail?: {
     asset?: {
@@ -181,9 +182,122 @@ export type Project = {
     crop?: SanityImageCrop
     _type: 'image'
   }
-  startDate?: string
-  releaseDate?: string
-  summary?: string
+  role?: string
+  contribution?: string
+  kpis?: Array<{
+    label?: string
+    value?: string
+    sub?: string
+    _key: string
+  }>
+  links?: Array<{
+    label?: string
+    url?: string
+    icon?: 'github' | 'globe' | 'file' | 'play' | 'external'
+    _key: string
+  }>
+  overviewDesc?: string
+  overviewHighlights?: Array<{
+    icon?: string
+    label?: string
+    desc?: string
+    _key: string
+  }>
+  resultOutcomes?: Array<string>
+  resultMetrics?: Array<{
+    label?: string
+    before?: number
+    after?: number
+    unit?: string
+    invert?: boolean
+    color?: 'blue' | 'emerald'
+    _key: string
+  }>
+  sections?: Array<
+    | {
+        title?: string
+        body?: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'normal'
+                | 'h1'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'blockquote'
+              listItem?: 'bullet' | 'number'
+              markDefs?: Array<{
+                href?: string
+                _type: 'link'
+                _key: string
+              }>
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+              _key: string
+            }
+          | ({
+              _key: string
+            } & Code)
+          | ({
+              _key: string
+            } & Math)
+          | ({
+              _key: string
+            } & FeatureTable)
+        >
+        _type: 'contentSection'
+        _key: string
+      }
+    | {
+        title?: string
+        images?: Array<{
+          asset?: {
+            _ref: string
+            _type: 'reference'
+            _weak?: boolean
+            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+          }
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          caption?: string
+          _type: 'image'
+          _key: string
+        }>
+        _type: 'gallerySection'
+        _key: string
+      }
+  >
+  relatedProjects?: Array<{
+    reference?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'project'
+    }
+    _key: string
+  }>
   content?: Array<
     | {
         children?: Array<{
@@ -234,231 +348,6 @@ export type Project = {
         _key: string
       } & FeatureTable)
   >
-  contentOverview?: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'normal'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'blockquote'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-    | ({
-        _key: string
-      } & Code)
-  >
-  contentContribution?: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'normal'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'blockquote'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-    | ({
-        _key: string
-      } & Code)
-  >
-  contentSkill?: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'normal'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'blockquote'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-    | ({
-        _key: string
-      } & Code)
-  >
-  contentReflection?: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'normal'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'blockquote'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-    | ({
-        _key: string
-      } & Code)
-  >
-  troubleShootings?: Array<{
-    troubleShootingType?: 0 | 1
-    troubleShootingTitle?: string
-    troubleShootingContent?: Array<
-      | {
-          children?: Array<{
-            marks?: Array<string>
-            text?: string
-            _type: 'span'
-            _key: string
-          }>
-          style?:
-            | 'normal'
-            | 'h1'
-            | 'h2'
-            | 'h3'
-            | 'h4'
-            | 'h5'
-            | 'h6'
-            | 'blockquote'
-          listItem?: 'bullet' | 'number'
-          markDefs?: Array<{
-            href?: string
-            _type: 'link'
-            _key: string
-          }>
-          level?: number
-          _type: 'block'
-          _key: string
-        }
-      | {
-          asset?: {
-            _ref: string
-            _type: 'reference'
-            _weak?: boolean
-            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-          }
-          media?: unknown
-          hotspot?: SanityImageHotspot
-          crop?: SanityImageCrop
-          _type: 'image'
-          _key: string
-        }
-      | ({
-          _key: string
-        } & Code)
-    >
-    _key: string
-  }>
   images?: Array<{
     asset?: {
       _ref: string
@@ -470,15 +359,6 @@ export type Project = {
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
     _type: 'image'
-    _key: string
-  }>
-  relatedProjects?: Array<{
-    reference?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'project'
-    }
     _key: string
   }>
 }
@@ -726,7 +606,7 @@ export type PROJECT_LIST_QUERYResult = Array<{
 // Query: count(*[  _type == "project" &&  !(_id in path("drafts.**")) &&  isPublic != false &&  (    $projectType == null ||    select(      $projectType == "engineering" => coalesce(projectTypes.engineering, false) == true,      $projectType == "design"      => coalesce(projectTypes.design, false) == true,      $projectType == "planning"   => coalesce(projectTypes.planning, false) == true,      true    )  )])
 export type PROJECT_COUNT_QUERYResult = number
 // Variable: PROJECT_QUERY
-// Query: *[  _type == "project" &&   defined(serial) &&  // isPublic != false &&  (    serial == $sNum ||           // number 비교    string(serial) == $sStr      // string 비교  )][0]{  // "키 이름" : 표현식  // 따옴표 없으면 동일한 이름  serial,  isPublic,  title,  summary,  projectTypes,  startDate,  releaseDate,  role,  // duration,  contribution,  "updatedAt": _updatedAt,  skill[],  "thumbnail": coalesce(thumbnail.asset->url, ""),  content[],  contentOverview[],  contentContribution[],  contentSkill[],  contentReflection[],    troubleShootings[],  "imgUrls": coalesce(images[].asset->url, ""),  // "imgUrls": images[].asset->url,  "relatedProjects": relatedProjects[]{    "reference": reference->{      title,      serial,      projectTypes,      startDate,      releaseDate,      skill[],      summary,      "thumbnail": coalesce(thumbnail.asset->url, "")    }  }}
+// Query: *[  _type == "project" &&   defined(serial) &&  // isPublic != false &&  (    serial == $sNum ||    string(serial) == $sStr  )][0]{  serial,  isPublic,  title,  summary,  projectTypes,  startDate,  releaseDate,  role,  contribution,  "updatedAt": _updatedAt,  skill[],  kpis[],  "links": links[]{    label,    url,    icon  },  // Overview 카드 섹션  overviewDesc,  overviewHighlights[],  // Result 고정 섹션  resultOutcomes[],  resultMetrics[],  "thumbnail": coalesce(thumbnail.asset->url, ""),  // 새 본문 섹션 배열  "sections": sections[]{    _type,    title,    // contentSection인 경우    body[]{      ...,      _type == "image" => {        ...,        "url": asset->url,        "width": asset->metadata.dimensions.width,        "height": asset->metadata.dimensions.height      }    },    // gallerySection인 경우    "images": images[]{      "url": asset->url,      "width": asset->metadata.dimensions.width,      "height": asset->metadata.dimensions.height,      caption    }  },  // 레거시 필드 (구버전 데이터 호환)  content[]{    ...,    _type == "image" => {      ...,      "url": asset->url    }  },  "imgUrls": coalesce(images[].asset->url, ""),  "relatedProjects": relatedProjects[]{    "reference": reference->{      title,      serial,      projectTypes,      startDate,      releaseDate,      skill[],      summary,      "thumbnail": coalesce(thumbnail.asset->url, "")    }  }}
 export type PROJECT_QUERYResult = {
   serial: number | null
   isPublic: boolean | null
@@ -743,282 +623,183 @@ export type PROJECT_QUERYResult = {
   contribution: string | null
   updatedAt: string
   skill: Array<string> | null
-  thumbnail: string | ''
-  content: Array<
-    | ({
-        _key: string
-      } & Code)
-    | ({
-        _key: string
-      } & FeatureTable)
-    | ({
-        _key: string
-      } & Math)
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'blockquote'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'normal'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-  > | null
-  contentOverview: Array<
-    | ({
-        _key: string
-      } & Code)
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'blockquote'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'normal'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-  > | null
-  contentContribution: Array<
-    | ({
-        _key: string
-      } & Code)
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'blockquote'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'normal'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-  > | null
-  contentSkill: Array<
-    | ({
-        _key: string
-      } & Code)
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'blockquote'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'normal'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-  > | null
-  contentReflection: Array<
-    | ({
-        _key: string
-      } & Code)
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?:
-          | 'blockquote'
-          | 'h1'
-          | 'h2'
-          | 'h3'
-          | 'h4'
-          | 'h5'
-          | 'h6'
-          | 'normal'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: {
-          _ref: string
-          _type: 'reference'
-          _weak?: boolean
-          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-        }
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        _type: 'image'
-        _key: string
-      }
-  > | null
-  troubleShootings: Array<{
-    troubleShootingType?: 0 | 1
-    troubleShootingTitle?: string
-    troubleShootingContent?: Array<
-      | ({
-          _key: string
-        } & Code)
-      | {
-          children?: Array<{
-            marks?: Array<string>
-            text?: string
-            _type: 'span'
-            _key: string
-          }>
-          style?:
-            | 'blockquote'
-            | 'h1'
-            | 'h2'
-            | 'h3'
-            | 'h4'
-            | 'h5'
-            | 'h6'
-            | 'normal'
-          listItem?: 'bullet' | 'number'
-          markDefs?: Array<{
-            href?: string
-            _type: 'link'
-            _key: string
-          }>
-          level?: number
-          _type: 'block'
-          _key: string
-        }
-      | {
-          asset?: {
-            _ref: string
-            _type: 'reference'
-            _weak?: boolean
-            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-          }
-          media?: unknown
-          hotspot?: SanityImageHotspot
-          crop?: SanityImageCrop
-          _type: 'image'
-          _key: string
-        }
-    >
+  kpis: Array<{
+    label?: string
+    value?: string
+    sub?: string
     _key: string
   }> | null
+  links: Array<{
+    label: string | null
+    url: string | null
+    icon: 'external' | 'file' | 'github' | 'globe' | 'play' | null
+  }> | null
+  overviewDesc: string | null
+  overviewHighlights: Array<{
+    icon?: string
+    label?: string
+    desc?: string
+    _key: string
+  }> | null
+  resultOutcomes: Array<string> | null
+  resultMetrics: Array<{
+    label?: string
+    before?: number
+    after?: number
+    unit?: string
+    invert?: boolean
+    color?: 'blue' | 'emerald'
+    _key: string
+  }> | null
+  thumbnail: string | ''
+  sections: Array<
+    | {
+        _type: 'contentSection'
+        title: string | null
+        body: Array<
+          | {
+              children?: Array<{
+                marks?: Array<string>
+                text?: string
+                _type: 'span'
+                _key: string
+              }>
+              style?:
+                | 'blockquote'
+                | 'h1'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal'
+              listItem?: 'bullet' | 'number'
+              markDefs?: Array<{
+                href?: string
+                _type: 'link'
+                _key: string
+              }>
+              level?: number
+              _type: 'block'
+              _key: string
+            }
+          | {
+              _key: string
+              _type: 'code'
+              language?: string
+              filename?: string
+              code?: string
+              highlightedLines?: Array<number>
+            }
+          | {
+              _key: string
+              _type: 'featureTable'
+              caption?: string
+              mode?: 'bothHeader' | 'colHeader' | 'rowHeader'
+              dense?: boolean
+              table?: Table
+            }
+          | {
+              asset?: {
+                _ref: string
+                _type: 'reference'
+                _weak?: boolean
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+              }
+              media?: unknown
+              hotspot?: SanityImageHotspot
+              crop?: SanityImageCrop
+              _type: 'image'
+              _key: string
+              url: string | null
+              width: number | null
+              height: number | null
+            }
+          | {
+              _key: string
+              _type: 'math'
+              tex?: string
+              display?: 'block' | 'inline'
+            }
+        > | null
+        images: null
+      }
+    | {
+        _type: 'gallerySection'
+        title: string | null
+        body: null
+        images: Array<{
+          url: string | null
+          width: number | null
+          height: number | null
+          caption: string | null
+        }> | null
+      }
+  > | null
+  content: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?:
+          | 'blockquote'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'normal'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        _key: string
+        _type: 'code'
+        language?: string
+        filename?: string
+        code?: string
+        highlightedLines?: Array<number>
+      }
+    | {
+        _key: string
+        _type: 'featureTable'
+        caption?: string
+        mode?: 'bothHeader' | 'colHeader' | 'rowHeader'
+        dense?: boolean
+        table?: Table
+      }
+    | {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+        _key: string
+        url: string | null
+      }
+    | {
+        _key: string
+        _type: 'math'
+        tex?: string
+        display?: 'block' | 'inline'
+      }
+  > | null
   imgUrls: Array<string | null> | ''
   relatedProjects: Array<{
     reference: {
@@ -1177,7 +958,7 @@ declare module '@sanity/client' {
     "*[_type == \"history\" && !(_id in path('drafts.**')) ] | order(year){\n    'id': _id,\n    year,\n    content,\n }": HISTORY_QUERYResult
     '\n*[\n  _type == "project" && \n  !(_id in path("drafts.**")) &&\n  defined(serial) &&\n  isPublic != false &&\n  (\n    $projectType == null ||\n    select(\n      $projectType == "engineering" => coalesce(projectTypes.engineering, false) == true,\n      $projectType == "design"      => coalesce(projectTypes.design, false) == true,\n      $projectType == "planning"   => coalesce(projectTypes.planning, false) == true,\n      true\n    ) // \uC804\uBD80 false\uBA74 \uC804\uCCB4 \uBD88\uB7EC\uC624\uAE30\n  )\n] | order(coalesce(releaseDate, _updatedAt, _createdAt) desc) {\n  "id": _id,\n  "slug": string(serial),\n  title,\n  projectTypes,\n  startDate,\n  releaseDate,\n  "skill": skill[],\n  summary,\n  "thumbnail": coalesce(thumbnail.asset->url, "")\n}\n': PROJECT_LIST_QUERYResult
     '\ncount(*[\n  _type == "project" &&\n  !(_id in path("drafts.**")) &&\n  isPublic != false &&\n  (\n    $projectType == null ||\n    select(\n      $projectType == "engineering" => coalesce(projectTypes.engineering, false) == true,\n      $projectType == "design"      => coalesce(projectTypes.design, false) == true,\n      $projectType == "planning"   => coalesce(projectTypes.planning, false) == true,\n      true\n    )\n  )\n])\n': PROJECT_COUNT_QUERYResult
-    '\n*[\n  _type == "project" && \n  defined(serial) &&\n  // isPublic != false &&\n  (\n    serial == $sNum ||           // number \uBE44\uAD50\n    string(serial) == $sStr      // string \uBE44\uAD50\n  )\n][0]{\n  // "\uD0A4 \uC774\uB984" : \uD45C\uD604\uC2DD\n  // \uB530\uC634\uD45C \uC5C6\uC73C\uBA74 \uB3D9\uC77C\uD55C \uC774\uB984\n  serial,\n  isPublic,\n  title,\n  summary,\n  projectTypes,\n  startDate,\n  releaseDate,\n  role,\n  // duration,\n  contribution,\n  "updatedAt": _updatedAt,\n\n  skill[],\n\n  "thumbnail": coalesce(thumbnail.asset->url, ""),\n  content[],\n  contentOverview[],\n  contentContribution[],\n  contentSkill[],\n  contentReflection[],\n  \n  troubleShootings[],\n  "imgUrls": coalesce(images[].asset->url, ""),\n  // "imgUrls": images[].asset->url,\n  "relatedProjects": relatedProjects[]{\n    "reference": reference->{\n      title,\n      serial,\n      projectTypes,\n      startDate,\n      releaseDate,\n      skill[],\n      summary,\n      "thumbnail": coalesce(thumbnail.asset->url, "")\n    }\n  }\n}\n': PROJECT_QUERYResult
+    '\n*[\n  _type == "project" && \n  defined(serial) &&\n  // isPublic != false &&\n  (\n    serial == $sNum ||\n    string(serial) == $sStr\n  )\n][0]{\n  serial,\n  isPublic,\n  title,\n  summary,\n  projectTypes,\n  startDate,\n  releaseDate,\n  role,\n  contribution,\n  "updatedAt": _updatedAt,\n\n  skill[],\n  kpis[],\n  "links": links[]{\n    label,\n    url,\n    icon\n  },\n\n  // Overview \uCE74\uB4DC \uC139\uC158\n  overviewDesc,\n  overviewHighlights[],\n\n  // Result \uACE0\uC815 \uC139\uC158\n  resultOutcomes[],\n  resultMetrics[],\n\n  "thumbnail": coalesce(thumbnail.asset->url, ""),\n\n  // \uC0C8 \uBCF8\uBB38 \uC139\uC158 \uBC30\uC5F4\n  "sections": sections[]{\n    _type,\n    title,\n    // contentSection\uC778 \uACBD\uC6B0\n    body[]{\n      ...,\n      _type == "image" => {\n        ...,\n        "url": asset->url,\n        "width": asset->metadata.dimensions.width,\n        "height": asset->metadata.dimensions.height\n      }\n    },\n    // gallerySection\uC778 \uACBD\uC6B0\n    "images": images[]{\n      "url": asset->url,\n      "width": asset->metadata.dimensions.width,\n      "height": asset->metadata.dimensions.height,\n      caption\n    }\n  },\n\n  // \uB808\uAC70\uC2DC \uD544\uB4DC (\uAD6C\uBC84\uC804 \uB370\uC774\uD130 \uD638\uD658)\n  content[]{\n    ...,\n    _type == "image" => {\n      ...,\n      "url": asset->url\n    }\n  },\n  "imgUrls": coalesce(images[].asset->url, ""),\n\n  "relatedProjects": relatedProjects[]{\n    "reference": reference->{\n      title,\n      serial,\n      projectTypes,\n      startDate,\n      releaseDate,\n      skill[],\n      summary,\n      "thumbnail": coalesce(thumbnail.asset->url, "")\n    }\n  }\n}\n': PROJECT_QUERYResult
     '\n*[\n  _type == "study" && \n  !(_id in path("drafts.**")) &&\n  isPublic != false &&\n  defined(serial) \n] | order(serial desc) {\n  "slug": string(serial),\n  title,\n  "skill": skill[],\n  "thumbnail": coalesce(thumbnail.asset->url, ""),\n  studyTypes,\n  "createdAt":_createdAt,\n  "updatedAt":_updatedAt,\n}\n': STUDY_LIST_QUERYResult
     '\n  *[\n    _type == "studyCategory" &&\n    !(_id in path("drafts.**")) &&        // \u2B05\uFE0F \uB8E8\uD2B8\uC5D0\uC11C draft \uC81C\uC678\n    defined(slug) &&                 // \u2B05\uFE0F slug \uC5C6\uB294 \uBB38\uC11C \uC81C\uC678(\uC548\uC804\uB9DD)\n    isPublic != false\n  ] | order(title asc) {\n    _id,\n    title,\n    slug,\n    skill[],\n    studyTypes,\n    summary,\n    "thumbnail": coalesce(thumbnail.asset->url, ""),\n    "recentFivePosts": *[\n      _type == "study" && \n      !(_id in path("drafts.**")) &&\n      isPublic != false &&\n      references(^._id)\n    ] | order(_createdAt desc)[0...3]{\n      _id,\n      title,\n      "slug": string(serial),\n      "updatedAt":_updatedAt,\n      "thumbnail": coalesce(thumbnail.asset->url, ""),\n    }\n  }\n': STUDY_CATEGORY_AND_RECENT_QUERYResult
     '\n*[_type=="studyCategory" && slug==$categorySlug][0]{\n  _id,\n  title,\n  slug,\n  summary,\n  "thumbnail": coalesce(thumbnail.asset->url, ""),\n  skill[],\n  // \uCD1D \uAC1C\uC218\n  "totalCount": count(*[\n    _type=="study" && !(_id in path("drafts.**")) && references(^._id) && isPublic != false \n  ]),\n  // \uD398\uC774\uC9C0 \uC2AC\uB77C\uC774\uC2A4\n  "studyPosts": *[\n    _type=="study" && !(_id in path("drafts.**")) && references(^._id) && isPublic != false\n  ] | order(_createdAt desc){\n    _id,\n    title,\n    "slug": string(serial), // \uB77C\uC6B0\uD305 \uD0A4: /study/[serial]\n    "updatedAt": _updatedAt,\n    "thumbnail": coalesce(thumbnail.asset->url,""),\n  }\n}\n': STUDY_CATEGORY_PAGE_QUERYResult
