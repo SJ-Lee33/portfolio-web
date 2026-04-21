@@ -1,6 +1,7 @@
 import {
   Smartphone,
   Brain,
+  Paintbrush,
   Music,
   MessageCircle,
   Zap,
@@ -11,12 +12,14 @@ import {
   Shield,
   Star,
   Code,
+  ShieldAlert,
 } from 'lucide-react'
 import type { OverviewHighlight } from '@/hooks/get-project'
 
 const ICON_MAP: Record<string, React.ElementType> = {
   smartphone: Smartphone,
   brain: Brain,
+  brush: Paintbrush,
   music: Music,
   message: MessageCircle,
   zap: Zap,
@@ -27,6 +30,7 @@ const ICON_MAP: Record<string, React.ElementType> = {
   shield: Shield,
   star: Star,
   code: Code,
+  sheild: ShieldAlert,
 }
 
 interface Props {

@@ -244,6 +244,22 @@ const overviewDescField = defineField({
   rows: 2,
 })
 
+const ICON_LIST = [
+  'smartphone',
+  'shield',
+  'brain',
+  'music',
+  'message',
+  'zap',
+  'server',
+  'cpu',
+  'layers',
+  'globe',
+  'star',
+  'code',
+  'brush',
+]
+
 const overviewHighlightsField = defineField({
   title: 'Overview - 하이라이트 카드',
   name: 'overviewHighlights',
@@ -259,8 +275,12 @@ const overviewHighlightsField = defineField({
           name: 'icon',
           title: '아이콘',
           type: 'string',
-          description:
-            'smartphone / brain / music / message / zap / server / cpu / layers / globe / shield / star / code 중 선택',
+          options: {
+            list: ICON_LIST.filter((v, i, arr) => arr.indexOf(v) === i) // 중복 제거
+              .sort((a, b) => a.localeCompare(b)) // ✅ 사전순
+              .map((v) => ({ title: v, value: v })),
+            layout: 'dropdown',
+          },
           validation: (Rule: any) => Rule.required(),
         },
         {
@@ -472,20 +492,6 @@ const sectionsField = defineField({
 })
 
 // ─── 레거시 필드 (기존 데이터 호환용, 신규 입력은 sections 사용) ──────────────
-const contentField = defineField({
-  title: '[레거시] 프로젝트 설명',
-  name: 'content',
-  description:
-    '⚠️ 구버전 필드입니다. 신규 프로젝트는 아래 "본문 섹션"을 사용하세요.',
-  type: 'array',
-  of: [
-    { type: 'block' },
-    { type: 'image' },
-    { type: 'code' },
-    defineArrayMember({ type: 'math' }),
-    defineArrayMember({ type: 'featureTable' }),
-  ],
-})
 
 const imagesField = defineField({
   title: '[레거시] 추가 이미지들',
@@ -494,6 +500,165 @@ const imagesField = defineField({
     '⚠️ 구버전 필드입니다. 신규 프로젝트는 갤러리 섹션을 사용하세요.',
   type: 'array',
   of: [{ type: 'image' }],
+})
+
+const contributionField = defineField({
+  title: '핵심 성과',
+  name: 'contribution',
+  description: '핵심 성과 내용을 쉼표로 구분',
+  type: 'text',
+  validation: (Rule) => Rule.required(),
+})
+
+const contentField = defineField({
+  title: '프로젝트 설명',
+  name: 'content',
+  description: '개요, 기여, 사용 기술, 느낀점 등',
+  type: 'array',
+  of: [
+    {
+      type: 'block',
+    },
+    {
+      type: 'image',
+    },
+    {
+      type: 'code',
+    },
+    defineArrayMember({ type: 'math' }), // ← 수식 블록 추가
+    defineArrayMember({ type: 'featureTable' }), // 표 추가
+  ],
+})
+
+const contentOverviewField = defineField({
+  title: '프로젝트 개요',
+  name: 'contentOverview',
+  type: 'array',
+  of: [
+    {
+      type: 'block',
+    },
+    {
+      type: 'image',
+    },
+    {
+      type: 'code',
+    },
+  ],
+})
+
+const contentContributionField = defineField({
+  title: '프로젝트 기여',
+  name: 'contentContribution',
+  type: 'array',
+  of: [
+    {
+      type: 'block',
+    },
+    {
+      type: 'image',
+    },
+    {
+      type: 'code',
+    },
+  ],
+})
+
+const contentSkillField = defineField({
+  title: '사용 기술',
+  name: 'contentSkill',
+  type: 'array',
+  of: [
+    {
+      type: 'block',
+    },
+    {
+      type: 'image',
+    },
+    {
+      type: 'code',
+    },
+  ],
+})
+
+const contentReflectionField = defineField({
+  title: '느낀점 및 재고',
+  name: 'contentReflection',
+  type: 'array',
+  of: [
+    {
+      type: 'block',
+    },
+    {
+      type: 'image',
+    },
+    {
+      type: 'code',
+    },
+  ],
+})
+
+const troubleShootingsField = defineField({
+  title: '트러블 슈팅',
+  name: 'troubleShootings',
+  description: '문제와 솔루션을 기입하는 란',
+  type: 'array',
+  of: [
+    {
+      title: '문제와 솔루션',
+      name: 'troubleShooting',
+      type: 'document',
+
+      fields: [
+        {
+          title: '구분',
+          name: 'troubleShootingType',
+          type: 'number',
+          options: {
+            list: [
+              { title: '문제', value: 0 },
+              { title: '해결', value: 1 },
+            ],
+          },
+        },
+        {
+          title: '제목',
+          name: 'troubleShootingTitle',
+          type: 'string',
+        },
+        {
+          title: '내용',
+          name: 'troubleShootingContent',
+          type: 'array',
+          of: [
+            {
+              type: 'block',
+            },
+            {
+              type: 'image',
+            },
+            {
+              type: 'code',
+            },
+          ],
+        },
+      ],
+
+      preview: {
+        select: {
+          type: 'troubleShootingType',
+          title: 'troubleShootingTitle',
+        },
+        prepare(selection) {
+          let { type, title } = selection
+          type = type === 0 ? '문제' : '해결'
+          return {
+            title: `${type} : ${title}`,
+          }
+        },
+      },
+    },
+  ],
 })
 
 // ─── defineType ───────────────────────────────────────────────────────────────
@@ -543,6 +708,12 @@ export default defineType({
     // 레거시
     { ...contentField, group: 'legacy' },
     { ...imagesField, group: 'legacy' },
+    { ...contributionField, group: 'legacy' },
+    { ...contentOverviewField, group: 'legacy' },
+    { ...contentContributionField, group: 'legacy' },
+    { ...contentSkillField, group: 'legacy' },
+    { ...contentReflectionField, group: 'legacy' },
+    { ...troubleShootingsField, group: 'legacy' },
   ],
   preview: {
     select: {
