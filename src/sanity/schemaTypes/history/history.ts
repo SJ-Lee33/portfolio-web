@@ -25,7 +25,7 @@ const contentField = defineField({
   title: '내용',
   name: 'content',
   type: 'array',
-  description: 'list로 작성할 것',
+  description: 'bullet로 작성할 것, 수상/수료 등의 표시는 백틱 안에 넣으세요',
   of: [
     {
       type: 'block',

@@ -1,6 +1,8 @@
+import PortableQuote from '@/components/portable-text/portable-quote'
 import getHistory from '@/hooks/get-history'
 import { HISTORY_QUERYResult } from '@/sanity/types'
 import classNames from 'classnames'
+import { Quote } from 'lucide-react'
 import { PortableText } from 'next-sanity'
 import { FaCircle } from 'react-icons/fa6'
 
@@ -15,6 +17,13 @@ export default async function History() {
         <li className="text-body-s" style={{ listStyleType: 'disc' }}>
           {children}
         </li>
+      ),
+    },
+    marks: {
+      code: ({ children }: { children: any }) => (
+        <span className="bg-emerald/20 text-emerald p-1 rounded-md text-caption ml-0.5">
+          {children}
+        </span>
       ),
     },
   }

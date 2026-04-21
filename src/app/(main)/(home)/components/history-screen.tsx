@@ -23,7 +23,7 @@ export default function HistoryScreen() {
             <div>
               <p className="text-body-s">총 2년 10개월</p>
               <div>
-                <p>24.08 - 25.05 (주)INNOS</p>
+                <p>24.08 - 25.05 (주)이노스</p>
                 <p>22.06 - 24.05 (주)이루티</p>
               </div>
             </div>
