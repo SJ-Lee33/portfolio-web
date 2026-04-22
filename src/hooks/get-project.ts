@@ -65,20 +65,11 @@ export default async function getProject(slug: string): Promise<ProjectItem> {
 
   if (!project) notFound()
 
-  const { startDate, releaseDate, troubleShootings, ...rest } = project
+  const { startDate, releaseDate, ...rest } = project
   const duration =
     startDate && releaseDate
       ? getDurationDate(startDate, releaseDate)
       : undefined
-
-  const enrichedTroubleShootings = project.troubleShootings?.map(
-    (item: any) => ({
-      ...item,
-      troubleShootingContent: enrichPortableTextWithImageUrl(
-        item.troubleShootingContent,
-      ),
-    }),
-  )
 
   const enrichedSections = (project.sections ?? []).map((sec: any) => {
     if (sec._type === 'contentSection' && sec.body) {
@@ -100,16 +91,5 @@ export default async function getProject(slug: string): Promise<ProjectItem> {
     resultMetrics: project.resultMetrics ?? [],
     sections: enrichedSections,
     imgUrls: project.imgUrls ?? [],
-    contentOverview: enrichPortableTextWithImageUrl(
-      project.contentOverview || [],
-    ),
-    contentContribution: enrichPortableTextWithImageUrl(
-      project.contentContribution || [],
-    ),
-    contentSkill: enrichPortableTextWithImageUrl(project.contentSkill || []),
-    contentReflection: enrichPortableTextWithImageUrl(
-      project.contentReflection || [],
-    ),
-    troubleShootings: enrichedTroubleShootings,
   }
 }

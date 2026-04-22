@@ -21,10 +21,6 @@ export default async function Page({
   // const year = project.startDate ? project.startDate.slice(0, 4) : ''
   const sections = project.sections ?? []
   const hasNewSections = sections.length > 0
-  const hasLegacyContent =
-    !hasNewSections &&
-    Array.isArray(project.content) &&
-    project.content.length > 0
 
   const hasOverview =
     (project.overviewHighlights?.length ?? 0) > 0 || !!project.overviewDesc
@@ -53,7 +49,6 @@ export default async function Page({
           {/* 사이드바 (TOC) */}
           <ProjectSidebar
             sections={sections}
-            hasLegacy={hasLegacyContent ?? false}
             hasOverview={hasOverview}
             hasResult={hasResult}
           />
@@ -62,12 +57,6 @@ export default async function Page({
           <main className="flex-1 min-w-0 space-y-10">
             <ProjectSectionRenderer
               sections={sections}
-              legacyContent={
-                hasLegacyContent && Array.isArray(project.content)
-                  ? project.content
-                  : undefined
-              }
-              legacyImgUrls={hasLegacyContent ? project.imgUrls : undefined}
               overviewDesc={project.overviewDesc}
               overviewHighlights={project.overviewHighlights}
               resultOutcomes={project.resultOutcomes}

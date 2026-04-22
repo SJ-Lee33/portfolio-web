@@ -1,6 +1,5 @@
 import ProjectContentSection from './project-content-section'
 import ProjectGallerySection from './project-gallery-section'
-import ProjectLegacySection from './project-legacy-section'
 import ProjectMobileNav from './project-mobile-nav'
 import ProjectOverviewSection from './project-overview-section'
 import ProjectResultSection from './project-result-section'
@@ -20,8 +19,6 @@ function slugify(text: string) {
 
 interface Props {
   sections: SectionItem[]
-  legacyContent?: any[]
-  legacyImgUrls?: string[]
   overviewDesc?: string | null
   overviewHighlights?: OverviewHighlight[]
   resultOutcomes?: string[]
@@ -30,8 +27,6 @@ interface Props {
 
 export default function ProjectSectionRenderer({
   sections,
-  legacyContent,
-  legacyImgUrls,
   overviewDesc,
   overviewHighlights,
   resultOutcomes,
@@ -99,13 +94,6 @@ export default function ProjectSectionRenderer({
           )}
         </div>
       </>
-    )
-  }
-
-  // 레거시 fallback
-  if (legacyContent && legacyContent.length > 0) {
-    return (
-      <ProjectLegacySection content={legacyContent} imgUrls={legacyImgUrls} />
     )
   }
 

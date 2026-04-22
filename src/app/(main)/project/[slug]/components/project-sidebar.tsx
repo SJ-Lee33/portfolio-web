@@ -9,7 +9,6 @@ interface Section {
 
 interface Props {
   sections: Section[]
-  hasLegacy: boolean
   hasOverview: boolean
   hasResult: boolean
 }
@@ -24,13 +23,9 @@ function slugify(text: string) {
 
 export default function ProjectSidebar({
   sections,
-  hasLegacy,
   hasOverview,
   hasResult,
 }: Props) {
-  // 레거시 모드면 사이드바 없음 (Portable 자체 TOC 사용)
-  if (hasLegacy && sections.length === 0) return null
-
   // navItems 조립: Overview(있으면) → sections → Result(있으면)
   const navItems: { id: string; label: string }[] = []
   if (hasOverview) navItems.push({ id: 'overview', label: 'Overview' })

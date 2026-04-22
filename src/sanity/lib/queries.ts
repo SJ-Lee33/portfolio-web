@@ -84,7 +84,6 @@ export const PROJECT_QUERY = defineQuery(`
   startDate,
   releaseDate,
   role,
-  contribution,
   "updatedAt": _updatedAt,
 
   skill[],
@@ -127,16 +126,6 @@ export const PROJECT_QUERY = defineQuery(`
       caption
     }
   },
-
-  // 레거시 필드 (구버전 데이터 호환)
-  content[]{
-    ...,
-    _type == "image" => {
-      ...,
-      "url": asset->url
-    }
-  },
-  "imgUrls": coalesce(images[].asset->url, ""),
 
   "relatedProjects": relatedProjects[]{
     "reference": reference->{
