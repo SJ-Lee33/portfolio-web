@@ -56,7 +56,7 @@ export default function ProjectSectionRenderer({
         {/* 모바일 탭 네비게이션 */}
         <ProjectMobileNav navItems={navItems} />
 
-        <div className="p-5">
+        <div className="flex flex-col gap-[80px] p-5 ">
           {/* Overview 카드 섹션 (항상 맨 위) */}
           {hasOverview && (
             <ProjectOverviewSection

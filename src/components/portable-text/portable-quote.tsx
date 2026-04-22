@@ -4,7 +4,7 @@ export default function PortableQuote({ children }: { children: any }) {
   return (
     <div
       className={
-        'text-title-s flex gap-2 w-full px-2 py-1 mb-2 md:px-8 italic bg-white/50 rounded-lg text-primary'
+        'text-title-s flex gap-2 w-full px-2 py-1 mb-4 md:px-8 italic bg-white/50 rounded-lg text-primary'
       }
     >
       <BiSolidQuoteLeft />

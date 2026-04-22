@@ -12,7 +12,6 @@ import { useMemo, useRef } from 'react'
 import PortableTable from './portable-table'
 import { urlFor } from '@/sanity/lib/image'
 import classNames from 'classnames'
-import PortableList from './portable-list'
 
 function slugify(text: string, used: Record<string, number>) {
   const base = text
@@ -98,12 +97,12 @@ export default function Portable({ value, hideToc = false }: Props) {
     },
     list: {
       bullet: ({ children }: { children: React.ReactNode }) => (
-        <div className="bg-white border border-neutralLight/40 rounded-xl p-5 my-5">
+        <div className="bg-white border border-neutralLight/40 rounded-xl p-5 mt-2 mb-5">
           <ul className="list-disc pl-5 space-y-1.5 text-body-m">{children}</ul>
         </div>
       ),
       number: ({ children }: { children: React.ReactNode }) => (
-        <div className="bg-white border border-neutralLight/40 rounded-xl p-5 my-5">
+        <div className="bg-white border border-neutralLight/40 rounded-xl p-5 mt-2 mb-5">
           <ol className="list-decimal pl-5 space-y-1.5 text-body-m">
             {children}
           </ol>
@@ -126,9 +125,16 @@ export default function Portable({ value, hideToc = false }: Props) {
       ),
       math: ({ value }: any) => <PortableMath value={value} />,
       featureTable: ({ value }: { value: any }) => (
-        <div className="my-6 ml-4 overflow-x-auto">
+        <div className="my-5 overflow-x-auto">
           <PortableTable value={value} />
         </div>
+      ),
+    },
+    marks: {
+      code: ({ children }: { children: any }) => (
+        <span className="bg-blush/10 text-blush px-1.5 py-1 rounded-md mx-0.5">
+          {children}
+        </span>
       ),
     },
   }

@@ -35,7 +35,7 @@ export default function ProjectHero({ project }: Props) {
           {/* 썸네일 */}
           <div className="w-full md:w-[260px] flex-shrink-0">
             {project.thumbnail ? (
-              <div className="w-full md:w-[260px] aspect-[3/4] rounded-2xl overflow-hidden relative border border-neutral shadow-sm">
+              <div className="w-full md:w-[260px] max-h-[520px] md:max-h-max aspect-[3/4] rounded-2xl overflow-hidden relative shadow-xl">
                 <Image
                   src={project.thumbnail}
                   alt={project.title ?? 'thumbnail image'}

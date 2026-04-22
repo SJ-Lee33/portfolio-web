@@ -59,7 +59,7 @@ export default async function Page({
           />
 
           {/* 본문 섹션들 */}
-          <main className="flex-1 min-w-0 space-y-20 ">
+          <main className="flex-1 min-w-0 space-y-10">
             <ProjectSectionRenderer
               sections={sections}
               legacyContent={

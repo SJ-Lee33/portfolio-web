@@ -15,6 +15,7 @@ import {
   ShieldAlert,
 } from 'lucide-react'
 import type { OverviewHighlight } from '@/hooks/get-project'
+import ProjectSectionHeader from './project-section-header'
 
 const ICON_MAP: Record<string, React.ElementType> = {
   smartphone: Smartphone,
@@ -42,10 +43,7 @@ export default function ProjectOverviewSection({ desc, highlights }: Props) {
   return (
     <section id="overview" className="scroll-mt-28">
       {/* 섹션 헤더 */}
-      <div className="flex items-center gap-3 mb-2">
-        <h2 className="text-title-l font-bold">Overview</h2>
-      </div>
-      <div className="h-[1.5px] bg-neutralLighter mb-6" />
+      <ProjectSectionHeader header="overview" />
 
       {/* 한 줄 설명 */}
       {desc && <p className="text-body-m mb-6 leading-relaxed">{desc}</p>}

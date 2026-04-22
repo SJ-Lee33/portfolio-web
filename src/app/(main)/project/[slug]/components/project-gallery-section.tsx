@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import ProjectSectionHeader from './project-section-header'
 
 interface GalleryImage {
   url: string
@@ -16,10 +17,7 @@ interface Props {
 export default function ProjectGallerySection({ id, title, images }: Props) {
   return (
     <section id={id} className="scroll-mt-28">
-      <div className="flex items-center gap-3 mb-2 mt-10">
-        <h2 className="text-title-l font-bold">{title}</h2>
-      </div>
-      <div className="h-[1.5px] bg-neutralLighter mb-6" />
+      <ProjectSectionHeader header={title} />
 
       {images.length === 0 ? (
         <p className="italic">이미지가 없습니다.</p>

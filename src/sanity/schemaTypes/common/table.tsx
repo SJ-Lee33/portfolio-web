@@ -18,13 +18,6 @@ const headerMode = defineField({
   validation: (Rule) => Rule.required(),
 })
 
-const dense = defineField({
-  name: 'dense',
-  title: '컴팩트 셀',
-  type: 'boolean',
-  initialValue: false,
-})
-
 const table = defineField({
   name: 'table',
   title: '표 데이터',
@@ -36,7 +29,7 @@ export default defineType({
   name: 'featureTable',
   title: '표',
   type: 'object',
-  fields: [caption, headerMode, dense, table],
+  fields: [caption, headerMode, table],
   preview: {
     select: { mode: 'mode', caption: 'caption' },
     prepare({ mode, caption }) {

@@ -3,6 +3,7 @@
 import { CheckCircle2, TrendingUp } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import type { ResultMetric } from '@/hooks/get-project'
+import ProjectSectionHeader from './project-section-header'
 
 interface Props {
   outcomes: string[]
@@ -12,10 +13,7 @@ interface Props {
 export default function ProjectResultSection({ outcomes, metrics }: Props) {
   return (
     <section id="result" className="scroll-mt-28 mt-[80px]">
-      <div className="flex items-center gap-3 mb-2">
-        <h2 className="text-title-l font-bold">Result</h2>
-      </div>
-      <div className="h-[1.5px] bg-neutralLighter mb-6" />
+      <ProjectSectionHeader header="result" />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {/* Outcomes */}

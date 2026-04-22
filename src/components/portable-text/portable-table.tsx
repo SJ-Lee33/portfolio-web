@@ -2,7 +2,6 @@ interface PortableTableProps {
   value: {
     caption?: string
     mode?: 'rowHeader' | 'colHeader' | 'bothHeader'
-    dense?: boolean
     table?: {
       rows?: { cells: string[]; _key?: string }[]
     }
@@ -10,7 +9,7 @@ interface PortableTableProps {
 }
 
 export default function PortableTable({ value }: PortableTableProps) {
-  const { caption, mode, dense, table } = value || {}
+  const { caption, mode, table } = value || {}
   const rows = table?.rows ?? []
   if (!rows.length) return null
 
@@ -18,11 +17,9 @@ export default function PortableTable({ value }: PortableTableProps) {
 
   return (
     <div className="w-full overflow-x-auto rounded-lg border border-neutralLight">
-      <table
-        className={`w-full border-collapse ${dense ? 'text-body-m' : 'text-body-m'}`}
-      >
+      <table className={`w-full border-collapse text-body-s`}>
         {caption && (
-          <caption className="px-5 py-2 text-body-s text-neutralLight text-left bg-soft/50 font-bold border-b border-neutralLight">
+          <caption className="px-5 py-2 text-body-s text-left bg-neutralLight/20 text-neutral/80 font-bold border-b border-neutralLight">
             {caption}
           </caption>
         )}
@@ -54,7 +51,7 @@ export default function PortableTable({ value }: PortableTableProps) {
                       className={[
                         'px-5 py-3 align-top text-left ',
                         isHeader
-                          ? 'bg-neutralLight/20 text-neutral/80 text-body-s font-extrabold hover:bg-neutralLight'
+                          ? 'bg-emerald/10 font-extrabold hover:bg-neutralLight'
                           : 'font-normal white hover:bg-neutralLighter',
                         // 첫 번째 열 헤더면 border-r
                         isHeaderCol && !isHeaderRow

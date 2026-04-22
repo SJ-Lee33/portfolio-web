@@ -1,4 +1,5 @@
 import Portable from '@/components/portable-text/portable-text-component'
+import ProjectSectionHeader from './project-section-header'
 
 interface Props {
   id: string
@@ -12,11 +13,8 @@ export default function ProjectContentSection({ id, title, body }: Props) {
   const safeBody = Array.isArray(body) ? body : []
 
   return (
-    <section id={id} className="scroll-mt-28 mt-[80px]">
-      <div className="flex items-center gap-3 mb-2">
-        <h2 className="text-title-l font-bold">{title}</h2>
-      </div>
-      <div className="h-[1.5px] bg-neutralLighter mb-6" />
+    <section id={id} className="scroll-mt-28">
+      <ProjectSectionHeader header={title} />
 
       {body && body.length > 0 ? (
         <Portable value={safeBody} hideToc />
