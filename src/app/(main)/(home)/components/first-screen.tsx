@@ -1,24 +1,16 @@
 import { RESUME_QUERYResult as Generated } from '@/sanity/types'
 import Contact from './contact'
 import backgroundImage from '/public/images/background.jpg'
-import getResume from '@/hooks/get-resume'
 import DownloadButton from './download_button'
 
-type RESUME_QUERYResult = Generated extends null
-  ? { resumeUrl: string } | null
-  : Generated
-
-export default async function FirstScreen() {
-  const data: RESUME_QUERYResult = await getResume()
-  const resumeUrl = data.resumeUrl
-
+export default function FirstScreen() {
   return (
     <div
       className="w-screen h-screen bg-cover bg-center"
       style={{ backgroundImage: `url(${backgroundImage.src})` }}
     >
       {/* 경력기술서 다운로드 */}
-      {resumeUrl && <DownloadButton url={resumeUrl} />}
+      <DownloadButton url="/api/resume" />
 
       {/* 본문 */}
       <div
